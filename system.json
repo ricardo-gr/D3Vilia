@@ -1,9 +1,9 @@
 {
-  "name": "D35E",
-  "title": "3.5e SRD",
-  "description": "Implementation of 3.5 edition System Reference Document for Foundry VTT. Aiming to provide 100% SRD coverage.",
-  "version": "0.92.1",
-  "author": "Rughalt",
+  "name": "D3Vilia",
+  "title": "3.5 SRD - Vilia",
+  "description": "A fork of an implementation of 3.5 edition System Reference Document for Foundry VTT. Customized for the Vilia campaign. Credit goes to the original creators.",
+  "version": "0.1.0",
+  "author": "Bardomero",
   "templateVersion": 2,
   "scripts": [],
   "esmodules": ["D35E.js"],
@@ -12,222 +12,222 @@
     {
       "name": "classes",
       "label": "Classes",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/classes.db",
       "entity": "Item"
     },
     {
       "name": "minion-classes",
       "label": "Minion Classes",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/minion-classes.db",
       "entity": "Item"
     },
     {
       "name": "commonbuffs",
       "label": "Common Buffs",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/commonbuffs.db",
       "entity": "Item"
     },
     {
       "name": "item-buffs",
       "label": "Item Buffs",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/itembuffs.db",
       "entity": "Item"
     },
     {
       "name": "magicitems",
       "label": "Magic Items",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/magic-items.db",
       "entity": "Item"
     },
     {
       "name": "racialfeatures",
       "label": "Races",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/racialfeatures.db",
       "entity": "Item"
     },
     {
       "name": "racial-abilities",
       "label": "Racial Abilities",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/racial-abilities.db",
       "entity": "Item"
     },
     {
       "name": "natural-attacks",
       "label": "Natural Attacks",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/natural-attacks.db",
       "entity": "Item"
     },
     {
       "name": "class-abilities",
       "label": "Class Abilities",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/class-abilities.db",
       "entity": "Item"
     },
     {
       "name": "spelllike",
       "label": "Spell-Like Abilities",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/spell-like-abilities.db",
       "entity": "Item"
     },
     {
       "name": "spells",
       "label": "Spells",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/spells.db",
       "entity": "Item"
     },{
       "name": "spell-schools-domains",
       "label": "Spell Schools and Domains",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/spell-school-domain.db",
       "entity": "Item"
     },{
       "name": "templates",
       "label": "Templates",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/templates.db",
       "entity": "Item"
     },
     {
       "name": "powers",
       "label": "Powers",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/powers.db",
       "entity": "Item"
     },
     {
       "name": "feats",
       "label": "Feats",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/feats.db",
       "entity": "Item"
     },
     {
       "name": "items",
       "label": "Items",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/items.db",
       "entity": "Item"
     },
     {
       "name": "armors-and-shields",
       "label": "Armor and Shields",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/armors-and-shields.db",
       "entity": "Item"
     },
     {
       "name": "enhancements",
       "label": "Enhancements",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/enhancements.db",
       "entity": "Item"
     },
     {
       "name": "weapons-and-ammo",
       "label": "Weapons and Ammo",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/weapons-and-ammo.db",
       "entity": "Item"
     },
     {
       "name": "racialhd",
       "label": "Racial HD",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/racial-hd.db",
       "entity": "Item"
     },
     {
       "name": "materials",
       "label": "Materials",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/materials.db",
       "entity": "Item"
     },
     {
       "name": "damage-types",
       "label": "Damage Types",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/damage-types.db",
       "entity": "Item"
     },
     {
       "name": "srd-rules",
       "label": "SRD Rules Extended Descriptions",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/srd-rules.db",
       "entity": "JournalEntry"
     },
     {
       "name": "sample-macros",
       "label": "Sample Macros",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/sample-macros.db",
       "entity": "Macro"
     },
     {
       "name": "roll-tables",
       "label": "Roll Tables",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/roll-tables.db",
       "entity": "RollTable"
     },
     {
       "name": "bestiary",
       "label": "Bestiary",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/bestiary.db",
       "entity": "Actor"
     },
     {
       "name": "minion",
       "label": "Minions (Familiars, Animal Companions)",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/minions.db",
       "entity": "Actor"
     },
     {
       "name": "sample-chars",
       "label": "Sample Characters",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/minions.db",
       "entity": "Actor"
     },
     {
       "name": "traps",
       "label": "Traps",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/traps.db",
       "entity": "Actor"
     },
     {
       "name": "conditions",
       "label": "Conditions",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/conditions.db",
       "entity": "JournalEntry"
     },
     {
       "name": "docs",
       "label": "Documentation",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/documentation.db",
       "entity": "JournalEntry"
     },
     {
       "name": "scenes",
       "label": "Scenes",
-      "system": "D35E",
+      "system": "D3Vilia",
       "path": "./packs/scenes.db",
       "entity": "Scene"
     }
@@ -263,7 +263,7 @@
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.8.0",
   
-  "url": "https://github.com/Rughalt/d35e",
+  "url": "https://github.com/ricardo-gr/D3Vilia",
   "manifest": "http://dragonshorn.info/dnd35e/system.json",
   "download": "http://dragonshorn.info/dnd35e/dnd35e.zip",
   "media": [
