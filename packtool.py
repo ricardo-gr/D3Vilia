@@ -23,20 +23,20 @@ def img_to_base_64(image):
 
 if args.action == 'unpack' or args.action == 'repack':
     data = []
-    with open('packs/'+args.file+'.db', 'r') as read_file:
+    with open('packs/'+args.file+'.db', 'r', encoding="utf8") as read_file:
         db = read_file.read().splitlines()
         for item in db:
             data.append(json.loads(item))
 
-    with open('source/'+args.file+'.json', "w") as outfile:
+    with open('source/'+args.file+'.json', "w", encoding="utf8") as outfile:
         outfile.write(json.dumps(data, indent=4))
 
 if args.action == 'pack' or args.action == 'repack':
 
-    with open('source/'+args.file+'.json', "r") as read_file:
+    with open('source/'+args.file+'.json', "r", encoding="utf8") as read_file:
         data = json.load(read_file)
 
-    with open('packs/'+args.file+'.db', 'w') as outfile:
+    with open('packs/'+args.file+'.db', 'w', encoding="utf8") as outfile:
         for item in data:
             if '_skip_' not in item['name']:
                 if item['_id'] == 'generate':

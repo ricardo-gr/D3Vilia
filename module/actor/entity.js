@@ -2149,6 +2149,7 @@ export class ActorPF extends Actor {
                     if (babScale === "high") return cur + obj.data.levels;
                     if (babScale === "med") return cur + obj.data.levels * 0.75;
                     if (babScale === "low") return cur + obj.data.levels * 0.5;
+                    if (babScale === "monk") return cur + obj.data.levels * 0.75;
                     return cur;
                 }, 0)));
 
@@ -3956,8 +3957,14 @@ export class ActorPF extends Actor {
 
         // Add additional attacks
         let extraAttacks = [];
-        for (let a = 5; a < this.data.data.attributes.bab.total; a += 5) {
-            extraAttacks = extraAttacks.concat([[`-${a}`, `${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 5) / 5)}`]]);
+        if (item.monkWeapon && this.data.data.details.levelUpData.some((levelUp) => levelUp.class.name === "Monk")) {
+            for (let a = 3; a < this.data.data.attributes.bab.total; a += 3) {
+                extraAttacks = extraAttacks.concat([[`-${a}`, `monk ${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 3) / 3)}`]]); //TODO: TEST THIS
+            }
+        } else {
+            for (let a = 5; a < this.data.data.attributes.bab.total; a += 5) {
+                extraAttacks = extraAttacks.concat([[`-${a}`, `${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 5) / 5)}`]]);
+            }
         }
         if (isSpeed) {
             extraAttacks = extraAttacks.concat([[`0`, `${game.i18n.localize("D35E.Attack")} - Speed Enhancement`]])

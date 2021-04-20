@@ -459,13 +459,26 @@
           "level": {
             "value": 0,
             "min": 0,
-            "max": 40,
+            "max": 60,
             "available": 1
           },
           "levelUpData": [
             {
               "level": 1,
               "id": "_level1",
+              "classId": null,
+              "class": null,
+              "classImage": null,
+              "skills": {},
+              "hp": 0,
+              "hasFeat": true,
+              "hasAbility": false
+            }
+          ],
+          "doubleClass": [
+            {
+              "level": 1,
+              "id": "_dclevel1",
               "classId": null,
               "class": null,
               "classImage": null,
@@ -1828,6 +1841,7 @@
       "equipped": true,
       "masterwork": false,
       "weaponType": "simple",
+      "monkWeapon": false,
       "weaponSubtype": "light",
       "properties": {},
       "enh": null,
