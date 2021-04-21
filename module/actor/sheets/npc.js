@@ -14,7 +14,7 @@ export class ActorSheetPFNPC extends ActorSheetPF {
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["D35E", "sheet", "actor", "npc"],
+      classes: ["D3Vilia", "sheet", "actor", "npc"],
       width: 725,
       height: 800
     });
@@ -29,12 +29,12 @@ export class ActorSheetPFNPC extends ActorSheetPF {
    * @type {String}
    */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/D35E/templates/actors/limited-sheet.html";
-    return "systems/D35E/templates/actors/npc-sheet.html";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/D3Vilia/templates/actors/limited-sheet.html";
+    return "systems/D3Vilia/templates/actors/npc-sheet.html";
   }
 
   static get name() {
-    return game.i18n.localize("D35E.ActorSheetPFNPC");
+    return game.i18n.localize("D3Vilia.ActorSheetPFNPC");
   }
 
   /* -------------------------------------------- */

@@ -51,42 +51,42 @@
         <div class="master-block flexrow" style="position: relative">
             <img src="{{data.master.img}}" title="{{data.master.name}}">
             <div class="flexcol tooltip">  <span class="tooltipcontent">
-                {{{ localize 'D35E.MinionTooltip' }}}
+                {{{ localize 'D3Vilia.MinionTooltip' }}}
                     @master.data.attributes.hd.total : {{data.master.data.attributes.hd.total}}
                   </span>
-                <span class="minion-of">{{ localize 'D35E.MinionOf' }}</span>
+                <span class="minion-of">{{ localize 'D3Vilia.MinionOf' }}</span>
                 <span class="minion-name">{{data.master.name}}</span>
 
-                <a class="unbind-minion" title="{{ localize 'D35E.UnbindMinion' }}">
+                <a class="unbind-minion" title="{{ localize 'D3Vilia.UnbindMinion' }}">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>
         </div>
       {{/if}}
       <h1 class="charname">
-          <input name="name" style="margin: 0" type="text" value="{{actor.name}}" placeholder="{{ localize 'D35E.CharacterName' }}"
-          title="{{ localize 'D35E.CharacterName' }}"/>
+          <input name="name" style="margin: 0" type="text" value="{{actor.name}}" placeholder="{{ localize 'D3Vilia.CharacterName' }}"
+          title="{{ localize 'D3Vilia.CharacterName' }}"/>
       </h1>
 
       <div class="hd tooltip">
         <span class="tooltipcontent">
           @attributes.hd.total : {{data.attributes.hd.total}}
         </span>
-        <Label>{{ localize 'D35E.HD' }}</label>
+        <Label>{{ localize 'D3Vilia.HD' }}</label>
         <input disabled type="text" value="{{data.attributes.hd.total}}" placeholder="1"
                data-dtype="Number"/>
       </div>
 
       <div class="charlevel">
         <div class="level">
-          <label>{{ localize 'D35E.CR' }} {{labels.totalCr}}</label>
+          <label>{{ localize 'D3Vilia.CR' }} {{labels.totalCr}}</label>
         </div>
         <div class="level" style="line-height: 14px">
-          <label style="font-size: 14px;">{{ localize 'D35E.BaseCR' }}</label>
+          <label style="font-size: 14px;">{{ localize 'D3Vilia.BaseCR' }}</label>
           <input name="data.details.cr" style="font-size: 14px; height: 16px" type="text" value="{{labels.cr}}" placeholder="1"/>
         </div>
         <div class="experience">
-          <span>{{data.details.xp.value}} {{ localize 'D35E.XP' }}</span>
+          <span>{{data.details.xp.value}} {{ localize 'D3Vilia.XP' }}</span>
         </div>
       </div>
     </div>
@@ -102,17 +102,17 @@
           <ul class="summary">
             <li>
               <input type="text" name="data.details.type" value="{{data.details.type}}"
-                     placeholder="{{ localize 'D35E.TypeSubType' }}" title="{{ localize 'D35E.TypeSubType' }}"/>
+                     placeholder="{{ localize 'D3Vilia.TypeSubType' }}" title="{{ localize 'D3Vilia.TypeSubType' }}"/>
             </li>
             <li>
               <input type="text" name="data.details.alignment" value="{{data.details.alignment}}"
-                     placeholder="{{ localize 'D35E.Alignment' }}" title="{{ localize 'D35E.Alignment' }}"/>
+                     placeholder="{{ localize 'D3Vilia.Alignment' }}" title="{{ localize 'D3Vilia.Alignment' }}"/>
             </li>
             <ol class="item-list race-container" style="margin: 0">
-              <li class="race-container item flexrow" {{#if race}}data-item-id="{{race._id}}"{{/if}} title="{{ localize 'D35E.Race' }}">
+              <li class="race-container item flexrow" {{#if race}}data-item-id="{{race._id}}"{{/if}} title="{{ localize 'D3Vilia.Race' }}">
               <div class="race item-image rollable" style="background-image: url({{race.img}})"
                    title="{{labels.race}}">
-                {{#unless race}}{{ localize 'D35E.Race' }}{{/unless}}
+                {{#unless race}}{{ localize 'D3Vilia.Race' }}{{/unless}}
               </div>
               {{#if race}}
                 <span>{{race.name}}</span>
@@ -121,13 +121,13 @@
               <div class="item-controls flexrow" style="line-height: 23px;">
                 {{#if owner}}
                   {{#unless race}}
-                    <a class="item-control add" title="{{ localize 'D35E.CreateItem' }}"><i
+                    <a class="item-control add" title="{{ localize 'D3Vilia.CreateItem' }}"><i
                        class="fas fa-plus"></i></a>
                   {{/unless}}
                   {{#if race}}
-                    <a class="item-control edit" title="{{ localize 'D35E.EditItem' }}"><i
+                    <a class="item-control edit" title="{{ localize 'D3Vilia.EditItem' }}"><i
                        class="fas fa-edit"></i></a>
-                    <a class="item-control delete" title="{{ localize 'D35E.DeleteItem' }}"><i
+                    <a class="item-control delete" title="{{ localize 'D3Vilia.DeleteItem' }}"><i
                        class="fas fa-trash"></i></a>
                   {{/if}}
                 {{/if}}
@@ -141,7 +141,7 @@
           <li class="attribute health">
               {{#if healthConfig.variants.npc.useWoundsAndVigor}}
                 <h4 class="attribute-name box-title tooltip">
-                  {{ localize 'D35E.Vigor' }}
+                  {{ localize 'D3Vilia.Vigor' }}
                   <div class="tooltipcontent">
                     @attributes.vigor.min : {{data.attributes.vigor.min}}<br/>
                     @attributes.vigor.value : {{data.attributes.vigor.value}}<br/>
@@ -149,7 +149,7 @@
                     @attributes.vigor.temp : {{data.attributes.vigor.temp}}
 
                     {{#if sourceDetails.data.attributes.vigor.max.length}}
-                      <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+                      <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
                       {{#each sourceDetails.data.attributes.vigor.max as |src|}}{{src.name}}:
                       {{src.value}}<br/>{{/each}}
                     {{/if}}
@@ -164,20 +164,20 @@
                 </div>
                 <footer class="attribute-footer">
                   <input name="data.attributes.vigor.temp" type="text" class="temphp"
-                         placeholder="{{ localize 'D35E.Temporary' }}"
+                         placeholder="{{ localize 'D3Vilia.Temporary' }}"
                          value="{{#if data.attributes.vigor.temp}}{{data.attributes.vigor.temp}}{{/if}}"
                          data-dtype="Number"/>
                 </footer>
 
                 <h4 class="attribute-name box-title tooltip">
-                  {{ localize 'D35E.Wounds' }}
+                  {{ localize 'D3Vilia.Wounds' }}
                   <div class="tooltipcontent">
                       @attributes.wounds.min : {{data.attributes.wounds.min}}<br/>
                       @attributes.wounds.value : {{data.attributes.wounds.value}}<br/>
                       @attributes.wounds.max : {{data.attributes.wounds.max}}<br/>
 
                       {{#if sourceDetails.data.attributes.wounds.max.length}}
-                        <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+                        <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
                         {{#each sourceDetails.data.attributes.wounds.max as |src|}}{{src.name}}:
                         {{src.value}}<br/>{{/each}}
                       {{/if}}
@@ -192,7 +192,7 @@
                 </div>
               {{else}}
                 <h4 class="attribute-name box-title tooltip">
-                  {{ localize 'D35E.Health' }}
+                  {{ localize 'D3Vilia.Health' }}
                   <div class="tooltipcontent">
                     @attributes.hp.value : {{data.attributes.hp.value}}<br/>
                     @attributes.hp.max : {{data.attributes.hp.max}}<br/>
@@ -200,7 +200,7 @@
                     @attributes.hp.nonlethal : {{data.attributes.hp.nonlethal}}
 
                     {{#if sourceDetails.data.attributes.hp.max.length}}
-                      <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+                      <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
                       {{#each sourceDetails.data.attributes.hp.max as |src|}}{{src.name}}: {{src.value}}<br/>{{/each}}
                     {{/if}}
                   </div>
@@ -213,23 +213,23 @@
                 </div>
                 <footer class="attribute-footer">
                   <input name="data.attributes.hp.temp" type="text" class="temphp"
-                         placeholder="+{{ localize 'D35E.TempShort' }}"
+                         placeholder="+{{ localize 'D3Vilia.TempShort' }}"
                          value="{{#if data.attributes.hp.temp}}{{data.attributes.hp.temp}}{{/if}}"
-                         data-dtype="Number" title="{{ localize 'D35E.TempHP' }}"/>
+                         data-dtype="Number" title="{{ localize 'D3Vilia.TempHP' }}"/>
                   <input name="data.attributes.hp.nonlethal" type="text" class="temphp"
-                         placeholder="{{ localize 'D35E.Nonlethal' }}"
+                         placeholder="{{ localize 'D3Vilia.Nonlethal' }}"
                          value="{{#if data.attributes.hp.nonlethal}}{{data.attributes.hp.nonlethal}}{{/if}}"
-                         data-dtype="Number" title="{{ localize 'D35E.Nonlethal' }}"/>
+                         data-dtype="Number" title="{{ localize 'D3Vilia.Nonlethal' }}"/>
                   <br>
 
-                  <a class="btn random-hp-roll" onkeydown="e.preventDefault();">{{ localize 'D35E.RandomizeHP' }}</a>
+                  <a class="btn random-hp-roll" onkeydown="e.preventDefault();">{{ localize 'D3Vilia.RandomizeHP' }}</a>
                 </footer>
               {{/if}}
           </li>
 
           <li class="attribute speed">
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.SpeedLand' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.SpeedLand' }}</h4>
               <div class="attribute-value">
                 <div class="attribute">
                   {{#if data.attributes.speed.land.total}}{{data.attributes.speed.land.total}}{{/if}}
@@ -238,11 +238,11 @@
                 <footer class="attribute-footer">
                   <input name="data.attributes.speed.land.base" type="text"
                          value="{{#if data.attributes.speed.land.base}}{{data.attributes.speed.land.base}}{{/if}}"
-                         data-dtype="Number" placeholder="{{ localize 'D35E.Base' }}"/>
+                         data-dtype="Number" placeholder="{{ localize 'D3Vilia.Base' }}"/>
                 </footer>
             </div>
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.SpeedClimb' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.SpeedClimb' }}</h4>
               <div class="attribute-value">
                 <div class="attribute">
                   {{#if data.attributes.speed.climb.total}}{{data.attributes.speed.climb.total}}{{/if}}
@@ -251,11 +251,11 @@
               <footer class="attribute-footer">
                 <input name="data.attributes.speed.climb.base" type="text"
                        value="{{#if data.attributes.speed.climb.base}}{{data.attributes.speed.climb.base}}{{/if}}"
-                       data-dtype="Number" placeholder="{{ localize 'D35E.Base' }}"/>
+                       data-dtype="Number" placeholder="{{ localize 'D3Vilia.Base' }}"/>
               </footer>
             </div>
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.SpeedSwim' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.SpeedSwim' }}</h4>
               <div class="attribute-value">
                 <div class="attribute">
                   {{#if data.attributes.speed.swim.total}}{{data.attributes.speed.swim.total}}{{/if}}
@@ -264,11 +264,11 @@
               <footer class="attribute-footer">
                 <input name="data.attributes.speed.swim.base" type="text"
                        value="{{#if data.attributes.speed.swim.base}}{{data.attributes.speed.swim.base}}{{/if}}"
-                       data-dtype="Number" placeholder="{{ localize 'D35E.Base' }}"/>
+                       data-dtype="Number" placeholder="{{ localize 'D3Vilia.Base' }}"/>
               </footer>
             </div>
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.SpeedBurrow' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.SpeedBurrow' }}</h4>
               <div class="attribute-value">
                 <div class="attribute">
                   {{#if data.attributes.speed.burrow.total}}{{data.attributes.speed.burrow.total}}{{/if}}
@@ -277,11 +277,11 @@
               <footer class="attribute-footer">
                 <input name="data.attributes.speed.burrow.base" type="text"
                        value="{{#if data.attributes.speed.burrow.base}}{{data.attributes.speed.burrow.base}}{{/if}}"
-                       data-dtype="Number" placeholder="{{ localize 'D35E.Base' }}"/>
+                       data-dtype="Number" placeholder="{{ localize 'D3Vilia.Base' }}"/>
               </footer>
             </div>
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.SpeedFly' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.SpeedFly' }}</h4>
               <div class="attribute-value">
                 <div class="attribute">
                   {{#if data.attributes.speed.fly.total}}{{data.attributes.speed.fly.total}}{{/if}}
@@ -290,11 +290,11 @@
               <footer class="attribute-footer">
                 <input name="data.attributes.speed.fly.base" type="text"
                        value="{{#if data.attributes.speed.fly.base}}{{data.attributes.speed.fly.base}}{{/if}}"
-                       data-dtype="Number" placeholder="{{ localize 'D35E.Base' }}"/>
+                       data-dtype="Number" placeholder="{{ localize 'D3Vilia.Base' }}"/>
               </footer>
             </div>
             <div class="attribute-speed">
-              <h4 class="attribute-name box-title">{{ localize 'D35E.FlyManeuverabilityShort' }}</h4>
+              <h4 class="attribute-name box-title">{{ localize 'D3Vilia.FlyManeuverabilityShort' }}</h4>
               <select name="data.attributes.speed.fly.maneuverability">
                   {{#select data.attributes.speed.fly.maneuverability}}
                   {{#each config.flyManeuverabilities as |name type|}}
@@ -311,15 +311,15 @@
 
   {{!-- NPC Sheet Navigation --}}
   <nav class="sheet-navigation tabs" data-group="primary">
-    <a class="item active" data-tab="attributes">{{ localize 'D35E.Attributes' }}</a>
-    <a class="item" data-tab="attacks">{{ localize 'D35E.Combat' }}</a>
-    <a class="item" data-tab="inventory">{{ localize 'D35E.Inventory' }}</a>
-    <a class="item" data-tab="feats">{{ localize 'D35E.Features' }}</a>
-    <a class="item" data-tab="skills">{{ localize 'D35E.Skills' }}</a>
-    <a class="item" data-tab="buffs">{{ localize 'D35E.Buffs' }}</a>
-    <a class="item" data-tab="spellbook">{{ localize 'D35E.Spells' }}</a>
-    <a class="item" data-tab="biography">{{ localize 'D35E.Biography' }}</a>
-    <a class="item" data-tab="notes">{{ localize 'D35E.Notes' }}</a>
+    <a class="item active" data-tab="attributes">{{ localize 'D3Vilia.Attributes' }}</a>
+    <a class="item" data-tab="attacks">{{ localize 'D3Vilia.Combat' }}</a>
+    <a class="item" data-tab="inventory">{{ localize 'D3Vilia.Inventory' }}</a>
+    <a class="item" data-tab="feats">{{ localize 'D3Vilia.Features' }}</a>
+    <a class="item" data-tab="skills">{{ localize 'D3Vilia.Skills' }}</a>
+    <a class="item" data-tab="buffs">{{ localize 'D3Vilia.Buffs' }}</a>
+    <a class="item" data-tab="spellbook">{{ localize 'D3Vilia.Spells' }}</a>
+    <a class="item" data-tab="biography">{{ localize 'D3Vilia.Biography' }}</a>
+    <a class="item" data-tab="notes">{{ localize 'D3Vilia.Notes' }}</a>
     <a class="item header-button" data-tab="config"><i class="fas fa-cogs"></i></a>
   </nav>
 
@@ -333,17 +333,17 @@
           <li class="ability" data-ability="{{id}}">
             <div class="ability-header flexrow">
               <input class="ability-damage" name="data.abilities.{{id}}.damage" type="text"
-                     title="{{ localize 'D35E.Damage' }}"
+                     title="{{ localize 'D3Vilia.Damage' }}"
               value="{{#if ability.damage}}{{ability.damage}}{{/if}}" data-dtype="Number" 
-              placeholder="{{ localize 'D35E.DMG' }}"/>
+              placeholder="{{ localize 'D3Vilia.DMG' }}"/>
               <input class="ability-penalty" name="data.abilities.{{id}}.userPenalty" type="text"
-                     title="{{ localize 'D35E.Penalty' }}"
+                     title="{{ localize 'D3Vilia.Penalty' }}"
               value="{{#if ability.userPenalty}}{{ability.userPenalty}}{{/if}}" data-dtype="Number"
-              placeholder="{{ localize 'D35E.PNL' }}"/>
+              placeholder="{{ localize 'D3Vilia.PNL' }}"/>
               <input class="ability-drain" name="data.abilities.{{id}}.drain" type="text" 
-                     title="{{ localize 'D35E.Drain' }}"
+                     title="{{ localize 'D3Vilia.Drain' }}"
               value="{{#if ability.drain}}{{ability.drain}}{{/if}}" data-dtype="Number" 
-              placeholder="{{ localize 'D35E.DRN' }}"/>
+              placeholder="{{ localize 'D3Vilia.DRN' }}"/>
             </div>
             <h4 class="ability-name box-title rollable">{{ability.label}}</h4>
             <span class="ability-score tooltip">
@@ -357,7 +357,7 @@
                 @abilities.{{id}}.penalty : {{ability.penalty}}
 
                 {{#if ability.sourceDetails.length}}
-                  <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+                  <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
                   {{#each ability.sourceDetails as |src|}}{{src.name}}: {{src.value}}<br/>{{/each}}
                 {{/if}}
               </span>
@@ -376,13 +376,13 @@
       <div class="flexcol attributes-root">
         <ul class="attributes misc-base flexrow">
           <li class="attribute bab" data-attribute="bab">
-            <h4 class="attribute-name box-title rollable">{{ localize 'D35E.BABAbbr' }}</h4>
+            <h4 class="attribute-name box-title rollable">{{ localize 'D3Vilia.BABAbbr' }}</h4>
             <div class="attribute-value tooltip">
               <span>{{numberFormat data.attributes.bab.total decimals=0 sign=false}}</span>
               <span class="tooltipcontent">
                 @attributes.bab.total : {{data.attributes.bab.total}}
                 {{#if sourceDetails.data.attributes.bab.total.length}}
-                  <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+                  <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
                   {{#each sourceDetails.data.attributes.bab.total as |src|}}{{src.name}}: {{src.value}}<br/>{{/each}}
                 {{/if}}
               </span>
@@ -390,13 +390,13 @@
           </li>
 
             <li class="attribute cmb" data-attribute="cmb">
-                <h4 class="attribute-name box-title rollable">{{ localize 'D35E.CMBAbbr' }}</h4>
+                <h4 class="attribute-name box-title rollable">{{ localize 'D3Vilia.CMBAbbr' }}</h4>
                 <div class="attribute-value tooltip">
                     <span>{{data.attributes.cmb.total}}</span>
                     <span class="tooltipcontent">
           @attributes.cmb.total : {{data.attributes.cmb.total}}
           {{#if sourceDetails.data.attributes.cmb.total.length}}
-            <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+            <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
             {{#each sourceDetails.data.attributes.cmb.total as |src|}}{{src.name}}: {{src.value}}<br/>{{/each}}
           {{/if}}
         </span>
@@ -406,13 +406,13 @@
 
           <ul class="attributes misc-base flexrow">
               <li class="attribute initiative" data-attribute="init">
-                  <h4 class="attribute-name box-title rollable">{{ localize 'D35E.Initiative' }}</h4>
+                  <h4 class="attribute-name box-title rollable">{{ localize 'D3Vilia.Initiative' }}</h4>
                   <div class="attribute-value tooltip">
                       <span>{{data.attributes.init.total}}</span>
                       <span class="tooltipcontent">
             @attributes.init.total : {{data.attributes.init.total}}
             {{#if sourceDetails.data.attributes.init.total.length}}
-              <br/><br/>{{ localize 'D35E.FromSources' }}:<br/>
+              <br/><br/>{{ localize 'D3Vilia.FromSources' }}:<br/>
               {{#each sourceDetails.data.attributes.init.total as |src|}}{{src.name}}: {{src.value}}<br/>{{/each}}
             {{/if}}
           </span>
@@ -422,7 +422,7 @@
 
           <ul class="attributes misc-base2 flexrow">
               <li class="attribute acp" data-attribute="acp">
-                  <h4 class="attribute-name box-title">{{ localize 'D35E.ACP' }}</h4>
+                  <h4 class="attribute-name box-title">{{ localize 'D3Vilia.ACP' }}</h4>
                   <div class="attribute-value tooltip">
                       <span>{{data.attributes.acp.total}}</span>
                       <span class="tooltipcontent">@attributes.acp.total : {{data.attributes.acp.total}}</span>
@@ -430,7 +430,7 @@
               </li>
 
               <li class="attribute maxdex" data-attribute="maxdex">
-                  <h4 class="attribute-name box-title">{{ localize 'D35E.MaxDexShort' }}</h4>
+                  <h4 class="attribute-name box-title">{{ localize 'D3Vilia.MaxDexShort' }}</h4>
                   <div class="attribute-value tooltip">
                       <span>{{data.attributes.maxDexBonus}}</span>
                       <span class="tooltipcontent">@attributes.maxDexBonus : {{data.attributes.maxDexBonus}}</span>
@@ -438,13 +438,13 @@
               </li>
           </ul>
 
-          <textarea name="data.attributes.cmbNotes" placeholder="CMB {{ localize 'D35E.Notes' }}">{{data.attributes.cmbNotes}}</textarea>
+          <textarea name="data.attributes.cmbNotes" placeholder="CMB {{ localize 'D3Vilia.Notes' }}">{{data.attributes.cmbNotes}}</textarea>
       </div>
 
       <section class="center-pane flexcol">
         <div class="traits">
           <div class="form-group">
-            <label>{{ localize 'D35E.BuffTarACNatural' }}</label>
+            <label>{{ localize 'D3Vilia.BuffTarACNatural' }}</label>
             <input name="data.attributes.naturalAC" type="text" placeholder="0"
                    value="{{#if data.attributes.naturalAC}}{{data.attributes.naturalAC}}{{/if}}"/>
           </div>
@@ -452,10 +452,10 @@
 
         <div class="traits">
           <div class="form-group">
-            <label>{{ localize 'D35E.SpellResistance' }}</label>
-            <input style="width: calc(100% - 60px);" name="data.attributes.sr.formula" type="text" placeholder="{{ localize 'D35E.Formula' }}"
+            <label>{{ localize 'D3Vilia.SpellResistance' }}</label>
+            <input style="width: calc(100% - 60px);" name="data.attributes.sr.formula" type="text" placeholder="{{ localize 'D3Vilia.Formula' }}"
                    value="{{#if data.attributes.sr.formula}}{{data.attributes.sr.formula}}{{/if}}"/>
-            <span style="flex: 0 80px; text-align: end">{{ localize 'D35E.Total' }}: </span>
+            <span style="flex: 0 80px; text-align: end">{{ localize 'D3Vilia.Total' }}: </span>
             <input style="flex: 0 30px" disabled type="text"
                    value="{{data.attributes.sr.total}}"/>
           </div>
@@ -463,37 +463,37 @@
 
         <div class="traits">
           <div class="form-group">
-            <label>{{ localize 'D35E.Fortification' }}</label>
-            <input style="width: calc(100% - 60px);" name="data.attributes.fortification.value" type="text" placeholder="{{ localize 'D35E.Value' }}"  data-dtype="Number"
+            <label>{{ localize 'D3Vilia.Fortification' }}</label>
+            <input style="width: calc(100% - 60px);" name="data.attributes.fortification.value" type="text" placeholder="{{ localize 'D3Vilia.Value' }}"  data-dtype="Number"
                    value="{{#if data.attributes.fortification.value}}{{data.attributes.fortification.value}}{{/if}}"/>
-            <span style="flex: 0 80px; text-align: end">{{ localize 'D35E.Total' }}: </span>
+            <span style="flex: 0 80px; text-align: end">{{ localize 'D3Vilia.Total' }}: </span>
             <input style="flex: 0 30px" disabled type="text"
                    value="{{data.attributes.fortification.total}}"/>
           </div>
         </div>
           <div class="traits">
             <div class="form-group">
-              <label>{{ localize 'D35E.FastHealing' }}</label>
+              <label>{{ localize 'D3Vilia.FastHealing' }}</label>
               <input name="data.traits.fastHealing" type="text" placeholder="0"
                      value="{{#if data.traits.fastHealing}}{{data.traits.fastHealing}}{{/if}}" data-dtype="Number"/>
-              <span style="flex: 0 80px; text-align: end">{{ localize 'D35E.Total' }}: </span>
+              <span style="flex: 0 80px; text-align: end">{{ localize 'D3Vilia.Total' }}: </span>
               <input style="flex: 0 30px" disabled type="text"
                      value="{{data.traits.fastHealingTotal}}"/>
             </div>
           </div>
           <div class="traits">
             <div class="form-group">
-              <label>{{ localize 'D35E.Regeneration' }}</label>
+              <label>{{ localize 'D3Vilia.Regeneration' }}</label>
               <input name="data.traits.regen" type="text" placeholder="0"
                      value="{{#if data.traits.regen}}{{data.traits.regen}}{{/if}}" data-dtype="Number"/>
-              <span style="flex: 0 80px; text-align: end">{{ localize 'D35E.Total' }}: </span>
+              <span style="flex: 0 80px; text-align: end">{{ localize 'D3Vilia.Total' }}: </span>
               <input style="flex: 0 30px" disabled type="text"
                      value="{{data.traits.regenTotal}}"/>
             </div>
           </div>
 
           {{!-- Traits --}}
-          {{> "systems/D35E/templates/actors/parts/actor-traits.html"}}
+          {{> "systems/D3Vilia/templates/actors/parts/actor-traits.html"}}
       </section>
 
 
@@ -501,37 +501,37 @@
 
     {{!-- Defenses Tab --}}
     <div class="tab defenses flexcol" data-group="primary" data-tab="defenses">
-      {{> "systems/D35E/templates/actors/parts/actor-defenses.html"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-defenses.html"}}
     </div>
 
     {{!-- Attacks Tab --}}
     <div class="tab attacks flexcol" data-group="primary" data-tab="attacks">
-      {{> "systems/D35E/templates/actors/parts/actor-attacks.html" sections=attacks}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-attacks.html" sections=attacks}}
     </div>
 
     {{!-- Inventory Tab --}}
     <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-      {{> "systems/D35E/templates/actors/parts/actor-inventory.html" sections=inventory}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-inventory.html" sections=inventory}}
     </div>
 
     {{!-- Features Tab --}}
     <div class="tab features flexcol" data-group="primary" data-tab="feats">
-      {{> "systems/D35E/templates/actors/parts/actor-features.html" sections=features}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-features.html" sections=features}}
     </div>
 
     {{!-- Skills Tab --}}
     <div class="tab skills flexcol" data-group="primary" data-tab="skills">
-      {{> "systems/D35E/templates/actors/parts/actor-skills-front.html"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-skills-front.html"}}
     </div>
 
     {{!-- Buffs Tab --}}
     <div class="tab buffs flexcol" data-group="primary" data-tab="buffs">
-      {{> "systems/D35E/templates/actors/parts/actor-buffs.html" sections=buffs}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-buffs.html" sections=buffs}}
     </div>
 
     {{!-- Spellbook Tab --}}
     <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
-      {{> "systems/D35E/templates/actors/parts/actor-spellbook-front.html"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-spellbook-front.html"}}
     </div>
 
     {{!-- Biography Tab --}}
@@ -548,7 +548,7 @@
 
     {{!-- Config Tab --}}
     <div class="tab actor-notes flexcol" data-group="primary" data-tab="config">
-      {{> "systems/D35E/templates/actors/parts/actor-config.html"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-config.html"}}
     </div>
   </section>
 </form>

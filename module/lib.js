@@ -192,15 +192,15 @@ export const CR = {
 };
 
 export const sizeInt = function (targetSize="M") {
-  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D35E.sizeChart).indexOf(targetSize.toUpperCase());
-  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D35E.sizeChart).length - 1, Object.values(CONFIG.D35E.sizeChart).indexOf("M") + targetSize));
+  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D3Vilia.sizeChart).indexOf(targetSize.toUpperCase());
+  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D3Vilia.sizeChart).length - 1, Object.values(CONFIG.D3Vilia.sizeChart).indexOf("M") + targetSize));
   return `${targetSize}`
 }
 
 export const sizeDie = function(origCount, origSides, targetSize="M", crit=1) {
-  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D35E.sizeChart).indexOf(targetSize.toUpperCase());
-  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D35E.sizeChart).length - 1, Object.values(CONFIG.D35E.sizeChart).indexOf("M") + targetSize));
-  let c = duplicate(CONFIG.D35E.sizeDie);
+  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D3Vilia.sizeChart).indexOf(targetSize.toUpperCase());
+  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D3Vilia.sizeChart).length - 1, Object.values(CONFIG.D3Vilia.sizeChart).indexOf("M") + targetSize));
+  let c = duplicate(CONFIG.D3Vilia.sizeDie);
 
   const mediumDie = `${origCount}d${origSides}`;
   const mediumDieMax = origCount * origSides;
@@ -261,7 +261,7 @@ export const sizeDie = function(origCount, origSides, targetSize="M", crit=1) {
   formula = `${count * crit}d${sides}${RegExp.$3}`;
   }
   if (index === -1) {
-    ui.notifications.warn(game.i18n.localize("D35E.WarningNoSizeDie").format(mediumDie, formula));
+    ui.notifications.warn(game.i18n.localize("D3Vilia.WarningNoSizeDie").format(mediumDie, formula));
   }
 
   return formula;
@@ -296,8 +296,8 @@ export const sizeMonkDamageDie = function(level, targetSize="M", crit=1) {
 };
 
 export const sizeNaturalDie= function(block, targetSize="M", crit=1) {
-  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D35E.sizeChart).indexOf(targetSize.toUpperCase());
-  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D35E.sizeChart).length - 1, Object.values(CONFIG.D35E.sizeChart).indexOf("M") + targetSize));
+  if (typeof targetSize === "string") targetSize = Object.values(CONFIG.D3Vilia.sizeChart).indexOf(targetSize.toUpperCase());
+  else if (typeof targetSize === "number") targetSize = Math.max(0, Math.min(Object.values(CONFIG.D3Vilia.sizeChart).length - 1, Object.values(CONFIG.D3Vilia.sizeChart).indexOf("M") + targetSize));
   let naturalDamageSizes =
       [
         ['0','1','1','1d3','1d4','1d6','1d8','2d6','2d8'],

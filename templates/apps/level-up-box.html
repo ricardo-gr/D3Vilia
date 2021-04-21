@@ -9,7 +9,7 @@
     <h3>Abilities</h3>
     <p>You have reached a level that allows you to increase one of your abilities.</p>
     <div class="form-group spellcasting-ability flexrow">
-        <label><span>{{localize "D35E.Ability"}}</span></label>
+        <label><span>{{localize "D3Vilia.Ability"}}</span></label>
         <select name="ability" data-dtype="String">
             {{#select levelup.ability}}
             {{#each config.abilities as |abl a|}}
@@ -21,7 +21,7 @@
     {{/if}}
     {{#if hasNewFeat}}
     <h3>Feat</h3>
-    <p>You have reached a level that allows you to have a new Feat. <a onclick="game.packs.get('D35E.feats').render(true)" style="color: #782e22;">Open Feats compendium.</a></p>
+    <p>You have reached a level that allows you to have a new Feat. <a onclick="game.packs.get('D3Vilia.feats').render(true)" style="color: #782e22;">Open Feats compendium.</a></p>
     {{/if}}
     {{#unless hasNewAbility}}
     {{#unless hasNewFeat}}
@@ -29,5 +29,5 @@
     {{/unless}}
     {{/unless}}
 
-  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{localize "D35E.LevelUp"}}</button>
+  <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{localize "D3Vilia.LevelUp"}}</button>
 </form>

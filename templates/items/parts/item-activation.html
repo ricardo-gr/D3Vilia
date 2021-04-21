@@ -1,6 +1,6 @@
 {{!-- Activation Cost --}}
 <div class="form-group input-select">
-  <label>{{localize "D35E.ActivationCost"}}</label>
+  <label>{{localize "D3Vilia.ActivationCost"}}</label>
   <div class="form-fields">
     <input type="text" name="data.activation.cost" value="{{data.activation.cost}}" data-dtype="Number" placeholder=""/>
     <select name="data.activation.type">
@@ -17,7 +17,7 @@
 
 {{#unless isAttack}}
 <div class="form-group">
-  <label>{{localize "D35E.Favorite"}}</label>
+  <label>{{localize "D3Vilia.Favorite"}}</label>
   <label class="checkbox" style="position: relative; flex: 0 20px">
     <input type="checkbox" class="stylized" name="data.favorite" {{checked data.favorite}}/>
     <span class="checkmark"></span>
@@ -27,7 +27,7 @@
 
 {{!-- Ability Target --}}
 <div class="form-group input-select-select">
-  <label>{{localize "D35E.Target"}}</label>
+  <label>{{localize "D3Vilia.Target"}}</label>
   <div class="form-fields">
     <input type="text" name="data.target.value" value="{{data.target.value}}"/>
   </div>
@@ -35,9 +35,9 @@
 
 {{!-- Ability Range --}}
 <div class="form-group input-select">
-  <label>{{localize "D35E.Range"}}</label>
+  <label>{{localize "D3Vilia.Range"}}</label>
   <div class="form-fields">
-    {{#if canInputRange}}<input type="text" name="data.range.value" value="{{data.range.value}}" placeholder="{{#unless isSpell}}{{localize "D35E.Formula"}}{{/unless}}"/>{{/if}}
+    {{#if canInputRange}}<input type="text" name="data.range.value" value="{{data.range.value}}" placeholder="{{#unless isSpell}}{{localize "D3Vilia.Formula"}}{{/unless}}"/>{{/if}}
     <select name="data.range.units">
       {{#select data.range.units}}
       <option value=""></option>
@@ -52,7 +52,7 @@
 {{!-- Area --}}
 {{#if isSpell}}
 <div class="form-group input-select-select">
-  <label>{{localize "D35E.Area"}}</label>
+  <label>{{localize "D3Vilia.Area"}}</label>
   <div class="form-fields">
     <input type="text" name="data.spellArea" value="{{data.spellArea}}"/>
   </div>
@@ -61,12 +61,12 @@
 
 {{!-- Effect Duration --}}
 <div class="form-group input-select">
-  <label>{{localize "D35E.Duration"}}</label>
+  <label>{{localize "D3Vilia.Duration"}}</label>
   <div class="form-fields">
     {{#if isSpell}}
-    <input type="text" name="data.spellDuration" value="{{data.spellDuration}}" placeholder="{{localize "D35E.SpellDurationExample"}}"/>
+    <input type="text" name="data.spellDuration" value="{{data.spellDuration}}" placeholder="{{localize "D3Vilia.SpellDurationExample"}}"/>
     {{else}}
-    {{#if canInputDuration}}<input type="text" name="data.duration.value" value="{{data.duration.value}}" placeholder="{{localize "D35E.Formula"}}"/>{{/if}}
+    {{#if canInputDuration}}<input type="text" name="data.duration.value" value="{{data.duration.value}}" placeholder="{{localize "D3Vilia.Formula"}}"/>{{/if}}
     <select name="data.duration.units">
       {{#select data.duration.units}}
       <option value=""></option>
@@ -82,7 +82,7 @@
 {{!-- Limited Uses --}}
 {{#unless isSpell}}
   <div class="form-group uses-per">
-    <label>{{localize "D35E.LimitedUses"}}</label>
+    <label>{{localize "D3Vilia.LimitedUses"}}</label>
     <div class="form-fields">
       {{#if isCharged}}
       {{#unless data.linkedChargeItem.id}}
@@ -106,25 +106,25 @@
   {{#unless data.linkedChargeItem.id}}
   {{#if isCharged}}
   <div class="form-group uses-per">
-    <label>{{localize "D35E.MaximumUsesFormula"}}</label>
-    <input type="text" name="data.uses.maxFormula" value="{{data.uses.maxFormula}}" placeholder="{{localize "D35E.MaximumUsesFormula"}}"/>
+    <label>{{localize "D3Vilia.MaximumUsesFormula"}}</label>
+    <input type="text" name="data.uses.maxFormula" value="{{data.uses.maxFormula}}" placeholder="{{localize "D3Vilia.MaximumUsesFormula"}}"/>
   </div>
 
   <div class="form-group uses-recharge-formula">
-    <label>{{localize "D35E.RechargeFormula"}} <i class="fas fa-info-circle tooltip">
-      <div class="tooltipcontent"><strong>{{localize "D35E.RechargeFormula"}}</strong><br><p style="white-space: normal;"> {{localize "D35E.RechargeFormulaInfo"}}</p></div>
+    <label>{{localize "D3Vilia.RechargeFormula"}} <i class="fas fa-info-circle tooltip">
+      <div class="tooltipcontent"><strong>{{localize "D3Vilia.RechargeFormula"}}</strong><br><p style="white-space: normal;"> {{localize "D3Vilia.RechargeFormulaInfo"}}</p></div>
     </i></label>
-    <input type="text" name="data.uses.rechargeFormula" value="{{data.uses.rechargeFormula}}" placeholder="{{localize "D35E.RechargeFormula"}}"/>
+    <input type="text" name="data.uses.rechargeFormula" value="{{data.uses.rechargeFormula}}" placeholder="{{localize "D3Vilia.RechargeFormula"}}"/>
   </div>
   {{/if}}
   {{/unless}}
   <div class="charge-link flexcol">
     {{#unless data.linkedChargeItem.id}}
       <div style="width: 100%; text-align: center; padding: 12px">
-        {{localize "D35E.DropChargeLinkItem"}}
+        {{localize "D3Vilia.DropChargeLinkItem"}}
       </div>
     {{else}}
-      <h4>{{localize "D35E.LinkedCharge"}} {{data.linkedChargeItem.id}}<a style="float: right" class="colorized-link remove-charge-link">{{localize "D35E.UnlinkCharge"}}</a></h4>
+      <h4>{{localize "D3Vilia.LinkedCharge"}} {{data.linkedChargeItem.id}}<a style="float: right" class="colorized-link remove-charge-link">{{localize "D3Vilia.UnlinkCharge"}}</a></h4>
       <div class="form-group">
       <img src="{{data.linkedChargeItem.img}}">
       <label>{{data.linkedChargeItem.name}}</label>
@@ -133,11 +133,11 @@
 
       </div>
       {{/unless}}
-    <em style="align-self: flex-end;">{{localize "D35E.LinkedChargeDescription"}}</em>
+    <em style="align-self: flex-end;">{{localize "D3Vilia.LinkedChargeDescription"}}</em>
   </div>
 
   <div class="form-group">
-    <label>{{localize "D35E.AutoDeductCharges"}}</label>
+    <label>{{localize "D3Vilia.AutoDeductCharges"}}</label>
     <label class="checkbox" style="position: relative; flex: 0 20px">
       <input type="checkbox" class="stylized" name="data.uses.autoDeductCharges" {{checked data.uses.autoDeductCharges}}/>
       <span class="checkmark"></span>
@@ -145,12 +145,12 @@
   </div>
 
   <div class="form-group input">
-    <label>{{localize "D35E.ChargesToDeduct"}}</label>
+    <label>{{localize "D3Vilia.ChargesToDeduct"}}</label>
     <input style="width: 40px" type="text" value="{{data.uses.chargesPerUse}}" name="data.uses.chargesPerUse"  data-dtype="Number"/>
   </div>
 
   <div class="form-group">
-    <label>{{localize "D35E.AllowMultipleUses"}}</label>
+    <label>{{localize "D3Vilia.AllowMultipleUses"}}</label>
     <label class="checkbox" style="position: relative; flex: 0 20px">
       <input type="checkbox" class="stylized" name="data.uses.allowMultipleUses" {{checked data.uses.allowMultipleUses}}/>
       <span class="checkmark"></span>
@@ -158,7 +158,7 @@
   </div>
   {{#if data.uses.allowMultipleUses}}
   <div class="form-group input">
-    <label>{{localize "D35E.MaxChargesPerUse"}}</label>
+    <label>{{localize "D3Vilia.MaxChargesPerUse"}}</label>
     <input style="flex: 0 140px; margin-right: 1rem" type="text" value="{{data.uses.maxPerUseFormula}}" name="data.uses.maxPerUseFormula"  data-dtype="String"/>
 
     <span class="sep"> Total:  </span>

@@ -19,7 +19,7 @@ export default function renderWelcomeScreen() {
     class WelcomeScreen extends Application {
         static get defaultOptions() {
             const options = super.defaultOptions;
-            options.template = `systems/D35E/templates/welcome-screen.html`;
+            options.template = `systems/D3Vilia/templates/welcome-screen.html`;
             options.resizable = false;
             options.width = 920;
             options.height = 730;

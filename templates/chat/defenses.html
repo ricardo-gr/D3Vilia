@@ -1,4 +1,4 @@
-<div class="D35E chat-card defense-card" data-actor-id="{{actor._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+<div class="D3Vilia chat-card defense-card" data-actor-id="{{actor._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
   <header class="card-header flexrow">
     <h3 class="actor-name">{{name}} - Defenses</h3>
   </header>
@@ -8,9 +8,9 @@
     <div class="defense ac">
       <table>
         <tr>
-          <th>{{localize "D35E.ACNormal"}}</th>
-          <th>{{localize "D35E.ACTouch"}}</th>
-          <th>{{localize "D35E.ACFlatFooted"}}</th>
+          <th>{{localize "D3Vilia.ACNormal"}}</th>
+          <th>{{localize "D3Vilia.ACTouch"}}</th>
+          <th>{{localize "D3Vilia.ACFlatFooted"}}</th>
         </tr>
         <tr>
           <td>{{ac.normal}}</td>
@@ -22,7 +22,7 @@
 
     {{#if ac.notes}}
     <div class="flexcol property-group">
-      <label>{{localize "D35E.ACNotes"}}</label>
+      <label>{{localize "D3Vilia.ACNotes"}}</label>
       <div class="flexrow">
         {{#each ac.notes as |v|}}
         <span class="tag">{{{v}}}</span>
@@ -36,8 +36,8 @@
     <div class="defense cmd">
       <table>
         <tr>
-          <th>{{localize "D35E.CMDAbbr"}}</th>
-          <th>{{localize "D35E.CMDFlatFooted"}}</th>
+          <th>{{localize "D3Vilia.CMDAbbr"}}</th>
+          <th>{{localize "D3Vilia.CMDFlatFooted"}}</th>
         </tr>
         <tr>
           <td>{{cmd.normal}}</td>
@@ -48,7 +48,7 @@
 
     {{#if cmd.notes}}
     <div class="flexcol property-group">
-      <label>{{localize "D35E.CMDNotes"}}</label>
+      <label>{{localize "D3Vilia.CMDNotes"}}</label>
       <div class="flexrow">
         {{#each cmd.notes as |v|}}
         <span class="tag">{{{v}}}</span>
@@ -62,7 +62,7 @@
     <div class="defense misc">
       <table>
         <tr>
-          <th>{{localize "D35E.SpellResistance"}}</th>
+          <th>{{localize "D3Vilia.SpellResistance"}}</th>
         </tr>
         <tr>
           <td>{{misc.sr}}</td>
@@ -72,7 +72,7 @@
 
     {{#if misc.srNotes}}
     <div class="flexcol property-group">
-      <label>{{localize "D35E.SpellResistanceNotes"}}</label>
+      <label>{{localize "D3Vilia.SpellResistanceNotes"}}</label>
       <div class="flexrow">
         {{#each misc.srNotes as |v|}}
         <span class="tag">{{{v}}}</span>
@@ -84,7 +84,7 @@
 
     {{#if misc.drNotes}}
     <div class="flexcol property-group">
-      <label>{{localize "D35E.DamRed"}}</label>
+      <label>{{localize "D3Vilia.DamRed"}}</label>
       <div class="flexrow">
         {{#each misc.drNotes as |v|}}
         <span class="tag">{{{v}}}</span>
@@ -95,7 +95,7 @@
 
     {{#if misc.energyResistance}}
     <div class="flexcol property-group">
-      <label>{{localize "D35E.EnRes"}}</label>
+      <label>{{localize "D3Vilia.EnRes"}}</label>
       <div class="flexrow">
         {{#each misc.energyResistance as |v|}}
         <span class="tag">{{{v}}}</span>
@@ -108,21 +108,21 @@
     <div class="defense regen">
       <table>
         <tr>
-          <th>{{localize "D35E.Regeneration"}}</th>
-          <th>{{localize "D35E.FastHealing"}}</th>
+          <th>{{localize "D3Vilia.Regeneration"}}</th>
+          <th>{{localize "D3Vilia.FastHealing"}}</th>
         </tr>
         <tr>
-          <td>{{#if regen.regen}}{{regen.regen}}{{else}}{{localize "D35E.NonApplicable"}}{{/if}}</td>
-          <td>{{#if regen.fastHealing}}{{regen.fastHealing}}{{else}}{{localize "D35E.NonApplicable"}}{{/if}}</td>
+          <td>{{#if regen.regen}}{{regen.regen}}{{else}}{{localize "D3Vilia.NonApplicable"}}{{/if}}</td>
+          <td>{{#if regen.fastHealing}}{{regen.fastHealing}}{{else}}{{localize "D3Vilia.NonApplicable"}}{{/if}}</td>
         </tr>
       </table>
     </div>
     {{/if}}
     
     <div class="saving-throws flexrow">
-      <button data-action="save" data-save="fort">{{localize "D35E.SavingThrowFort"}}</button>
-      <button data-action="save" data-save="ref">{{localize "D35E.SavingThrowRef"}}</button>
-      <button data-action="save" data-save="will">{{localize "D35E.SavingThrowWill"}}</button>
+      <button data-action="save" data-save="fort">{{localize "D3Vilia.SavingThrowFort"}}</button>
+      <button data-action="save" data-save="ref">{{localize "D3Vilia.SavingThrowRef"}}</button>
+      <button data-action="save" data-save="will">{{localize "D3Vilia.SavingThrowWill"}}</button>
     </div>
   </div>
 

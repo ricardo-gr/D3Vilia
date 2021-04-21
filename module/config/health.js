@@ -5,7 +5,7 @@ export class HealthConfig extends FormApplication {
 
   /** Collect data for the template. @override */
   async getData() {
-    let settings = await game.settings.get("D35E", "healthConfig")
+    let settings = await game.settings.get("D3Vilia", "healthConfig")
     settings = mergeObject(HealthConfig.defaultSettings, settings)
     return settings
   }
@@ -13,9 +13,9 @@ export class HealthConfig extends FormApplication {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      title:  game.i18n.localize("SETTINGS.D35EHealthConfigName"),
+      title:  game.i18n.localize("SETTINGS.D3ViliaHealthConfigName"),
       id: 'health-config',
-      template: "systems/D35E/templates/settings/health.html",
+      template: "systems/D3Vilia/templates/settings/health.html",
       width: 480,
       height: "auto",
       tabs: [{
@@ -60,8 +60,8 @@ export class HealthConfig extends FormApplication {
    */
   async _onReset(event) {
     event.preventDefault();
-    await game.settings.set("D35E", "healthConfig", HealthConfig.defaultSettings)
-    ui.notifications.info(`Reset D35E health configuration.`)
+    await game.settings.set("D3Vilia", "healthConfig", HealthConfig.defaultSettings)
+    ui.notifications.info(`Reset D3Vilia health configuration.`)
     return this.render()
   }
 
@@ -80,7 +80,7 @@ export class HealthConfig extends FormApplication {
       hd.rate = Math.max(0, Math.min(hd.rate, 100))
       hd.maximized = Math.max(0, Math.min(Math.floor(hd.maximized), 100))
     }
-    await game.settings.set("D35E", "healthConfig", settings)
-    ui.notifications.info(`Updated D35E health configuration.`)
+    await game.settings.set("D3Vilia", "healthConfig", settings)
+    ui.notifications.info(`Updated D3Vilia health configuration.`)
   }
 }

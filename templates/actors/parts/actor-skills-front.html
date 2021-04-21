@@ -4,15 +4,15 @@
   <div class="flexcol skill-rank">
     <ol class="form-group">
       <li class="flexrow skill-rank-formula">
-        <label>{{ localize 'D35E.SkillBonusRankFormula' }}</label>
-        <input type="text" name="data.details.bonusSkillRankFormula" value="{{data.details.bonusSkillRankFormula}}" placeholder="{{ localize 'D35E.Formula' }}"/>
+        <label>{{ localize 'D3Vilia.SkillBonusRankFormula' }}</label>
+        <input type="text" name="data.details.bonusSkillRankFormula" value="{{data.details.bonusSkillRankFormula}}" placeholder="{{ localize 'D3Vilia.Formula' }}"/>
       </li>
     </ol>
     <ol class="form-group">
       <li class="flexrow skill-rank-info">
-        <label>{{ localize 'D35E.SkillRankPlural' }}</label>
+        <label>{{ localize 'D3Vilia.SkillRankPlural' }}</label>
         <input type="text" disabled value="{{skillRanks.allowed}}"/>
-        <label>{{ localize 'D35E.Used' }}</label>
+        <label>{{ localize 'D3Vilia.Used' }}</label>
         <input type="text" disabled value="{{skillRanks.used}}"/>
       </li>
     </ol>
@@ -21,38 +21,38 @@
   <div class="flexcol skill-rank">
     <ol class="form-group">
       <li class="flexrow skill-rank-formula">
-        <label>{{ localize 'D35E.SkillBonusRankFormula' }}</label>
-        <input type="text" name="data.details.bonusSkillRankFormula" value="{{data.details.bonusSkillRankFormula}}" placeholder="{{ localize 'D35E.Formula' }}"/>
+        <label>{{ localize 'D3Vilia.SkillBonusRankFormula' }}</label>
+        <input type="text" name="data.details.bonusSkillRankFormula" value="{{data.details.bonusSkillRankFormula}}" placeholder="{{ localize 'D3Vilia.Formula' }}"/>
       </li>
     </ol>
     <ol class="form-group">
       <li class="flexrow skill-rank-info">
-        <label>{{ localize 'D35E.SkillRankPlural' }}</label>
+        <label>{{ localize 'D3Vilia.SkillRankPlural' }}</label>
         <input type="text" disabled value="{{skillRanks.allowed}}"/>
-        <label>{{ localize 'D35E.Used' }}</label>
+        <label>{{ localize 'D3Vilia.Used' }}</label>
         <input type="text" disabled value="{{skillRanks.used}}"/>
-        <label>{{ localize 'D35E.AdventureRanksToBG' }}</label>
+        <label>{{ localize 'D3Vilia.AdventureRanksToBG' }}</label>
         <input type="text" disabled value="{{skillRanks.sentToBG}}"/>
-        <label>{{ localize 'D35E.BGSkillRanks' }}</label>
+        <label>{{ localize 'D3Vilia.BGSkillRanks' }}</label>
         <input type="text" disabled value="{{skillRanks.bgAllowed}}"/>
-        <label>{{ localize 'D35E.BGUsed' }}</label>
+        <label>{{ localize 'D3Vilia.BGUsed' }}</label>
         <input type="text" disabled value="{{skillRanks.bgUsed}}"/>
       </li>
     </ol>
   </div>
 
   <nav class="sheet-navigation tabs" data-group="skillset">
-    <a class="item" data-tab="adventure">{{ localize 'D35E.SkillTypeAdventure' }}</a>
-    <a class="item" data-tab="background">{{ localize 'D35E.SkillTypeBackground' }}</a>
+    <a class="item" data-tab="adventure">{{ localize 'D3Vilia.SkillTypeAdventure' }}</a>
+    <a class="item" data-tab="background">{{ localize 'D3Vilia.SkillTypeBackground' }}</a>
   </nav>
 
   <section class="skillset-body">
     <div class="tab flexcol" data-group="skillset" data-tab="adventure">
-      {{> "systems/D35E/templates/actors/parts/actor-skills.html" skillset=skillsets.adventure.skills isBackgroundSkills="false"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-skills.html" skillset=skillsets.adventure.skills isBackgroundSkills="false"}}
     </div>
 
     <div class="tab flexcol" data-group="skillset" data-tab="background">
-      {{> "systems/D35E/templates/actors/parts/actor-skills.html" skillset=skillsets.background.skills isBackgroundSkills="true"}}
+      {{> "systems/D3Vilia/templates/actors/parts/actor-skills.html" skillset=skillsets.background.skills isBackgroundSkills="true"}}
     </div>
   </section>
   {{/unless}}
@@ -60,12 +60,12 @@
 
 {{#unless useBGSkills}}
 <nav class="sheet-navigation tabs" data-group="skillset" style="display: none">
-  <a class="item" data-tab="all">{{ localize 'D35E.AllSkills' }}</a>
+  <a class="item" data-tab="all">{{ localize 'D3Vilia.AllSkills' }}</a>
 </nav>
 
 <section class="skillset-body">
   <div class="tab flexcol" data-group="skillset" data-tab="all">
-    {{> "systems/D35E/templates/actors/parts/actor-skills.html" skillset=skillsets.all.skills isBackgroundSkills="false"}}
+    {{> "systems/D3Vilia/templates/actors/parts/actor-skills.html" skillset=skillsets.all.skills isBackgroundSkills="false"}}
   </div>
 </section>
 {{/unless}}

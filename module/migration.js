@@ -3,9 +3,9 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  if (!game.user.isGM) return ui.notifications.error(game.i18n.localize("D35E.ErrorUnauthorizedAction"));
-  ui.notifications.info(`Applying D35E System Migration for version ${game.system.data.version}. Please stand by.`);
-  console.log(`Applying D35E System Migration for version ${game.system.data.version}. Please stand by.`);
+  if (!game.user.isGM) return ui.notifications.error(game.i18n.localize("D3Vilia.ErrorUnauthorizedAction"));
+  ui.notifications.info(`Applying D3Vilia System Migration for version ${game.system.data.version}. Please stand by.`);
+  console.log(`Applying D3Vilia System Migration for version ${game.system.data.version}. Please stand by.`);
 
   // Migrate World Actors
   for ( let a of game.actors.entities ) {
@@ -54,8 +54,8 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("D35E", "systemMigrationVersion", game.system.data.version);
-  ui.notifications.info(`D35E System Migration to version ${game.system.data.version} succeeded!`);
+  game.settings.set("D3Vilia", "systemMigrationVersion", game.system.data.version);
+  ui.notifications.info(`D3Vilia System Migration to version ${game.system.data.version} succeeded!`);
 };
 
 /* -------------------------------------------- */
@@ -74,7 +74,7 @@ export const migrateCompendium = async function(pack) {
     await pack.migrate();
     content = await pack.getContent();
   } catch(err) {
-    ui.notifications.error(game.i18n.localize("D35E.ErrorProblemWithMigratingPack") + pack.collection);
+    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorProblemWithMigratingPack") + pack.collection);
     console.error(err);
   }
 
@@ -209,14 +209,14 @@ const _migrateActorTokenVision = function(ent, updateData) {
   if (!vision) return;
 
   updateData["data.attributes.-=vision"] = null;
-  updateData["token.flags.D35E.lowLightVision"] = vision.lowLight;
+  updateData["token.flags.D3Vilia.lowLightVision"] = vision.lowLight;
   if (!getProperty(ent.data, "token.brightSight")) updateData["token.brightSight"] = vision.darkvision;
 };
 
 const migrateTokenVision = function(token, updateData) {
   if (!token.actor) return;
 
-  setProperty(updateData, "flags.D35E.lowLightVision", getProperty(token.actor.data, "token.flags.D35E.lowLightVision"));
+  setProperty(updateData, "flags.D3Vilia.lowLightVision", getProperty(token.actor.data, "token.flags.D3Vilia.lowLightVision"));
   setProperty(updateData, "brightSight", getProperty(token.actor.data, "token.brightSight"));
 };
 
@@ -232,13 +232,13 @@ const migrateTokenVision = function(token, updateData) {
  */
 const _migrateActorTraits = function(actor, updateData) {
   if ( !actor.data.traits ) return;
-  const dt = invertObject(CONFIG.D35E.damageTypes);
+  const dt = invertObject(CONFIG.D3Vilia.damageTypes);
   const map = {
     "dr": dt,
     "di": dt,
     "dv": dt,
-    "ci": invertObject(CONFIG.D35E.conditionTypes),
-    "languages": invertObject(CONFIG.D35E.languages)
+    "ci": invertObject(CONFIG.D3Vilia.conditionTypes),
+    "languages": invertObject(CONFIG.D3Vilia.languages)
   };
   for ( let [t, choices] of Object.entries(map) ) {
     const trait = actor.data.traits[t];
@@ -285,7 +285,7 @@ const _migrateCharacterLevel = function(ent, updateData) {
   }
   let k = "details.levelUpProgression"
   const value = getProperty(ent.data.data, k);
-  console.log(`D35E | Migrate | Level up progression ${value}`)
+  console.log(`D3Vilia | Migrate | Level up progression ${value}`)
   if (value === null || value === undefined) {
 
     updateData["data.details.levelUpProgression"] = false;
@@ -310,7 +310,7 @@ const _migrateWeaponProficiencies = async function(actor, updateData, itemsToAdd
   let weaponProfItemId = "F7ouXcMvMxDFNq8S";
   let martialWeaponProfItemId = "L6Zih954XajPhxk0";
   let simpleWeaponProfItemId = "5jR5ehCRndtJpCGb";
-  let pack = game.packs.get("D35E.feats");
+  let pack = game.packs.get("D3Vilia.feats");
   if (!(actor instanceof Actor)) return;
   let data = actor.data.data;
   if (data.traits && data.traits.weaponProf && data.traits.weaponProf.value) {
@@ -349,7 +349,7 @@ const _migrateArmorProficiencies = async function(actor, updateData, itemsToAdd)
   let armProfLight = "tflks0QMIbzAyEle"
   let armProfMed = "ZwIMzns2opN6xxIo"
   let armProfHeavy = "sh3SLeHp45GMtm3n"
-  let pack = game.packs.get("D35E.feats");
+  let pack = game.packs.get("D3Vilia.feats");
   if (!(actor instanceof Actor)) return;
   let data = actor.data.data;
   if (data.traits && data.traits.weaponProf && data.traits.armorProf.value) {
@@ -727,7 +727,7 @@ const _migrateContainer = function(ent, updateData) {
 const _migrateCastTime = function(item, updateData) {
   const value = getProperty(item.data, "time.value");
   if ( !value ) return;
-  const ATS = invertObject(CONFIG.D35E.abilityActivationTypes);
+  const ATS = invertObject(CONFIG.D3Vilia.abilityActivationTypes);
   let match = value.match(/([\d]+\s)?([\w\s]+)/);
   if ( !match ) return;
   let type = ATS[match[2]] || "none";
@@ -765,7 +765,7 @@ const _migrateDamage = function(item, updateData) {
  * @private
  */
 const _migrateDuration = function(item, updateData) {
-  const TIME = invertObject(CONFIG.D35E.timePeriods);
+  const TIME = invertObject(CONFIG.D3Vilia.timePeriods);
   const dur = item.data.duration;
   if ( dur && dur.value && !dur.units ) {
     let match = dur.value.match(/([\d]+\s)?([\w\s]+)/);
@@ -868,7 +868,7 @@ const _migrateTarget = function(item, updateData) {
 
     // Target Type
     let type = null;
-    for ( let t of Object.keys(CONFIG.D35E.targetTypes) ) {
+    for ( let t of Object.keys(CONFIG.D3Vilia.targetTypes) ) {
       let rgx = new RegExp(t, "i");
       if ( rgx.test(target.value) ) {
         type = t;
@@ -987,7 +987,7 @@ const _migrateWeaponProperties = function(item, updateData) {
   // Map weapon property strings to boolean flags
   const props = item.data.properties;
   if ( props.value ) {
-    const labels = invertObject(CONFIG.D35E.weaponProperties);
+    const labels = invertObject(CONFIG.D3Vilia.weaponProperties);
     for (let k of props.value.split(",").map(p => p.trim())) {
       if (labels[k]) updateData[`data.properties.${labels[k]}`] = true;
     }
@@ -1001,7 +1001,7 @@ const migrateTokenStatuses = function (token, updateData) {
   if (token.data.effects.length) {
     var effects = token.data.effects;
     effects = effects.filter((e) => {
-      const [key, tex] = Object.entries(CONFIG.D35E.conditionTextures).find((t) => e === t[1]) ?? [];
+      const [key, tex] = Object.entries(CONFIG.D3Vilia.conditionTextures).find((t) => e === t[1]) ?? [];
       if (key && token.actor.data.data.attributes.conditions[key]) return false;
       if (token.actor.items.find((i) => i.type === "buff" && i.data.data.active && i.img === e)) return false;
       return true;

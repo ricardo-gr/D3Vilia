@@ -6,8 +6,8 @@
   "author": "Bardomero",
   "templateVersion": 2,
   "scripts": [],
-  "esmodules": ["D35E.js"],
-  "styles": ["D35E.css"],
+  "esmodules": ["D3Vilia.js"],
+  "styles": ["D3Vilia.css"],
   "packs": [
     {
       "name": "classes",
@@ -264,12 +264,12 @@
   "compatibleCoreVersion": "0.8.0",
   
   "url": "https://github.com/ricardo-gr/D3Vilia",
-  "manifest": "http://dragonshorn.info/dnd35e/system.json",
-  "download": "http://dragonshorn.info/dnd35e/dnd35e.zip",
+  "manifest": "http://dragonshorn.info/dnd3vilia/system.json",
+  "download": "http://dragonshorn.info/dnd3vilia/dnd3vilia.zip",
   "media": [
     {
       "type": "cover",
-      "link": "https://legaciesofthedragon.com/img/logo-dnd35e-bazaar.png"
+      "link": "https://legaciesofthedragon.com/img/logo-dnd3vilia-bazaar.png"
     }
   ]
 }

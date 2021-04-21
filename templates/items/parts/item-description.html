@@ -1,8 +1,8 @@
 <div class="tab active flexcol" data-group="primary" data-tab="description">
   {{#if showIdentifyDescription}}
   <nav class="sheet-navigation tabs subtabs description" data-group="description">
-    <a class="item active" data-tab="identified">{{localize "D35E.Identified"}}</a>
-    <a class="item" data-tab="unidentified">{{localize "D35E.Unidentified"}}</a>
+    <a class="item active" data-tab="identified">{{localize "D3Vilia.Identified"}}</a>
+    <a class="item" data-tab="unidentified">{{localize "D3Vilia.Unidentified"}}</a>
   </nav>
   {{/if}}
 
@@ -11,23 +11,23 @@
       {{#if isPhysical}}
       {{!-- Quantity --}}
       <div class="form-group">
-        <label>{{localize "D35E.Quantity"}}</label>
+        <label>{{localize "D3Vilia.Quantity"}}</label>
         <input type="text" name="data.quantity" value="{{data.quantity}}" data-dtype="Number"/>
       </div>
 
       {{!-- Weight --}}
       <div class="form-group">
-        <label>{{localize "D35E.Weight"}}</label>
+        <label>{{localize "D3Vilia.Weight"}}</label>
         <input type="text" name="data.convertedWeight" value="{{convertedWeight}}" data-dtype="Number"/>
         {{#if usesImperialSystem}}
-        <label class="unit" style="flex: 0">{{ localize 'D35E.Lbs' }}</label>
+        <label class="unit" style="flex: 0">{{ localize 'D3Vilia.Lbs' }}</label>
         {{else}}
-        <label class="unit" style="flex: 0">{{ localize 'D35E.Kgs' }}</label>
+        <label class="unit" style="flex: 0">{{ localize 'D3Vilia.Kgs' }}</label>
         {{/if}}
       </div>
 
       <div class="form-group">
-        <label>{{localize "D35E.EquippedWeightless"}}</label>
+        <label>{{localize "D3Vilia.EquippedWeightless"}}</label>
 
         <label class="checkbox" style="position: relative; flex: 0 20px">
           <input type="checkbox" class="stylized" name="data.equippedWeightless" {{checked data.equippedWeightless}}/>
@@ -38,23 +38,23 @@
       {{!-- Price --}}
       {{#if showIdentifyDescription}}
       <div class="form-group">
-        <label>{{localize "D35E.Price"}}</label>
+        <label>{{localize "D3Vilia.Price"}}</label>
         <input type="text" name="data.price" value="{{data.price}}" data-dtype="Number"/>
       </div>
 
       <div class="form-group">
-        <label>{{localize "D35E.UnidentifiedPriceShort"}}</label>
+        <label>{{localize "D3Vilia.UnidentifiedPriceShort"}}</label>
         <input type="text" name="data.unidentified.price" value="{{data.unidentified.price}}" data-dtype="Number"/>
       </div>
       {{else}}
       {{#if showUnidentifiedData}}
       <div class="form-group">
-        <label>{{localize "D35E.Price"}}</label>
+        <label>{{localize "D3Vilia.Price"}}</label>
         <input type="text" name="data.unidentified.price" value="{{data.unidentified.price}}" data-dtype="Number"/>
       </div>
       {{else}}
       <div class="form-group">
-        <label>{{localize "D35E.Price"}}</label>
+        <label>{{localize "D3Vilia.Price"}}</label>
         <input type="text" name="data.price" value="{{data.price}}" data-dtype="Number"/>
       </div>
       {{/if}}
@@ -62,7 +62,7 @@
 
       {{!-- Hit Points --}}
       <div class="form-group">
-        <label>{{localize "D35E.HPShort"}}</label>
+        <label>{{localize "D3Vilia.HPShort"}}</label>
         <input type="text" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number" style="flex: 0 0 32px"/>
         <span>/</span>
         <input type="text" name="data.hp.max" value="{{data.hp.max}}" data-dtype="Number" style="flex: 0 0 32px"/>
@@ -70,20 +70,20 @@
 
       {{!-- Hardness --}}
       <div class="form-group">
-        <label>{{localize "D35E.Hardness"}}</label>
+        <label>{{localize "D3Vilia.Hardness"}}</label>
         <input type="text" name="data.hardness" value="{{data.hardness}}" data-dtype="Number"/>
       </div>
 
       {{!-- Carried Flag --}}
       <div class="form-group">
-        <label>{{localize "D35E.Carried"}}</label>
+        <label>{{localize "D3Vilia.Carried"}}</label>
         <label class="checkbox" style="position: relative; flex: 0 20px">
           <input type="checkbox" class="stylized" name="data.carried" {{checked data.carried}}/>
           <span class="checkmark"></span>
         </label>
       </div>
       <div class="form-group">
-        <label>{{localize "D35E.Container"}}</label>
+        <label>{{localize "D3Vilia.Container"}}</label>
 
         <select name="data.containerId">
           {{#select data.containerId}}
@@ -98,7 +98,7 @@
 
       {{#if canMeld}}
       <div class="form-group">
-        <label>{{localize "D35E.Melded"}}</label>
+        <label>{{localize "D3Vilia.Melded"}}</label>
 
         <label class="checkbox" style="position: relative; flex: 0 20px">
           <input type="checkbox" class="stylized" name="data.melded" {{checked data.melded}}/>
@@ -121,10 +121,10 @@
 
       {{#if isFeat}}
       <div class="form-group">
-        <label>{{localize "D35E.FeatPool"}}</label>
+        <label>{{localize "D3Vilia.FeatPool"}}</label>
         <select name="data.classSource" data-dtype="String">
             {{#select data.classSource}}
-            <option value="">{{localize "D35E.Base"}}</option>
+            <option value="">{{localize "D3Vilia.Base"}}</option>
             {{#each featCounters as |ftt a|}}
             <option value="{{ftt.val}}" style="text-transform: capitalize">{{ftt.name}}</option>
             {{/each}}

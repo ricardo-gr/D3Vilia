@@ -1841,7 +1841,6 @@
       "equipped": true,
       "masterwork": false,
       "weaponType": "simple",
-      "monkWeapon": false,
       "weaponSubtype": "light",
       "properties": {},
       "enh": null,

@@ -5,7 +5,7 @@ export class TopPortraitBar {
   }
 
   static async render(actor) {
-    let partyHudType = game.settings.get("D35E", "showPartyHud")
+    let partyHudType = game.settings.get("D3Vilia", "showPartyHud")
     let portraitBar = $('#portrait-bar')
     let dragging = false;
     let dragX = 0;
@@ -29,8 +29,8 @@ export class TopPortraitBar {
         },
         mouseup:function(e){
           dragging = false;
-          localStorage.setItem("D35E-portraitbar-y-location",$(this).parent().position().top)
-          localStorage.setItem("D35E-portraitbar-x-location",$(this).parent().position().left)
+          localStorage.setItem("D3Vilia-portraitbar-y-location",$(this).parent().position().top)
+          localStorage.setItem("D3Vilia-portraitbar-x-location",$(this).parent().position().left)
           },
         mousemove:function(e)
         {
@@ -59,8 +59,8 @@ export class TopPortraitBar {
     }
 
 
-    let posTop = localStorage.getItem("D35E-portraitbar-y-location") || 460
-    let postLeft = localStorage.getItem("D35E-portraitbar-x-location") || 20
+    let posTop = localStorage.getItem("D3Vilia-portraitbar-y-location") || 460
+    let postLeft = localStorage.getItem("D3Vilia-portraitbar-x-location") || 20
 
 
     portraitBar.css('top',`${posTop}px`)
@@ -96,7 +96,7 @@ export class TopPortraitBar {
       damage.css("width", `${pixelDamage}%`)
 
     //damage.css("top",`calc(100px - ${pixelDamage}px)`)
-    //<div class="item-image tooltip" style="background-image: url('systems/D35E/icons/buffs/bark-skin.png')">
+    //<div class="item-image tooltip" style="background-image: url('systems/D3Vilia/icons/buffs/bark-skin.png')">
     //              <span class="tooltipcontent">
     //                   Barkskin
     //                 </span>

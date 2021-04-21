@@ -18,7 +18,7 @@ export class CompendiumDirectoryPF extends CompendiumDirectory {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      template: "systems/D35E/templates/sidebar/compendium.html"
+      template: "systems/D3Vilia/templates/sidebar/compendium.html"
     });
   }
 

@@ -31,7 +31,7 @@ export class ChatMessagePF extends ChatMessage {
     };
 
     // Enrich some data for dice rolls
-    if (this.isRoll && !this.getFlag("D35E", "noRollRender")) {
+    if (this.isRoll && !this.getFlag("D3Vilia", "noRollRender")) {
       const isVisible = this.isRollVisible;
       messageData.message.content = await this.roll.render({isPrivate: !isVisible});
       if ( isWhisper ) {
@@ -85,7 +85,7 @@ export class ChatMessagePF extends ChatMessage {
     };
 
     // Enrich some data for dice rolls
-    if (this.isRoll && !this.getFlag("D35E", "noRollRender")) {
+    if (this.isRoll && !this.getFlag("D3Vilia", "noRollRender")) {
 
       // Render HTML if needed
       if ( data.content.slice(0, 1) !== "<" ) {

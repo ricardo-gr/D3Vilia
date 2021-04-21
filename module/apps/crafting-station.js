@@ -15,7 +15,7 @@ export class CompendiumBrowser extends Application {
     };
 
     // Preload compendiums
-    // if (game.settings.get("D35E", "preloadCompendiums") === true) {
+    // if (game.settings.get("D3Vilia", "preloadCompendiums") === true) {
       // this.loadData();
     // }
   }
@@ -24,7 +24,7 @@ export class CompendiumBrowser extends Application {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      template: "systems/D35E/templates/apps/crafting-station.html",
+      template: "systems/D3Vilia/templates/apps/crafting-station.html",
       width: 720,
       height: window.innerHeight - 60,
       top: 30,
@@ -35,9 +35,9 @@ export class CompendiumBrowser extends Application {
   get typeName() {
     switch (this.type) {
       case "spells":
-        return game.i18n.localize("D35E.Spells");
+        return game.i18n.localize("D3Vilia.Spells");
       case "items":
-        return game.i18n.localize("D35E.Items");
+        return game.i18n.localize("D3Vilia.Items");
     }
     return this.type;
   }
@@ -224,7 +224,7 @@ export class CompendiumBrowser extends Application {
       }
       // Add spell types
       {
-        const spellTypes = getProperty(item.data, "data.types") ? getProperty(item.data, "data.types").split(CONFIG.D35E.re.traitSeparator) : []
+        const spellTypes = getProperty(item.data, "data.types") ? getProperty(item.data, "data.types").split(CONFIG.D3Vilia.re.traitSeparator) : []
         result.item.spellTypes = spellTypes;
         for (let st of spellTypes) {
           if (!this.extraFilters["spellTypes"].includes(st)) this.extraFilters["spellTypes"].push(st);
@@ -265,8 +265,8 @@ export class CompendiumBrowser extends Application {
     this.filters = [
       {
         path: "data.school",
-        label: game.i18n.localize("D35E.SpellSchool"),
-        items: Object.entries(CONFIG.D35E.spellSchools).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.SpellSchool"),
+        items: Object.entries(CONFIG.D3Vilia.spellSchools).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []).sort((a, b) => {
@@ -277,7 +277,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "data.subschool",
-        label: game.i18n.localize("D35E.SubSchool"),
+        label: game.i18n.localize("D3Vilia.SubSchool"),
         items: this.extraFilters["data.subschool"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -289,7 +289,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "spellTypes",
-        label: game.i18n.localize("D35E.TypePlural"),
+        label: game.i18n.localize("D3Vilia.TypePlural"),
         items: this.extraFilters["spellTypes"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -301,7 +301,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "learnedAt.class",
-        label: game.i18n.localize("D35E.ClassPlural"),
+        label: game.i18n.localize("D3Vilia.ClassPlural"),
         items: this.extraFilters["learnedAt.class"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -313,7 +313,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "learnedAt.domain",
-        label: game.i18n.localize("D35E.Domain"),
+        label: game.i18n.localize("D3Vilia.Domain"),
         items: this.extraFilters["learnedAt.domain"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -325,7 +325,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "learnedAt.subDomain",
-        label: game.i18n.localize("D35E.SubDomain"),
+        label: game.i18n.localize("D3Vilia.SubDomain"),
         items: this.extraFilters["learnedAt.subDomain"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -337,7 +337,7 @@ export class CompendiumBrowser extends Application {
       },
       // {
       //   path: "learnedAt.elementalSchool",
-      //   label: game.i18n.localize("D35E.ElementalSchool"),
+      //   label: game.i18n.localize("D3Vilia.ElementalSchool"),
       //   items: this.extraFilters["learnedAt.elementalSchool"].reduce((cur, o) => {
       //     cur.push({ key: o, name: o });
       //     return cur;
@@ -345,7 +345,7 @@ export class CompendiumBrowser extends Application {
       // },
       {
         path: "learnedAt.bloodline",
-        label: game.i18n.localize("D35E.Bloodline"),
+        label: game.i18n.localize("D3Vilia.Bloodline"),
         items: this.extraFilters["learnedAt.bloodline"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -357,8 +357,8 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "_spellLevel",
-        label: game.i18n.localize("D35E.SpellLevel"),
-        items: Object.entries(CONFIG.D35E.spellLevels).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.SpellLevel"),
+        items: Object.entries(CONFIG.D3Vilia.spellLevels).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
@@ -370,26 +370,26 @@ export class CompendiumBrowser extends Application {
     this.filters = [
       {
         path: "type",
-        label: game.i18n.localize("D35E.Type"),
+        label: game.i18n.localize("D3Vilia.Type"),
         items: [
-          { key: "weapon", name: game.i18n.localize("D35E.ItemTypeWeapon") },
-          { key: "equipment", name: game.i18n.localize("D35E.ItemTypeEquipment") },
-          { key: "consumable", name: game.i18n.localize("D35E.ItemTypeConsumable") },
-          { key: "loot", name: game.i18n.localize("D35E.Misc") },
+          { key: "weapon", name: game.i18n.localize("D3Vilia.ItemTypeWeapon") },
+          { key: "equipment", name: game.i18n.localize("D3Vilia.ItemTypeEquipment") },
+          { key: "consumable", name: game.i18n.localize("D3Vilia.ItemTypeConsumable") },
+          { key: "loot", name: game.i18n.localize("D3Vilia.Misc") },
         ],
       },
       {
         path: "data.weaponType",
-        label: game.i18n.localize("D35E.WeaponType"),
-        items: Object.entries(CONFIG.D35E.weaponTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.WeaponType"),
+        items: Object.entries(CONFIG.D3Vilia.weaponTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1]._label });
           return cur;
         }, []),
       },
       {
         path: "data.weaponSubtype",
-        label: game.i18n.localize("D35E.WeaponSubtype"),
-        items: Object.values(CONFIG.D35E.weaponTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.WeaponSubtype"),
+        items: Object.values(CONFIG.D3Vilia.weaponTypes).reduce((cur, o) => {
           cur = cur.concat((Object.entries(o).filter(i => !i[0].startsWith("_")).reduce((arr, i) => {
             if (!cur.filter(a => a.key === i[0]).length) {
               arr.push({ key: i[0], name: i[1] });
@@ -401,24 +401,24 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "weaponProps",
-        label: game.i18n.localize("D35E.WeaponProperties"),
-        items: Object.entries(CONFIG.D35E.weaponProperties).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.WeaponProperties"),
+        items: Object.entries(CONFIG.D3Vilia.weaponProperties).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
       },
       {
         path: "data.equipmentType",
-        label: game.i18n.localize("D35E.EquipmentType"),
-        items: Object.entries(CONFIG.D35E.equipmentTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.EquipmentType"),
+        items: Object.entries(CONFIG.D3Vilia.equipmentTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1]._label });
           return cur;
         }, []),
       },
       {
         path: "data.equipmentSubtype",
-        label: game.i18n.localize("D35E.EquipmentSubtype"),
-        items: Object.values(CONFIG.D35E.equipmentTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.EquipmentSubtype"),
+        items: Object.values(CONFIG.D3Vilia.equipmentTypes).reduce((cur, o) => {
           cur = cur.concat((Object.entries(o).filter(i => !i[0].startsWith("_")).reduce((arr, i) => {
             if (!cur.filter(a => a.key === i[0]).length) {
               arr.push({ key: i[0], name: i[1] });
@@ -430,8 +430,8 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "data.slot",
-        label: game.i18n.localize("D35E.Slot"),
-        items: Object.values(CONFIG.D35E.equipmentSlots).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.Slot"),
+        items: Object.values(CONFIG.D3Vilia.equipmentSlots).reduce((cur, o) => {
           cur = cur.concat((Object.entries(o).filter(i => !i[0].startsWith("_")).reduce((arr, i) => {
             if (!cur.filter(a => a.key === i[0]).length) {
               arr.push({ key: i[0], name: i[1] });
@@ -443,16 +443,16 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "data.consumableType",
-        label: game.i18n.localize("D35E.ConsumableType"),
-        items: Object.entries(CONFIG.D35E.consumableTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.ConsumableType"),
+        items: Object.entries(CONFIG.D3Vilia.consumableTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
       },
       {
         path: "data.subType",
-        label: game.i18n.localize("D35E.Misc"),
-        items: Object.entries(CONFIG.D35E.lootTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.Misc"),
+        items: Object.entries(CONFIG.D3Vilia.lootTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
@@ -472,8 +472,8 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "data.attributes.creatureType",
-        label: game.i18n.localize("D35E.CreatureType"),
-        items: Object.entries(CONFIG.D35E.creatureTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.CreatureType"),
+        items: Object.entries(CONFIG.D3Vilia.creatureTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
@@ -485,15 +485,15 @@ export class CompendiumBrowser extends Application {
     this.filters = [
       {
         path: "data.featType",
-        label: game.i18n.localize("D35E.Type"),
-        items: Object.entries(CONFIG.D35E.featTypes).reduce((cur, o) => {
+        label: game.i18n.localize("D3Vilia.Type"),
+        items: Object.entries(CONFIG.D3Vilia.featTypes).reduce((cur, o) => {
           cur.push({ key: o[0], name: o[1] });
           return cur;
         }, []),
       },
       {
         path: "tags",
-        label: game.i18n.localize("D35E.Tags"),
+        label: game.i18n.localize("D3Vilia.Tags"),
         items: this.extraFilters.tags.reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;
@@ -505,7 +505,7 @@ export class CompendiumBrowser extends Application {
       },
       {
         path: "assocations.class",
-        label: game.i18n.localize("D35E.ClassPlural"),
+        label: game.i18n.localize("D3Vilia.ClassPlural"),
         items: this.extraFilters.associations["class"].reduce((cur, o) => {
           cur.push({ key: o, name: o });
           return cur;

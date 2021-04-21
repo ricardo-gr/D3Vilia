@@ -3,8 +3,8 @@ export class ActorSheetFlags extends BaseEntitySheet {
     const options = super.defaultOptions;
     return mergeObject(options, {
       id: "actor-flags",
-      classes: ["D35E"],
-      template: "systems/D35E/templates/apps/actor-flags.html",
+      classes: ["D3Vilia"],
+      template: "systems/D3Vilia/templates/apps/actor-flags.html",
       width: 500,
       closeOnSubmit: true
     });
@@ -17,7 +17,7 @@ export class ActorSheetFlags extends BaseEntitySheet {
    * @type {String}
    */
   get title() {
-    return `${game.i18n.localize('D35E.FlagsTitle')}: ${this.object.name}`;
+    return `${game.i18n.localize('D3Vilia.FlagsTitle')}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */
@@ -41,13 +41,13 @@ export class ActorSheetFlags extends BaseEntitySheet {
    */
   _getFlags() {
     const flags = {};
-    for ( let [k, v] of Object.entries(CONFIG.D35E.characterFlags) ) {
+    for ( let [k, v] of Object.entries(CONFIG.D3Vilia.characterFlags) ) {
       if ( !flags.hasOwnProperty(v.section) ) flags[v.section] = {};
       let flag = duplicate(v);
       flag.type = v.type.name;
       flag.isCheckbox = v.type === Boolean;
       flag.isSelect = v.hasOwnProperty('choices');
-      flag.value = this.entity.getFlag("D35E", k);
+      flag.value = this.entity.getFlag("D3Vilia", k);
       flags[v.section][k] = flag;
     }
     return flags;
@@ -64,13 +64,13 @@ export class ActorSheetFlags extends BaseEntitySheet {
 
     // Iterate over the flags which may be configured
     const updateData = {};
-    for ( let [k, v] of Object.entries(CONFIG.D35E.characterFlags) ) {
+    for ( let [k, v] of Object.entries(CONFIG.D3Vilia.characterFlags) ) {
       if ( [undefined, null, "", false].includes(formData[k]) ) updateData[`-=${k}`] = null;
       else if ( (v.type === Number) && (formData[k] === 0) ) updateData[`-=${k}`] = null;
       else updateData[k] = formData[k];
     }
 
     // Set the new flags in bulk
-    actor.update({'flags.D35E': updateData});
+    actor.update({'flags.D3Vilia': updateData});
   }
 }

@@ -1,9 +1,9 @@
 import { degtorad } from "./lib.js";
 
-// Use 90 degrees cone in D35E style
+// Use 90 degrees cone in D3Vilia style
 const TemplateLayer__onDragLeftStart = TemplateLayer.prototype._onDragLeftStart;
 TemplateLayer.prototype._onDragLeftStart = function(event) {
-  if (!game.settings.get("D35E", "measureStyle")) return TemplateLayer__onDragLeftStart.call(this, event);
+  if (!game.settings.get("D3Vilia", "measureStyle")) return TemplateLayer__onDragLeftStart.call(this, event);
 
   PlaceablesLayer.prototype._onDragLeftStart.call(this, event);
 
@@ -40,7 +40,7 @@ TemplateLayer.prototype._onDragLeftStart = function(event) {
 
 const TemplateLayer__onDragLeftMove = TemplateLayer.prototype._onDragLeftMove;
 TemplateLayer.prototype._onDragLeftMove = function(event) {
-  if (!game.settings.get("D35E", "measureStyle")) return TemplateLayer__onDragLeftMove.call(this, event);
+  if (!game.settings.get("D3Vilia", "measureStyle")) return TemplateLayer__onDragLeftMove.call(this, event);
 
   PlaceablesLayer.prototype._onDragLeftMove.call(this, event);
   if (event.data.createState >= 1) {
@@ -74,10 +74,10 @@ TemplateLayer.prototype._onDragLeftMove = function(event) {
 };
 
 
-// Highlight grid in D35E style
+// Highlight grid in D3Vilia style
 const MeasuredTemplate_highlightGrid = MeasuredTemplate.prototype.highlightGrid;
 MeasuredTemplate.prototype.highlightGrid = function() {
-  if (!game.settings.get("D35E", "measureStyle") || !(["circle", "cone"].includes(this.data.t))) return MeasuredTemplate_highlightGrid.call(this);
+  if (!game.settings.get("D3Vilia", "measureStyle") || !(["circle", "cone"].includes(this.data.t))) return MeasuredTemplate_highlightGrid.call(this);
 
   const grid = canvas.grid,
         d = canvas.dimensions,
@@ -230,11 +230,11 @@ newFun = newFun.replace(
 				});
 				// move into draw or so
 				const source = getProperty(this.texture, "baseTexture.resource.source")
-				if ( source && (source.tagName === "VIDEO") && game.D35E.createdMeasureTemplates.has(this.id) ) {
-					source.loop = game.settings.get("D35E", "repeatAnimations");
+				if ( source && (source.tagName === "VIDEO") && game.D3Vilia.createdMeasureTemplates.has(this.id) ) {
+					source.loop = game.settings.get("D3Vilia", "repeatAnimations");
 					source.muted = true;
 					game.video.play(source);
-					game.D35E.createdMeasureTemplates.delete(this.id)
+					game.D3Vilia.createdMeasureTemplates.delete(this.id)
 				}
 		}`
 );

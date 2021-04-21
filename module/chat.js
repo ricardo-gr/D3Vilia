@@ -2,14 +2,14 @@
  * Optionally hide the display of chat card action buttons which cannot be performed by the user
  */
 export const displayChatActionButtons = function(message, html, data) {
-  const chatCard = html.find(".D35E.chat-card");
+  const chatCard = html.find(".D3Vilia.chat-card");
   if (chatCard.length > 0) {
 
     // If the user is the message author or the actor owner, proceed
 
     const buttons = chatCard.find("button[data-action]:not(.everyone)");
     buttons.each((a, btn) => {
-      if (game.settings.get("D35E", "allowPlayersApplyActions"))
+      if (game.settings.get("D3Vilia", "allowPlayersApplyActions"))
         $(btn).addClass('everyone')
     });
     const actor = game.actors.get(data.message.speaker.actor);
@@ -18,7 +18,7 @@ export const displayChatActionButtons = function(message, html, data) {
 
     // Otherwise make buttons disabled, but show the actions action buttons
     buttons.each((a, btn) => {
-      if (!game.settings.get("D35E", "allowPlayersApplyActions"))
+      if (!game.settings.get("D3Vilia", "allowPlayersApplyActions"))
         btn.disabled = true
     });
   }
@@ -81,18 +81,18 @@ export const hideGMSensitiveInfo = function(app, html, data) {
 
   let speaker = app.data.speaker,
     actor = speaker != null ? (speaker.actor ? game.actors.get(speaker.actor) : game.actors.tokens[speaker.token]) : null;
-  console.log('D35E | Message | Cleaning ', actor, app, html)
+  console.log('D3Vilia | Message | Cleaning ', actor, app, html)
   if (!actor || (actor && actor.hasPerm(game.user, "LIMITED"))) return;
 
   // Hide info
   html.find(".gm-sensitive").remove();
 
 
-  if (game.settings.get("D35E", "playersNoDamageDetails")) {
+  if (game.settings.get("D3Vilia", "playersNoDamageDetails")) {
     html.find(".toggle-content").remove();
   }
 
-  if (game.settings.get("D35E", "playersNoDCDetails")) {
+  if (game.settings.get("D3Vilia", "playersNoDCDetails")) {
     html.find(".dc-value").text("?");
   }
 };

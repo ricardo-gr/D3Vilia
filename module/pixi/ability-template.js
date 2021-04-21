@@ -1,4 +1,4 @@
-import { D35E } from "../config.js";
+import { D3Vilia } from "../config.js";
 
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
@@ -13,7 +13,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   static fromItem(item, multiplier = 1) {
     const target = getProperty(item.data, "data.measureTemplate") || {};
-    const templateShape = D35E.areaTargetTypes[target.type];
+    const templateShape = D3Vilia.areaTargetTypes[target.type];
     if ( !templateShape ) return null;
 
     // Prepare template data
@@ -33,7 +33,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     // Additional type-specific data
     switch ( templateShape ) {
       case "cone": // 5e cone RAW should be 53.13 degrees
-        if (game.settings.get("D35E", "measureStyle") === true) templateData.angle = 90;
+        if (game.settings.get("D3Vilia", "measureStyle") === true) templateData.angle = 90;
         templateData.angle = 53.13;
         break;
       case "rect": // 5e rectangular AoEs are always cubes
@@ -89,7 +89,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       const handlers = {};
       let moveTime = 0;
 
-      const pfStyle = game.settings.get("D35E", "measureStyle") === true;
+      const pfStyle = game.settings.get("D3Vilia", "measureStyle") === true;
 
       // Update placement (mouse-move)
       handlers.mm = event => {

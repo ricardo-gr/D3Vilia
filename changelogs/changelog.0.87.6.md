@@ -5,5 +5,5 @@
     
 ### Bug Fixes
 - Fixed inifinte loop when updating Tokens with containers
-- [#138](https://github.com/Rughalt/D35E/issues/138) - Fixed buff tracking for linked actors
-- [#135](https://github.com/Rughalt/D35E/issues/135) - Fixed spell with no material component toggle selected displaying message.
+- [#138](https://github.com/Rughalt/D3Vilia/issues/138) - Fixed buff tracking for linked actors
+- [#135](https://github.com/Rughalt/D3Vilia/issues/135) - Fixed spell with no material component toggle selected displaying message.

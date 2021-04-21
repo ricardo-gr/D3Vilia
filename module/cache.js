@@ -10,11 +10,11 @@ CACHE.DamageTypes = new Map()
 
 export const buildCache = async function() {
 
-    console.log("D35E | Building Caches for compendiums...")
+    console.log("D3Vilia | Building Caches for compendiums...")
     ui.notifications.info(`Building Caches for compendiums...`);
     let itemPack = game.packs.get();
     let items = []
-    for (let packName of ["D35E.class-abilities", "world.class-abilities","LOTD.class-abilities","ETOOLS.class-abilities"])
+    for (let packName of ["D3Vilia.class-abilities", "world.class-abilities","LOTD.class-abilities","ETOOLS.class-abilities"])
     if (game.packs.has(packName)) {
         itemPack = game.packs.get(packName);
         items = [];
@@ -35,7 +35,7 @@ export const buildCache = async function() {
         }
     }
 
-    for (let packName of ["world.racial-abilities","LOTD.racial-abilities","D35E.racial-abilities"])
+    for (let packName of ["world.racial-abilities","LOTD.racial-abilities","D3Vilia.racial-abilities"])
         if (game.packs.has(packName)) {
             itemPack = game.packs.get(packName);
             items = [];
@@ -56,7 +56,7 @@ export const buildCache = async function() {
             }
         }
 
-    for (let packName of ["world.spelllike-abilities","world.spell-like-abilities","LOTD.spelllike","D35E.spelllike"])
+    for (let packName of ["world.spelllike-abilities","world.spell-like-abilities","LOTD.spelllike","D3Vilia.spelllike"])
         if (game.packs.has(packName)) {
             itemPack = game.packs.get(packName);
             items = [];
@@ -78,7 +78,7 @@ export const buildCache = async function() {
         }
 
 
-    for (let packName of ["world.materials","LOTD.materials","D35E.materials"])
+    for (let packName of ["world.materials","LOTD.materials","D3Vilia.materials"])
         if (game.packs.has(packName)) {
             itemPack = game.packs.get(packName);
             items = [];
@@ -90,7 +90,7 @@ export const buildCache = async function() {
                 }
             }
         }
-    for (let packName of ["world.damage-types","LOTD.damage-types","D35E.damage-types"])
+    for (let packName of ["world.damage-types","LOTD.damage-types","D3Vilia.damage-types"])
         if (game.packs.has(packName)) {
             itemPack = game.packs.get(packName);
             items = [];
@@ -104,5 +104,5 @@ export const buildCache = async function() {
         }
 
     ui.notifications.info(`Building Caches for compendiums finished!`);
-    console.log("D35E | Building Caches for finished!")
+    console.log("D3Vilia | Building Caches for finished!")
 }

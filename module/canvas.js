@@ -119,10 +119,10 @@ TokenHUD.prototype._onAttributeUpdate = function(event) {
  */
 export const getConditions = function () {
   var core = CONFIG.statusEffects,
-      sys = Object.keys(CONFIG.D35E.conditions).filter(c => c !== 'wildshaped' && c !== 'polymorphed').map((c) => {
-        return { id: c, label: CONFIG.D35E.conditions[c], icon: CONFIG.D35E.conditionTextures[c] };
+      sys = Object.keys(CONFIG.D3Vilia.conditions).filter(c => c !== 'wildshaped' && c !== 'polymorphed').map((c) => {
+        return { id: c, label: CONFIG.D3Vilia.conditions[c], icon: CONFIG.D3Vilia.conditionTextures[c] };
       });
-  if (game.settings.get("D35E", "coreEffects")) sys.push(...core);
+  if (game.settings.get("D3Vilia", "coreEffects")) sys.push(...core);
   else sys = [core[0]].concat(sys);
   return sys;
 };
@@ -167,7 +167,7 @@ Token.prototype.toggleEffect = async function (effect, { active, overlay = false
     if (buffItem) {
       call = await buffItem.update({ "data.active": !buffItem.data.data.active });
     } else call = Token_toggleEffect.call(this, effect, { active, overlay });
-  } else if (!midUpdate && Object.keys(CONFIG.D35E.conditions).includes(effect.id)) {
+  } else if (!midUpdate && Object.keys(CONFIG.D3Vilia.conditions).includes(effect.id)) {
     const updates = {};
     updates["data.attributes.conditions." + effect.id] = !this.actor.data.data.attributes.conditions[effect.id];
     call = this.actor.update(updates);

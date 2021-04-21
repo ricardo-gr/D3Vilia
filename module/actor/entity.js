@@ -5,7 +5,7 @@ import { createCustomChatMessage } from "../chat.js";
 import { _getInitiativeFormula } from "../combat.js";
 import { CACHE } from "../cache.js";
 import {DamageTypes} from "../damage-types.js";
-import {D35E} from "../config.js";
+import {D3Vilia} from "../config.js";
 
 /**
  * Extend the base Actor class to implement additional logic specialized for D&D5e.
@@ -624,7 +624,7 @@ export class ActorPF extends Actor {
             return a.sort - b.sort;
         });
 
-        const healthConfig = game.settings.get("D35E", "healthConfig");
+        const healthConfig = game.settings.get("D3Vilia", "healthConfig");
         const cls_options = this.data.type === "character" ? healthConfig.hitdice.PC : healthConfig.hitdice.NPC;
         const race_options = healthConfig.hitdice.Racial;
         const round = { up: Math.ceil, nearest: Math.round, down: Math.floor }[healthConfig.rounding];
@@ -725,12 +725,12 @@ export class ActorPF extends Actor {
         // Add fly bonuses or penalties based on maneuverability
         const flyKey = getProperty(data, "data.attributes.speed.fly.maneuverability");
         let flyValue = 0;
-        if (flyKey != null) flyValue = CONFIG.D35E.flyManeuverabilityValues[flyKey];
+        if (flyKey != null) flyValue = CONFIG.D3Vilia.flyManeuverabilityValues[flyKey];
         if (flyValue !== 0) {
             changes.push({
                 raw: [flyValue.toString(), "skill", "skill.fly", "untyped", 0],
                 source: {
-                    name: game.i18n.localize("D35E.FlyManeuverability"),
+                    name: game.i18n.localize("D3Vilia.FlyManeuverability"),
                 },
             });
         }
@@ -742,7 +742,7 @@ export class ActorPF extends Actor {
                 changes.push({
                     raw: ["8", "skill", "skill.clm", "racial", 0],
                     source: {
-                        name: game.i18n.localize("D35E.SpeedClimb"),
+                        name: game.i18n.localize("D3Vilia.SpeedClimb"),
                     },
                 });
             }
@@ -750,7 +750,7 @@ export class ActorPF extends Actor {
                 changes.push({
                     raw: ["8", "skill", "skill.swm", "racial", 0],
                     source: {
-                        name: game.i18n.localize("D35E.SpeedSwim"),
+                        name: game.i18n.localize("D3Vilia.SpeedSwim"),
                     },
                 });
             }
@@ -770,35 +770,35 @@ export class ActorPF extends Actor {
         if (sizeKey !== "med") {
             // AC
             changes.push({
-                raw: [CONFIG.D35E.sizeMods[sizeKey].toString(), "ac", "ac", "size", 0],
+                raw: [CONFIG.D3Vilia.sizeMods[sizeKey].toString(), "ac", "ac", "size", 0],
                 source: {
                     type: "size"
                 }
             });
             // Stealth skill
             changes.push({
-                raw: [CONFIG.D35E.sizeStealthMods[sizeKey].toString(), "skill", "skill.hid", "size", 0],
+                raw: [CONFIG.D3Vilia.sizeStealthMods[sizeKey].toString(), "skill", "skill.hid", "size", 0],
                 source: {
                     type: "size"
                 }
             });
             // Fly skill
             changes.push({
-                raw: [CONFIG.D35E.sizeFlyMods[sizeKey].toString(), "skill", "skill.fly", "size", 0],
+                raw: [CONFIG.D3Vilia.sizeFlyMods[sizeKey].toString(), "skill", "skill.fly", "size", 0],
                 source: {
                     type: "size"
                 }
             });
             // CMB
             changes.push({
-                raw: [CONFIG.D35E.sizeSpecialMods[sizeKey].toString(), "misc", "cmb", "size", 0],
+                raw: [CONFIG.D3Vilia.sizeSpecialMods[sizeKey].toString(), "misc", "cmb", "size", 0],
                 source: {
                     type: "size"
                 }
             });
             // CMD
             changes.push({
-                raw: [CONFIG.D35E.sizeSpecialMods[sizeKey].toString(), "misc", "cmd", "size", 0],
+                raw: [CONFIG.D3Vilia.sizeSpecialMods[sizeKey].toString(), "misc", "cmd", "size", 0],
                 source: {
                     type: "size"
                 }
@@ -809,7 +809,7 @@ export class ActorPF extends Actor {
         // Apply changes in Actor size to Token width/height
         if (!options.skipToken && tokenSizeKey !== 'none' && this.data.type !== "trap" && !this.data.data.noTokenOverride)
         {
-            let size = CONFIG.D35E.tokenSizes[tokenSizeKey];
+            let size = CONFIG.D3Vilia.tokenSizes[tokenSizeKey];
             //console.log(size)
             if (this.isToken) {
                 let tokens = []
@@ -830,7 +830,7 @@ export class ActorPF extends Actor {
                 data["token.scale"] = size.scale;
             }
         }
-        if (!options.skipToken && this.data.type !== "trap" && !this.data.data.noLightOverride && !game.settings.get("D35E", "globalDisableTokenLight"))
+        if (!options.skipToken && this.data.type !== "trap" && !this.data.data.noLightOverride && !game.settings.get("D3Vilia", "globalDisableTokenLight"))
         {
             let dimLight = 0;
             let brightLight = 0;
@@ -1341,7 +1341,7 @@ export class ActorPF extends Actor {
                 sources: []
             }
         };
-        for (let [key, buffTarget] of Object.entries(CONFIG.D35E.buffTargets)) {
+        for (let [key, buffTarget] of Object.entries(CONFIG.D3Vilia.buffTargets)) {
             if (typeof buffTarget === "object") {
                 // Add specific skills as targets
                 if (key === "skill") {
@@ -1349,13 +1349,13 @@ export class ActorPF extends Actor {
                         if (skl == null) continue;
                         if (!skl.subSkills) {
                             changeData[`skill.${s}`] = {};
-                            Object.keys(CONFIG.D35E.bonusModifiers).forEach(b => {
+                            Object.keys(CONFIG.D3Vilia.bonusModifiers).forEach(b => {
                                 changeData[`skill.${s}`][b] = duplicate(changeDataTemplate);
                             });
                         } else {
                             for (let s2 of Object.keys(skl.subSkills)) {
                                 changeData[`skill.${s}.subSkills.${s2}`] = {};
-                                Object.keys(CONFIG.D35E.bonusModifiers).forEach(b => {
+                                Object.keys(CONFIG.D3Vilia.bonusModifiers).forEach(b => {
                                     changeData[`skill.${s}.subSkills.${s2}`][b] = duplicate(changeDataTemplate);
                                 });
                             }
@@ -1367,7 +1367,7 @@ export class ActorPF extends Actor {
                     for (let subKey of Object.keys(buffTarget)) {
                         if (subKey.startsWith("_")) continue;
                         changeData[subKey] = {};
-                        Object.keys(CONFIG.D35E.bonusModifiers).forEach(b => {
+                        Object.keys(CONFIG.D3Vilia.bonusModifiers).forEach(b => {
                             changeData[subKey][b] = duplicate(changeDataTemplate);
                         });
                     }
@@ -1540,8 +1540,8 @@ export class ActorPF extends Actor {
             let _changesLength = allChanges.length;
             allChanges = allChanges.filter((c) => (c.raw[0] || "").indexOf('@master') === -1)
             if (_changesLength !== allChanges.length) {
-                return ui.notifications.warn(game.i18n.localize("D35E.FamiliarNoMaster"));
-                console.log('D35E | Minion has some changes removed |', _changesLength,allChanges.length);
+                return ui.notifications.warn(game.i18n.localize("D3Vilia.FamiliarNoMaster"));
+                console.log('D3Vilia | Minion has some changes removed |', _changesLength,allChanges.length);
             }
         }
 
@@ -1571,7 +1571,7 @@ export class ActorPF extends Actor {
             try {
                 change.raw[4] = roll.roll().total;
             } catch (e) {
-                ui.notifications.error(game.i18n.localize("D35E.ErrorItemFormula").format(change.source.item.name, this.name));
+                ui.notifications.error(game.i18n.localize("D3Vilia.ErrorItemFormula").format(change.source.item.name, this.name));
             }
             this._parseChange(change, changeData[changeTarget], flags);
             temp.push(changeData[changeTarget]);
@@ -1889,7 +1889,7 @@ export class ActorPF extends Actor {
 
                     // Apply final rounding of health, if required.
                     if (["data.attributes.hp.max", "data.attributes.wounds.max", "data.attributes.vigor.max"].includes(target)) {
-                        const healthConfig = game.settings.get("D35E", "healthConfig")
+                        const healthConfig = game.settings.get("D3Vilia", "healthConfig")
                         const continuous = { discrete: false, continuous: true }[healthConfig.continuity]
                         if (continuous) {
                             const round = { up: Math.ceil, nearest: Math.round, down: Math.floor }[healthConfig.rounding]
@@ -1912,7 +1912,7 @@ export class ActorPF extends Actor {
 
         const racialHD = classes.filter(o => getProperty(o.data, "classType") === "racial");
         const templateHD = classes.filter(o => getProperty(o.data, "classType") === "template");
-        const useFractionalBaseBonuses = game.settings.get("D35E", "useFractionalBaseBonuses") === true;
+        const useFractionalBaseBonuses = game.settings.get("D3Vilia", "useFractionalBaseBonuses") === true;
 
 
 
@@ -1994,7 +1994,7 @@ export class ActorPF extends Actor {
         let levelUpData = duplicate(data1.details.levelUpData) || []
         if (levelUpData.length !== data1.details.level.available) {
 
-            console.log('D35E | ActorPF | Will update actor level')
+            console.log('D3Vilia | ActorPF | Will update actor level')
             while (levelUpData.length < data1.details.level.available) {
                 levelUpData.push({ 'level': levelUpData.length + 1, 'id': '_' + Math.random().toString(36).substr(2, 9), 'classId': null, 'class': null, 'classImage': null, 'skills': {}, 'hp': 0, hasFeat: (levelUpData.length + 1) % 3 === 0, hasAbility: (levelUpData.length + 1) % 4 === 0 })
             }
@@ -2002,7 +2002,7 @@ export class ActorPF extends Actor {
                 levelUpData.pop();
             }
             await this.updateClassProgressionLevel(data, updateData, data1, levelUpData);
-            console.log('D35E | LevelUpData | ', levelUpData)
+            console.log('D3Vilia | LevelUpData | ', levelUpData)
             linkData(data, updateData, "data.details.levelUpData", levelUpData);
         }
 
@@ -2063,13 +2063,13 @@ export class ActorPF extends Actor {
                     const v = updateData[k];
                     if (v !== 0) {
                         sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
-                        sourceInfo[k].positive.push({ name: game.i18n.localize("D35E.Base"), value: updateData[k] });
+                        sourceInfo[k].positive.push({ name: game.i18n.localize("D3Vilia.Base"), value: updateData[k] });
                     }
                 } else {
                     let epicST = 0;
                     let baseST = classes.reduce((cur, obj) => {
                         const classType = getProperty(obj.data, "classType") || "base";
-                        let formula = CONFIG.D35E.classSavingThrowFormulas[classType][obj.data.savingThrows[a].value];
+                        let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][obj.data.savingThrows[a].value];
                         if (formula == null) formula = "0";
                         let classLevel = obj.data.levels;
 
@@ -2149,19 +2149,18 @@ export class ActorPF extends Actor {
                     if (babScale === "high") return cur + obj.data.levels;
                     if (babScale === "med") return cur + obj.data.levels * 0.75;
                     if (babScale === "low") return cur + obj.data.levels * 0.5;
-                    if (babScale === "monk") return cur + obj.data.levels * 0.75;
                     return cur;
                 }, 0)));
 
                 const v = updateData[k];
                 if (v !== 0) {
                     sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
-                    sourceInfo[k].positive.push({ name: game.i18n.localize("D35E.Base"), value: v });
+                    sourceInfo[k].positive.push({ name: game.i18n.localize("D3Vilia.Base"), value: v });
                 }
             } else {
                 let epicBab = 0
                 let bab = classes.reduce((cur, obj) => {
-                    const formula = CONFIG.D35E.classBABFormulas[obj.data.bab] != null ? CONFIG.D35E.classBABFormulas[obj.data.bab] : "0";
+                    const formula = CONFIG.D3Vilia.classBABFormulas[obj.data.bab] != null ? CONFIG.D3Vilia.classBABFormulas[obj.data.bab] : "0";
                     let classLevel = obj.data.levels;
 
                     // Epic level/total level should only be calculated when taking into account non-racial hd
@@ -2315,7 +2314,7 @@ export class ActorPF extends Actor {
                 return cur + o.data.levels;
             }, 0);
 
-            console.log(`D35E | Setting attributes hd total | ${level}`)
+            console.log(`D3Vilia | Setting attributes hd total | ${level}`)
             linkData(data, updateData, "data.attributes.hd.total", level);
 
             linkData(data, updateData, "data.attributes.hd.racialClass", level);
@@ -2359,7 +2358,7 @@ export class ActorPF extends Actor {
                     classNames.add([i.name, i.data.data.levels,i.data.data.addedAbilities || [],i.data.data.disabledAbilities || []])
                 }
 
-                let itemPack = game.packs.get("D35E.class-abilities");
+                let itemPack = game.packs.get("D3Vilia.class-abilities");
                 let items = []
                 await itemPack.getIndex().then(index => items = index);
 
@@ -2370,7 +2369,7 @@ export class ActorPF extends Actor {
                         const level = parseInt(feature.level)
                         let uniqueId = e?.data?.data?.uniqueId;
                         if (!uniqueId) {
-                            ui.notifications.warn(game.i18n.localize("D35E.NotAddingAbilityWithNoUID").replace("{0}",feature.uid));
+                            ui.notifications.warn(game.i18n.localize("D3Vilia.NotAddingAbilityWithNoUID").replace("{0}",feature.uid));
                             continue;
                         }
                         if (uniqueId.endsWith("*")) {
@@ -2403,11 +2402,11 @@ export class ActorPF extends Actor {
                         let e = CACHE.AllAbilities.get(feature.uid)
                         let uniqueId = e.data.data.uniqueId;
                         if (!uniqueId || uniqueId === "") {
-                            ui.notifications.warn(game.i18n.localize("D35E.NotAddingAbilityWithNoUID").format(e.data.name));
+                            ui.notifications.warn(game.i18n.localize("D3Vilia.NotAddingAbilityWithNoUID").format(e.data.name));
                             continue;
                         }
                         if (uniqueId.endsWith("*")) {
-                            ui.notifications.warn(game.i18n.localize("D35E.NotAddingAbilityWithStarUIDRace").format(e.data.name));
+                            ui.notifications.warn(game.i18n.localize("D3Vilia.NotAddingAbilityWithStarUIDRace").format(e.data.name));
                             continue;
                         }
                         let canAdd = !addedAbilities.has(uniqueId)
@@ -2449,7 +2448,7 @@ export class ActorPF extends Actor {
                         }
 
                         if (!uniqueId || uniqueId === "") {
-                            ui.notifications.warn(game.i18n.localize("D35E.NotAddingAbilityWithNoUID").format(e.data.name));
+                            ui.notifications.warn(game.i18n.localize("D3Vilia.NotAddingAbilityWithNoUID").format(e.data.name));
                             continue;
                         }
                         if ((raceObject.data.data.disabledAbilities || []).some(a => a.uid === uniqueId)) continue;
@@ -2489,7 +2488,7 @@ export class ActorPF extends Actor {
 
             for (let abilityUid of existingAbilities) {
                 if (!addedAbilities.has(abilityUid)) {
-                    console.log(`D35E | Removing existing ability ${abilityUid}`, changes)
+                    console.log(`D3Vilia | Removing existing ability ${abilityUid}`, changes)
                     changes.splice(changes.findIndex(change => change.source.item.data.uniqueId === abilityUid), 1)
                     itemsToRemove.push(abilityUid)
                 }
@@ -2607,7 +2606,7 @@ export class ActorPF extends Actor {
         }
 
         // Add ability mods to CMB and CMD
-        const cmbMod = Object.keys(CONFIG.D35E.actorSizes).indexOf(getProperty(data, "data.traits.size") || "") <= Object.keys(CONFIG.D35E.actorSizes).indexOf("tiny") ? modDiffs["dex"] : modDiffs["str"];
+        const cmbMod = Object.keys(CONFIG.D3Vilia.actorSizes).indexOf(getProperty(data, "data.traits.size") || "") <= Object.keys(CONFIG.D3Vilia.actorSizes).indexOf("tiny") ? modDiffs["dex"] : modDiffs["str"];
         linkData(data, updateData, "data.attributes.cmb.total", updateData["data.attributes.cmb.total"] + cmbMod);
         linkData(data, updateData, "data.attributes.cmd.total", updateData["data.attributes.cmd.total"] + modDiffs["str"]);
         if (!flags.loseDexToAC || modDiffs["dex"] < 0) {
@@ -2620,7 +2619,7 @@ export class ActorPF extends Actor {
         linkData(data, updateData, "data.attributes.init.total", updateData["data.attributes.init.total"] + modDiffs["dex"]);
 
         // Add ability mods to saving throws
-        for (let [s, a] of Object.entries(CONFIG.D35E.savingThrowMods)) {
+        for (let [s, a] of Object.entries(CONFIG.D3Vilia.savingThrowMods)) {
             linkData(data, updateData, `data.attributes.savingThrows.${s}.total`, updateData[`data.attributes.savingThrows.${s}.total`] + modDiffs[a]);
         }
         // Apply changes
@@ -2699,7 +2698,7 @@ export class ActorPF extends Actor {
 
 
         // Create arbitrary skill slots
-        for (let skillId of CONFIG.D35E.arbitrarySkills) {
+        for (let skillId of CONFIG.D3Vilia.arbitrarySkills) {
             if (data.skills[skillId] == null) continue;
             let skill = data.skills[skillId];
             skill.subSkills = skill.subSkills || {};
@@ -2746,7 +2745,7 @@ export class ActorPF extends Actor {
             }
             cls.data.tag = tag;
             data.totalNonEclLevels += cls.data.levels
-            let healthConfig = game.settings.get("D35E", "healthConfig");
+            let healthConfig = game.settings.get("D3Vilia", "healthConfig");
             healthConfig = cls.data.classType === "racial" ? healthConfig.hitdice.Racial : this.hasPlayerOwner ? healthConfig.hitdice.PC : healthConfig.hitdice.NPC;
             const classType = cls.data.classType || "base";
             data.classes[tag] = {
@@ -2789,7 +2788,7 @@ export class ActorPF extends Actor {
                 if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].powersMaxLevel.push(cls.data.powersMaxLevel[_level - 1])
             }
             for (let k of Object.keys(data.classes[tag].savingThrows)) {
-                let formula = CONFIG.D35E.classSavingThrowFormulas[classType][cls.data.savingThrows[k].value];
+                let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][cls.data.savingThrows[k].value];
                 if (formula == null) formula = "0";
                 data.classes[tag].savingThrows[k] = new Roll(formula, { level: cls.data.levels }).roll().total;
             }
@@ -2990,7 +2989,7 @@ export class ActorPF extends Actor {
         if (flags == null) flags = {};
         let sourceDetails = {};
         // Get empty source arrays
-        for (let obj of Object.values(CONFIG.D35E.buffTargets)) {
+        for (let obj of Object.values(CONFIG.D3Vilia.buffTargets)) {
             for (let b of Object.keys(obj)) {
                 if (!b.startsWith("_")) {
                     let buffTargets = this._getChangeFlat(b, null, actorData.data);
@@ -3034,7 +3033,7 @@ export class ActorPF extends Actor {
                 value: actorData.data.attributes.bab.total
             });
         }
-        const useDexForCMB = Object.keys(CONFIG.D35E.actorSizes).indexOf(getProperty(actorData, "data.traits.size") || "") <= Object.keys(CONFIG.D35E.actorSizes).indexOf("tiny");
+        const useDexForCMB = Object.keys(CONFIG.D3Vilia.actorSizes).indexOf(getProperty(actorData, "data.traits.size") || "") <= Object.keys(CONFIG.D3Vilia.actorSizes).indexOf("tiny");
         if (actorData.data.abilities.str.mod !== 0) {
             if (!useDexForCMB) sourceDetails["data.attributes.cmb.total"].push({
                 name: "Strength",
@@ -3091,10 +3090,10 @@ export class ActorPF extends Actor {
         }
 
         // Add ability mods (and energy drain) to saving throws
-        for (let [s, a] of Object.entries(CONFIG.D35E.savingThrowMods)) {
+        for (let [s, a] of Object.entries(CONFIG.D3Vilia.savingThrowMods)) {
             if (actorData.data.abilities[a].mod !== 0) {
                 sourceDetails[`data.attributes.savingThrows.${s}.total`].push({
-                    name: CONFIG.D35E.abilities[a],
+                    name: CONFIG.D3Vilia.abilities[a],
                     value: actorData.data.abilities[a].mod
                 });
             }
@@ -3201,7 +3200,7 @@ export class ActorPF extends Actor {
      * @returns {Number} The reduced movement speed.
      */
     static getReducedMovementSpeed(value) {
-        const incr = game.settings.get("D35E", "units") === "metric" ? 1.5 : 5
+        const incr = game.settings.get("D3Vilia", "units") === "metric" ? 1.5 : 5
 
         if (value <= 0) return value;
         if (value < 2 * incr) return incr;
@@ -3236,8 +3235,8 @@ export class ActorPF extends Actor {
      * @return {Number}       The XP required
      */
     getLevelExp(level) {
-        const expRate = game.settings.get("D35E", "experienceRate");
-        const levels = CONFIG.D35E.CHARACTER_EXP_LEVELS[expRate];
+        const expRate = game.settings.get("D3Vilia", "experienceRate");
+        const levels = CONFIG.D3Vilia.CHARACTER_EXP_LEVELS[expRate];
         return levels[Math.min(level, levels.length - 1)];
     }
 
@@ -3250,7 +3249,7 @@ export class ActorPF extends Actor {
      */
     getCRExp(cr) {
         if (cr < 1.0) return Math.max(400 * cr, 10);
-        return CONFIG.D35E.CR_EXP_LEVELS[cr];
+        return CONFIG.D3Vilia.CR_EXP_LEVELS[cr];
     }
 
     /* -------------------------------------------- */
@@ -3310,12 +3309,12 @@ export class ActorPF extends Actor {
      */
     async update(data, options = {}) {
         if (options['recursive'] !== undefined && options['recursive'] === false) {
-            console.log('D35E | Skipping update logic since it is not recursive')
+            console.log('D3Vilia | Skipping update logic since it is not recursive')
             await super.update(data, options);
             return
         }
         // if (options['stopUpdates'] !== undefined && options['stopUpdates'] === true) {
-        //     console.log('D35E | Got stop updates, exiting')
+        //     console.log('D3Vilia | Got stop updates, exiting')
         //     return
         // }
         data = await this.prepareUpdateData(data);
@@ -3467,7 +3466,7 @@ export class ActorPF extends Actor {
             if (hasContainerChanged)
                 itemUpdates.push(itemUpdateData)
         }
-        // console.log('D35E | Item updates', itemUpdates)
+        // console.log('D3Vilia | Item updates', itemUpdates)
         if (itemUpdates.length > 0)
             await this.updateOwnedItem(itemUpdates, { stopUpdates: true });
         // Send resource updates to item
@@ -3596,9 +3595,9 @@ export class ActorPF extends Actor {
         if (this.data.type !== "character") return;
         if (data["data.details.levelUpProgression"] || this.data.data.details.levelUpProgression) {
             dataLevel = (data["data.details.level.available"] || this.data.data.details.level.available) + raceLA + racialHD
-            console.log('D35E | ActorPF | _updateExp | Update exp data from class level count', dataLevel)
+            console.log('D3Vilia | ActorPF | _updateExp | Update exp data from class level count', dataLevel)
         }
-        console.log('D35E | ActorPF | _updateExp | Race LA, racial HD, level', raceLA, racialHD,dataLevel)
+        console.log('D3Vilia | ActorPF | _updateExp | Race LA, racial HD, level', raceLA, racialHD,dataLevel)
         // Translate update exp value to number
         let newExp = data["data.details.xp.value"],
             resetExp = false;
@@ -3629,7 +3628,7 @@ export class ActorPF extends Actor {
 
     async updateClassProgressionLevel(data, globalUpdateData, data1, levelUpData) {
 
-        console.log('D35E | ActorPF | updateClassProgressionLevel | Starting update')
+        console.log('D3Vilia | ActorPF | updateClassProgressionLevel | Starting update')
         const classes = this.items.filter(o => o.type === "class" && getProperty(o.data.data, "classType") !== "racial").sort((a, b) => {
             return a.sort - b.sort;
         });
@@ -3679,7 +3678,7 @@ export class ActorPF extends Actor {
                 itemUpdateData["data.hp"] = classHP.get(_class._id) || 0;
                 await this.updateOwnedItem(itemUpdateData, { stopUpdates: true });
 
-                console.log(`D35E | ActorPF | updateClassProgressionLevel | Updated class item ${_class.name}`)
+                console.log(`D3Vilia | ActorPF | updateClassProgressionLevel | Updated class item ${_class.name}`)
             }
 
             for (let [k, s] of Object.entries(getProperty(data, "data.skills"))) {
@@ -3689,9 +3688,9 @@ export class ActorPF extends Actor {
                 }
             }
 
-            console.log('D35E | ActorPF | updateClassProgressionLevel | Update done')
+            console.log('D3Vilia | ActorPF | updateClassProgressionLevel | Update done')
         } else {
-            console.log('D35E | ActorPF | updateClassProgressionLevel | Update skipped, no levelUpData')
+            console.log('D3Vilia | ActorPF | updateClassProgressionLevel | Update skipped, no levelUpData')
         }
 
     }
@@ -3814,10 +3813,10 @@ export class ActorPF extends Actor {
      */
     async useSpell(item, ev, { skipDialog = false, replacement = false, replacementItem = null } = {}, actor = null) {
         let usedItem = replacementItem ? replacementItem : item;
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
         if (item.data.type !== "spell") throw new Error("Wrong Item type");
 
-        if (getProperty(item.data, "data.preparation.mode") !== "atwill" && item.getSpellUses() <= 0) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoSpellsLeft"));
+        if (getProperty(item.data, "data.preparation.mode") !== "atwill" && item.getSpellUses() <= 0) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoSpellsLeft"));
 
         // Invoke the Item roll
         if (usedItem.hasAction)
@@ -3833,7 +3832,7 @@ export class ActorPF extends Actor {
     }
 
     async addSpellsToSpellbook(item) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         if (item.data.type !== "feat") throw new Error("Wrong Item type");
         let spellsToAdd = []
@@ -3852,7 +3851,7 @@ export class ActorPF extends Actor {
     }
 
     async addSpellsToSpellbookForClass(_spellbookKey, level) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         let spellsToAdd = []
         for (let p of game.packs.values()) {
@@ -3885,7 +3884,7 @@ export class ActorPF extends Actor {
     }
 
     async createAttackFromWeapon(item) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
         if (item.type)  {
             item = duplicate(item);
             item.data = duplicate(item);
@@ -3957,17 +3956,17 @@ export class ActorPF extends Actor {
 
         // Add additional attacks
         let extraAttacks = [];
-        if (item.monkWeapon && this.data.data.details.levelUpData.some((levelUp) => levelUp.class.name === "Monk")) {
+        if (item.data.data.properties.mnk && "monk" in this.data.data.classes) {
             for (let a = 3; a < this.data.data.attributes.bab.total; a += 3) {
-                extraAttacks = extraAttacks.concat([[`-${a}`, `monk ${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 3) / 3)}`]]); //TODO: TEST THIS
+                extraAttacks = extraAttacks.concat([[`-${a}`, `monk ${game.i18n.localize("D3Vilia.Attack")} ${Math.floor((a + 3) / 3)}`]]); 
             }
         } else {
             for (let a = 5; a < this.data.data.attributes.bab.total; a += 5) {
-                extraAttacks = extraAttacks.concat([[`-${a}`, `${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 5) / 5)}`]]);
+                extraAttacks = extraAttacks.concat([[`-${a}`, `${game.i18n.localize("D3Vilia.Attack")} ${Math.floor((a + 5) / 5)}`]]);
             }
         }
         if (isSpeed) {
-            extraAttacks = extraAttacks.concat([[`0`, `${game.i18n.localize("D35E.Attack")} - Speed Enhancement`]])
+            extraAttacks = extraAttacks.concat([[`0`, `${game.i18n.localize("D3Vilia.Attack")} - Speed Enhancement`]])
         }
         if (extraAttacks.length > 0) attackData["data.attackParts"] = extraAttacks;
 
@@ -3990,7 +3989,7 @@ export class ActorPF extends Actor {
                 dieCount = parseInt(RegExp.$1);
                 dieSides = parseInt(RegExp.$2);
                 let weaponSize = "@size"
-                if (!game.settings.get("D35E", "autosizeWeapons")) weaponSize = Object.keys(CONFIG.D35E.sizeChart).indexOf(item.data.data.weaponData.size) - 4;
+                if (!game.settings.get("D3Vilia", "autosizeWeapons")) weaponSize = Object.keys(CONFIG.D3Vilia.sizeChart).indexOf(item.data.data.weaponData.size) - 4;
                 part = `sizeRoll(${dieCount}, ${dieSides}, ${weaponSize}, @critMult)`;
             }
             const bonusFormula = getProperty(item.data, "data.weaponData.damageFormula");
@@ -4069,7 +4068,7 @@ export class ActorPF extends Actor {
         if (hasProperty(attackData, "data.templates")) delete attackData["data.templates"];
         let createdAttack = await this.createOwnedItem(expandObject(attackData));
 
-        ui.notifications.info(game.i18n.localize("D35E.NotificationCreatedAttack").format(item.data.name));
+        ui.notifications.info(game.i18n.localize("D3Vilia.NotificationCreatedAttack").format(item.data.name));
         return createdAttack;
     }
 
@@ -4090,39 +4089,39 @@ export class ActorPF extends Actor {
     }
 
     rollBAB(options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         return DicePF.d20Roll({
             event: options.event,
             parts: ["@mod - @drain"],
             data: { mod: this.data.data.attributes.bab.total, drain: this.data.data.attributes.energyDrain || 0 },
-            title: game.i18n.localize("D35E.BAB"),
+            title: game.i18n.localize("D3Vilia.BAB"),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             takeTwenty: false
         });
     }
 
     rollMelee(options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         return DicePF.d20Roll({
             event: options.event,
             parts: ["@mod - @drain + @ablMod + @sizeMod + @changeGeneral + @changeAttack"],
-            data: { changeGeneral: this.data.data.attributes.attack.general, changeAttack: this.data.data.attributes.attack.ranged, mod: this.data.data.attributes.bab.total, ablMod: this.data.data.abilities.str.mod, drain: this.data.data.attributes.energyDrain || 0, sizeMod: CONFIG.D35E.sizeMods[this.data.data.traits.actualSize] || 0 },
-            title: game.i18n.localize("D35E.Melee"),
+            data: { changeGeneral: this.data.data.attributes.attack.general, changeAttack: this.data.data.attributes.attack.ranged, mod: this.data.data.attributes.bab.total, ablMod: this.data.data.abilities.str.mod, drain: this.data.data.attributes.energyDrain || 0, sizeMod: CONFIG.D3Vilia.sizeMods[this.data.data.traits.actualSize] || 0 },
+            title: game.i18n.localize("D3Vilia.Melee"),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             takeTwenty: false
         });
     }
 
     rollRanged(options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         return DicePF.d20Roll({
             event: options.event,
             parts: ["@mod - @drain + @ablMod + @sizeMod + @changeGeneral + @changeAttack"],
-            data: { changeGeneral: this.data.data.attributes.attack.general, changeAttack: this.data.data.attributes.attack.ranged, mod: this.data.data.attributes.bab.total, ablMod: this.data.data.abilities.dex.mod, drain: this.data.data.attributes.energyDrain || 0, sizeMod: CONFIG.D35E.sizeMods[this.data.data.traits.actualSize] || 0 },
-            title: game.i18n.localize("D35E.Ranged"),
+            data: { changeGeneral: this.data.data.attributes.attack.general, changeAttack: this.data.data.attributes.attack.ranged, mod: this.data.data.attributes.bab.total, ablMod: this.data.data.abilities.dex.mod, drain: this.data.data.attributes.energyDrain || 0, sizeMod: CONFIG.D3Vilia.sizeMods[this.data.data.traits.actualSize] || 0 },
+            title: game.i18n.localize("D3Vilia.Ranged"),
             speaker: ChatMessage.getSpeaker({ actor: this }),
             takeTwenty: false
         });
@@ -4136,53 +4135,53 @@ export class ActorPF extends Actor {
         const data = this.data.data;
         const headers = [];
 
-        const reSplit = CONFIG.D35E.re.traitSeparator;
+        const reSplit = CONFIG.D3Vilia.re.traitSeparator;
         let misc = [];
 
         // Damage reduction
         if (data.traits.dr.length) {
-            headers.push({ header: game.i18n.localize("D35E.DamRed"), value: data.traits.dr.split(reSplit) });
+            headers.push({ header: game.i18n.localize("D3Vilia.DamRed"), value: data.traits.dr.split(reSplit) });
         }
         // Energy resistance
         if (data.traits.eres.length) {
-            headers.push({ header: game.i18n.localize("D35E.EnRes"), value: data.traits.eres.split(reSplit) });
+            headers.push({ header: game.i18n.localize("D3Vilia.EnRes"), value: data.traits.eres.split(reSplit) });
         }
         // Damage vulnerabilities
         if (data.traits.dv.value.length || data.traits.dv.custom.length) {
             const value = [].concat(
                 data.traits.dv.value.map(obj => {
-                    return CONFIG.D35E.damageTypes[obj];
+                    return CONFIG.D3Vilia.damageTypes[obj];
                 }),
                 data.traits.dv.custom.length > 0 ? data.traits.dv.custom.split(";") : [],
             );
-            headers.push({ header: game.i18n.localize("D35E.DamVuln"), value: value });
+            headers.push({ header: game.i18n.localize("D3Vilia.DamVuln"), value: value });
         }
         // Condition resistance
         if (data.traits.cres.length) {
-            headers.push({ header: game.i18n.localize("D35E.ConRes"), value: data.traits.cres.split(reSplit) });
+            headers.push({ header: game.i18n.localize("D3Vilia.ConRes"), value: data.traits.cres.split(reSplit) });
         }
         // Immunities
         if (data.traits.di.value.length || data.traits.di.custom.length ||
             data.traits.ci.value.length || data.traits.ci.custom.length) {
             const value = [].concat(
                 data.traits.di.value.map(obj => {
-                    return CONFIG.D35E.damageTypes[obj];
+                    return CONFIG.D3Vilia.damageTypes[obj];
                 }),
                 data.traits.di.custom.length > 0 ? data.traits.di.custom.split(";") : [],
                 data.traits.ci.value.map(obj => {
-                    return CONFIG.D35E.conditionTypes[obj];
+                    return CONFIG.D3Vilia.conditionTypes[obj];
                 }),
                 data.traits.ci.custom.length > 0 ? data.traits.ci.custom.split(";") : [],
             );
-            headers.push({ header: game.i18n.localize("D35E.ImmunityPlural"), value: value });
+            headers.push({ header: game.i18n.localize("D3Vilia.ImmunityPlural"), value: value });
         }
         // Spell Resistance
         if (data.attributes.sr.total > 0) {
-            misc.push(game.i18n.localize("D35E.SpellResistanceNote").format(data.attributes.sr.total));
+            misc.push(game.i18n.localize("D3Vilia.SpellResistanceNote").format(data.attributes.sr.total));
         }
 
         if (misc.length > 0) {
-            headers.push({ header: game.i18n.localize("D35E.MiscShort"), value: misc });
+            headers.push({ header: game.i18n.localize("D3Vilia.MiscShort"), value: misc });
         }
 
         return headers;
@@ -4231,7 +4230,7 @@ export class ActorPF extends Actor {
      * @returns {Promise<unknown>|void}
      */
     async rollSavingThrow(_savingThrow,ability, target, options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
         if (_savingThrow === "fort") _savingThrow = "fortitudenegates"
         if (_savingThrow === "ref") _savingThrow = "reflexnegates"
         if (_savingThrow === "will") _savingThrow = "willnegates"
@@ -4274,7 +4273,7 @@ export class ActorPF extends Actor {
             allCombatChanges = this._getAllSelectedCombatChangesForRoll(attackType, rollData, allCombatChanges, rollModifiers, optionalFeatIds, optionalFeatRanges);
 
             if (rollModifiers.length > 0) props.push({
-                header: game.i18n.localize("D35E.RollModifiers"),
+                header: game.i18n.localize("D3Vilia.RollModifiers"),
                 value: rollModifiers
             });
 
@@ -4289,7 +4288,7 @@ export class ActorPF extends Actor {
                 speaker: ChatMessage.getSpeaker({actor: this.data}),
                 rollMode: rollMode || "gmroll",
                 sound: CONFIG.sounds.dice,
-                "flags.D35E.noRollRender": true,
+                "flags.D3Vilia.noRollRender": true,
             };
             let chatTemplateData = {
                 name: this.name,
@@ -4298,7 +4297,7 @@ export class ActorPF extends Actor {
             };
             const templateData = mergeObject(chatTemplateData, {
                 img: this.img,
-                saveTypeName: game.i18n.localize(CONFIG.D35E.savingThrows[saveType]),
+                saveTypeName: game.i18n.localize(CONFIG.D3Vilia.savingThrows[saveType]),
                 roll: roll,
                 total: roll.total,
                 result: roll.result,
@@ -4310,7 +4309,7 @@ export class ActorPF extends Actor {
             }, {inplace: false});
             // Create message
 
-            await createCustomChatMessage("systems/D35E/templates/chat/saving-throw.html", templateData, chatData, {rolls: [roll]});
+            await createCustomChatMessage("systems/D3Vilia/templates/chat/saving-throw.html", templateData, chatData, {rolls: [roll]});
         }
 
         let savingThrowId = "";
@@ -4354,13 +4353,13 @@ export class ActorPF extends Actor {
             }
         }
         let props = this.getDefenseHeaders();
-        if (notes.length > 0) props.push({ header: game.i18n.localize("D35E.Notes"), value: notes });
-        const label = CONFIG.D35E.savingThrows[savingThrowId];
+        if (notes.length > 0) props.push({ header: game.i18n.localize("D3Vilia.Notes"), value: notes });
+        const label = CONFIG.D3Vilia.savingThrows[savingThrowId];
         const savingThrow = this.data.data.attributes.savingThrows[savingThrowId];
         rollData.savingThrow = savingThrowId;
 
 
-        let template = "systems/D35E/templates/apps/saving-throw-roll-dialog.html";
+        let template = "systems/D3Vilia/templates/apps/saving-throw-roll-dialog.html";
         let dialogData = {
             data: rollData,
             savingThrow: savingThrow,
@@ -4376,7 +4375,7 @@ export class ActorPF extends Actor {
         const buttons = {};
         let wasRolled = false;
         buttons.normal = {
-            label: game.i18n.localize("D35E.Roll"),
+            label: game.i18n.localize("D3Vilia.Roll"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this,savingThrowId,savingThrowAbility,savingThrowBaseAbility,target,html,props)
@@ -4384,7 +4383,7 @@ export class ActorPF extends Actor {
         };
         await new Promise(resolve => {
             new Dialog({
-                title: `${game.i18n.localize("D35E.STRollSavingThrow")}`,
+                title: `${game.i18n.localize("D3Vilia.STRollSavingThrow")}`,
                 content: html,
                 buttons: buttons,
                 classes: ['custom-dialog','wide'],
@@ -4403,7 +4402,7 @@ export class ActorPF extends Actor {
      * @param {Object} options      Options which configure how the skill check is rolled
      */
     async rollSkill(skillId, options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         const _roll = async function (target, form, props, sklName, skillRollFormula) {
             let optionalFeatIds = [],
@@ -4441,7 +4440,7 @@ export class ActorPF extends Actor {
             allCombatChanges = this._getAllSelectedCombatChangesForRoll(attackType, rollData, allCombatChanges, rollModifiers, optionalFeatIds, optionalFeatRanges);
 
             if (rollModifiers.length > 0) props.push({
-                header: game.i18n.localize("D35E.RollModifiers"),
+                header: game.i18n.localize("D3Vilia.RollModifiers"),
                 value: rollModifiers
             });
 
@@ -4459,7 +4458,7 @@ export class ActorPF extends Actor {
                 speaker: ChatMessage.getSpeaker({actor: this.data}),
                 rollMode: rollMode || "gmroll",
                 sound: CONFIG.sounds.dice,
-                "flags.D35E.noRollRender": true
+                "flags.D3Vilia.noRollRender": true
             };
             let chatTemplateData = {
                 name: this.name,
@@ -4482,7 +4481,7 @@ export class ActorPF extends Actor {
             }, {inplace: false});
             // Create message
 
-            await createCustomChatMessage("systems/D35E/templates/chat/skill.html", templateData, chatData, {rolls: [roll]});
+            await createCustomChatMessage("systems/D3Vilia/templates/chat/skill.html", templateData, chatData, {rolls: [roll]});
         }
 
         // Generating Skill Name
@@ -4492,11 +4491,11 @@ export class ActorPF extends Actor {
         if (isSubSkill) {
             skillId = skillParts[0];
             skl = this.data.data.skills[skillId].subSkills[skillParts[2]];
-            sklName = `${CONFIG.D35E.skills[skillId]} (${skl.name})`;
+            sklName = `${CONFIG.D3Vilia.skills[skillId]} (${skl.name})`;
         } else {
             skl = this.data.data.skills[skillId];
             if (skl.name != null) sklName = skl.name;
-            else sklName = CONFIG.D35E.skills[skillId];
+            else sklName = CONFIG.D3Vilia.skills[skillId];
         }
 
         // Add contextual notes
@@ -4514,7 +4513,7 @@ export class ActorPF extends Actor {
             }
         }
         if (skl.rt && skl.rank === 0) {
-            notes.push(game.i18n.localize("D35E.Untrained"));
+            notes.push(game.i18n.localize("D3Vilia.Untrained"));
         }
 
         if (notes.length > 0) props.push({header: "Notes", value: notes});
@@ -4522,7 +4521,7 @@ export class ActorPF extends Actor {
         const label = sklName;
 
 
-        let template = "systems/D35E/templates/apps/skill-roll-dialog.html";
+        let template = "systems/D3Vilia/templates/apps/skill-roll-dialog.html";
         let dialogData = {
             data: rollData,
             rollMode: game.settings.get("core", "rollMode"),
@@ -4536,21 +4535,21 @@ export class ActorPF extends Actor {
         const buttons = {};
         let wasRolled = false;
         buttons.takeTen = {
-            label: game.i18n.localize("D35E.Take10"),
+            label: game.i18n.localize("D3Vilia.Take10"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this,skl,html,props, sklName, "10")
             }
         };
         buttons.takeTwenty = {
-            label: game.i18n.localize("D35E.Take20"),
+            label: game.i18n.localize("D3Vilia.Take20"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this,skl,html,props, sklName, "20")
             }
         };
         buttons.normal = {
-            label: game.i18n.localize("D35E.Roll"),
+            label: game.i18n.localize("D3Vilia.Roll"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this,skl,html,props, sklName, "1d20")
@@ -4603,7 +4602,7 @@ export class ActorPF extends Actor {
      * @returns {Promise<unknown>|void}
      */
     async rollGrapple(target, options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         const _roll = async function (target, form,props) {
             let grappleModTotal = this.data.data.attributes.cmb.total - (this.data.data.attributes.energyDrain || 0),
@@ -4641,7 +4640,7 @@ export class ActorPF extends Actor {
             allCombatChanges = this._getAllSelectedCombatChangesForRoll(attackType, rollData, allCombatChanges, rollModifiers, optionalFeatIds, optionalFeatRanges);
 
             if (rollModifiers.length > 0) props.push({
-                header: game.i18n.localize("D35E.RollModifiers"),
+                header: game.i18n.localize("D3Vilia.RollModifiers"),
                 value: rollModifiers
             });
 
@@ -4657,7 +4656,7 @@ export class ActorPF extends Actor {
             let actions = []
             if (!target) {
                 actions.push({
-                    label: `${game.i18n.localize("D35E.CMB")} ${game.i18n.localize("D35E.Check")}`,
+                    label: `${game.i18n.localize("D3Vilia.CMB")} ${game.i18n.localize("D3Vilia.Check")}`,
                     value: `Grapple ${roll.total} on target;`,
                     isTargeted: false,
                     action: "customAction",
@@ -4666,7 +4665,7 @@ export class ActorPF extends Actor {
                 });
             } else if (target && roll.total < target) {
                 actions.push({
-                    label: `${game.i18n.localize("D35E.Begin")} ${game.i18n.localize("D35E.CMB")}`,
+                    label: `${game.i18n.localize("D3Vilia.Begin")} ${game.i18n.localize("D3Vilia.CMB")}`,
                     value: `Condition set grappled to true on target;`,
                     isTargeted: false,
                     action: "customAction",
@@ -4682,7 +4681,7 @@ export class ActorPF extends Actor {
                 speaker: ChatMessage.getSpeaker({actor: this.data}),
                 rollMode: rollMode || "gmroll",
                 sound: CONFIG.sounds.dice,
-                "flags.D35E.noRollRender": true
+                "flags.D3Vilia.noRollRender": true
             };
             let chatTemplateData = {
                 name: this.name,
@@ -4705,7 +4704,7 @@ export class ActorPF extends Actor {
             }, {inplace: false});
             // Create message
 
-            await createCustomChatMessage("systems/D35E/templates/chat/grapple.html", templateData, chatData, {rolls: [roll]});
+            await createCustomChatMessage("systems/D3Vilia/templates/chat/grapple.html", templateData, chatData, {rolls: [roll]});
         }
 
         // Add contextual notes
@@ -4730,11 +4729,11 @@ export class ActorPF extends Actor {
             }
         }
         let props = this.getDefenseHeaders();
-        if (notes.length > 0) props.push({ header: game.i18n.localize("D35E.Notes"), value: notes });
-        const label = game.i18n.localize("D35E.CMB");
+        if (notes.length > 0) props.push({ header: game.i18n.localize("D3Vilia.Notes"), value: notes });
+        const label = game.i18n.localize("D3Vilia.CMB");
 
 
-        let template = "systems/D35E/templates/apps/grapple-roll-dialog.html";
+        let template = "systems/D3Vilia/templates/apps/grapple-roll-dialog.html";
         let dialogData = {
             data: rollData,
             rollMode: game.settings.get("core", "rollMode"),
@@ -4748,7 +4747,7 @@ export class ActorPF extends Actor {
         const buttons = {};
         let wasRolled = false;
         buttons.normal = {
-            label: game.i18n.localize("D35E.Roll"),
+            label: game.i18n.localize("D3Vilia.Roll"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this,target,html,props)
@@ -4756,7 +4755,7 @@ export class ActorPF extends Actor {
         };
         await new Promise(resolve => {
             new Dialog({
-                title: `${game.i18n.localize("D35E.GRRollGrapple")}`,
+                title: `${game.i18n.localize("D3Vilia.GRRollGrapple")}`,
                 content: html,
                 buttons: buttons,
                 classes: ['custom-dialog','wide'],
@@ -4771,7 +4770,7 @@ export class ActorPF extends Actor {
 
     _addCombatChangesToRollData(allCombatChanges, rollData) {
         for (const change of allCombatChanges) {
-            console.log('D35E | Change', change[4])
+            console.log('D3Vilia | Change', change[4])
             if (change[3].indexOf('$') !== -1) {
                 setProperty(rollData, change[3].substr(1), ItemPF._fillTemplate(change[4], rollData))
             } else if (change[3].indexOf('&') !== -1) {
@@ -4791,7 +4790,7 @@ export class ActorPF extends Actor {
      * @param {Object} options      Options which configure how ability tests are rolled
      */
     rollAbilityTest(abilityId, options = {}) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         // Add contextual notes
         let notes = [];
@@ -4817,30 +4816,30 @@ export class ActorPF extends Actor {
 
         let props = this.getDefenseHeaders();
         if (notes.length > 0) props.push({ header: "Notes", value: notes });
-        const label = CONFIG.D35E.abilities[abilityId];
+        const label = CONFIG.D3Vilia.abilities[abilityId];
         const abl = this.data.data.abilities[abilityId];
         return DicePF.d20Roll({
             event: options.event,
             parts: ["@mod + @checkMod - @drain"],
             data: { mod: abl.mod, checkMod: abl.checkMod, drain: this.data.data.attributes.energyDrain || 0 },
-            title: game.i18n.localize("D35E.AbilityTest").format(label),
+            title: game.i18n.localize("D3Vilia.AbilityTest").format(label),
             speaker: ChatMessage.getSpeaker({ actor: this }),
-            chatTemplate: "systems/D35E/templates/chat/roll-ext.html",
+            chatTemplate: "systems/D3Vilia/templates/chat/roll-ext.html",
             chatTemplateData: { hasProperties: props.length > 0, properties: props }
         });
     }
 
 
     async rollTurnUndead(name = "Undead") {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
         const rollData = duplicate(this.data.data);
         let turnUndeadHdTotal = this.data.data.attributes.turnUndeadHdTotal
         let turnUndeadUses = this.data.data.attributes.turnUndeadUses
         if (turnUndeadHdTotal < 1) {
-            return ui.notifications.warn(game.i18n.localize("D35E.CannotTurnUndead").format(this.name));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.CannotTurnUndead").format(this.name));
         }
         // if (turnUndeadUses < 1) {
-        //     return ui.notifications.warn(game.i18n.localize("D35E.CannotTurnUndead").format(this.name));
+        //     return ui.notifications.warn(game.i18n.localize("D3Vilia.CannotTurnUndead").format(this.name));
         // }
         let rolls = []
         let knowledgeMod = this.data.data.skills.kre.rank > 5 ? 2 : 0
@@ -4908,13 +4907,13 @@ export class ActorPF extends Actor {
         let chatData = {
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             sound: CONFIG.sounds.dice,
-            "flags.D35E.noRollRender": true,
+            "flags.D3Vilia.noRollRender": true,
         };
 
 
         data.level = turnUndeadHdTotal;
 
-        createCustomChatMessage("systems/D35E/templates/chat/turn-undead.html", data, chatData, {rolls: rolls});
+        createCustomChatMessage("systems/D3Vilia/templates/chat/turn-undead.html", data, chatData, {rolls: rolls});
         let updateData = {}
         updateData[`data.attributes.turnUndeadUses`] = this.data.data.attributes.turnUndeadUses - 1;
         this.update(updateData)
@@ -4925,7 +4924,7 @@ export class ActorPF extends Actor {
      * Display defenses in chat.
      */
     displayDefenses() {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
         const rollData = duplicate(this.data.data);
 
         // Add contextual AC notes
@@ -4995,7 +4994,7 @@ export class ActorPF extends Actor {
         }
 
         // Add misc data
-        const reSplit = CONFIG.D35E.re.traitSeparator;
+        const reSplit = CONFIG.D3Vilia.re.traitSeparator;
         // Damage Reduction
         let drNotes = [];
         if (this.data.data.traits.dr.length) {
@@ -5010,21 +5009,21 @@ export class ActorPF extends Actor {
         if (this.data.data.traits.di.value.length || this.data.data.traits.di.custom.length) {
             const values = [
                 ...this.data.data.traits.di.value.map(obj => {
-                    return CONFIG.D35E.damageTypes[obj];
+                    return CONFIG.D3Vilia.damageTypes[obj];
                 }),
                 ...this.data.data.traits.di.custom.length > 0 ? this.data.data.traits.di.custom.split(reSplit) : [],
             ];
-            energyResistance.push(...values.map(o => game.i18n.localize("D35E.ImmuneTo").format(o)));
+            energyResistance.push(...values.map(o => game.i18n.localize("D3Vilia.ImmuneTo").format(o)));
         }
         // Damage Vulnerability
         if (this.data.data.traits.dv.value.length || this.data.data.traits.dv.custom.length) {
             const values = [
                 ...this.data.data.traits.dv.value.map(obj => {
-                    return CONFIG.D35E.damageTypes[obj];
+                    return CONFIG.D3Vilia.damageTypes[obj];
                 }),
                 ...this.data.data.traits.dv.custom.length > 0 ? this.data.data.traits.dv.custom.split(reSplit) : [],
             ];
-            energyResistance.push(...values.map(o => game.i18n.localize("D35E.VulnerableTo").format(o)));
+            energyResistance.push(...values.map(o => game.i18n.localize("D3Vilia.VulnerableTo").format(o)));
         }
 
         // Create message
@@ -5058,7 +5057,7 @@ export class ActorPF extends Actor {
                 fastHealing: d.traits.fastHealingTotal,
             };
         }
-        createCustomChatMessage("systems/D35E/templates/chat/defenses.html", data, {
+        createCustomChatMessage("systems/D3Vilia/templates/chat/defenses.html", data, {
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
     }
@@ -5121,44 +5120,44 @@ export class ActorPF extends Actor {
                 }
                 if (form.find('[name="prone"]').prop("checked")) {
                     ac += new Roll("-4").roll().total;
-                    rollModifiers.push(`${game.i18n.localize("D35E.Prone")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Prone")}`)
                 }
                 if (form.find('[name="squeezing"]').prop("checked")) {
                     ac += new Roll("-4").roll().total;
-                    rollModifiers.push(`${game.i18n.localize("D35E.Squeezing")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Squeezing")}`)
                 }
                 if (form.find('[name="defense"]').prop("checked")) {
 
                     if ((this.data.data.skills?.tmb?.rank || 0) >= 25) {
                         ac += new Roll(`4+${Math.floor((this.data.data.skills?.tmb?.rank - 25) / 10)}`).roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.Defense")} (Epic ${game.i18n.localize("D35E.SkillTmb")})`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.Defense")} (Epic ${game.i18n.localize("D3Vilia.SkillTmb")})`)
                     } else if ((this.data.data.skills?.tmb?.rank || 0) >= 5) {
                         ac += new Roll("+3").roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.Defense")} (${game.i18n.localize("D35E.SkillTmb")})`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.Defense")} (${game.i18n.localize("D3Vilia.SkillTmb")})`)
                     } else {
                         ac += new Roll("+2").roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.Defense")}`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.Defense")}`)
                     }
                 }
                 if (form.find('[name="totaldefense"]').prop("checked")) {
                     if ((this.data.data.skills?.tmb?.rank || 0) >= 25) {
                         ac += new Roll(`8+${2*Math.floor((this.data.data.skills?.tmb?.rank - 25) / 10)}`).roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.TotalDefense")} (Epic ${game.i18n.localize("D35E.SkillTmb")})`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.TotalDefense")} (Epic ${game.i18n.localize("D3Vilia.SkillTmb")})`)
                     } else if ((this.data.data.skills?.tmb?.rank || 0) >= 5) {
                         ac += new Roll("+6").roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.TotalDefense")} (${game.i18n.localize("D35E.SkillTmb")})`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.TotalDefense")} (${game.i18n.localize("D3Vilia.SkillTmb")})`)
                     } else {
                         ac += new Roll("+4").roll().total;
-                        rollModifiers.push(`${game.i18n.localize("D35E.TotalDefense")}`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.TotalDefense")}`)
                     }
                 }
                 if (form.find('[name="covered"]').prop("checked")) {
                     ac += new Roll("+4").roll().total;
-                    rollModifiers.push(`${game.i18n.localize("D35E.Covered")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Covered")}`)
                 }
                 if (form.find('[name="charged"]').prop("checked")) {
                     ac += new Roll("-2").roll().total;
-                    rollModifiers.push(`${game.i18n.localize("D35E.Charged")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Charged")}`)
                 }
 
                 if (form.find('[name="conceal"]').prop("checked")) {
@@ -5181,12 +5180,12 @@ export class ActorPF extends Actor {
 
             ac += rollData.featAC || 0;
 
-            console.log('D35E | Final roll AC', ac)
+            console.log('D3Vilia | Final roll AC', ac)
             return {ac: ac, applyHalf: applyHalf, noCritical: noCritical, noCheck: acType === 'noCheck', rollMode: rollMode, applyPrecision: applyPrecision, rollModifiers: rollModifiers, conceal: conceal, fullConceal: fullConceal};
         }
         let rollData = this.getRollData();
         // Render modal dialog
-        let template = "systems/D35E/templates/apps/defense-roll-dialog.html";
+        let template = "systems/D3Vilia/templates/apps/defense-roll-dialog.html";
         let totalBonus = "+4"
         let defenseBonus = "+2"
         if ((this.data.data.skills?.tmb?.rank || 0) >= 25) {
@@ -5214,21 +5213,21 @@ export class ActorPF extends Actor {
         const buttons = {};
         let wasRolled = false;
         buttons.vsNormal = {
-            label: game.i18n.localize("D35E.ACVsNormal"),
+            label: game.i18n.localize("D3Vilia.ACVsNormal"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this, 'normal', html)
             }
         };
         buttons.vsTouch = {
-            label: game.i18n.localize("D35E.ACvsTouch"),
+            label: game.i18n.localize("D3Vilia.ACvsTouch"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this, 'touch', html)
             }
         };
         buttons.vsFlat = {
-            label: game.i18n.localize("D35E.ACvsFlat"),
+            label: game.i18n.localize("D3Vilia.ACvsFlat"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this, 'flatFooted', html)
@@ -5236,7 +5235,7 @@ export class ActorPF extends Actor {
         };
 
         buttons.vsNo = {
-            label: game.i18n.localize("D35E.ACvsNoCheck"),
+            label: game.i18n.localize("D3Vilia.ACvsNoCheck"),
             callback: html => {
                 wasRolled = true;
                 roll = _roll.call(this, 'noCheck', html)
@@ -5244,7 +5243,7 @@ export class ActorPF extends Actor {
         };
         let finalAc = await new Promise(resolve => {
             new Dialog({
-                title: `${game.i18n.localize("D35E.ACRollDefense")}`,
+                title: `${game.i18n.localize("D3Vilia.ACRollDefense")}`,
                 content: html,
                 buttons: buttons,
                 classes: ['custom-dialog','wide'],
@@ -5255,7 +5254,7 @@ export class ActorPF extends Actor {
             }).render(true);
         });
 
-        console.log('D35E | Final dialog AC', finalAc)
+        console.log('D3Vilia | Final dialog AC', finalAc)
         return finalAc || {ac: -1, applyHalf: false, noCritical: false};
     }
 
@@ -5268,7 +5267,7 @@ export class ActorPF extends Actor {
             else
                 tokensList = canvas.tokens.controlled;
             if (!tokensList.length) {
-                ui.notifications.warn(game.i18n.localize("D35E.NoTokensSelected"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.NoTokensSelected"));
                 return
             }
         } else {
@@ -5295,7 +5294,7 @@ export class ActorPF extends Actor {
             else
                 tokensList = canvas.tokens.controlled;
             if (!tokensList.length) {
-                ui.notifications.warn(game.i18n.localize("D35E.NoTokensSelected"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.NoTokensSelected"));
                 return
             }
         } else {
@@ -5333,7 +5332,7 @@ export class ActorPF extends Actor {
             else
                 tokensList = canvas.tokens.controlled;
             if (!tokensList.length) {
-                ui.notifications.warn(game.i18n.localize("D35E.NoTokensSelected"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.NoTokensSelected"));
                 return
             }
         } else {
@@ -5351,7 +5350,7 @@ export class ActorPF extends Actor {
                 crit = false;
 
             if (!a.hasPerm(game.user, "OWNER")) {
-                ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
                 continue;
             }
             if (simpleDamage) {
@@ -5432,11 +5431,11 @@ export class ActorPF extends Actor {
                 damageData.displayDamage = value
                 let props = []
                 if ((finalAc.rollModifiers || []).length > 0) props.push({
-                    header: game.i18n.localize("D35E.RollModifiers"),
+                    header: game.i18n.localize("D3Vilia.RollModifiers"),
                     value: finalAc.rollModifiers
                 });
                 let ammoRecovered = false
-                if (game.settings.get("D35E", "useAutoAmmoRecovery")) {
+                if (game.settings.get("D3Vilia", "useAutoAmmoRecovery")) {
                     if (ammoId && attackerId && !hit) {
 
                         let recoveryRoll = new Roll("1d100").roll().total;
@@ -5452,7 +5451,7 @@ export class ActorPF extends Actor {
                     speaker: ChatMessage.getSpeaker({actor: a.data}),
                     rollMode: finalAc.rollMode || "gmroll",
                     sound: CONFIG.sounds.dice,
-                    "flags.D35E.noRollRender": true,
+                    "flags.D3Vilia.noRollRender": true,
                 };
                 let chatTemplateData = {
                     name: a.name,
@@ -5482,7 +5481,7 @@ export class ActorPF extends Actor {
                 }, {inplace: false});
                 // Create message
 
-                await createCustomChatMessage("systems/D35E/templates/chat/damage-description.html", templateData, chatData);
+                await createCustomChatMessage("systems/D3Vilia/templates/chat/damage-description.html", templateData, chatData);
             }
 
 
@@ -5510,7 +5509,7 @@ export class ActorPF extends Actor {
             else
                 tokensList = canvas.tokens.controlled;
             if (!tokensList.length) {
-                ui.notifications.warn(game.i18n.localize("D35E.NoTokensSelected"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.NoTokensSelected"));
                 return
             }
         } else {
@@ -5541,14 +5540,14 @@ export class ActorPF extends Actor {
             tokensList = canvas.tokens.controlled;
         const promises = [];
         if (!tokensList.length) {
-            ui.notifications.warn(game.i18n.localize("D35E.NoTokensSelected"));
+            ui.notifications.warn(game.i18n.localize("D3Vilia.NoTokensSelected"));
             return
         }
         for (let t of tokensList) {
             if (t.actor == null) continue
             let a = t.actor
             if (!a.hasPerm(game.user, "OWNER")) {
-                ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+                ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
                 continue;
             }
             promises.push(t.actor.rollSavingThrow(type,ability,target,{}));
@@ -5795,12 +5794,12 @@ export class ActorPF extends Actor {
         const carryStr = (srcData.data.abilities.str.total - srcData.data.abilities.str.damage) + srcData.data.abilities.str.carryBonus;
         let carryMultiplier = srcData.data.abilities.str.carryMultiplier;
         const size = srcData.data.traits.actualSize;
-        if (srcData.data.attributes.quadruped) carryMultiplier *= CONFIG.D35E.encumbranceMultipliers.quadruped[size];
-        else carryMultiplier *= CONFIG.D35E.encumbranceMultipliers.normal[size];
-        let heavy = carryMultiplier * new Roll(CONFIG.D35E.carryingCapacityFormula, { "str": carryStr > 0 ? carryStr : 0 }).roll().total;
+        if (srcData.data.attributes.quadruped) carryMultiplier *= CONFIG.D3Vilia.encumbranceMultipliers.quadruped[size];
+        else carryMultiplier *= CONFIG.D3Vilia.encumbranceMultipliers.normal[size];
+        let heavy = carryMultiplier * new Roll(CONFIG.D3Vilia.carryingCapacityFormula, { "str": carryStr > 0 ? carryStr : 0 }).roll().total;
 
         // 1 kg = 0.5 lb
-        // if (game.settings.get("D35E", "units") === "metric") {
+        // if (game.settings.get("D3Vilia", "units") === "metric") {
         //     heavy = heavy / 2
         // }
         // Imperial to metric: All items have their weight stored in imperial for internal calculations
@@ -5870,7 +5869,7 @@ export class ActorPF extends Actor {
 
         const pack = game.packs.find(p => p.collection === collection);
         if (!pack) {
-            ui.notifications.error(game.i18n.localize("D35E.NoPackFound") + " " + collection);
+            ui.notifications.error(game.i18n.localize("D3Vilia.NoPackFound") + " " + collection);
             return;
         }
         if (pack.metadata.entity !== "Item") return;
@@ -5895,7 +5894,7 @@ export class ActorPF extends Actor {
     getRollData(data = null) {
         if (data == null) data = this.data.data;
         const result = mergeObject(data, {
-            size: Object.keys(CONFIG.D35E.sizeChart).indexOf(getProperty(data, "traits.actualSize")) - 4,
+            size: Object.keys(CONFIG.D3Vilia.sizeChart).indexOf(getProperty(data, "traits.actualSize")) - 4,
         }, { inplace: false });
 
         return result;
@@ -5921,7 +5920,7 @@ export class ActorPF extends Actor {
     }
 
     async applyActionOnSelf(action, actor, buff = null) {
-        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (!this.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         function cleanParam(parameter) {
             return parameter.replace(/"/gi, "");
@@ -5957,16 +5956,16 @@ export class ActorPF extends Actor {
                     if (action.parameters[1] === "from") {
                         await this.importItemFromCollectionByName(cleanParam(action.parameters[2]), cleanParam(action.parameters[0]))
                     } else {
-                        ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                        ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                     }
                 } else if (action.parameters.length === 4) {
                     if (action.parameters[2] === "from" && (action.parameters[0] === "unique" || action.parameters[0] === "u")) {
                         await this.importItemFromCollectionByName(cleanParam(action.parameters[3]), cleanParam(action.parameters[1]), true)
                     } else {
-                        ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                        ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                     }
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Activate":
                 if (action.parameters.length === 1) {
@@ -5994,7 +5993,7 @@ export class ActorPF extends Actor {
                         }
                     }
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Set":
                 // Set "Sneak Attack" field data.level to (@class.rogue.level) on self
@@ -6071,7 +6070,7 @@ export class ActorPF extends Actor {
                         }
                     }
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Condition":
                 // Condition set *name* to *value*
@@ -6089,7 +6088,7 @@ export class ActorPF extends Actor {
                     updateObject[`data.attributes.conditions.${name}`] = !getProperty(this.data.data, `attributes.conditions.${name}`)
                     await this.update(updateObject)
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Trait":
                 // Condition set *name* to *value*
@@ -6112,7 +6111,7 @@ export class ActorPF extends Actor {
                     updateObject[`data.traits.${traitGroup}.value`] = currentTraits
                     await this.update(updateObject)
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
 
             case "Update":
@@ -6151,7 +6150,7 @@ export class ActorPF extends Actor {
                     }
                     await this.update(updateObject)
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Damage":
                 // Rolls arbitrary attack
@@ -6170,9 +6169,9 @@ export class ActorPF extends Actor {
                         tooltip: $(await damage.getTooltip()).prepend(`<div class="dice-formula">${damage.formula}</div>`)[0].outerHTML
                     }, {inplace: false});
                     // Create message
-                    await createCustomChatMessage("systems/D35E/templates/chat/simple-attack-roll.html", templateData, {}, damage);
+                    await createCustomChatMessage("systems/D3Vilia/templates/chat/simple-attack-roll.html", templateData, {}, damage);
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "SelfDamage":
                 // Rolls arbitrary attack
@@ -6181,7 +6180,7 @@ export class ActorPF extends Actor {
                     let damage = new Roll(cleanParam(action.parameters[0]), actionRollData).roll().total
                     ActorPF.applyDamage(null,null,null,null,null,null,null,damage,null,null,null,null,false,true, actor);
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
 
             case "Grapple":
@@ -6198,7 +6197,7 @@ export class ActorPF extends Actor {
                     let damage = new Roll(cleanParam(action.parameters[1]), actionRollData).roll().total
                     ActorPF.applyAbilityDamage(damage, cleanParam(action.parameters[0]));
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "AbilityDrain":
                 // Rolls arbitrary attack
@@ -6207,7 +6206,7 @@ export class ActorPF extends Actor {
                     let damage = new Roll(cleanParam(action.parameters[1]), actionRollData).roll().total
                     ActorPF.applyAbilityDrain(damage, cleanParam(action.parameters[0]));
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Regenerate":
                 // Rolls arbitrary attack
@@ -6216,7 +6215,7 @@ export class ActorPF extends Actor {
                     let damage = new Roll(cleanParam(action.parameters[0]), actionRollData).roll().total
                     ActorPF.applyRegeneration(damage,actor);
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Clear":
                 if (action.parameters.length === 1) {
@@ -6225,7 +6224,7 @@ export class ActorPF extends Actor {
                 if (action.parameters.length === 2) {
                     // Clear all items of type and subtype
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Use":
                 if (action.parameters.length === 1) {
@@ -6234,13 +6233,13 @@ export class ActorPF extends Actor {
                 if (action.parameters.length === 2) {
                     // Use n items/action
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "Roll":
                 if (action.parameters.length === 1) {
                     // Do a roll
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
                 break;
             case "RunMacro":
 				// Executes a macro defined on MacroDirectory
@@ -6249,18 +6248,18 @@ export class ActorPF extends Actor {
 					let macroToRun = MacroDirectory.collection.find(x => x.data.name === cleanParam(action.parameters[0]));
 					if (!macroToRun)
 					{
-						ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+						ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
 						return;
 					}
 					await macroToRun.execute();
                 } else
-                    ui.notifications.error(game.i18n.localize("D35E.ErrorActionFormula"));
+                    ui.notifications.error(game.i18n.localize("D3Vilia.ErrorActionFormula"));
 				break;
             case "Eval":
                 let actor = this;
-                console.log('D35E | Running async eval')
+                console.log('D3Vilia | Running async eval')
                 await eval("(async () => {" + action.body + "})()");
-                console.log('D35E | Running async eval done')
+                console.log('D3Vilia | Running async eval done')
                 break;
             default:
                 break;
@@ -6281,8 +6280,8 @@ export class ActorPF extends Actor {
 
     _createConsumableSpellDialog(itemData) {
         new Dialog({
-            title: game.i18n.localize("D35E.CreateItemForSpell").format(itemData.name),
-            content: game.i18n.localize("D35E.CreateItemForSpellD").format(itemData.name),
+            title: game.i18n.localize("D3Vilia.CreateItemForSpell").format(itemData.name),
+            content: game.i18n.localize("D3Vilia.CreateItemForSpellD").format(itemData.name),
             buttons: {
                 potion: {
                     icon: '<i class="fas fa-prescription-bottle"></i>',
@@ -6306,8 +6305,8 @@ export class ActorPF extends Actor {
 
     _createConsumablePowerDialog(itemData) {
         new Dialog({
-            title: game.i18n.localize("D35E.CreateItemForPower").format(itemData.name),
-            content: game.i18n.localize("D35E.CreateItemForPowerD").format(itemData.name),
+            title: game.i18n.localize("D3Vilia.CreateItemForPower").format(itemData.name),
+            content: game.i18n.localize("D3Vilia.CreateItemForPowerD").format(itemData.name),
             buttons: {
                 potion: {
                     icon: '<i class="fas fa-prescription-bottle"></i>',
@@ -6331,8 +6330,8 @@ export class ActorPF extends Actor {
 
     _createPolymorphBuffDialog(itemData) {
         new Dialog({
-            title: game.i18n.localize("D35E.CreateItemForActor").format(itemData.name),
-            content: game.i18n.localize("D35E.CreateItemForActorD").format(itemData.name),
+            title: game.i18n.localize("D3Vilia.CreateItemForActor").format(itemData.name),
+            content: game.i18n.localize("D3Vilia.CreateItemForActorD").format(itemData.name),
             buttons: {
                 potion: {
                     icon: '',
@@ -6628,7 +6627,7 @@ export class ActorPF extends Actor {
             // Restore spontaneous spellbooks
             for (let [key, spellbook] of Object.entries(actorData.attributes.spells.spellbooks)) {
                 if (spellbook.spontaneous) {
-                    for (let sl of Object.keys(CONFIG.D35E.spellLevels)) {
+                    for (let sl of Object.keys(CONFIG.D3Vilia.spellLevels)) {
                         updateData[`data.attributes.spells.spellbooks.${key}.spells.spell${sl}.value`] = getProperty(actorData, `attributes.spells.spellbooks.${key}.spells.spell${sl}.max`);
                     }
                 }
@@ -6679,12 +6678,12 @@ export class ActorPF extends Actor {
             speaker: ChatMessage.getSpeaker({actor: this}),
             rollMode: "selfroll",
             sound: CONFIG.sounds.dice,
-            "flags.D35E.noRollRender": true,
+            "flags.D3Vilia.noRollRender": true,
         };
         let actions = []
         if (d.traits.regenTotal) {
             actions.push({
-                label: game.i18n.localize("D35E.Regeneration"),
+                label: game.i18n.localize("D3Vilia.Regeneration"),
                 value: `Regenerate ${d.traits.regenTotal} on self;`,
                 isTargeted: false,
                 action: "customAction",
@@ -6694,7 +6693,7 @@ export class ActorPF extends Actor {
         }
         if (d.traits.fastHealingTotal) {
             actions.push({
-                label: game.i18n.localize("D35E.FastHealing"),
+                label: game.i18n.localize("D3Vilia.FastHealing"),
                 value: `SelfDamage -${d.traits.fastHealingTotal} on self;`,
                 isTargeted: false,
                 action: "customAction",
@@ -6707,7 +6706,7 @@ export class ActorPF extends Actor {
                 actions: actions
             }, {inplace: false});
             // Create message
-            await createCustomChatMessage("systems/D35E/templates/chat/fastheal-roll.html", templateData, chatData, {});
+            await createCustomChatMessage("systems/D3Vilia/templates/chat/fastheal-roll.html", templateData, chatData, {});
         }
     }
 
@@ -6735,7 +6734,7 @@ export class ActorPF extends Actor {
         for (let token of tokens) {
             CONFIG.statusEffects.forEach((con) => {
                 const idx = fx.findIndex((e) => e.getFlag("core", "statusId") === con.id);
-                if (CONFIG.D35E.conditions[con.id] && (idx !== -1) != this.data.data.attributes.conditions[con.id])
+                if (CONFIG.D3Vilia.conditions[con.id] && (idx !== -1) != this.data.data.attributes.conditions[con.id])
                     promises.push(token.toggleEffect(con, { midUpdate: true }));
             });
         }
@@ -6759,8 +6758,8 @@ export class ActorPF extends Actor {
 
     async syncToCompendium() {
         if (!this.data.data.companionUuid) return;
-        let apiKey = game.settings.get("D35E", "apiKeyWorld")
-        if (this.data.data.companionUsePersonalKey) apiKey = game.settings.get("D35E", "apiKeyPersonal")
+        let apiKey = game.settings.get("D3Vilia", "apiKeyWorld")
+        if (this.data.data.companionUsePersonalKey) apiKey = game.settings.get("D3Vilia", "apiKeyPersonal")
         if (!apiKey) return;
         $.ajax({
             url: `${this.API_URI}/api/character/${this.data.data.companionUuid}`,
@@ -6779,8 +6778,8 @@ export class ActorPF extends Actor {
     async getQueuedActions() {
         if (!this.data.data.companionUuid) return;
         let that = this;
-        let apiKey = game.settings.get("D35E", "apiKeyWorld")
-        if (this.data.data.companionUsePersonalKey) apiKey = game.settings.get("D35E", "apiKeyPersonal")
+        let apiKey = game.settings.get("D3Vilia", "apiKeyWorld")
+        if (this.data.data.companionUsePersonalKey) apiKey = game.settings.get("D3Vilia", "apiKeyPersonal")
 
         let userWithCharacterIsActive = game.users.players.some(u => u.active && u.data.character === this.id)
         let isMyCharacter = game.users.current.data.character === this.id;
@@ -6856,7 +6855,7 @@ export class ActorPF extends Actor {
     }
 
     async renderBuffEndChatCard(items) {
-        const chatTemplate = "systems/D35E/templates/chat/roll-ext.html";
+        const chatTemplate = "systems/D3Vilia/templates/chat/roll-ext.html";
 
         // Create chat data
         let chatData = {
@@ -6880,7 +6879,7 @@ export class ActorPF extends Actor {
         }
 
         // Send message
-        await createCustomChatMessage("systems/D35E/templates/chat/deactivate-buff.html", {items: items, actor: this}, chatData,  {rolls: []})
+        await createCustomChatMessage("systems/D3Vilia/templates/chat/deactivate-buff.html", {items: items, actor: this}, chatData,  {rolls: []})
     }
 
 

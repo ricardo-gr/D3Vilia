@@ -8,9 +8,9 @@ export class EntrySelector extends FormApplication {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "entry-selector",
-      classes: ["D35E", "entry"],
+      classes: ["D3Vilia", "entry"],
       title: "Entry Selector",
-      template: "systems/D35E/templates/apps/entry-selector.html",
+      template: "systems/D3Vilia/templates/apps/entry-selector.html",
       width: 320,
       height: "auto",
       closeOnSubmit: false,

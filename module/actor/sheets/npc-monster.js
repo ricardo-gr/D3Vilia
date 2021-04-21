@@ -8,18 +8,18 @@ export class ActorSheetPFNPCMonster extends ActorSheetPFNPC {
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["D35E", "sheet", "actor", "npc", "monster"],
+      classes: ["D3Vilia", "sheet", "actor", "npc", "monster"],
         width: 350,
         height: 200
     });
   }
     
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/D35E/templates/actors/limited-sheet.html";
-    return "systems/D35E/templates/actors/npc-sheet-monster.html";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/D3Vilia/templates/actors/limited-sheet.html";
+    return "systems/D3Vilia/templates/actors/npc-sheet-monster.html";
   }
 
   static get name() {
-    return game.i18n.localize("D35E.ActorSheetPFNPCMonster");
+    return game.i18n.localize("D3Vilia.ActorSheetPFNPCMonster");
   }
 }

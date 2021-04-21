@@ -4,7 +4,7 @@ import {createTag, alterRoll, linkData, isMinimumCoreVersion} from "../lib.js";
 import {ActorPF} from "../actor/entity.js";
 import AbilityTemplate from "../pixi/ability-template.js";
 import {ChatAttack} from "../misc/chat-attack.js";
-import {D35E} from "../config.js";
+import {D3Vilia} from "../config.js";
 import {CACHE} from "../cache.js";
 import {DamageTypes} from "../damage-types.js";
 
@@ -252,7 +252,7 @@ export class ItemPF extends Item {
 
         const itemData = this.data;
         const data = itemData.data;
-        const C = CONFIG.D35E;
+        const C = CONFIG.D3Vilia;
         const labels = {};
 
         // Physical items
@@ -269,18 +269,18 @@ export class ItemPF extends Item {
 
             // Equipped label
             labels.equipped = "";
-            if (itemData.data.equipped === true) labels.equipped = game.i18n.localize("D35E.Yes");
-            else labels.equipped = game.i18n.localize("D35E.No");
+            if (itemData.data.equipped === true) labels.equipped = game.i18n.localize("D3Vilia.Yes");
+            else labels.equipped = game.i18n.localize("D3Vilia.No");
 
             // Carried label
             labels.carried = "";
-            if (itemData.data.carried === true) labels.carried = game.i18n.localize("D35E.Yes");
-            else labels.carried = game.i18n.localize("D35E.No");
+            if (itemData.data.carried === true) labels.carried = game.i18n.localize("D3Vilia.Yes");
+            else labels.carried = game.i18n.localize("D3Vilia.No");
 
             // Identified label
             labels.identified = "";
-            if (itemData.data.identified === true) labels.identified = game.i18n.localize("D35E.YesShort");
-            else labels.identified = game.i18n.localize("D35E.NoShort");
+            if (itemData.data.identified === true) labels.identified = game.i18n.localize("D3Vilia.YesShort");
+            else labels.identified = game.i18n.localize("D3Vilia.NoShort");
 
             // Slot label
             if (itemData.data.slot) {
@@ -288,7 +288,7 @@ export class ItemPF extends Item {
                 const equipmentType = getProperty(this.data, "data.equipmentType") || null;
                 if (equipmentType != null) {
                     const equipmentSlot = getProperty(this.data, "data.slot") || null;
-                    labels.slot = equipmentSlot == null ? null : CONFIG.D35E.equipmentSlots[equipmentType][equipmentSlot];
+                    labels.slot = equipmentSlot == null ? null : CONFIG.D3Vilia.equipmentSlots[equipmentType][equipmentSlot];
                 } else labels.slot = null;
             }
 
@@ -411,7 +411,7 @@ export class ItemPF extends Item {
                 itemData['custom'][(propData.name || propData.id).replace(/ /g, '').toLowerCase()] = propData.value;
             }
         }
-        //console.log('D35E | Custom properties', itemData['custom'])
+        //console.log('D3Vilia | Custom properties', itemData['custom'])
 
         // Assign labels and return the Item
         this.labels = labels;
@@ -423,7 +423,7 @@ export class ItemPF extends Item {
 
     async update(data, options = {}) {
         if (options['recursive'] !== undefined && options['recursive'] === false) {
-            console.log('D35E | Skipping update logic since it is not recursive')
+            console.log('D3Vilia | Skipping update logic since it is not recursive')
             await super.update(data, options);
             return
         }
@@ -443,7 +443,7 @@ export class ItemPF extends Item {
         if (data["data.weaponType"] != null && data["data.weaponType"] !== getProperty(this.data, "data.weaponType")) {
             const type = data["data.weaponType"];
             const subtype = data["data.weaponSubtype"] || getProperty(this.data, "data.weaponSubtype") || "";
-            const keys = Object.keys(CONFIG.D35E.weaponTypes[type])
+            const keys = Object.keys(CONFIG.D3Vilia.weaponTypes[type])
                 .filter(o => !o.startsWith("_"));
             if (!subtype || !keys.includes(subtype)) {
                 data["data.weaponSubtype"] = keys[0];
@@ -451,20 +451,20 @@ export class ItemPF extends Item {
         }
 
         if (data["data.weaponData.size"] && data["data.weaponData.size"] !== this.data.data.weaponData.size) {
-            let newSize = Object.keys(CONFIG.D35E.actorSizes).indexOf(data["data.weaponData.size"] || "");
-            let oldSize = Object.keys(CONFIG.D35E.actorSizes).indexOf(this.data.data.weaponData.size || "");
+            let newSize = Object.keys(CONFIG.D3Vilia.actorSizes).indexOf(data["data.weaponData.size"] || "");
+            let oldSize = Object.keys(CONFIG.D3Vilia.actorSizes).indexOf(this.data.data.weaponData.size || "");
             let weightChange = Math.pow(2,newSize-oldSize);
             data["data.weight"] = this.data.data.weight * weightChange;
         }
 
 
         if (data["data.convertedWeight"]) {
-            const conversion = game.settings.get("D35E", "units") === "metric" ? 2 : 1;
+            const conversion = game.settings.get("D3Vilia", "units") === "metric" ? 2 : 1;
             data["data.weight"] = data["data.convertedWeight"] * conversion;
         }
 
         if (data["data.convertedCapacity"] !== undefined && data["data.convertedCapacity"] !== null) {
-            const conversion = game.settings.get("D35E", "units") === "metric" ? 2 : 1;
+            const conversion = game.settings.get("D3Vilia", "units") === "metric" ? 2 : 1;
             data["data.capacity"] = data["data.convertedCapacity"] * conversion;
         }
 
@@ -599,7 +599,7 @@ export class ItemPF extends Item {
             // Set subtype
             const type = data["data.equipmentType"];
             const subtype = data["data.equipmentSubtype"] || getProperty(this.data, "data.equipmentSubtype") || "";
-            let keys = Object.keys(CONFIG.D35E.equipmentTypes[type])
+            let keys = Object.keys(CONFIG.D3Vilia.equipmentTypes[type])
                 .filter(o => !o.startsWith("_"));
             if (!subtype || !keys.includes(subtype)) {
                 data["data.equipmentSubtype"] = keys[0];
@@ -607,7 +607,7 @@ export class ItemPF extends Item {
 
             // Set slot
             const slot = data["data.slot"] || getProperty(this.data, "data.slot") || "";
-            keys = Object.keys(CONFIG.D35E.equipmentSlots[type]);
+            keys = Object.keys(CONFIG.D3Vilia.equipmentSlots[type]);
             if (!slot || !keys.includes(slot)) {
                 data["data.slot"] = keys[0];
             }
@@ -787,7 +787,7 @@ export class ItemPF extends Item {
         let actor = this.actor;
         if (tempActor != null)
             actor = tempActor;
-        if (actor && !actor.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (actor && !actor.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         // Basic template rendering data
         const token = actor ? actor.token : null;
@@ -819,7 +819,7 @@ export class ItemPF extends Item {
 
         // Render the chat card template
         const templateType = ["consumable"].includes(this.data.type) ? this.data.type : "item";
-        const template = `systems/D35E/templates/chat/${templateType}-card.html`;
+        const template = `systems/D3Vilia/templates/chat/${templateType}-card.html`;
 
         // Basic chat message data
         const chatData = mergeObject({
@@ -894,7 +894,7 @@ export class ItemPF extends Item {
         const props = [];
         if (data.hasOwnProperty("equipped") && ["weapon", "equipment"].includes(this.data.type)) {
             props.push(
-                data.equipped ? game.i18n.localize("D35E.Equipped") : game.i18n.localize("D35E.NotEquipped"),
+                data.equipped ? game.i18n.localize("D3Vilia.Equipped") : game.i18n.localize("D3Vilia.NotEquipped"),
             );
         }
 
@@ -906,19 +906,19 @@ export class ItemPF extends Item {
             let rangeModifier = rollData.spellEnlarged ? 2 : 1
             // Range
             if (data.range != null) {
-                if (data.range.units === "close") dynamicLabels.range = game.i18n.localize("D35E.RangeNote").format(rangeModifier * 25 +rangeModifier *  Math.floor(cl / 2) * 5);
-                else if (data.range.units === "medium") dynamicLabels.range = game.i18n.localize("D35E.RangeNote").format(rangeModifier * 100 + rangeModifier * cl * 10);
-                else if (data.range.units === "long") dynamicLabels.range = game.i18n.localize("D35E.RangeNote").format(rangeModifier * 400 + rangeModifier * cl * 40);
+                if (data.range.units === "close") dynamicLabels.range = game.i18n.localize("D3Vilia.RangeNote").format(rangeModifier * 25 +rangeModifier *  Math.floor(cl / 2) * 5);
+                else if (data.range.units === "medium") dynamicLabels.range = game.i18n.localize("D3Vilia.RangeNote").format(rangeModifier * 100 + rangeModifier * cl * 10);
+                else if (data.range.units === "long") dynamicLabels.range = game.i18n.localize("D3Vilia.RangeNote").format(rangeModifier * 400 + rangeModifier * cl * 40);
                 else if (["ft", "mi", "spec"].includes(data.range.units) && typeof data.range.value === "string") {
                     let range = new Roll(data.range.value.length > 0 ? data.range.value : "0", rollData).roll().total;
-                    dynamicLabels.range = [range > 0 ? "Range:" : null, range, CONFIG.D35E.distanceUnits[data.range.units]].filterJoin(" ");
+                    dynamicLabels.range = [range > 0 ? "Range:" : null, range, CONFIG.D3Vilia.distanceUnits[data.range.units]].filterJoin(" ");
                 }
             }
             // Duration
             if (data.duration != null) {
                 if (!["inst", "perm"].includes(data.duration.units) && typeof data.duration.value === "string") {
                     let duration = new Roll(data.duration.value.length > 0 ? data.duration.value : "0", rollData).roll().total;
-                    dynamicLabels.duration = [duration, CONFIG.D35E.timePeriods[data.duration.units]].filterJoin(" ");
+                    dynamicLabels.duration = [duration, CONFIG.D3Vilia.timePeriods[data.duration.units]].filterJoin(" ");
                 }
             }
 
@@ -948,7 +948,7 @@ export class ItemPF extends Item {
             // Add save DC
             if (data.hasOwnProperty("actionType") && (getProperty(data, "save.description") || getProperty(data, "save.type")) && getProperty(data, "save.description") !== "None") {
                 let saveDC = new Roll(data.save.dc.length > 0 ? data.save.dc : "0", rollData).roll().total;
-                let saveType = data.save.type ? CONFIG.D35E.savingThrowTypes[data.save.type] : data.save.description;
+                let saveType = data.save.type ? CONFIG.D3Vilia.savingThrowTypes[data.save.type] : data.save.description;
                 if (this.type === "spell") {
                     saveDC += new Roll(spellbook.baseDCFormula || "", rollData).roll().total;
                 }
@@ -959,17 +959,17 @@ export class ItemPF extends Item {
                 }
 
                 //
-                // console.log('D35E | Calculated spell DC for props', saveDC)
+                // console.log('D3Vilia | Calculated spell DC for props', saveDC)
             }
         }
 
         // Add SR reminder
         if (this.type === "spell") {
             if (data.sr) {
-                props.push(game.i18n.localize("D35E.SpellResistance"));
+                props.push(game.i18n.localize("D3Vilia.SpellResistance"));
             }
             if (data.pr) {
-                props.push(game.i18n.localize("D35E.PowerResistance"));
+                props.push(game.i18n.localize("D3Vilia.PowerResistance"));
             }
         }
 
@@ -998,7 +998,7 @@ export class ItemPF extends Item {
      */
     _equipmentChatData(data, labels, props) {
         props.push(
-            CONFIG.D35E.equipmentTypes[data.equipmentType][data.equipmentSubtype],
+            CONFIG.D3Vilia.equipmentTypes[data.equipmentType][data.equipmentSubtype],
             labels.armor || null,
         );
     }
@@ -1011,8 +1011,8 @@ export class ItemPF extends Item {
      */
     _weaponChatData(data, labels, props) {
         props.push(
-            CONFIG.D35E.weaponTypes[data.weaponType]._label,
-            CONFIG.D35E.weaponTypes[data.weaponType][data.weaponSubtype],
+            CONFIG.D3Vilia.weaponTypes[data.weaponType]._label,
+            CONFIG.D3Vilia.weaponTypes[data.weaponType][data.weaponSubtype],
         );
     }
 
@@ -1026,11 +1026,11 @@ export class ItemPF extends Item {
      */
     _consumableChatData(data, labels, props) {
         props.push(
-            CONFIG.D35E.consumableTypes[data.consumableType]
+            CONFIG.D3Vilia.consumableTypes[data.consumableType]
         );
         if (["day", "week", "charges"].includes(data.uses.per)) {
             props.push(data.uses.value + "/" + data.uses.max + " Charges");
-        } else props.push(CONFIG.D35E.limitedUsePeriods[data.uses.per]);
+        } else props.push(CONFIG.D3Vilia.limitedUsePeriods[data.uses.per]);
         data.hasCharges = data.uses.value >= 0;
     }
 
@@ -1042,7 +1042,7 @@ export class ItemPF extends Item {
      */
     _lootChatData(data, labels, props) {
         props.push(
-            data.weight ? data.weight + " " + (game.settings.get("D35E", "units") === "metric" ? game.i18n.localize("D35E.Kgs") : game.i18n.localize("D35E.Lbs")) : null
+            data.weight ? data.weight + " " + (game.settings.get("D3Vilia", "units") === "metric" ? game.i18n.localize("D3Vilia.Kgs") : game.i18n.localize("D3Vilia.Lbs")) : null
         );
     }
 
@@ -1059,7 +1059,7 @@ export class ItemPF extends Item {
         // Spell saving throw text
         // const abl = data.ability || ad.attributes.spellcasting || "int";
         // if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-        // labels.save = `DC ${data.save.dc} ${CONFIG.D35E.abilities[data.save.ability]}`;
+        // labels.save = `DC ${data.save.dc} ${CONFIG.D3Vilia.abilities[data.save.ability]}`;
 
         // Spell properties
         props.push(
@@ -1079,11 +1079,11 @@ export class ItemPF extends Item {
         // Spell saving throw text
         // const abl = data.ability || ad.attributes.spellcasting || "str";
         // if ( this.hasSave && !data.save.dc ) data.save.dc = 8 + ad.abilities[abl].mod + ad.attributes.prof;
-        // labels.save = `DC ${data.save.dc} ${CONFIG.D35E.abilities[data.save.ability]}`;
+        // labels.save = `DC ${data.save.dc} ${CONFIG.D3Vilia.abilities[data.save.ability]}`;
 
         // Feat properties
         props.push(
-            CONFIG.D35E.featTypes[data.featType]
+            CONFIG.D3Vilia.featTypes[data.featType]
         );
     }
 
@@ -1126,8 +1126,8 @@ export class ItemPF extends Item {
 
         if (this.isCharged && !skipChargeCheck) {
             if (this.charges < this.chargeCost) {
-                if (this.isSingleUse) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoQuantity"));
-                return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoCharges").format(this.name));
+                if (this.isSingleUse) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoQuantity"));
+                return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoCharges").format(this.name));
             }
             await this.addCharges(-1*this.chargeCost);
         }
@@ -1140,15 +1140,15 @@ export class ItemPF extends Item {
         if (tempActor !== null) {
             actor = tempActor;
         }
-        if (actor && !actor.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoActorPermission"));
+        if (actor && !actor.hasPerm(game.user, "OWNER")) return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoActorPermission"));
 
         const itemQuantity = getProperty(this.data, "data.quantity");
         if (itemQuantity != null && itemQuantity <= 0 && !skipChargeCheck) {
-            return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoQuantity"));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoQuantity"));
         }
 
         if (this.isCharged && this.charges < this.chargeCost && !skipChargeCheck) {
-            return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoCharges").format(this.name));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoCharges").format(this.name));
         }
 
         const itemData = this.data.data;
@@ -1199,12 +1199,12 @@ export class ItemPF extends Item {
                 rollData.attackBonus = form.find('[name="attack-bonus"]').val();
                 if (rollData.attackBonus) {
                     attackExtraParts.push("@attackBonus");
-                    rollModifiers.push(`${game.i18n.localize("D35E.AttackRollBonus")} ${rollData.attackBonus}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.AttackRollBonus")} ${rollData.attackBonus}`)
                 }
                 rollData.damageBonus = form.find('[name="damage-bonus"]').val();
                 if (rollData.damageBonus) {
-                    damageExtraParts.push(["@damageBonus",game.i18n.localize("D35E.DamageBonus"),"base"]);
-                    rollModifiers.push(`${game.i18n.localize("D35E.DamageBonus")} ${rollData.damageBonus}`)
+                    damageExtraParts.push(["@damageBonus",game.i18n.localize("D3Vilia.DamageBonus"),"base"]);
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.DamageBonus")} ${rollData.damageBonus}`)
                 }
                 rollMode = form.find('[name="rollMode"]').val();
 
@@ -1234,7 +1234,7 @@ export class ItemPF extends Item {
                         attackExtraParts.push(useAmmoAttack);
                     }
                     rollModifiers.push(`${useAmmoName}`)
-                    // console.log('D35E | Selected ammo', useAmmoDamage, useAmmoAttack)
+                    // console.log('D3Vilia | Selected ammo', useAmmoDamage, useAmmoAttack)
                 }
 
 
@@ -1243,18 +1243,18 @@ export class ItemPF extends Item {
                 if (rollData.powerAttackBonus !== undefined) {
                     rollData.powerAttackBonus = parseInt(form.find('[name="power-attack"]').val())
                     rollData.weaponHands = 1
-                    damageExtraParts.push(["floor(@powerAttackBonus * @weaponHands) * @critMult",game.i18n.localize("D35E.PowerAttack"),"base"]);
+                    damageExtraParts.push(["floor(@powerAttackBonus * @weaponHands) * @critMult",game.i18n.localize("D3Vilia.PowerAttack"),"base"]);
                     rollData.powerAttackPenalty = -rollData.powerAttackBonus;
                     attackExtraParts.push("@powerAttackPenalty");
                     if (rollData.powerAttackBonus > 0)
-                        rollModifiers.push(`${game.i18n.localize("D35E.PowerAttack")} ${rollData.powerAttackBonus}`)
+                        rollModifiers.push(`${game.i18n.localize("D3Vilia.PowerAttack")} ${rollData.powerAttackBonus}`)
                 }
                 if (form.find('[name="manyshot"]').prop("checked")) {
                     manyshot = true;
                     manyshotCount = parseInt(form.find('[name="manyshot-count"]').val())
                     rollData.manyshotPenalty = -manyshotCount*2;
                     attackExtraParts.push("@manyshotPenalty");
-                    rollModifiers.push(`${game.i18n.localize("D35E.FeatManyshot")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.FeatManyshot")}`)
                 }
 
                 if (form.find('[name="nonLethal"]').prop("checked")) {
@@ -1264,44 +1264,44 @@ export class ItemPF extends Item {
                 if (nonLethal !== itemNonLethal) {
                     rollData.nonLethalPenalty = -4;
                     attackExtraParts.push("@nonLethalPenalty");
-                    rollModifiers.push(`${game.i18n.localize("D35E.WeaponPropNonLethal")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.WeaponPropNonLethal")}`)
 
                 }
 
                 if (form.find('[name="prone"]').prop("checked")) {
                     rollData.pronePenalty = -4;
                     attackExtraParts.push("@pronePenalty");
-                    rollModifiers.push(`${game.i18n.localize("D35E.Prone")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Prone")}`)
                 }
                 if (form.find('[name="squeezing"]').prop("checked")) {
                     rollData.squeezingPenalty = -4;
                     attackExtraParts.push("@squeezingPenalty");
-                    rollModifiers.push(`${game.i18n.localize("D35E.Squeezing")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Squeezing")}`)
                 }
                 if (form.find('[name="highground"]').prop("checked")) {
                     rollData.highground = 1;
                     attackExtraParts.push("@highground");
-                    rollModifiers.push(`${game.i18n.localize("D35E.HighGround")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.HighGround")}`)
                 }
                 if (form.find('[name="defensive"]').prop("checked")) {
                     rollData.defensive = -4;
                     attackExtraParts.push("@defensive");
-                    rollModifiers.push(`${game.i18n.localize("D35E.DefensiveFighting")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.DefensiveFighting")}`)
                 }
                 if (form.find('[name="charge"]').prop("checked")) {
                     rollData.charge = 2;
                     attackExtraParts.push("@charge");
-                    rollModifiers.push(`${game.i18n.localize("D35E.Charge")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Charge")}`)
                 }
                 if (form.find('[name="ccshot"]').prop("checked")) {
                     rollData.ccshot = -4;
                     attackExtraParts.push("@ccshot");
-                    rollModifiers.push(`${game.i18n.localize("D35E.CloseQuartersShot")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.CloseQuartersShot")}`)
                 }
                 if (form.find('[name="flanking"]').prop("checked")) {
                     rollData.flanking = 2;
                     attackExtraParts.push("@flanking");
-                    rollModifiers.push(`${game.i18n.localize("D35E.Flanking")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.Flanking")}`)
                 }
 
                 if (form.find('[name="greater-manyshot"]').prop("checked")) {
@@ -1309,7 +1309,7 @@ export class ItemPF extends Item {
                     greaterManyshot = true;
                     rollData.greaterManyshotPenalty = -greaterManyshotCount*2;
                     attackExtraParts.push("@greaterManyshotPenalty");
-                    rollModifiers.push(`${game.i18n.localize("D35E.FeatGreaterManyshot")}`)
+                    rollModifiers.push(`${game.i18n.localize("D3Vilia.FeatGreaterManyshot")}`)
                 }
                 if (form.find('[name="rapid-shot"]').prop("checked")) {
                     rapidShot = true;
@@ -1406,18 +1406,18 @@ export class ItemPF extends Item {
 
             let allAttacks = []
             // Auto scaling attacks
-            if (game.settings.get("D35E", "autoScaleAttacksBab") && actor.data.type !== "npc" && getProperty(this.data, "data.attackType") === "weapon" && fullAttack) {
-                allAttacks.push({bonus: 0, label: `${game.i18n.localize("D35E.Attack")}`})
+            if (game.settings.get("D3Vilia", "autoScaleAttacksBab") && actor.data.type !== "npc" && getProperty(this.data, "data.attackType") === "weapon" && fullAttack && !("monk" in actor.data.data.classes)) {
+                allAttacks.push({bonus: 0, label: `${game.i18n.localize("D3Vilia.Attack")}`})
                 for (let a = 5; a < actor.data.data.attributes.bab.total; a += 5) {
-                    allAttacks.push({bonus:`-${a}`, label:`${game.i18n.localize("D35E.Attack")} ${Math.floor((a + 5) / 5)}`});
+                    allAttacks.push({bonus:`-${a}`, label:`${game.i18n.localize("D3Vilia.Attack")} ${Math.floor((a + 5) / 5)}`});
                 }
             } else {
                 allAttacks = fullAttack ? this.data.data.attackParts.reduce((cur, r) => {
                     cur.push({bonus: r[0], label: r[1]});
                     return cur;
-                }, [{bonus: 0, label: `${game.i18n.localize("D35E.Attack")}`}]) : [{
+                }, [{bonus: 0, label: `${game.i18n.localize("D3Vilia.Attack")}`}]) : [{
                     bonus: 0,
-                    label: `${game.i18n.localize("D35E.Attack")}`
+                    label: `${game.i18n.localize("D3Vilia.Attack")}`
                 }];
             }
 
@@ -1478,17 +1478,17 @@ export class ItemPF extends Item {
             if (hasTwoImprovedWeaponFightingFeat && twoWeaponFightingOffhand) {
                 allAttacks.push({
                     bonus: "-5",
-                    label: `${game.i18n.localize("D35E.Attack")} 2`
+                    label: `${game.i18n.localize("D3Vilia.Attack")} 2`
                 })
             }
             if (hasTwoGreaterFightingFeat && twoWeaponFightingOffhand) {
                 allAttacks.push({
                     bonus: "-10",
-                    label: `${game.i18n.localize("D35E.Attack")} 3`
+                    label: `${game.i18n.localize("D3Vilia.Attack")} 3`
                 })
             }
 
-            // console.log('D35E | Enabled conditionals', enabledConditionals)
+            // console.log('D3Vilia | Enabled conditionals', enabledConditionals)
             let attackEnhancementMap = new Map();
             let damageEnhancementMap = new Map();
             for (let enabledConditional of enabledConditionals) {
@@ -1515,7 +1515,7 @@ export class ItemPF extends Item {
                             })
                         }
                         else
-                            damageExtraParts.push([modifier.formula,CACHE.DamageTypes.get(modifier.type)?.data?.name || game.i18n.localize("D35E.UnknownDamageType"),modifier.type]);
+                            damageExtraParts.push([modifier.formula,CACHE.DamageTypes.get(modifier.type)?.data?.name || game.i18n.localize("D3Vilia.UnknownDamageType"),modifier.type]);
                     }
                 }
             }
@@ -1569,28 +1569,28 @@ export class ItemPF extends Item {
             let dc = this._getSpellDC(rollData)
             if (this.data.data?.metamagicFeats?.maximized) {
                 damageModifiers.maximize = true;
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellMaximized")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellMaximized")}`)
             }
             if (this.data.data?.metamagicFeats?.empowered) {
                 damageModifiers.multiplier = 1.5
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellEmpowered")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellEmpowered")}`)
             }
             if (this.data.data?.metamagicFeats?.intensified) {
                 damageModifiers.maximize = true;
                 damageModifiers.multiplier = 2
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellIntensified")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellIntensified")}`)
             }
             if (this.data.data?.metamagicFeats?.enlarged) {
                 rollData.spellEnlarged = true;
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellEnlarged")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellEnlarged")}`)
             }
             if (this.data.data?.metamagicFeats?.widened) {
                 rollData.spellWidened = true;
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellWidened")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellWidened")}`)
             }
             if (this.data.data?.metamagicFeats?.enhanced) {
                 rollData.maxDamageDice += 10;
-                rollModifiers.push(`${game.i18n.localize("D35E.SpellEnhanced")}`)
+                rollModifiers.push(`${game.i18n.localize("D3Vilia.SpellEnhanced")}`)
             }
 
             // Lock useAmount for powers to max value
@@ -1620,7 +1620,7 @@ export class ItemPF extends Item {
                     }
                     let localDamageExtraParts = duplicate(damageExtraParts);
                     for (let aepConditional of damageEnhancementMap.get(`attack.${attackId}`) || []) {
-                        localDamageExtraParts.push([aepConditional.formula,CACHE.DamageTypes.get(aepConditional.type)?.data?.name || game.i18n.localize("D35E.UnknownDamageType"),aepConditional.type])
+                        localDamageExtraParts.push([aepConditional.formula,CACHE.DamageTypes.get(aepConditional.type)?.data?.name || game.i18n.localize("D3Vilia.UnknownDamageType"),aepConditional.type])
                     }
                     await attack.addAttack({
                         bonus: atk.bonus || 0,
@@ -1713,7 +1713,7 @@ export class ItemPF extends Item {
             // Prompt measure template
             if (useMeasureTemplate) {
 
-                // console.log(`D35E | Creating measure template.`)
+                // console.log(`D3Vilia | Creating measure template.`)
                 // Create template
                 const template = AbilityTemplate.fromItem(this, rollData.spellWidened ? 2 : 1);
                 if (template) {
@@ -1726,10 +1726,10 @@ export class ItemPF extends Item {
                 }
             }
 
-            // console.log(`D35E | Updating item on attack.`)
+            // console.log(`D3Vilia | Updating item on attack.`)
             // Deduct charge
             if (this.autoDeductCharges && !skipChargeCheck) {
-                // console.log(`D35E | Deducting ${this.chargeCost} charges.`)
+                // console.log(`D3Vilia | Deducting ${this.chargeCost} charges.`)
                 if (rollData.useAmount === undefined)
                     await this.addCharges(-1*this.chargeCost, itemUpdateData);
                 else
@@ -1746,18 +1746,18 @@ export class ItemPF extends Item {
                 speaker: ChatMessage.getSpeaker({actor: actor}),
                 rollMode: rollMode,
                 sound: CONFIG.sounds.dice,
-                "flags.D35E.noRollRender": true,
+                "flags.D3Vilia.noRollRender": true,
             };
 
             // Post message
             if (this.data.type === "spell" || this.data.data.isFromSpell) {
-                if (!game.settings.get("D35E", "hideSpellDescriptionsIfHasAction"))
+                if (!game.settings.get("D3Vilia", "hideSpellDescriptionsIfHasAction"))
                     await this.roll({rollMode: rollMode});
             }
             let rolled = false;
             if (this.hasAttack || this.hasDamage || this.hasEffect || getProperty(this.data, "data.actionType") === "special") {
 
-                // console.log(`D35E | Generating chat message.`)
+                // console.log(`D3Vilia | Generating chat message.`)
                 // Get extra text and properties
                 let hasBoxInfo = this.hasAttack || this.hasDamage || this.hasEffect;
                 let attackNotes = []
@@ -1785,16 +1785,16 @@ export class ItemPF extends Item {
 
                 if (attackStr.length > 0) {
                     const innerHTML = TextEditor.enrichHTML(attackStr, {rollData: rollData});
-                    extraText += `<div class="flexcol property-group"><label>${game.i18n.localize("D35E.AttackNotes")}</label><div class="flexrow">${innerHTML}</div></div>`;
+                    extraText += `<div class="flexcol property-group"><label>${game.i18n.localize("D3Vilia.AttackNotes")}</label><div class="flexrow">${innerHTML}</div></div>`;
                 }
 
                 const properties = this.getChatData({}, rollData).properties;
                 if (properties.length > 0) props.push({
-                    header: game.i18n.localize("D35E.InfoShort"),
+                    header: game.i18n.localize("D3Vilia.InfoShort"),
                     value: properties
                 });
                 if (rollModifiers.length > 0) props.push({
-                    header: game.i18n.localize("D35E.RollModifiers"),
+                    header: game.i18n.localize("D3Vilia.RollModifiers"),
                     value: rollModifiers
                 });
 
@@ -1814,7 +1814,7 @@ export class ItemPF extends Item {
                     useAmmoId: useAmmoId
                 }, {inplace: false});
                 // Create message
-                await createCustomChatMessage("systems/D35E/templates/chat/attack-roll.html", templateData, chatData, {rolls: rolls});
+                await createCustomChatMessage("systems/D3Vilia/templates/chat/attack-roll.html", templateData, chatData, {rolls: rolls});
                 rolled = true;
             }
             if (this.hasRolltableDraw) {
@@ -1833,7 +1833,7 @@ export class ItemPF extends Item {
         if (skipDialog || (ev instanceof MouseEvent && (ev.shiftKey || ev.button === 2)) || getProperty(this.data, "data.actionType") === "special") return _roll.call(this, true);
 
         // Render modal dialog
-        let template = "systems/D35E/templates/apps/attack-roll-dialog.html";
+        let template = "systems/D3Vilia/templates/apps/attack-roll-dialog.html";
         let weaponName = this.data.data.baseWeaponType || "";
         let featWeaponName = `(${weaponName})`;
         let bonusMaxPowerPoints = 0;
@@ -1843,19 +1843,20 @@ export class ItemPF extends Item {
             let availablePowerPoints = (spellbook.powerPoints || 0) - (this.data.data.powerPointsCost || 0);
             bonusMaxPowerPoints = Math.min((this?.actor?.data?.data?.attributes?.hd.total || 0) + 10 - (this.data.data.powerPointsCost || 0),availablePowerPoints);
         }
-        let extraAttacksCount = game.settings.get("D35E", "autoScaleAttacksBab") && actor.data.type !== "npc" && getProperty(this.data, "data.attackType") === "weapon" ? Math.ceil((actor.data.data.attributes.bab.total)/5.0) : (getProperty(this.data, "data.attackParts") || []).length + 1;
+        let extraAttacksCount = game.settings.get("D3Vilia", "autoScaleAttacksBab") && actor.data.type !== "npc" && getProperty(this.data, "data.attackType") === "weapon" ? Math.ceil((actor.data.data.attributes.bab.total)/5.0) : (getProperty(this.data, "data.attackParts") || []).length + 1;
+        extraAttacksCount = getProperty(this.data, "data.attackType") === "weapon" && "monk" in actor.data.data.classes ? (getProperty(this.data, "data.attackParts") || []).length + 1 : extraAttacksCount;
         let dialogData = {
             data: rollData,
             id: this.id,
             item: this.data.data,
             rollMode: game.settings.get("core", "rollMode"),
             rollModes: CONFIG.Dice.rollModes,
-            twoWeaponAttackTypes: D35E.twoWeaponAttackType,
+            twoWeaponAttackTypes: D3Vilia.twoWeaponAttackType,
             attackType: attackType ? attackType : "primary",
             attackTypeSet: isFullAttack,
             hasAttack: this.hasAttack,
             hasDamage: this.hasDamage,
-            allowNoAmmo: game.settings.get("D35E", "allowNoAmmo") || this.actor.type === "npc",
+            allowNoAmmo: game.settings.get("D3Vilia", "allowNoAmmo") || this.actor.type === "npc",
             nonLethal: getProperty(this.data, "data.nonLethal") || false,
             allowMultipleUses: this.data.data.uses.allowMultipleUses,
             multipleUsesMax: this.data.data.uses.maxPerUse ? Math.min(Math.floor(this.charges/this.chargeCost),this.data.data.uses.maxPerUse) : Math.floor(this.charges/this.chargeCost),
@@ -1889,7 +1890,7 @@ export class ItemPF extends Item {
         if (this.hasAttack) {
             if (this.type !== "spell") {
                 buttons.normal = {
-                    label: game.i18n.localize("D35E.SingleAttack"),
+                    label: game.i18n.localize("D3Vilia.SingleAttack"),
                     callback: html => {
                         wasRolled = true;
                         roll = _roll.call(this, false, html)
@@ -1898,7 +1899,7 @@ export class ItemPF extends Item {
             }
             if (extraAttacksCount > 1 || this.type === "spell") {
                 buttons.multi = {
-                    label: this.type === "spell" ? game.i18n.localize("D35E.Cast") : (game.i18n.localize("D35E.FullAttack") + " (" + (extraAttacksCount) + " attacks)"),
+                    label: this.type === "spell" ? game.i18n.localize("D3Vilia.Cast") : (game.i18n.localize("D3Vilia.FullAttack") + " (" + (extraAttacksCount) + " attacks)"),
                     callback: html => {
                         wasRolled = true;
                         roll = _roll.call(this, true, html)
@@ -1907,7 +1908,7 @@ export class ItemPF extends Item {
             }
         } else {
             buttons.normal = {
-                label: this.type === "spell" ? game.i18n.localize("D35E.Cast") : game.i18n.localize("D35E.Use"),
+                label: this.type === "spell" ? game.i18n.localize("D3Vilia.Cast") : game.i18n.localize("D3Vilia.Use"),
                 callback: html => {
                     wasRolled = true;
                     roll = _roll.call(this, false, html)
@@ -1916,7 +1917,7 @@ export class ItemPF extends Item {
         }
         await new Promise(resolve => {
             new Dialog({
-                title: `${game.i18n.localize("D35E.Use")}: ${this.name}`,
+                title: `${game.i18n.localize("D3Vilia.Use")}: ${this.name}`,
                 content: html,
                 buttons: buttons,
                 classes: ['custom-dialog'],
@@ -1995,8 +1996,8 @@ export class ItemPF extends Item {
                 spellDC.ability = data.save.ability;
                 spellDC.isHalf = data.save.type.indexOf('half') !== -1;
                 spellDC.isPartial = data.save.type.indexOf('partial') !== -1;
-                spellDC.description = `${CONFIG.D35E.savingThrowTypes[data.save.type]}`;
-                if (data.save.ability) spellDC.description += ` (${CONFIG.D35E.abilitiesShort[data.save.ability]})`;
+                spellDC.description = `${CONFIG.D3Vilia.savingThrowTypes[data.save.type]}`;
+                if (data.save.ability) spellDC.description += ` (${CONFIG.D3Vilia.abilitiesShort[data.save.ability]})`;
             }
             else if (saveDC > 0 && saveDesc) {
                 spellDC.dc = saveDC + (rollData.featSpellDCBonus || 0);
@@ -2040,7 +2041,7 @@ export class ItemPF extends Item {
                 spellDC.description = saveDesc;
             }
         }
-        // console.log('D35E | Calculated spell DC', spellDC)
+        // console.log('D3Vilia | Calculated spell DC', spellDC)
         return spellDC;
     }
 
@@ -2111,7 +2112,7 @@ export class ItemPF extends Item {
             rollData.cl = cl;
         }
         // Determine size bonus
-        rollData.sizeBonus = CONFIG.D35E.sizeMods[rollData.traits.actualSize];
+        rollData.sizeBonus = CONFIG.D3Vilia.sizeMods[rollData.traits.actualSize];
         // Add misc bonuses/penalties
         rollData.item.proficiencyPenalty = -4;
 
@@ -2244,7 +2245,7 @@ export class ItemPF extends Item {
 
         const inner = notes.join('')
         if  (notes.length > 0) {
-            return `<div class="flexcol property-group"><label>${game.i18n.localize("D35E.EffectNotes")}</label><div class="flexrow">${inner}</div></div>`;
+            return `<div class="flexcol property-group"><label>${game.i18n.localize("D3Vilia.EffectNotes")}</label><div class="flexrow">${inner}</div></div>`;
         } else
             return '';
     }
@@ -2395,13 +2396,13 @@ export class ItemPF extends Item {
     async rollFormula(options = {}) {
         const itemData = this.data.data;
         if (!itemData.formula) {
-            throw new Error(game.i18n.localize("D35E.ErrorNoFormula").format(this.name));
+            throw new Error(game.i18n.localize("D3Vilia.ErrorNoFormula").format(this.name));
         }
 
         // Define Roll Data
         const rollData = this.actor.getRollData();
         rollData.item = itemData;
-        const title = `${this.name} - ${game.i18n.localize("D35E.OtherFormula")}`;
+        const title = `${this.name} - ${game.i18n.localize("D3Vilia.OtherFormula")}`;
 
         const roll = new Roll(itemData.formula, rollData).roll();
         return roll.toMessage({
@@ -2438,10 +2439,10 @@ export class ItemPF extends Item {
         if (effectStr === "") {
             new Roll(parts.join("+")).toMessage({
                 speaker: ChatMessage.getSpeaker({actor: this.actor}),
-                flavor: game.i18n.localize("D35E.UsesItem").format(this.name)
+                flavor: game.i18n.localize("D3Vilia.UsesItem").format(this.name)
             });
         } else {
-            const chatTemplate = "systems/D35E/templates/chat/roll-ext.html";
+            const chatTemplate = "systems/D3Vilia/templates/chat/roll-ext.html";
             const chatTemplateData = {hasExtraText: true, extraText: effectStr};
             // Execute the roll
             let roll = new Roll(parts.join("+"), data).roll();
@@ -2460,7 +2461,7 @@ export class ItemPF extends Item {
                 type: CONST.CHAT_MESSAGE_TYPES.CHAT,
                 sound: CONFIG.sounds.dice,
                 speaker: ChatMessage.getSpeaker({actor: this.actor}),
-                flavor: game.i18n.localize("D35E.UsesItem").format(this.name),
+                flavor: game.i18n.localize("D3Vilia.UsesItem").format(this.name),
                 rollMode: game.settings.get("core", "rollMode"),
                 roll: roll,
                 content: await renderTemplate(chatTemplate, rollData),
@@ -2501,7 +2502,7 @@ export class ItemPF extends Item {
                 result['custom'][(propData.name || propData.id).replace(/ /g, '').toLowerCase()] = propData.value;
             }
         }
-        //console.log('D35E | Roll data', result)
+        //console.log('D3Vilia | Roll data', result)
         return result;
     }
 
@@ -2775,14 +2776,14 @@ export class ItemPF extends Item {
     async _updateSpellDescription(updateData, srcData) {
         const data = this._generateSpellDescription(srcData);
 
-        linkData(srcData, updateData, "data.description.value", await renderTemplate("systems/D35E/templates/internal/spell-description.html", data));
+        linkData(srcData, updateData, "data.description.value", await renderTemplate("systems/D3Vilia/templates/internal/spell-description.html", data));
     }
 
     _generateSpellDescription(srcData) {
-        const reSplit = CONFIG.D35E.re.traitSeparator;
+        const reSplit = CONFIG.D3Vilia.re.traitSeparator;
 
         const label = {
-            school: (CONFIG.D35E.spellSchools[getProperty(srcData, "data.school")] || "").toLowerCase(),
+            school: (CONFIG.D3Vilia.spellSchools[getProperty(srcData, "data.school")] || "").toLowerCase(),
             subschool: (getProperty(srcData, "data.subschool") || ""),
             types: "",
         };
@@ -2820,10 +2821,10 @@ export class ItemPF extends Item {
             const activationType = getProperty(srcData, "data.activation.type");
 
             if (activationType) {
-                if (CONFIG.D35E.abilityActivationTypesPlurals[activationType] != null) {
-                    if (activationCost === 1) label.castingTime = `${CONFIG.D35E.abilityActivationTypes[activationType]}`;
-                    else label.castingTime = `${CONFIG.D35E.abilityActivationTypesPlurals[activationType]}`;
-                } else label.castingTime = `${CONFIG.D35E.abilityActivationTypes[activationType]}`;
+                if (CONFIG.D3Vilia.abilityActivationTypesPlurals[activationType] != null) {
+                    if (activationCost === 1) label.castingTime = `${CONFIG.D3Vilia.abilityActivationTypes[activationType]}`;
+                    else label.castingTime = `${CONFIG.D3Vilia.abilityActivationTypesPlurals[activationType]}`;
+                } else label.castingTime = `${CONFIG.D3Vilia.abilityActivationTypes[activationType]}`;
             }
             if (!Number.isNaN(activationCost) && label.castingTime != null) label.castingTime = `${activationCost} ${label.castingTime}`;
             if (label.castingTime) label.castingTime = label.castingTime.toLowerCase();
@@ -2886,7 +2887,7 @@ export class ItemPF extends Item {
             const rangeValue = getProperty(srcData, "data.range.value");
 
             if (rangeUnit != null && rangeUnit !== "none") {
-                label.range = (CONFIG.D35E.distanceUnits[rangeUnit] || "").toLowerCase();
+                label.range = (CONFIG.D3Vilia.distanceUnits[rangeUnit] || "").toLowerCase();
                 if (rangeUnit === "close") label.range = `${label.range} (25 ft. + 5 ft./2 levels)`;
                 else if (rangeUnit === "medium") label.range = `${label.range} (100 ft. + 10 ft./level)`;
                 else if (rangeUnit === "long") label.range = `${label.range} (400 ft. + 40 ft./level)`;
@@ -2905,7 +2906,7 @@ export class ItemPF extends Item {
 
         // Set DC and SR
         {
-            const savingThrowDescription = data?.data?.save?.type ? CONFIG.D35E.savingThrowTypes[data.data.save.type] : (data?.data?.save?.description || "");
+            const savingThrowDescription = data?.data?.save?.type ? CONFIG.D3Vilia.savingThrowTypes[data.data.save.type] : (data?.data?.save?.description || "");
             if (savingThrowDescription) label.savingThrow = savingThrowDescription;
             else label.savingThrow = "none";
 
@@ -2945,7 +2946,7 @@ export class ItemPF extends Item {
         if (this.data.data.atWill) return;
         //if (this.data.data.level === 0) return;
 
-        console.log(`D35E | Adding spell uses ${value}`)
+        console.log(`D3Vilia | Adding spell uses ${value}`)
         const spellbook = getProperty(this.actor.data, `data.attributes.spells.spellbooks.${this.data.data.spellbook}`),
             isSpontaneous = spellbook.spontaneous, usePowerPoints = spellbook.usePowerPoints,
             spellbookKey = getProperty(this.data, "data.spellbook") || "primary",
@@ -3156,8 +3157,8 @@ export class ItemPF extends Item {
         }
 
         // Set description
-        data.data.description.value = await renderTemplate("systems/D35E/templates/internal/shapechange-description.html", {
-            size: game.i18n.localize(CONFIG.D35E.actorSizes[origData.data.traits.size]),
+        data.data.description.value = await renderTemplate("systems/D3Vilia/templates/internal/shapechange-description.html", {
+            size: game.i18n.localize(CONFIG.D3Vilia.actorSizes[origData.data.traits.size]),
             type: origData.data.details.type,
             speed: speedDesc.join(', '),
             str: origData.data.abilities.str.total,
@@ -3238,7 +3239,7 @@ export class ItemPF extends Item {
 
         // Determine aura power
         let auraPower = "faint";
-        for (let a of CONFIG.D35E.magicAuraByLevel.item) {
+        for (let a of CONFIG.D3Vilia.magicAuraByLevel.item) {
             if (a.level <= slcl[1]) auraPower = a.power;
         }
         let clLabel;
@@ -3372,11 +3373,11 @@ export class ItemPF extends Item {
 
         // Determine aura power
         let auraPower = "faint";
-        for (let a of CONFIG.D35E.magicAuraByLevel.item) {
+        for (let a of CONFIG.D3Vilia.magicAuraByLevel.item) {
             if (a.level <= slcl[1]) auraPower = a.power;
         }
         if (type === "potion") {
-            data.img = `systems/D35E/icons/items/potions/generated/${auraPower}.png`;
+            data.img = `systems/D3Vilia/icons/items/potions/generated/${auraPower}.png`;
         }
         // Determine caster level label
         let clLabel;
@@ -3436,42 +3437,42 @@ export class ItemPF extends Item {
         // Set name
         if (type === "wand") {
             data.name = `Wand of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/magic/generated/wand-low.png";
+            data.img = "systems/D3Vilia/icons/items/magic/generated/wand-low.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 750;
             data.data.hardness = 5;
             data.data.hp.max = 5;
             data.data.hp.value = 5;
         } else if (type === "potion") {
             data.name = `Potion of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/potions/generated/med.png";
+            data.img = "systems/D3Vilia/icons/items/potions/generated/med.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 50;
             data.data.hardness = 1;
             data.data.hp.max = 1;
             data.data.hp.value = 1;
         } else if (type === "scroll") {
             data.name = `Scroll of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/magic/generated/scroll.png";
+            data.img = "systems/D3Vilia/icons/items/magic/generated/scroll.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 25;
             data.data.hardness = 0;
             data.data.hp.max = 1;
             data.data.hp.value = 1;
         } else if (type === "dorje") {
             data.name = `Dorje of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/magic/generated/droje.png";
+            data.img = "systems/D3Vilia/icons/items/magic/generated/droje.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 750;
             data.data.hardness = 5;
             data.data.hp.max = 5;
             data.data.hp.value = 5;
         } else if (type === "tattoo") {
             data.name = `Tattoo of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/magic/generated/tattoo.png";
+            data.img = "systems/D3Vilia/icons/items/magic/generated/tattoo.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 50;
             data.data.hardness = 1;
             data.data.hp.max = 1;
             data.data.hp.value = 1;
         } else if (type === "powerstone") {
             data.name = `Power Stone of ${origData.name}`;
-            data.img = "systems/D35E/icons/items/magic/generated/crystal.png";
+            data.img = "systems/D3Vilia/icons/items/magic/generated/crystal.png";
             data.data.price = Math.max(0.5, slcl[0]) * slcl[1] * 25;
             data.data.hardness = 0;
             data.data.hp.max = 1;
@@ -3521,11 +3522,11 @@ export class ItemPF extends Item {
 
         // Determine aura power
         let auraPower = "faint";
-        for (let a of CONFIG.D35E.magicAuraByLevel.item) {
+        for (let a of CONFIG.D3Vilia.magicAuraByLevel.item) {
             if (a.level <= slcl[1]) auraPower = a.power;
         }
         if (type === "potion") {
-            data.img = `systems/D35E/icons/items/potions/generated/${auraPower}.png`;
+            data.img = `systems/D3Vilia/icons/items/potions/generated/${auraPower}.png`;
         }
         // Determine caster level label
         let clLabel;
@@ -3561,19 +3562,19 @@ export class ItemPF extends Item {
         }
 
         // Set description
-        data.data.description.value = await renderTemplate("systems/D35E/templates/internal/consumable-description.html", {
+        data.data.description.value = await renderTemplate("systems/D3Vilia/templates/internal/consumable-description.html", {
             origData: origData,
             data: data,
             isWand: type === "wand" || type === "dorje",
             isPotion: type === "potion" || type === "tattoo",
             isScroll: type === "scroll" || type === "powerstone",
             auraPower: auraPower,
-            aura: (CONFIG.D35E.spellSchools[origData.data.school] || "").toLowerCase(),
+            aura: (CONFIG.D3Vilia.spellSchools[origData.data.school] || "").toLowerCase(),
             sl: slcl[0],
             cl: slcl[1],
             slLabel: slLabel,
             clLabel: clLabel,
-            config: CONFIG.D35E,
+            config: CONFIG.D3Vilia,
         });
 
         return data;
@@ -3642,7 +3643,7 @@ export class ItemPF extends Item {
     async useEnhancementItem(item) {
         if (this.data.data.enhancements.uses.commonPool) {
             if (this.data.data.enhancements.uses.value < item.chargeCost) {
-                return ui.notifications.warn(game.i18n.localize("D35E.ErrorNoCharges").format(this.name));
+                return ui.notifications.warn(game.i18n.localize("D3Vilia.ErrorNoCharges").format(this.name));
             }
         }
         let roll = await item.use({ev: event, skipDialog: event.shiftKey},this.actor,this.data.data.enhancements.uses.commonPool === true);
@@ -3682,13 +3683,13 @@ export class ItemPF extends Item {
      */
     getConditionalTargets() {
         let result = {};
-        if (this.hasAttack) result["attack"] = game.i18n.localize(CONFIG.D35E.conditionalTargets.attack._label);
-        if (this.hasDamage) result["damage"] = game.i18n.localize(CONFIG.D35E.conditionalTargets.damage._label);
+        if (this.hasAttack) result["attack"] = game.i18n.localize(CONFIG.D3Vilia.conditionalTargets.attack._label);
+        if (this.hasDamage) result["damage"] = game.i18n.localize(CONFIG.D3Vilia.conditionalTargets.damage._label);
         if (this.type === "spell" || this.hasSave)
-            result["effect"] = game.i18n.localize(CONFIG.D35E.conditionalTargets.effect._label);
+            result["effect"] = game.i18n.localize(CONFIG.D3Vilia.conditionalTargets.effect._label);
         // Only add Misc target if subTargets are available
         if (Object.keys(this.getConditionalSubTargets("misc")).length > 0) {
-            result["misc"] = game.i18n.localize(CONFIG.D35E.conditionalTargets.misc._label);
+            result["misc"] = game.i18n.localize(CONFIG.D3Vilia.conditionalTargets.misc._label);
         }
         return result;
     }
@@ -3701,8 +3702,8 @@ export class ItemPF extends Item {
     getConditionalSubTargets(target) {
         let result = {};
         // Add static targets
-        if (hasProperty(CONFIG.D35E.conditionalTargets, target)) {
-            for (let [k, v] of Object.entries(CONFIG.D35E.conditionalTargets[target])) {
+        if (hasProperty(CONFIG.D3Vilia.conditionalTargets, target)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.conditionalTargets[target])) {
                 if (!k.startsWith("_")) result[k] = v;
             }
         }
@@ -3710,7 +3711,7 @@ export class ItemPF extends Item {
         if (["attack", "damage"].includes(target)) {
             // Add specific attacks
             if (this.hasAttack) {
-                result["attack.0"] = `${game.i18n.localize("D35E.Attack")} 1`;
+                result["attack.0"] = `${game.i18n.localize("D3Vilia.Attack")} 1`;
             }
             if (this.hasMultiAttack) {
                 for (let [k, v] of Object.entries(this.data.data.attackParts)) {
@@ -3720,14 +3721,14 @@ export class ItemPF extends Item {
         }
         // Add subtargets affecting effects
         if (target === "effect") {
-            if (this.data.type === "spell") result["cl"] = game.i18n.localize("D35E.CasterLevel");
-            if (this.hasSave) result["dc"] = game.i18n.localize("D35E.DC");
+            if (this.data.type === "spell") result["cl"] = game.i18n.localize("D3Vilia.CasterLevel");
+            if (this.hasSave) result["dc"] = game.i18n.localize("D3Vilia.DC");
         }
         // Add misc subtargets
         if (target === "misc") {
             // Add charges subTarget with specific label
-            if (this.type === "spell" && this.useSpellPoints()) result["charges"] = game.i18n.localize("D35E.SpellPointsCost");
-            else if (this.isCharged) result["charges"] = game.i18n.localize("D35E.ChargeCost");
+            if (this.type === "spell" && this.useSpellPoints()) result["charges"] = game.i18n.localize("D3Vilia.SpellPointsCost");
+            else if (this.isCharged) result["charges"] = game.i18n.localize("D3Vilia.ChargeCost");
         }
         return result;
     }
@@ -3740,7 +3741,7 @@ export class ItemPF extends Item {
         let result = {};
         if (target === "attack") {
             // Add bonusModifiers from CONFIG.PF1.bonusModifiers
-            for (let [k, v] of Object.entries(CONFIG.D35E.bonusModifiers)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.bonusModifiers)) {
                 result[k] = v;
             }
         }
@@ -3753,18 +3754,18 @@ export class ItemPF extends Item {
     }
 
     /* Generates a list of critical applications for a given formula target.
-     * @param {string} target - The target key as defined in CONFIG.D35E.conditionalTargets.
+     * @param {string} target - The target key as defined in CONFIG.D3Vilia.conditionalTargets.
      * @returns {Object.<string, string>} A list of critical applications.
      * */
     getConditionalCritical(target) {
         let result = {};
         // Attack bonuses can only apply as critical confirm bonus
         if (target === "attack") {
-            result = { ...result, normal: "D35E.Normal"};
+            result = { ...result, normal: "D3Vilia.Normal"};
         }
         // Damage bonuses can be multiplied or not
         if (target === "damage") {
-            result = { ...result, normal: "D35E.Normal" };
+            result = { ...result, normal: "D3Vilia.Normal" };
         }
         return result;
     }
@@ -3982,7 +3983,7 @@ export class ItemPF extends Item {
         // Add a new effect
         //const durationData = {rounds: this.data.data.timeline.total - this.data.data.timeline.elapsed, combat: game.combats.entities[0]._id, startRound: game.combats.entities[0].current.round || 0, startTurn: game.combats.entities[0].current.turn || 0}
         const createData = { label: this.name, icon: this.img, origin: this.uuid, disabled: !this.data.data.active };
-        createData["flags.D35E.show"] = !this.data.data.hideFromToken && !game.settings.get("D35E", "hideTokenConditions");
+        createData["flags.D3Vilia.show"] = !this.data.data.hideFromToken && !game.settings.get("D3Vilia", "hideTokenConditions");
         const effect = ActiveEffect.create(createData, this.actor);
         await effect.create();
 
@@ -3990,7 +3991,7 @@ export class ItemPF extends Item {
     }
 
     async renderBuffEndChatCard() {
-        const chatTemplate = "systems/D35E/templates/chat/roll-ext.html";
+        const chatTemplate = "systems/D3Vilia/templates/chat/roll-ext.html";
 
         // Create chat data
         let chatData = {
@@ -4015,7 +4016,7 @@ export class ItemPF extends Item {
         }
 
         // Send message
-        await createCustomChatMessage("systems/D35E/templates/chat/deactivate-buff.html", {items: [this], actor: this.actor}, chatData,  {rolls: []})
+        await createCustomChatMessage("systems/D3Vilia/templates/chat/deactivate-buff.html", {items: [this], actor: this.actor}, chatData,  {rolls: []})
     }
 
     capitalizeFirstLetter(string) {
@@ -4041,12 +4042,12 @@ export class ItemPF extends Item {
             } else if (_requirement[2] === "bab") {
                 if (rollData.attributes.bab.total < parseInt(_requirement[1])) {
 
-                    unmetRequirements.push(_requirement[0] || (game.i18n.localize("D35E.BAB") + " " + _requirement[1]))
+                    unmetRequirements.push(_requirement[0] || (game.i18n.localize("D3Vilia.BAB") + " " + _requirement[1]))
                 }
             } else {
                 if (rollData.abilities[_requirement[2]].value < parseInt(_requirement[1])) {
 
-                    unmetRequirements.push(_requirement[0] || (game.i18n.localize(`D35E.Ability${this.capitalizeFirstLetter(_requirement[2])}`) + " " + _requirement[1]))
+                    unmetRequirements.push(_requirement[0] || (game.i18n.localize(`D3Vilia.Ability${this.capitalizeFirstLetter(_requirement[2])}`) + " " + _requirement[1]))
                 }
             }
         }
@@ -4054,7 +4055,7 @@ export class ItemPF extends Item {
     }
 
     get attackDescription() {
-        // console.log('D35E | AB ', this.hasAttack)
+        // console.log('D3Vilia | AB ', this.hasAttack)
         if (this.hasAttack) {
             let bab = 0;
             let attackBonus = ((this.data.data.enh || 0) ? parseInt(this.data.data.enh) : (this.data.data.masterwork ? 1 : 0)) + parseInt(this.data.data.attackBonus || "0");
@@ -4072,7 +4073,7 @@ export class ItemPF extends Item {
     }
 
     get damageDescription() {
-        // console.log('D35E | DD ', this.hasDamage)
+        // console.log('D3Vilia | DD ', this.hasDamage)
         let rollData = this.actor.getRollData();
         rollData.critMult = 1;
         rollData.item = duplicate(this.getRollData())
@@ -4110,7 +4111,7 @@ export class ItemPF extends Item {
                 if (this.data.data.actionType === "rwak")
                     rng.long = rng.value*10;
             }
-        let range = [rng.value, rng.long ? `/ ${rng.long}` : null, CONFIG.D35E.distanceUnitsShort[rng.units]].filterJoin(" ");
+        let range = [rng.value, rng.long ? `/ ${rng.long}` : null, CONFIG.D3Vilia.distanceUnitsShort[rng.units]].filterJoin(" ");
         if (range.length > 0) return [range].join(" ");
         return "";
     }

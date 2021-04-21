@@ -5,7 +5,7 @@ export const registerSystemSettings = function() {
   /**
    * Track the system version upon which point a migration was last applied
    */
-  game.settings.register("D35E", "systemMigrationVersion", {
+  game.settings.register("D3Vilia", "systemMigrationVersion", {
     name: "System Migration Version",
     scope: "world",
     config: false,
@@ -14,19 +14,19 @@ export const registerSystemSettings = function() {
   });
 
   // Health configuration
-  game.settings.registerMenu(isMinimumCoreVersion("0.5.6") ? "D35E" : "system",
+  game.settings.registerMenu(isMinimumCoreVersion("0.5.6") ? "D3Vilia" : "system",
     "healthConfig", {
-      name: "SETTINGS.D35EHealthConfigName",
-      label: "SETTINGS.D35EHealthConfigLabel",
-      hint: "SETTINGS.D35EHealthConfigHint",
+      name: "SETTINGS.D3ViliaHealthConfigName",
+      label: "SETTINGS.D3ViliaHealthConfigLabel",
+      hint: "SETTINGS.D3ViliaHealthConfigHint",
       icon: "fas fa-heartbeat",
       type: HealthConfig,
       restricted: true
     }
   );
 
-  game.settings.register("D35E", "healthConfig", {
-    name: "SETTINGS.D35EHealthConfigName",
+  game.settings.register("D3Vilia", "healthConfig", {
+    name: "SETTINGS.D3ViliaHealthConfigName",
     scope: "world",
     default: HealthConfig.defaultSettings,
     type: Object,
@@ -39,9 +39,9 @@ export const registerSystemSettings = function() {
 
 
 
-  game.settings.register("D35E", "autosizeWeapons", {
-    name: "SETTINGS.D35EAutosizeWeaponsN",
-    hint: "SETTINGS.D35EAutosizeWeaponsL",
+  game.settings.register("D3Vilia", "autosizeWeapons", {
+    name: "SETTINGS.D3ViliaAutosizeWeaponsN",
+    hint: "SETTINGS.D3ViliaAutosizeWeaponsL",
     scope: "world",
     config: true,
     default: true,
@@ -51,16 +51,16 @@ export const registerSystemSettings = function() {
   /**
    * Register diagonal movement rule setting
    */
-  game.settings.register("D35E", "diagonalMovement", {
-    name: "SETTINGS.D35EDiagN",
-    hint: "SETTINGS.D35EDiagL",
+  game.settings.register("D3Vilia", "diagonalMovement", {
+    name: "SETTINGS.D3ViliaDiagN",
+    hint: "SETTINGS.D3ViliaDiagL",
     scope: "world",
     config: true,
     default: "5105",
     type: String,
     choices: {
-      "555": "SETTINGS.D35EDiagPHB",
-      "5105": "SETTINGS.D35EDiagDMG"
+      "555": "SETTINGS.D3ViliaDiagPHB",
+      "5105": "SETTINGS.D3ViliaDiagDMG"
     },
     onChange: rule => canvas.grid.diagonalRule = rule
   });
@@ -68,9 +68,9 @@ export const registerSystemSettings = function() {
   /**
    * Experience rate
    */
-  game.settings.register("D35E", "experienceRate", {
-    name: "SETTINGS.D35EExpRateN",
-    hint: "SETTINGS.D35EExpRateL",
+  game.settings.register("D3Vilia", "experienceRate", {
+    name: "SETTINGS.D3ViliaExpRateN",
+    hint: "SETTINGS.D3ViliaExpRateL",
     scope: "world",
     config: true,
     default: "medium",
@@ -93,9 +93,9 @@ export const registerSystemSettings = function() {
   /**
    * System of Units
    */
-  game.settings.register("D35E", "units", {
-    name: "SETTINGS.D35EUnitsN",
-    hint: "SETTINGS.D35EUnitsL",
+  game.settings.register("D3Vilia", "units", {
+    name: "SETTINGS.D3ViliaUnitsN",
+    hint: "SETTINGS.D3ViliaUnitsL",
     scope: "world",
     config: true,
     default: "imperial",
@@ -116,9 +116,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to disable XP bar for session-based or story-based advancement.
    */
-  game.settings.register("D35E", "disableExperienceTracking", {
-    name: "SETTINGS.D35ENoExpN",
-    hint: "SETTINGS.D35ENoExpL",
+  game.settings.register("D3Vilia", "disableExperienceTracking", {
+    name: "SETTINGS.D3ViliaNoExpN",
+    hint: "SETTINGS.D3ViliaNoExpL",
     scope: "world",
     config: true,
     default: false,
@@ -128,9 +128,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to display class features in other tabs as well
    */
-  game.settings.register("D35E", "classFeaturesInTabs", {
-    name: "SETTINGS.D35EClassFeaturesInTabsN",
-    hint: "SETTINGS.D35EClassFeaturesInTabsL",
+  game.settings.register("D3Vilia", "classFeaturesInTabs", {
+    name: "SETTINGS.D3ViliaClassFeaturesInTabsN",
+    hint: "SETTINGS.D3ViliaClassFeaturesInTabsL",
     scope: "client",
     config: true,
     default: false,
@@ -140,9 +140,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to allow the background skills optional ruleset.
    */
-  game.settings.register("D35E", "allowBackgroundSkills", {
-    name: "SETTINGS.D35EBackgroundSkillsN",
-    hint: "SETTINGS.D35EBackgroundSkillsH",
+  game.settings.register("D3Vilia", "allowBackgroundSkills", {
+    name: "SETTINGS.D3ViliaBackgroundSkillsN",
+    hint: "SETTINGS.D3ViliaBackgroundSkillsH",
     scope: "world",
     config: true,
     default: false,
@@ -156,9 +156,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to use the Fractional Base Bonuses optional ruleset.
    */
-  game.settings.register("D35E", "useFractionalBaseBonuses", {
-    name: "SETTINGS.D35EFractionalBaseBonusesN",
-    hint: "SETTINGS.D35EFractionalBaseBonusesH",
+  game.settings.register("D3Vilia", "useFractionalBaseBonuses", {
+    name: "SETTINGS.D3ViliaFractionalBaseBonusesN",
+    hint: "SETTINGS.D3ViliaFractionalBaseBonusesH",
     scope: "world",
     config: true,
     default: false,
@@ -172,27 +172,27 @@ export const registerSystemSettings = function() {
   /**
    * Option to use automatically scale weapon attacks using BAB
    */
-  game.settings.register("D35E", "autoScaleAttacksBab", {
-    name: "SETTINGS.D35EAutoScaleAttackBABN",
-    hint: "SETTINGS.D35EAutoScaleAttackBABH",
+  game.settings.register("D3Vilia", "autoScaleAttacksBab", {
+    name: "SETTINGS.D3ViliaAutoScaleAttackBABN",
+    hint: "SETTINGS.D3ViliaAutoScaleAttackBABH",
     scope: "world",
     config: true,
     default: true,
     type: Boolean
   });
 
-  game.settings.register("D35E", "allowNoAmmo", {
-    name: "SETTINGS.D35EAllowNoAmmoN",
-    hint: "SETTINGS.D35EAllowNoAmmoH",
+  game.settings.register("D3Vilia", "allowNoAmmo", {
+    name: "SETTINGS.D3ViliaAllowNoAmmoN",
+    hint: "SETTINGS.D3ViliaAllowNoAmmoH",
     scope: "world",
     config: true,
     default: false,
     type: Boolean
   });
 
-  game.settings.register("D35E", "useAutoAmmoRecovery", {
-    name: "SETTINGS.D35EAutoAmmoRecoveryN",
-    hint: "SETTINGS.D35EAutoAmmoRecoveryH",
+  game.settings.register("D3Vilia", "useAutoAmmoRecovery", {
+    name: "SETTINGS.D3ViliaAutoAmmoRecoveryN",
+    hint: "SETTINGS.D3ViliaAutoAmmoRecoveryH",
     scope: "world",
     config: true,
     default: false,
@@ -202,9 +202,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to automatically collapse Item Card descriptions
    */
-  game.settings.register("D35E", "autoCollapseItemCards", {
-    name: "SETTINGS.D35EAutoCollapseCardN",
-    hint: "SETTINGS.D35EAutoCollapseCardL",
+  game.settings.register("D3Vilia", "autoCollapseItemCards", {
+    name: "SETTINGS.D3ViliaAutoCollapseCardN",
+    hint: "SETTINGS.D3ViliaAutoCollapseCardL",
     scope: "client",
     config: true,
     default: false,
@@ -215,9 +215,9 @@ export const registerSystemSettings = function() {
   });
 
 
-  game.settings.register("D35E", "hideSpellDescriptionsIfHasAction", {
-    name: "SETTINGS.D35EHideSpellDescriptionsIfHasActionN",
-    hint: "SETTINGS.D35EHideSpellDescriptionsIfHasActionL",
+  game.settings.register("D3Vilia", "hideSpellDescriptionsIfHasAction", {
+    name: "SETTINGS.D3ViliaHideSpellDescriptionsIfHasActionN",
+    hint: "SETTINGS.D3ViliaHideSpellDescriptionsIfHasActionL",
     scope: "client",
     config: true,
     default: false,
@@ -227,9 +227,9 @@ export const registerSystemSettings = function() {
     }
   });
 
-  game.settings.register("D35E", "showPartyHud", {
-    name: "SETTINGS.D35EShowPartyHudN",
-    hint: "SETTINGS.D35EShowPartyHudL",
+  game.settings.register("D3Vilia", "showPartyHud", {
+    name: "SETTINGS.D3ViliaShowPartyHudN",
+    hint: "SETTINGS.D3ViliaShowPartyHudL",
     scope: "client",
     config: true,
     default: false,
@@ -245,77 +245,77 @@ export const registerSystemSettings = function() {
   });
 
 
-  game.settings.register("D35E", "customSkin", {
-    name: "SETTINGS.D35ECustomSkinN",
-    hint: "SETTINGS.D35ECustomSkinL",
+  game.settings.register("D3Vilia", "customSkin", {
+    name: "SETTINGS.D3ViliaCustomSkinN",
+    hint: "SETTINGS.D3ViliaCustomSkinL",
     scope: "client",
     config: true,
     default: true,
     type: Boolean,
     onChange: () => {
-      $('body').toggleClass('d35ecustom', game.settings.get("D35E", "customSkin"));
+      $('body').toggleClass('d3viliacustom', game.settings.get("D3Vilia", "customSkin"));
     },
   });
 
-  game.settings.register("D35E", "colorblindColors", {
-    name: "SETTINGS.D35EColorblindN",
-    hint: "SETTINGS.D35EColorblindL",
+  game.settings.register("D3Vilia", "colorblindColors", {
+    name: "SETTINGS.D3ViliaColorblindN",
+    hint: "SETTINGS.D3ViliaColorblindL",
     scope: "client",
     config: true,
     default: false,
     type: Boolean,
     onChange: () => {
-      $('body').toggleClass('color-blind', game.settings.get("D35E", "colorblindColors"));
+      $('body').toggleClass('color-blind', game.settings.get("D3Vilia", "colorblindColors"));
     },
   });
 
 
-  game.settings.register("D35E", 'transparentSidebarWhenUsingTheme', {
-    name: `SETTINGS.D35ETransparentSidebarWhenUsingThemeN`,
-    hint: 'SETTINGS.D35ETransparentSidebarWhenUsingThemeH',
+  game.settings.register("D3Vilia", 'transparentSidebarWhenUsingTheme', {
+    name: `SETTINGS.D3ViliaTransparentSidebarWhenUsingThemeN`,
+    hint: 'SETTINGS.D3ViliaTransparentSidebarWhenUsingThemeH',
     default: false,
     type: Boolean,
     config: true,
     scope: 'client',
     onChange: () => {
-      $('body').toggleClass('transparent-sidebar', game.settings.get("D35E", "transparentSidebarWhenUsingTheme"));
+      $('body').toggleClass('transparent-sidebar', game.settings.get("D3Vilia", "transparentSidebarWhenUsingTheme"));
     },
   });
 
 
-  game.settings.register("D35E", "saveAttackWindow", {
-    name: "SETTINGS.D35ESaveAttackWindowN",
-    hint: "SETTINGS.D35ESaveAttackWindowL",
+  game.settings.register("D3Vilia", "saveAttackWindow", {
+    name: "SETTINGS.D3ViliaSaveAttackWindowN",
+    hint: "SETTINGS.D3ViliaSaveAttackWindowL",
     scope: "client",
     config: true,
     default: false,
     type: Boolean
   });
 
-  game.settings.register("D35E", "hidePlayersList", {
-    name: "SETTINGS.D35ENoPlayersListN",
-    hint: "SETTINGS.D35ENoPlayersListL",
+  game.settings.register("D3Vilia", "hidePlayersList", {
+    name: "SETTINGS.D3ViliaNoPlayersListN",
+    hint: "SETTINGS.D3ViliaNoPlayersListL",
     scope: "client",
     config: true,
     default: false,
     type: Boolean,
     onChange: () => {
-      $('body').toggleClass('no-players-list', game.settings.get("D35E", "hidePlayersList"));
+      $('body').toggleClass('no-players-list', game.settings.get("D3Vilia", "hidePlayersList"));
     },
   });
 
-  game.settings.register("D35E", "playersNoDamageDetails", {
-    name: "SETTINGS.D35EPlayersNoDamageDetailsN",
-    hint: "SETTINGS.D35EPlayersNoDamageDetailsL",
+  game.settings.register("D3Vilia", "playersNoDamageDetails", {
+    name: "SETTINGS.D3ViliaPlayersNoDamageDetailsN",
+    hint: "SETTINGS.D3ViliaPlayersNoDamageDetailsL",
     scope: "world",
     config: true,
     default: false,
     type: Boolean
   });
 
-  game.settings.register("D35E", "playersNoDCDetails", {
-    name: "SETTINGS.D35EPlayersNoDCDetailsN",
-    hint: "SETTINGS.D35EPlayersNoDCDetailsL",
+  game.settings.register("D3Vilia", "playersNoDCDetails", {
+    name: "SETTINGS.D3ViliaPlayersNoDCDetailsN",
+    hint: "SETTINGS.D3ViliaPlayersNoDCDetailsL",
     scope: "world",
     config: true,
     default: false,
@@ -324,9 +324,9 @@ export const registerSystemSettings = function() {
   /**
    * Option to change measure style
    */
-  game.settings.register("D35E", "measureStyle", {
-    name: "SETTINGS.D35EMeasureStyleN",
-    hint: "SETTINGS.D35EMeasureStyleL",
+  game.settings.register("D3Vilia", "measureStyle", {
+    name: "SETTINGS.D3ViliaMeasureStyleN",
+    hint: "SETTINGS.D3ViliaMeasureStyleL",
     scope: "world",
     config: true,
     default: true,
@@ -336,9 +336,9 @@ export const registerSystemSettings = function() {
   /**
    * Low-light Vision Mode
    */
-  game.settings.register("D35E", "lowLightVisionMode", {
-    name: "SETTINGS.D35ELowLightVisionModeN",
-    hint: "SETTINGS.D35ELowLightVisionModeH",
+  game.settings.register("D3Vilia", "lowLightVisionMode", {
+    name: "SETTINGS.D3ViliaLowLightVisionModeN",
+    hint: "SETTINGS.D3ViliaLowLightVisionModeH",
     scope: "world",
     config: true,
     default: false,
@@ -348,9 +348,9 @@ export const registerSystemSettings = function() {
   /**
    * Preload Compendiums
    */
-  // game.settings.register("D35E", "preloadCompendiums", {
-    // name: "SETTINGS.D35EPreloadCompendiumsN",
-    // hint: "SETTINGS.D35EPreloadCompendiumsH",
+  // game.settings.register("D3Vilia", "preloadCompendiums", {
+    // name: "SETTINGS.D3ViliaPreloadCompendiumsN",
+    // hint: "SETTINGS.D3ViliaPreloadCompendiumsH",
     // scope: "client",
     // config: true,
     // default: false,
@@ -358,7 +358,7 @@ export const registerSystemSettings = function() {
   // });
 
 
-  game.settings.register("D35E", '__onboarding', {
+  game.settings.register("D3Vilia", '__onboarding', {
     name: `Tutorial shown`,
     hint: 'Basic system usage tutorial already shown. Uncheck to view again after reload.',
     default: false,
@@ -367,9 +367,9 @@ export const registerSystemSettings = function() {
     scope: 'client',
   });
 
-  game.settings.register("D35E", '__onboardingHidden', {
-    name: `SETTINGS.D35EDisableTutorialN`,
-    hint: 'SETTINGS.D35EDisableTutorialL',
+  game.settings.register("D3Vilia", '__onboardingHidden', {
+    name: `SETTINGS.D3ViliaDisableTutorialN`,
+    hint: 'SETTINGS.D3ViliaDisableTutorialL',
     default: false,
     type: Boolean,
     config: true,
@@ -378,9 +378,9 @@ export const registerSystemSettings = function() {
 
 
 
-  game.settings.register("D35E", 'hideSpells', {
-    name: `SETTINGS.D35EHideSpellDescriptionsN`,
-    hint: 'SETTINGS.D35EHideSpellDescriptionsH',
+  game.settings.register("D3Vilia", 'hideSpells', {
+    name: `SETTINGS.D3ViliaHideSpellDescriptionsN`,
+    hint: 'SETTINGS.D3ViliaHideSpellDescriptionsH',
     default: false,
     type: Boolean,
     config: true,
@@ -389,9 +389,9 @@ export const registerSystemSettings = function() {
 
 
 
-  game.settings.register("D35E", "allowPlayersApplyActions", {
-    name: "SETTINGS.D35EAllowPlayersApplyActionsN",
-    hint: "SETTINGS.D35EAllowPlayersApplyActionsH",
+  game.settings.register("D3Vilia", "allowPlayersApplyActions", {
+    name: "SETTINGS.D3ViliaAllowPlayersApplyActionsN",
+    hint: "SETTINGS.D3ViliaAllowPlayersApplyActionsH",
     scope: "world",
     config: true,
     default: false,
@@ -400,9 +400,9 @@ export const registerSystemSettings = function() {
 
 
 
-  game.settings.register("D35E", "repeatAnimations", {
-    name: "SETTINGS.D35ERepeatAnimationsN",
-    hint: "SETTINGS.D35ERepeatAnimationsL",
+  game.settings.register("D3Vilia", "repeatAnimations", {
+    name: "SETTINGS.D3ViliaRepeatAnimationsN",
+    hint: "SETTINGS.D3ViliaRepeatAnimationsL",
     scope: "world",
     config: true,
     default: false,
@@ -410,9 +410,9 @@ export const registerSystemSettings = function() {
   });
 
 
-  game.settings.register("D35E", "globalDisableTokenLight", {
-    name: "SETTINGS.D35EDisableTokenLightsN",
-    hint: "SETTINGS.D35EDisableTokenLightsL",
+  game.settings.register("D3Vilia", "globalDisableTokenLight", {
+    name: "SETTINGS.D3ViliaDisableTokenLightsN",
+    hint: "SETTINGS.D3ViliaDisableTokenLightsL",
     scope: "world",
     config: true,
     default: false,
@@ -422,9 +422,9 @@ export const registerSystemSettings = function() {
   /**
    * Hide token conditions
    */
-  game.settings.register("D35E", "hideTokenConditions", {
-    name: "SETTINGS.D35EHideTokenConditionsN",
-    hint: "SETTINGS.D35EHideTokenConditionsH",
+  game.settings.register("D3Vilia", "hideTokenConditions", {
+    name: "SETTINGS.D3ViliaHideTokenConditionsN",
+    hint: "SETTINGS.D3ViliaHideTokenConditionsH",
     scope: "world",
     config: true,
     default: false,
@@ -445,9 +445,9 @@ export const registerSystemSettings = function() {
   /**
    * Display default token conditions alongside system ones
    */
-  game.settings.register("D35E", "coreEffects", {
-    name: "SETTINGS.D35ECoreEffectsN",
-    hint: "SETTINGS.D35ECoreEffectsH",
+  game.settings.register("D3Vilia", "coreEffects", {
+    name: "SETTINGS.D3ViliaCoreEffectsN",
+    hint: "SETTINGS.D3ViliaCoreEffectsH",
     scope: "world",
     config: true,
     default: false,
@@ -460,9 +460,9 @@ export const registerSystemSettings = function() {
   /**
    * Display default token conditions alongside system ones
    */
-  game.settings.register("D35E", "currencyNames", {
-    name: "SETTINGS.D35ECurrencyNamesN",
-    hint: "SETTINGS.D35ECurrencyNamesH",
+  game.settings.register("D3Vilia", "currencyNames", {
+    name: "SETTINGS.D3ViliaCurrencyNamesN",
+    hint: "SETTINGS.D3ViliaCurrencyNamesH",
     scope: "world",
     config: true,
     default: "",
@@ -472,25 +472,25 @@ export const registerSystemSettings = function() {
     },
   });
 
-  game.settings.register("D35E", 'apiKeyWorld', {
-    name: "SETTINGS.D35EApiKeyWorldN",
-    hint: "SETTINGS.D35EApiKeyWorldH",
+  game.settings.register("D3Vilia", 'apiKeyWorld', {
+    name: "SETTINGS.D3ViliaApiKeyWorldN",
+    hint: "SETTINGS.D3ViliaApiKeyWorldH",
     default: "",
     type: String,
     config: true,
     scope: 'world',
   });
 
-  game.settings.register("D35E", 'apiKeyPersonal', {
-    name: "SETTINGS.D35EApiKeyPersonalN",
-    hint: "SETTINGS.D35EApiKeyPersonalH",
+  game.settings.register("D3Vilia", 'apiKeyPersonal', {
+    name: "SETTINGS.D3ViliaApiKeyPersonalN",
+    hint: "SETTINGS.D3ViliaApiKeyPersonalH",
     default: "",
     type: String,
     config: true,
     scope: 'client',
   });
 
-  game.settings.register("D35E", "demoWorld", {
+  game.settings.register("D3Vilia", "demoWorld", {
     name: "Demo Mode",
     hint: "This setting enables features related to Demo Mode. Do not set it in live games.",
     scope: "world",
@@ -500,9 +500,9 @@ export const registerSystemSettings = function() {
   });
 
 
-  // game.settings.register("D35E", 'displayItemsInContainers', {
-  //   name: `SETTINGS.D35EDisplayItemsInContainersN`,
-  //   hint: 'SETTINGS.D35EDisplayItemsInContainersH',
+  // game.settings.register("D3Vilia", 'displayItemsInContainers', {
+  //   name: `SETTINGS.D3ViliaDisplayItemsInContainersN`,
+  //   hint: 'SETTINGS.D3ViliaDisplayItemsInContainersH',
   //   default: false,
   //   type: Boolean,
   //   config: true,

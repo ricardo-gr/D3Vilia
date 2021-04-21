@@ -8,9 +8,9 @@ export class NoteEditor extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "note-editor",
-            classes: ["D35E", "entry"],
+            classes: ["D3Vilia", "entry"],
             title: "Notes Selector",
-            template: "systems/D35E/templates/apps/note-editor.html",
+            template: "systems/D3Vilia/templates/apps/note-editor.html",
             width: 800,
             height: 600,
             closeOnSubmit: false,

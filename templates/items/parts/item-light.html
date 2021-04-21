@@ -1,12 +1,12 @@
 <div class="form-group stacked">
   <label class="checkbox">
-    <input type="checkbox" name="data.light.emitLight" {{checked data.light.emitLight}}/> {{localize "D35E.LightEmitLight"}}
+    <input type="checkbox" name="data.light.emitLight" {{checked data.light.emitLight}}/> {{localize "D3Vilia.LightEmitLight"}}
   </label>
 </div>
 
 {{!-- Template Size --}}
 <div class="form-group">
-  <label>{{localize "D35E.BrightRadius"}}</label>
+  <label>{{localize "D3Vilia.BrightRadius"}}</label>
   <div class="form-fields">
     <input type="text" name="data.light.radius" value="{{data.light.radius}}" placeholder="0" data-dtype="Number" />
   </div>
@@ -14,7 +14,7 @@
 
 
 <div class="form-group">
-  <label>{{localize "D35E.DimRadius"}}</label>
+  <label>{{localize "D3Vilia.DimRadius"}}</label>
   <div class="form-fields">
     <input type="text" name="data.light.dimRadius" value="{{data.light.dimRadius}}" placeholder="Leave empty for 2 times Bright Radius" data-dtype="Number" />
   </div>
@@ -22,19 +22,19 @@
 
 {{!-- Override Color --}}
 <div class="form-group">
-  <label>{{localize "D35E.CustomColor"}}</label>
+  <label>{{localize "D3Vilia.CustomColor"}}</label>
   <input type="color" name="data.light.color" value="{{data.light.color}}" data-dtype="String"/>
 </div>
 
 <div class="form-group">
-  <label>{{localize "D35E.LightAngle"}}</label>
+  <label>{{localize "D3Vilia.LightAngle"}}</label>
   <input type="text" name="data.light.lightAngle" value="{{data.light.lightAngle}}"  placeholder="360" data-dtype="Number" />
 </div>
 
 
 {{!-- Override Color --}}
 <div class="form-group">
-  <label>{{localize "D35E.CustomAlpha"}}</label>
+  <label>{{localize "D3Vilia.CustomAlpha"}}</label>
   <input type="range" min="0.0" max="1.0" step="0.1" name="data.light.alpha" value="{{data.light.alpha}}" data-dtype="Number"/>
 </div>
 

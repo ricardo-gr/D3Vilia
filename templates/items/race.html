@@ -7,7 +7,7 @@
         </div>
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D35E.ItemName"}}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D3Vilia.ItemName"}}"/>
             </h1>
         </div>
     </header>
@@ -15,28 +15,28 @@
     <section class="sheet-content flexcol">
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "D35E.Description" }}</a>
-        <a class="item" data-tab="children">{{ localize "D35E.Children" }}</a>
-        <a class="item" data-tab="details">{{ localize "D35E.Details" }}</a>
-        <a class="item" data-tab="changes">{{localize "D35E.Changes"}}</a>
+        <a class="item active" data-tab="description">{{ localize "D3Vilia.Description" }}</a>
+        <a class="item" data-tab="children">{{ localize "D3Vilia.Children" }}</a>
+        <a class="item" data-tab="details">{{ localize "D3Vilia.Details" }}</a>
+        <a class="item" data-tab="changes">{{localize "D3Vilia.Changes"}}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="primary-body">
 
         {{!-- Description Tab --}}
-        {{> "systems/D35E/templates/items/parts/item-description.html"}}
+        {{> "systems/D3Vilia/templates/items/parts/item-description.html"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
             <div class="form-group">
-                <label>{{localize "D35E.LA"}}</label>
+                <label>{{localize "D3Vilia.LA"}}</label>
                 <input type="text" name="data.la" value="{{data.la}}" data-dtype="Number" />
             </div>
             {{!-- Racial Type --}}
             <div class="form-group">
-                <label>{{localize "D35E.CreatureType"}}</label>
+                <label>{{localize "D3Vilia.CreatureType"}}</label>
                 <select name="data.creatureType">
                     {{#select data.creatureType}}
                     {{#each config.creatureTypes as |name type|}}
@@ -48,8 +48,8 @@
 
             <div class="form-group stacked">
                 <div class="data-selector">
-                    <a class="entry-selector" for="data.subTypes" data-fields="{{localize "D35E.RaceSubtypePlural"}}" data-dtypes="String"><i class="fas fa-edit"></i></a>
-                    <label for="data.subTypes">{{localize "D35E.RaceSubtypePlural"}}</label>
+                    <a class="entry-selector" for="data.subTypes" data-fields="{{localize "D3Vilia.RaceSubtypePlural"}}" data-dtypes="String"><i class="fas fa-edit"></i></a>
+                    <label for="data.subTypes">{{localize "D3Vilia.RaceSubtypePlural"}}</label>
                 </div>
             </div>
 
@@ -57,13 +57,13 @@
 
 
     <div class="tab flexcol" data-group="primary" data-tab="children">
-      {{> "systems/D35E/templates/items/parts/item-children.html"}}
+      {{> "systems/D3Vilia/templates/items/parts/item-children.html"}}
     </div> 
 
         <div class="tab flexcol" data-group="primary" data-tab="changes">
-            {{> "systems/D35E/templates/items/parts/item-changes.html"}}
+            {{> "systems/D3Vilia/templates/items/parts/item-changes.html"}}
 
-            {{> "systems/D35E/templates/items/parts/item-notes.html"}}
+            {{> "systems/D3Vilia/templates/items/parts/item-notes.html"}}
         </div>
     </section>
     </section>

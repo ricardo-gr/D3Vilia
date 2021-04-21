@@ -7,11 +7,11 @@
             <li class="inventory-header flexrow">
                 <h3 class="item-name flexrow"></h3>
                 <div class="item-detail item-type">
-                    <span>{{localize "D35E.Action"}}</span></div>
+                    <span>{{localize "D3Vilia.Action"}}</span></div>
             </li>
 
             {{#if isRace}}
-            <ol class="item-list" data-pack="D35E.class-abilities">
+            <ol class="item-list" data-pack="D3Vilia.class-abilities">
                 {{#each children.abilities as |item iid|}}
                 <li class="item item-box  flexrow" data-item-id="{{item.item._id}}" data-pack="{{item.pack}}"
                     data-item-level="{{item.level}}" data-item-uid="{{item.item.data.data.uniqueId}}">
@@ -36,7 +36,7 @@
 
             </ol>
 
-            <ol class="item-list" data-pack="D35E.class-abilities">
+            <ol class="item-list" data-pack="D3Vilia.class-abilities">
                 {{#each children.addedAbilities as |item iid|}}
                 <li class="item item-box  flexrow" data-item-id="{{item.item._id}}" data-pack="{{item.pack}}"
                     data-item-uid="{{item.item.data.data.uniqueId}}" data-item-level="{{item.level}}">
@@ -56,19 +56,19 @@
                 {{/each}}
 
             </ol>
-            <ol class="item-list" data-pack="D35E.class-abilities">
+            <ol class="item-list" data-pack="D3Vilia.class-abilities">
 
                 <li class="inventory-header flexrow">
-                    <h3 class="item-name flexrow">{{localize 'D35E.Filter'}} <input style="margin-left: 8px"
-                                                                                    placeholder="{{localize 'D35E.FilterDescriptionAddAbilities'}}"
+                    <h3 class="item-name flexrow">{{localize 'D3Vilia.Filter'}} <input style="margin-left: 8px"
+                                                                                    placeholder="{{localize 'D3Vilia.FilterDescriptionAddAbilities'}}"
                                                                                     type="text" class="search-list"
                                                                                     id="{{randomUuid}}-input"></h3>
                     <div class="item-detail item-type">
-                        <span>{{localize "D35E.Action"}}</span>
+                        <span>{{localize "D3Vilia.Action"}}</span>
                     </div>
                 </li>
             </ol>
-            <ol class="item-list full-ability-list" data-pack="D35E.class-abilities" id="{{randomUuid}}-list">
+            <ol class="item-list full-ability-list" data-pack="D3Vilia.class-abilities" id="{{randomUuid}}-list">
                 {{#each allAbilities as |e iid|}}
                 <li class="item item-box  flexrow" data-item-id="{{e._id}}" data-pack="{{e.pack}}"
                     data-item-uid="{{e.data.data.uniqueId}}">
@@ -89,7 +89,7 @@
         </ol>
         {{/if}}
         {{#if isClass}}
-        <ol class="item-list" data-pack="D35E.class-abilities">
+        <ol class="item-list" data-pack="D3Vilia.class-abilities">
             {{#each children.abilities as |item iid|}}
             <li class="item item-box  flexrow" data-item-id="{{item.item._id}}" data-pack="{{item.pack}}"
                 data-item-level="{{item.level}}" data-item-uid="{{item.item.data.data.uniqueId}}">
@@ -101,7 +101,7 @@
                     </h4>
                 </div>
                 <div style="flex: 0 60px; text-align: center; opacity: 0.7">
-                    <em>{{localize "D35E.Level"}} {{item.level}}</em>
+                    <em>{{localize "D3Vilia.Level"}} {{item.level}}</em>
                 </div>
 
                 <div class="item-detail item-type flexrow">
@@ -117,7 +117,7 @@
 
         </ol>
 
-        <ol class="item-list" data-pack="D35E.class-abilities">
+        <ol class="item-list" data-pack="D3Vilia.class-abilities">
             {{#each children.addedAbilities as |item iid|}}
             <li class="item item-box  flexrow" data-item-id="{{item.item._id}}" data-pack="{{item.pack}}"
                 data-item-uid="{{item.item.data.data.uniqueId}}" data-item-level="{{item.level}}">
@@ -140,19 +140,19 @@
             {{/each}}
 
         </ol>
-        <ol class="item-list" data-pack="D35E.class-abilities">
+        <ol class="item-list" data-pack="D3Vilia.class-abilities">
 
             <li class="inventory-header flexrow">
-                <h3 class="item-name flexrow">{{localize 'D35E.Filter'}} <input style="margin-left: 8px"
-                                                                                placeholder="{{localize 'D35E.FilterDescriptionAddAbilities'}}"
+                <h3 class="item-name flexrow">{{localize 'D3Vilia.Filter'}} <input style="margin-left: 8px"
+                                                                                placeholder="{{localize 'D3Vilia.FilterDescriptionAddAbilities'}}"
                                                                                 type="text" class="search-list"
                                                                                 id="{{randomUuid}}-input"></h3>
                 <div class="item-detail item-type">
-                    <span>{{localize "D35E.Action"}}</span>
+                    <span>{{localize "D3Vilia.Action"}}</span>
                 </div>
             </li>
         </ol>
-        <ol class="item-list full-ability-list" data-pack="D35E.class-abilities" id="{{randomUuid}}-list">
+        <ol class="item-list full-ability-list" data-pack="D3Vilia.class-abilities" id="{{randomUuid}}-list">
             {{#each allAbilities as |e iid|}}
             <li class="item item-box  flexrow" data-item-id="{{e._id}}" data-pack="{{e.pack}}"
                 data-item-uid="{{e.data.data.uniqueId}}">

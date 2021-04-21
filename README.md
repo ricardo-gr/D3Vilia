@@ -11,17 +11,17 @@ Just search for 3.5e SRD in foundry system browser and click install! It is that
 
 ### Manual Install
 
-Install the following game system in FoundryVTT's game system tab: [https://www.dragonshorn.info/dnd35e/system.json](https://www.dragonshorn.info/dnd35e/system.json)
+Install the following game system in FoundryVTT's game system tab: [https://www.dragonshorn.info/dnd3vilia/system.json](https://www.dragonshorn.info/dnd3vilia/system.json)
 
 If you wish to manually install the system, you must clone or extract it into
-the Data/systems/D35E folder. You may do this by cloning the repository or
-downloading a zip archive from the [here](https://www.dragonshorn.info/dnd35e/dnd35e.zip).
+the Data/systems/D3Vilia folder. You may do this by cloning the repository or
+downloading a zip archive from the [here](https://www.dragonshorn.info/dnd3vilia/dnd3vilia.zip).
 
 ## Documentation
 You can find documentation on [wiki](https://docs.legaciesofthedragon.com). Be advised that this is heavy work in progress.
 
 ## Progress
-You can track SRD implementation progress [here](https://github.com/Rughalt/D35E/projects/1)
+You can track SRD implementation progress [here](https://github.com/Rughalt/D3Vilia/projects/1)
 
 ### Systems
 Most of the stuff that is the same as in PF1 works. For things that are different:

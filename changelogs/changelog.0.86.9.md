@@ -3,5 +3,5 @@
 
 ### Bug Fixes
 - Fix minor bugs related to Combat Changes
-- [#107](https://github.com/Rughalt/D35E/issues/107) - Rapid shot doesn't apply -2 penalty to all attacks
-- [#108](https://github.com/Rughalt/D35E/issues/108) - Spellbook jumps back to the top every time anything changes
+- [#107](https://github.com/Rughalt/D3Vilia/issues/107) - Rapid shot doesn't apply -2 penalty to all attacks
+- [#108](https://github.com/Rughalt/D3Vilia/issues/108) - Spellbook jumps back to the top every time anything changes

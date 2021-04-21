@@ -3,8 +3,8 @@ export class ActorRestDialog extends BaseEntitySheet {
     const options = super.defaultOptions;
     return mergeObject(options, {
       id: "actor-flags",
-      classes: ["D35E", "actor-rest"],
-      template: "systems/D35E/templates/apps/actor-rest.html",
+      classes: ["D3Vilia", "actor-rest"],
+      template: "systems/D3Vilia/templates/apps/actor-rest.html",
       width: 500,
       closeOnSubmit: true
     });
@@ -17,7 +17,7 @@ export class ActorRestDialog extends BaseEntitySheet {
    * @type {String}
    */
   get title() {
-    return `${game.i18n.localize('D35E.Rest')}: ${this.object.name}`;
+    return `${game.i18n.localize('D3Vilia.Rest')}: ${this.object.name}`;
   }
 
   /* -------------------------------------------- */

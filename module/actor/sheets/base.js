@@ -8,7 +8,7 @@ import { DicePF } from "../../dice.js";
 import {createTag, createTabs, isMinimumCoreVersion, uuidv4} from "../../lib.js";
 import { NoteEditor } from "../../apps/note-editor.js";
 import {SpellbookEditor} from "../../apps/spellbook-editor.js";
-import {D35E} from "../../config.js";
+import {D3Vilia} from "../../config.js";
 import {PointBuyCalculator} from "../../apps/point-buy-calculator.js";
 import {ItemPF} from "../../item/entity.js";
 import {CompendiumDirectoryPF} from "../../sidebar/compendium.js";
@@ -77,9 +77,9 @@ export class ActorSheetPF extends ActorSheet {
       isCharacter: this.entity.data.type === "character",
       isPlayerEditLocked: (this.entity.data.data.lockEditingByPlayers || false) && !game.user.isGM,
       hasRace: false,
-      config: CONFIG.D35E,
-      useBGSkills: this.entity.data.type === "character" && game.settings.get("D35E", "allowBackgroundSkills"),
-      hideShortDescriptions: game.settings.get("D35E", "hideSpells"),
+      config: CONFIG.D3Vilia,
+      useBGSkills: this.entity.data.type === "character" && game.settings.get("D3Vilia", "allowBackgroundSkills"),
+      hideShortDescriptions: game.settings.get("D3Vilia", "hideSpells"),
       spellFailure: this.entity.spellFailure,
       isGM: game.user.isGM,
       race: this.entity.race != null ? duplicate(this.entity.race.data) : null,
@@ -106,7 +106,7 @@ export class ActorSheetPF extends ActorSheet {
       i.data.timelineLeftText = i.getTimelineTimeLeftDescriptive();
       i.data.showUnidentifiedData = i.showUnidentifiedData;
       i.data.unmetRequirements = i.hasUnmetRequirements(featRollData);
-      if (i.showUnidentifiedData) i.data.name = getProperty(i.data, "data.unidentified.name") || game.i18n.localize("D35E.Unidentified");
+      if (i.showUnidentifiedData) i.data.name = getProperty(i.data, "data.unidentified.name") || game.i18n.localize("D3Vilia.Unidentified");
       else i.data.name = getProperty(i.data, "data.identifiedName") || i.data.name;
       return i.data;
     });
@@ -124,7 +124,7 @@ export class ActorSheetPF extends ActorSheet {
     data.abilitiesChanged = false;
 
     for ( let [a, abl] of Object.entries(data.actor.data.abilities)) {
-      abl.label = CONFIG.D35E.abilitiesShort[a];
+      abl.label = CONFIG.D3Vilia.abilitiesShort[a];
       abl.tempvalue = data.actor.data.abilities[a].total;
       if (data.actor.data.abilities[a].value !== 10)
         data.abilitiesChanged = true
@@ -135,29 +135,29 @@ export class ActorSheetPF extends ActorSheet {
 
     // Armor Class
     for (let [a, ac] of Object.entries(data.actor.data.attributes.ac)) {
-      ac.label = CONFIG.D35E.ac[a];
-      ac.labelShort = CONFIG.D35E.acShort[a];
-      ac.valueLabel = CONFIG.D35E.acValueLabels[a];
+      ac.label = CONFIG.D3Vilia.ac[a];
+      ac.labelShort = CONFIG.D3Vilia.acShort[a];
+      ac.valueLabel = CONFIG.D3Vilia.acValueLabels[a];
       ac.sourceDetails = data.sourceDetails != null ? data.sourceDetails.data.attributes.ac[a].total : [];
     }
 
     // Saving Throws
     for (let [a, savingThrow] of Object.entries(data.actor.data.attributes.savingThrows)) {
-      savingThrow.label = CONFIG.D35E.savingThrows[a];
+      savingThrow.label = CONFIG.D3Vilia.savingThrows[a];
       savingThrow.sourceDetails = data.sourceDetails != null ? data.sourceDetails.data.attributes.savingThrows[a].total : [];
     }
 
     // Update skill labels
     for ( let [s, skl] of Object.entries(data.actor.data.skills)) {
-      skl.label = CONFIG.D35E.skills[s];
-      skl.arbitrary = CONFIG.D35E.arbitrarySkills.includes(s);
+      skl.label = CONFIG.D3Vilia.skills[s];
+      skl.arbitrary = CONFIG.D3Vilia.arbitrarySkills.includes(s);
       skl.sourceDetails = (data.sourceDetails != null && data.sourceDetails.data.skills[s] != null) ? data.sourceDetails.data.skills[s].changeBonus : [];
       if (data.actor.data.attributes.acp.total && skl.acp)
-        skl.sourceDetails.push({ name: game.i18n.localize("D35E.ACP"), value: `-${data.actor.data.attributes.acp.total}` })
+        skl.sourceDetails.push({ name: game.i18n.localize("D3Vilia.ACP"), value: `-${data.actor.data.attributes.acp.total}` })
       if (skl.ability)
-        skl.sourceDetails.push({ name: game.i18n.localize("D35E.Ability"), value: getProperty(data.actor,`data.abilities.${skl.ability}.mod`) })
+        skl.sourceDetails.push({ name: game.i18n.localize("D3Vilia.Ability"), value: getProperty(data.actor,`data.abilities.${skl.ability}.mod`) })
       if (!data.actor.data.details.levelUpProgression && !skl.cls && skl.rank) // We do not display this as this is already calculated
-        skl.sourceDetails.push({ name: game.i18n.localize("D35E.NonClassSkill"), value: game.i18n.localize("D35E.HalfRanks") })
+        skl.sourceDetails.push({ name: game.i18n.localize("D3Vilia.NonClassSkill"), value: game.i18n.localize("D3Vilia.HalfRanks") })
       if (skl.subSkills != null) {
         for (let [s2, skl2] of Object.entries(skl.subSkills)) {
           if (data.sourceDetails == null) continue;
@@ -165,11 +165,11 @@ export class ActorSheetPF extends ActorSheet {
           if (data.sourceDetails.data.skills[s].subSkills == null) continue;
           skl2.sourceDetails = data.sourceDetails.data.skills[s].subSkills[s2] != null ? data.sourceDetails.data.skills[s].subSkills[s2].changeBonus : [];
           if (data.actor.data.attributes.acp.total && skl2.acp)
-            skl2.sourceDetails.push({ name: game.i18n.localize("D35E.ACP"), value: `-${data.actor.data.attributes.acp.total}` })
+            skl2.sourceDetails.push({ name: game.i18n.localize("D3Vilia.ACP"), value: `-${data.actor.data.attributes.acp.total}` })
           if (skl2.ability)
-            skl2.sourceDetails.push({ name: game.i18n.localize("D35E.Ability"), value: getProperty(data.actor,`data.abilities.${skl2.ability}.mod`) })
+            skl2.sourceDetails.push({ name: game.i18n.localize("D3Vilia.Ability"), value: getProperty(data.actor,`data.abilities.${skl2.ability}.mod`) })
           if (!skl2.cls && skl2.rank)
-            skl.sourceDetails.push({ name: game.i18n.localize("D35E.NonClassSkill"), value: game.i18n.localize("D35E.HalfRanks") })
+            skl.sourceDetails.push({ name: game.i18n.localize("D3Vilia.NonClassSkill"), value: game.i18n.localize("D3Vilia.HalfRanks") })
         }
       }
     }
@@ -277,11 +277,11 @@ export class ActorSheetPF extends ActorSheet {
       }
     }
     data.skillRanks = skillRanks;
-    let sizeMod = CONFIG.D35E.sizeMods[this.actor.data.data.traits.actualSize] || 0
+    let sizeMod = CONFIG.D3Vilia.sizeMods[this.actor.data.data.traits.actualSize] || 0
     data.attackBonuses = { sizeMod: sizeMod, melee: this.actor.data.data.attributes.bab.total + this.actor.data.data.abilities.str.mod + sizeMod - (this.actor.data.data.attributes.energyDrain || 0) + this.actor.data.data.attributes.attack.general + this.actor.data.data.attributes.attack.melee, ranged: this.actor.data.data.attributes.bab.total + this.actor.data.data.abilities.dex.mod + sizeMod - (this.actor.data.data.attributes.energyDrain || 0) + this.actor.data.data.attributes.attack.general + this.actor.data.data.attributes.attack.ranged}
 
     // Fetch the game settings relevant to sheet rendering.
-    data.healthConfig =  game.settings.get("D35E", "healthConfig");
+    data.healthConfig =  game.settings.get("D3Vilia", "healthConfig");
 
     // Return data to the sheet
     return data
@@ -291,13 +291,13 @@ export class ActorSheetPF extends ActorSheet {
 
   _prepareTraits(traits) {
     const map = {
-      // "dr": CONFIG.D35E.damageTypes,
-      "di": CONFIG.D35E.damageTypes,
-      "dv": CONFIG.D35E.damageTypes,
-      "ci": CONFIG.D35E.conditionTypes,
-      "languages": CONFIG.D35E.languages,
-      "armorProf": CONFIG.D35E.armorProficiencies,
-      "weaponProf": CONFIG.D35E.weaponProficiencies
+      // "dr": CONFIG.D3Vilia.damageTypes,
+      "di": CONFIG.D3Vilia.damageTypes,
+      "dv": CONFIG.D3Vilia.damageTypes,
+      "ci": CONFIG.D3Vilia.conditionTypes,
+      "languages": CONFIG.D3Vilia.languages,
+      "armorProf": CONFIG.D3Vilia.armorProficiencies,
+      "weaponProf": CONFIG.D3Vilia.weaponProficiencies
     };
     for ( let [t, choices] of Object.entries(map) ) {
       const trait = traits[t];
@@ -313,7 +313,7 @@ export class ActorSheetPF extends ActorSheet {
 
       // Add custom entry
       if ( trait.custom ) {
-        trait.custom.split(CONFIG.D35E.re.traitSeparator).forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
+        trait.custom.split(CONFIG.D3Vilia.re.traitSeparator).forEach((c, i) => trait.selected[`custom${i+1}`] = c.trim());
       }
       trait.cssClass = !isObjectEmpty(trait.selected) ? "" : "inactive";
     }
@@ -343,7 +343,7 @@ export class ActorSheetPF extends ActorSheet {
         powerPoints: book.powerPoints,
         canCreate: owner === true,
         canPrepare: (data.actor.type === "character"),
-        label: a === 10 ?  game.i18n.localize("D35E.SpellLevel10") : CONFIG.D35E.spellLevels[a],
+        label: a === 10 ?  game.i18n.localize("D3Vilia.SpellLevel10") : CONFIG.D3Vilia.spellLevels[a],
         isEpic: a === 10,
         slotsLeft: false,
         spells: [],
@@ -487,14 +487,14 @@ export class ActorSheetPF extends ActorSheet {
    * @private
    */
   _computeEncumbrance(actorData) {
-    const conversion = game.settings.get("D35E", "units") === "metric" ? 0.5 : 1;
+    const conversion = game.settings.get("D3Vilia", "units") === "metric" ? 0.5 : 1;
     const carriedWeight = actorData.data.attributes.encumbrance.carriedWeight * conversion;
     const load = {
       light: actorData.data.attributes.encumbrance.levels.light * conversion,
       medium: actorData.data.attributes.encumbrance.levels.medium * conversion,
       heavy: actorData.data.attributes.encumbrance.levels.heavy * conversion
     };
-    const carryLabel = game.settings.get("D35E", "units") === "metric" ? game.i18n.localize("D35E.CarryLabelKg").format(carriedWeight) : game.i18n.localize("D35E.CarryLabel").format(carriedWeight);
+    const carryLabel = game.settings.get("D3Vilia", "units") === "metric" ? game.i18n.localize("D3Vilia.CarryLabelKg").format(carriedWeight) : game.i18n.localize("D3Vilia.CarryLabel").format(carriedWeight);
     const enc = {
       pct: {
         light: Math.max(0, Math.min(carriedWeight * 100 / load.light, 99.5)),
@@ -739,7 +739,7 @@ export class ActorSheetPF extends ActorSheet {
       let actor = this.actor;
       $(content).slideToggle(400, function(){
         let isHidden = ($(this).is(':hidden'));
-        let parsedDrawerState = JSON.parse(localStorage.getItem(`D35E-drawer-state-${actor.id}`) || 'null');
+        let parsedDrawerState = JSON.parse(localStorage.getItem(`D3Vilia-drawer-state-${actor.id}`) || 'null');
         let drawerState = !jQuery.isEmptyObject(parsedDrawerState) ? new Set(parsedDrawerState) : new Set();
         if (isHidden) {
           drawerState.add(sublistId)
@@ -750,7 +750,7 @@ export class ActorSheetPF extends ActorSheet {
           $(card.querySelector(".toggle-open")).show();
           $(card.querySelector(".toggle-close")).hide();
         }
-        localStorage.setItem(`D35E-drawer-state-${actor.id}`, JSON.stringify(Array.from(drawerState)))
+        localStorage.setItem(`D3Vilia-drawer-state-${actor.id}`, JSON.stringify(Array.from(drawerState)))
       });
 
 
@@ -776,7 +776,7 @@ export class ActorSheetPF extends ActorSheet {
       });
     }
     {
-      let parsedDrawerState = JSON.parse(localStorage.getItem(`D35E-drawer-state-${this.actor.id}`) || 'null');
+      let parsedDrawerState = JSON.parse(localStorage.getItem(`D3Vilia-drawer-state-${this.actor.id}`) || 'null');
       let drawerState = !jQuery.isEmptyObject(parsedDrawerState) ? new Set(parsedDrawerState) : new Set();
       let x = 2;
       drawerState.forEach(id => {
@@ -787,15 +787,15 @@ export class ActorSheetPF extends ActorSheet {
     }
     {
 
-      console.log("D35E | Item Browser | Loading pack inline browser on load")
-      let entityType = localStorage.getItem(`D35E-last-ent-type-${this.id}`)
-      let type = localStorage.getItem(`D35E-last-type-${this.id}`)
-      let subType = localStorage.getItem(`D35E-last-subtype-${this.id}`)
-      let filter = localStorage.getItem(`D35E-filter-${this.id}`)
-      let label = localStorage.getItem(`D35E-label-${this.id}`)
-      let previousData = JSON.parse(localStorage.getItem(`D35E-data-${this.id}`))
-      let opened = localStorage.getItem(`D35E-opened-${this.id}`) === "true"
-      let scrollPosition = parseInt(localStorage.getItem(`D35E-position-${this.id}`) || "0")
+      console.log("D3Vilia | Item Browser | Loading pack inline browser on load")
+      let entityType = localStorage.getItem(`D3Vilia-last-ent-type-${this.id}`)
+      let type = localStorage.getItem(`D3Vilia-last-type-${this.id}`)
+      let subType = localStorage.getItem(`D3Vilia-last-subtype-${this.id}`)
+      let filter = localStorage.getItem(`D3Vilia-filter-${this.id}`)
+      let label = localStorage.getItem(`D3Vilia-label-${this.id}`)
+      let previousData = JSON.parse(localStorage.getItem(`D3Vilia-data-${this.id}`))
+      let opened = localStorage.getItem(`D3Vilia-opened-${this.id}`) === "true"
+      let scrollPosition = parseInt(localStorage.getItem(`D3Vilia-position-${this.id}`) || "0")
       if (opened) {
         await this.loadData(entityType, type, subType, filter, previousData, label);
         $(`#${this.randomUuid}-itemList`).scrollTop(scrollPosition);
@@ -803,13 +803,13 @@ export class ActorSheetPF extends ActorSheet {
     }
 
     if (this.actor.data.data.companionPublicId) {
-      const toggleString = "<a style='color: white; text-decoration: none' href='https://companion.legaciesofthedragon.com/character/public/"+this.actor.data.data.companionPublicId+"' class='header-button companion-view-button' title='" + game.i18n.localize("D35E.DisplayInCompanion") + "'><i class='fa fa-user'></i>"+game.i18n.localize("D35E.DisplayInCompanion")+"</a>";
+      const toggleString = "<a style='color: white; text-decoration: none' href='https://companion.legaciesofthedragon.com/character/public/"+this.actor.data.data.companionPublicId+"' class='header-button companion-view-button' title='" + game.i18n.localize("D3Vilia.DisplayInCompanion") + "'><i class='fa fa-user'></i>"+game.i18n.localize("D3Vilia.DisplayInCompanion")+"</a>";
       const toggleButton = $(toggleString);
       html.closest('.app').find('.companion-view-button').remove();
       const titleElement = html.closest('.app').find('.window-title');
       toggleButton.insertAfter(titleElement);
     } else if (this.actor.data.data.companionUuid) {
-        const toggleString = "<a style='color: white; text-decoration: none' href='https://companion.legaciesofthedragon.com/character/"+this.actor.data.data.companionUuid+"' class='header-button companion-view-button' title='" + game.i18n.localize("D35E.DisplayInCompanion") + "'><i class='fa fa-user'></i>"+game.i18n.localize("D35E.DisplayInCompanion")+"</a>";
+        const toggleString = "<a style='color: white; text-decoration: none' href='https://companion.legaciesofthedragon.com/character/"+this.actor.data.data.companionUuid+"' class='header-button companion-view-button' title='" + game.i18n.localize("D3Vilia.DisplayInCompanion") + "'><i class='fa fa-user'></i>"+game.i18n.localize("D3Vilia.DisplayInCompanion")+"</a>";
         const toggleButton = $(toggleString);
         html.closest('.app').find('.companion-view-button').remove();
         const titleElement = html.closest('.app').find('.window-title');
@@ -985,7 +985,7 @@ export class ActorSheetPF extends ActorSheet {
     }
 
     let props = [];
-    if (notes.length > 0) props.push({ header: game.i18n.localize("D35E.Notes"), value: notes });
+    if (notes.length > 0) props.push({ header: game.i18n.localize("D3Vilia.Notes"), value: notes });
     let formulaRoll = {}
     try {
       formulaRoll = new Roll(spellbook.concentrationFormula, rollData).roll();
@@ -999,10 +999,10 @@ export class ActorSheetPF extends ActorSheet {
         concentrationBonus: this.actor.data.data.skills["coc"].mod, // This is standard concentration skill
         formulaBonus: formulaRoll.total
       },
-      title: game.i18n.localize("D35E.ConcentrationCheck"),
+      title: game.i18n.localize("D3Vilia.ConcentrationCheck"),
       speaker: ChatMessage.getSpeaker({actor: this}),
       takeTwenty: false,
-      chatTemplate: "systems/D35E/templates/chat/roll-ext.html",
+      chatTemplate: "systems/D3Vilia/templates/chat/roll-ext.html",
       chatTemplateData: { hasProperties: props.length > 0, properties: props }
     });
   }
@@ -1010,17 +1010,17 @@ export class ActorSheetPF extends ActorSheet {
   _onChangeUseProgression(event) {
     event.preventDefault();
     new Dialog({
-      title: game.i18n.localize("D35E.ToggleUseProgression"),
-      content: game.i18n.localize("D35E.ToggleUseProgressionD"),
+      title: game.i18n.localize("D3Vilia.ToggleUseProgression"),
+      content: game.i18n.localize("D3Vilia.ToggleUseProgressionD"),
       buttons: {
         do: {
           icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("D35E.Change"),
+          label: game.i18n.localize("D3Vilia.Change"),
           callback: () => this.actor.update({data : {details: {levelUpProgression : !this.actor.data.data.details.levelUpProgression}}}),
         },
         dont: {
           icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("D35E.DoNotChange"),
+          label: game.i18n.localize("D3Vilia.DoNotChange"),
           callback: () => {},
         },
       },
@@ -1049,15 +1049,15 @@ export class ActorSheetPF extends ActorSheet {
     }
 
     let props = [];
-    if (notes.length > 0) props.push({ header: game.i18n.localize("D35E.Notes"), value: notes });
+    if (notes.length > 0) props.push({ header: game.i18n.localize("D3Vilia.Notes"), value: notes });
     return DicePF.d20Roll({
       event: event,
       parts: [`@cl`],
       data: { cl: spellbook.cl.total },
-      title: game.i18n.localize("D35E.CasterLevelCheck"),
+      title: game.i18n.localize("D3Vilia.CasterLevelCheck"),
       speaker: ChatMessage.getSpeaker({actor: this}),
       takeTwenty: false,
-      chatTemplate: "systems/D35E/templates/chat/roll-ext.html",
+      chatTemplate: "systems/D3Vilia/templates/chat/roll-ext.html",
       chatTemplateData: { hasProperties: props.length > 0, properties: props }
     });
   }
@@ -1133,7 +1133,7 @@ export class ActorSheetPF extends ActorSheet {
       let props = $(`<div class="item-properties"></div>`);
       chatData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       if (!item.showUnidentifiedData) {
-        console.log('D35E | Enchancement item data', getProperty(item.data, `data.enhancements.items`) || []);
+        console.log('D3Vilia | Enchancement item data', getProperty(item.data, `data.enhancements.items`) || []);
         (getProperty(item.data, `data.enhancements.items`) || []).forEach(_enh => {
           let enh = new ItemPF(_enh, {owner: this.owner})
           if (enh.hasAction || enh.isCharged) {
@@ -1147,7 +1147,7 @@ export class ActorSheetPF extends ActorSheet {
                     <div class="item-detail item-actions">
                         <div class="item-attack">
                             <a class="item-control item-enh-attack"><img class="icon"
-                                                                     src="systems/D35E/icons/actions/gladius.svg"></a>
+                                                                     src="systems/D3Vilia/icons/actions/gladius.svg"></a>
                         </div>
                     </div>` +
                 (item.data.data.enhancements.uses.commonPool ? (
@@ -1433,9 +1433,9 @@ export class ActorSheetPF extends ActorSheet {
     else {
       button.disabled = true;
 
-      const msg = `<p>${game.i18n.localize("D35E.DeleteItemConfirmation")}</p>`;
+      const msg = `<p>${game.i18n.localize("D3Vilia.DeleteItemConfirmation")}</p>`;
       Dialog.confirm({
-        title: game.i18n.localize("D35E.DeleteItem"),
+        title: game.i18n.localize("D3Vilia.DeleteItem"),
         content: msg,
         yes: () => {
           this.actor.deleteOwnedItem(li.dataset.itemId);
@@ -1455,9 +1455,9 @@ export class ActorSheetPF extends ActorSheet {
     const li = event.currentTarget.closest(".item");
 
     button.disabled = true;
-    const msg = `<p>${game.i18n.localize("D35E.RechargeItemConfirmation")}</p>`;
+    const msg = `<p>${game.i18n.localize("D3Vilia.RechargeItemConfirmation")}</p>`;
     Dialog.confirm({
-      title: game.i18n.localize("D35E.RechargeItem"),
+      title: game.i18n.localize("D3Vilia.RechargeItem"),
       content: msg,
       yes: () => {
         let itemId = li.dataset.itemId;
@@ -1595,13 +1595,13 @@ export class ActorSheetPF extends ActorSheet {
         }
       }
 
-      newSpell.data.description.value = await renderTemplate("systems/D35E/templates/internal/spell-description.html", new ItemPF(newSpell)._generateSpellDescription(newSpell))
+      newSpell.data.description.value = await renderTemplate("systems/D3Vilia/templates/internal/spell-description.html", new ItemPF(newSpell)._generateSpellDescription(newSpell))
 
 
       let x = await this.actor.createEmbeddedEntity("OwnedItem", newSpell, {ignoreSpellbookAndLevel: true})
     }
 
-    let template = "systems/D35E/templates/apps/apply-metamagic.html";
+    let template = "systems/D3Vilia/templates/apps/apply-metamagic.html";
     let dialogData = {
       metamagicFeats: metamagicFeats,
     };
@@ -1610,7 +1610,7 @@ export class ActorSheetPF extends ActorSheet {
     const buttons = {};
     let wasRolled = false;
     buttons.normal = {
-      label: game.i18n.localize("D35E.CreateMetamagicSpell"),
+      label: game.i18n.localize("D3Vilia.CreateMetamagicSpell"),
       callback: html => {
         wasRolled = true;
         roll = _roll.call(this,newSpell,html)
@@ -1618,7 +1618,7 @@ export class ActorSheetPF extends ActorSheet {
     };
     await new Promise(resolve => {
       new Dialog({
-        title: `${game.i18n.localize("D35E.CreateMetamagicSpell")}`,
+        title: `${game.i18n.localize("D3Vilia.CreateMetamagicSpell")}`,
         content: html,
         buttons: buttons,
         classes: ['custom-dialog','wide'],
@@ -1715,14 +1715,14 @@ export class ActorSheetPF extends ActorSheet {
 
     // Categorize items as inventory, spellbook, features, and classes
     const inventory = {
-      weapon: { label: game.i18n.localize("D35E.InventoryWeapons"), hasPack: true, pack: `inline:items:weapon:-:${game.i18n.localize("D35E.InventoryWeapons")}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: true, dataset: { type: "weapon" } },
-      equipment: { label: game.i18n.localize("D35E.InventoryArmorEquipment"), hasPack: true, pack: `inline:items:equipment:-:${game.i18n.localize("D35E.InventoryArmorEquipment")}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: true, items: [], canEquip: true, dataset: { type: "equipment" }, hasSlots: true },
-      consumable: { label: game.i18n.localize("D35E.InventoryConsumables"), hasPack: true, pack: `inline:items:consumable:-:${game.i18n.localize("D35E.InventoryConsumables")}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: true, items: [], canEquip: false, dataset: { type: "consumable" } },
-      gear: { label: CONFIG.D35E.lootTypes["gear"], hasPack: true, pack: `inline:items:loot:gear:${CONFIG.D35E.lootTypes["gear"]}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "gear" } },
-      ammo: { label: CONFIG.D35E.lootTypes["ammo"], hasPack: true, pack: `inline:items:loot:ammo:${CONFIG.D35E.lootTypes["ammo"]}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "ammo" } },
-      misc: { label: CONFIG.D35E.lootTypes["misc"], hasPack: true, pack: `inline:items:loot:misc:${CONFIG.D35E.lootTypes["misc"]}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "misc" } },
-      container: { label: CONFIG.D35E.lootTypes["container"], canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "container" }, isContainer: true },
-      tradeGoods: { label: CONFIG.D35E.lootTypes["tradeGoods"], hasPack: true, pack: `inline:items:loot:tradeGoods:-:${CONFIG.D35E.lootTypes["tradeGoods"]}`, emptyLabel: "D35E.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "tradeGoods" } },
+      weapon: { label: game.i18n.localize("D3Vilia.InventoryWeapons"), hasPack: true, pack: `inline:items:weapon:-:${game.i18n.localize("D3Vilia.InventoryWeapons")}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: true, dataset: { type: "weapon" } },
+      equipment: { label: game.i18n.localize("D3Vilia.InventoryArmorEquipment"), hasPack: true, pack: `inline:items:equipment:-:${game.i18n.localize("D3Vilia.InventoryArmorEquipment")}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: true, items: [], canEquip: true, dataset: { type: "equipment" }, hasSlots: true },
+      consumable: { label: game.i18n.localize("D3Vilia.InventoryConsumables"), hasPack: true, pack: `inline:items:consumable:-:${game.i18n.localize("D3Vilia.InventoryConsumables")}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: true, items: [], canEquip: false, dataset: { type: "consumable" } },
+      gear: { label: CONFIG.D3Vilia.lootTypes["gear"], hasPack: true, pack: `inline:items:loot:gear:${CONFIG.D3Vilia.lootTypes["gear"]}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "gear" } },
+      ammo: { label: CONFIG.D3Vilia.lootTypes["ammo"], hasPack: true, pack: `inline:items:loot:ammo:${CONFIG.D3Vilia.lootTypes["ammo"]}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "ammo" } },
+      misc: { label: CONFIG.D3Vilia.lootTypes["misc"], hasPack: true, pack: `inline:items:loot:misc:${CONFIG.D3Vilia.lootTypes["misc"]}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "misc" } },
+      container: { label: CONFIG.D3Vilia.lootTypes["container"], canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "container" }, isContainer: true },
+      tradeGoods: { label: CONFIG.D3Vilia.lootTypes["tradeGoods"], hasPack: true, pack: `inline:items:loot:tradeGoods:-:${CONFIG.D3Vilia.lootTypes["tradeGoods"]}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", canCreate: true, hasActions: false, items: [], canEquip: false, dataset: { type: "loot", "sub-type": "tradeGoods" } },
 
     };
 
@@ -1754,7 +1754,7 @@ export class ActorSheetPF extends ActorSheet {
       }
       else if (item.type === "full-attack") arr[4].push(item);
       else if ( Object.keys(inventory).includes(item.type) || (item.data.subType != null && Object.keys(inventory).includes(item.data.subType)) ) {
-        //console.log(`D35E | Item container | ${item.name}, ${item.data.containerId} |`, item)
+        //console.log(`D3Vilia | Item container | ${item.name}, ${item.data.containerId} |`, item)
         if (item.data.containerId !== "none") {
           if (!containerItems.has(item.data.containerId)) {
             containerItems.set(item.data.containerId,[])
@@ -1817,21 +1817,21 @@ export class ActorSheetPF extends ActorSheet {
         orig: spellbook,
         canCreate: this.actor.owner === true,
         concentration: this.actor.data.data.skills["coc"].mod,
-        spellcastingTypeName: spellbook.spellcastingType !== undefined && spellbook.spellcastingType !== null ? game.i18n.localize(CONFIG.D35E.spellcastingType[spellbook.spellcastingType]) : "None"
+        spellcastingTypeName: spellbook.spellcastingType !== undefined && spellbook.spellcastingType !== null ? game.i18n.localize(CONFIG.D3Vilia.spellcastingType[spellbook.spellcastingType]) : "None"
       };
 
     }
     // Organize Inventory
     let equippedWeapons = new Set();
     let containersMap = new Map();
-    const weightConversion = game.settings.get("D35E", "units") === "metric" ? 0.5 : 1;
+    const weightConversion = game.settings.get("D3Vilia", "units") === "metric" ? 0.5 : 1;
     for ( let i of items ) {
       const subType = i.type === "loot" ? i.data.subType || "gear" : i.data.subType;
       i.data.quantity = i.data.quantity || 0;
       i.data.displayWeight =  i.data.weight * weightConversion || 0;
       let weightMult = i.data.containerWeightless ? 0 : 1
       i.totalWeight = weightMult * Math.round(i.data.quantity * i.data.weight * weightConversion * 10) / 10;
-      i.units = game.settings.get("D35E", "units") === "metric" ? game.i18n.localize("D35E.Kgs") : game.i18n.localize("D35E.Lbs")
+      i.units = game.settings.get("D3Vilia", "units") === "metric" ? game.i18n.localize("D3Vilia.Kgs") : game.i18n.localize("D3Vilia.Lbs")
       if (i.type === "weapon" && i.data.carried === true && i.data.equipped === true && !i.data.melded) equippedWeapons.add(i.id)
       if (inventory[i.type] != null) inventory[i.type].items.push(i);
       if (subType != null && inventory[subType] != null) inventory[subType].items.push(i);
@@ -1856,14 +1856,14 @@ export class ActorSheetPF extends ActorSheet {
 
     // Organize Features
     const features = {
-      classes: { label: game.i18n.localize("D35E.ClassPlural"), hasPack: true, pack: "D35E.classes", emptyLabel: "D35E.ListDragAndDropClass", items: [], canCreate: true, hasActions: false, dataset: { type: "class" }, isClass: true},
-      feat: { label: game.i18n.localize("D35E.FeatPlural"), hasPack: true, pack: `inline:feats:feat:feat:${game.i18n.localize("D35E.FeatPlural")}`, emptyLabel: "D35E.ListDragAndDropFeat", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "feat" }, isFeat: true },
-      classFeat: { label: game.i18n.localize("D35E.ClassFeaturePlural"), hasPack: true, pack: 'actor-first-class', emptyLabel: "D35E.ListDragAndDropClassFeature", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "classFeat" }, isClassFeat: true },
-      trait: { label: game.i18n.localize("D35E.TraitPlural"), hasPack: false, pack: "", emptyLabel: "D35E.ListDragAndDropNone", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "trait" } },
-      racial: { label: game.i18n.localize("D35E.RacialTraitPlural"), hasPack: true, pack: "actor-race", emptyLabel: "D35E.ListDragAndDropRacialTrait", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "racial" } },
-      misc: { label: game.i18n.localize("D35E.Misc"), hasPack: false, pack: "", emptyLabel: "D35E.ListDragAndDropNone", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "misc" } },
-      spellSpecialization: { label: game.i18n.localize("D35E.FeatTypeSpellSpecialization"), hasPack: true, pack: "D35E.spell-schools-domains", emptyLabel: "D35E.ListDragAndDropCompendium", canCreate: true, hasActions: false, dataset: { type: "feat", "feat-type": "spellSpecialization" } , items: [] },
-      all: { label: game.i18n.localize("D35E.All"), hasPack: false, pack: "", emptyLabel: "D35E.ListDragAndDropNone", items: [], canCreate: false, hasActions: true, dataset: { type: "feat" }, isAll: true },
+      classes: { label: game.i18n.localize("D3Vilia.ClassPlural"), hasPack: true, pack: "D3Vilia.classes", emptyLabel: "D3Vilia.ListDragAndDropClass", items: [], canCreate: true, hasActions: false, dataset: { type: "class" }, isClass: true},
+      feat: { label: game.i18n.localize("D3Vilia.FeatPlural"), hasPack: true, pack: `inline:feats:feat:feat:${game.i18n.localize("D3Vilia.FeatPlural")}`, emptyLabel: "D3Vilia.ListDragAndDropFeat", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "feat" }, isFeat: true },
+      classFeat: { label: game.i18n.localize("D3Vilia.ClassFeaturePlural"), hasPack: true, pack: 'actor-first-class', emptyLabel: "D3Vilia.ListDragAndDropClassFeature", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "classFeat" }, isClassFeat: true },
+      trait: { label: game.i18n.localize("D3Vilia.TraitPlural"), hasPack: false, pack: "", emptyLabel: "D3Vilia.ListDragAndDropNone", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "trait" } },
+      racial: { label: game.i18n.localize("D3Vilia.RacialTraitPlural"), hasPack: true, pack: "actor-race", emptyLabel: "D3Vilia.ListDragAndDropRacialTrait", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "racial" } },
+      misc: { label: game.i18n.localize("D3Vilia.Misc"), hasPack: false, pack: "", emptyLabel: "D3Vilia.ListDragAndDropNone", items: [], canCreate: true, hasActions: true, dataset: { type: "feat", "feat-type": "misc" } },
+      spellSpecialization: { label: game.i18n.localize("D3Vilia.FeatTypeSpellSpecialization"), hasPack: true, pack: "D3Vilia.spell-schools-domains", emptyLabel: "D3Vilia.ListDragAndDropCompendium", canCreate: true, hasActions: false, dataset: { type: "feat", "feat-type": "spellSpecialization" } , items: [] },
+      all: { label: game.i18n.localize("D3Vilia.All"), hasPack: false, pack: "", emptyLabel: "D3Vilia.ListDragAndDropNone", items: [], canCreate: false, hasActions: true, dataset: { type: "feat" }, isAll: true },
     };
 
     let classFeaturesMap = new Map()
@@ -1877,7 +1877,7 @@ export class ActorSheetPF extends ActorSheet {
         if (!classFeaturesMap.has(sourceClassName))
           classFeaturesMap.set(sourceClassName,[])
         classFeaturesMap.get(sourceClassName).push(f);
-        if (!!game.settings.get("D35E", "classFeaturesInTabs") || k === "racial") {
+        if (!!game.settings.get("D3Vilia", "classFeaturesInTabs") || k === "racial") {
           features[k].items.push(f);
         }
       } else {
@@ -1894,11 +1894,11 @@ export class ActorSheetPF extends ActorSheet {
     let buffs = data.items.filter(obj => { return obj.type === "buff"; });
     buffs = this._filterItems(buffs, this._filters.buffs);
     const buffSections = {
-      temp: { label: game.i18n.localize("D35E.Temporary"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "temp" } },
-      perm: { label: game.i18n.localize("D35E.Permanent"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "perm" } },
-      item: { label: game.i18n.localize("D35E.Item"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "item" } },
-      misc: { label: game.i18n.localize("D35E.Misc"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "misc" } },
-      //all: { label: game.i18n.localize("D35E.All"), items: [], hasActions: false, dataset: { type: "buff" } },
+      temp: { label: game.i18n.localize("D3Vilia.Temporary"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "temp" } },
+      perm: { label: game.i18n.localize("D3Vilia.Permanent"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "perm" } },
+      item: { label: game.i18n.localize("D3Vilia.Item"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "item" } },
+      misc: { label: game.i18n.localize("D3Vilia.Misc"), pack: "browser:buffs", hasPack:true, items: [], hasActions: false, dataset: { type: "buff", "buff-type": "misc" } },
+      //all: { label: game.i18n.localize("D3Vilia.All"), items: [], hasActions: false, dataset: { type: "buff" } },
     };
     data.allbuffs = []
     data.shapechanges = []
@@ -1922,13 +1922,13 @@ export class ActorSheetPF extends ActorSheet {
     // Attacks
 
     const attackSections = {
-      all: { label: game.i18n.localize("D35E.All"), items: [], canCreate: false, initial: true, showTypes: true, dataset: { type: "attack" } },
-      weapon: { label: game.i18n.localize("D35E.AttackTypeWeaponPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "weapon" } },
-      natural: { label: game.i18n.localize("D35E.AttackTypeNaturalPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "natural" } },
-      ability: { label: game.i18n.localize("D35E.AttackTypeAbilityPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "ability" } },
-      racialAbility: { label: game.i18n.localize("D35E.AttackTypeRacialPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "racialAbility" } },
-      misc: { label: game.i18n.localize("D35E.Misc"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "misc" } },
-      full: { label: game.i18n.localize("D35E.FullAttack"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "full-attack", "attack-type": "full" } },
+      all: { label: game.i18n.localize("D3Vilia.All"), items: [], canCreate: false, initial: true, showTypes: true, dataset: { type: "attack" } },
+      weapon: { label: game.i18n.localize("D3Vilia.AttackTypeWeaponPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "weapon" } },
+      natural: { label: game.i18n.localize("D3Vilia.AttackTypeNaturalPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "natural" } },
+      ability: { label: game.i18n.localize("D3Vilia.AttackTypeAbilityPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "ability" } },
+      racialAbility: { label: game.i18n.localize("D3Vilia.AttackTypeRacialPlural"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "racialAbility" } },
+      misc: { label: game.i18n.localize("D3Vilia.Misc"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "attack", "attack-type": "misc" } },
+      full: { label: game.i18n.localize("D3Vilia.FullAttack"), items: [], canCreate: true, initial: false, showTypes: false, dataset: { type: "full-attack", "attack-type": "full" } },
       };
 
     for (let a of attacks) {
@@ -2037,7 +2037,7 @@ export class ActorSheetPF extends ActorSheet {
     const options = {
       name: label.getAttribute("for"),
       title: label.innerText,
-      choices: CONFIG.D35E[a.dataset.options]
+      choices: CONFIG.D3Vilia[a.dataset.options]
     };
     new ActorTraitSelector(this.actor, options).render(true)
   }
@@ -2117,7 +2117,7 @@ export class ActorSheetPF extends ActorSheet {
   async _onDrop(event) {
     event.preventDefault();
     if (this.actor.data.data.lockEditingByPlayers && !game.user.isGM) {
-        ui.notifications.error(game.i18n.localize("D35E.GMLockedCharacterSheet"));
+        ui.notifications.error(game.i18n.localize("D3Vilia.GMLockedCharacterSheet"));
         return;
     }
     // Try to extract the data
@@ -2298,12 +2298,12 @@ export class ActorSheetPF extends ActorSheet {
   async loadData(entityType, type, subtype, filter, previousData, label) {
     if($(`.item-add-${this.randomUuid}-overlay`).css('display') !== 'none')
     {
-      console.log("D35E | Item Browser | Skipping, its already visible", this.randomUuid)
+      console.log("D3Vilia | Item Browser | Skipping, its already visible", this.randomUuid)
       return;
     }
 
-    $(`#items-add-${this.randomUuid}-label`).text(`${game.i18n.localize("D35E.Add")} ${label}`)
-    console.log("D35E | Item Browser | Loading pack inline browser", this.randomUuid, `.item-add-${this.randomUuid}-overlay`, $(`.item-add-${this.randomUuid}-overlay`).css('display'))
+    $(`#items-add-${this.randomUuid}-label`).text(`${game.i18n.localize("D3Vilia.Add")} ${label}`)
+    console.log("D3Vilia | Item Browser | Loading pack inline browser", this.randomUuid, `.item-add-${this.randomUuid}-overlay`, $(`.item-add-${this.randomUuid}-overlay`).css('display'))
     function _filterItems(item, entityType, type, subtype) {
       if (entityType === "spells" && item.type !== type) return false;
       if (entityType === "items" && type.split(',').indexOf(item.type) !== -1 && (item.data.data.subType === subtype || subtype === "-")) return true;
@@ -2315,11 +2315,11 @@ export class ActorSheetPF extends ActorSheet {
     $(`.item-add-${this.randomUuid}-overlay`).show();
     $(`.items-add-${this.randomUuid}-working-item`).show();
     $(`.items-add-${this.randomUuid}-list`).hide();
-    localStorage.setItem(`D35E-last-ent-type-${this.id}`,entityType)
-    localStorage.setItem(`D35E-last-type-${this.id}`,type)
-    localStorage.setItem(`D35E-last-subtype-${this.id}`,subtype)
-    localStorage.setItem(`D35E-opened-${this.id}`,true)
-    localStorage.setItem(`D35E-label-${this.id}`,label)
+    localStorage.setItem(`D3Vilia-last-ent-type-${this.id}`,entityType)
+    localStorage.setItem(`D3Vilia-last-type-${this.id}`,type)
+    localStorage.setItem(`D3Vilia-last-subtype-${this.id}`,subtype)
+    localStorage.setItem(`D3Vilia-opened-${this.id}`,true)
+    localStorage.setItem(`D3Vilia-label-${this.id}`,label)
     $(`#${this.randomUuid}-itemList`).empty()
     let addedItems = []
     if (!previousData) {
@@ -2338,7 +2338,7 @@ export class ActorSheetPF extends ActorSheet {
                                 <a class="add-from-compendium blue-button" style="flex: 0 40px; text-align: center">Add</a> </div>
                         </li>`);
           li.find(".add-from-compendium").mouseup(ev => {
-                localStorage.setItem(`D35E-position-${this.id}`, $(`#${this.randomUuid}-itemList`).scrollTop())
+                localStorage.setItem(`D3Vilia-position-${this.id}`, $(`#${this.randomUuid}-itemList`).scrollTop())
                 this._addItemFromBrowser(p.collection, i.id, ev)
               }
           );
@@ -2348,7 +2348,7 @@ export class ActorSheetPF extends ActorSheet {
           }
         }
 
-        localStorage.setItem(`D35E-data-${this.id}`, JSON.stringify(addedItems))
+        localStorage.setItem(`D3Vilia-data-${this.id}`, JSON.stringify(addedItems))
       }
     } else {
       for (let i of previousData) {
@@ -2359,7 +2359,7 @@ export class ActorSheetPF extends ActorSheet {
                                 <a class="add-from-compendium blue-button" style="flex: 0 40px; text-align: center">Add</a> </div>
                         </li>`);
         li.find(".add-from-compendium").mouseup(ev => {
-          localStorage.setItem(`D35E-position-${this.id}`, $(`#${this.randomUuid}-itemList`).scrollTop())
+          localStorage.setItem(`D3Vilia-position-${this.id}`, $(`#${this.randomUuid}-itemList`).scrollTop())
           this._addItemFromBrowser(i.pack, i.id, ev)
         });
         if (!$(`#${this.randomUuid}-itemList li[data-item-id='${i.id}']`).length) {
@@ -2369,7 +2369,7 @@ export class ActorSheetPF extends ActorSheet {
     }
     $(`.items-add-${this.randomUuid}-openCompendium`).unbind( "mouseup" );
     $(`.items-add-${this.randomUuid}-openCompendium`).mouseup(ev => {
-      localStorage.setItem(`D35E-opened-${this.id}`,false);
+      localStorage.setItem(`D3Vilia-opened-${this.id}`,false);
       $(`.item-add-${this.randomUuid}-overlay`).hide();
       CompendiumDirectoryPF.browseCompendium(entityType)
     });
@@ -2387,7 +2387,7 @@ export class ActorSheetPF extends ActorSheet {
 
   _closeInlineData(ev) {
     ev.preventDefault();
-    localStorage.setItem(`D35E-opened-${this.id}`,false);
+    localStorage.setItem(`D3Vilia-opened-${this.id}`,false);
     $(`.item-add-${this.randomUuid}-overlay`).hide();
   }
 

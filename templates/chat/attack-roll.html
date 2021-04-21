@@ -1,4 +1,4 @@
-<div class="D35E chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
+<div class="D3Vilia chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
      tokenId}}data-token-id="{{tokenId}}" {{/if}} >
 <header class="card-header flexrow">
     <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
@@ -18,7 +18,7 @@
                     <div class="flexrow">
                         {{#if atk.hasAttack}}
                         <div class="dice-roll damage-roll" style="{{#if atk.hasDamage}}flex: 0 50px{{/if}}">
-                            <div class="dice-flavor">{{localize "D35E.Attack"}} {{#if ../item.data.ability.vsTouchAc}}<i class="fas fa-hand-paper"></i>{{/if}}</div>
+                            <div class="dice-flavor">{{localize "D3Vilia.Attack"}} {{#if ../item.data.ability.vsTouchAc}}<i class="fas fa-hand-paper"></i>{{/if}}</div>
                             <div class="dice-result">
                                 <h4 class="dice-total{{#if atk.attack.isCrit}} success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}">
                                     {{atk.attack.total}}</h4>
@@ -100,7 +100,7 @@
                 <div class="flexrow toggle-header">
                 <div class="flexrow">
                     <div class="dice-roll damage-roll" style="flex: 0 50px">
-                        <div class="dice-flavor">{{localize "D35E.CritS"}} {{#if ../item.data.ability.vsTouchAc}} <i class="fas fa-hand"></i>{{/if}}</div>
+                        <div class="dice-flavor">{{localize "D3Vilia.CritS"}} {{#if ../item.data.ability.vsTouchAc}} <i class="fas fa-hand"></i>{{/if}}</div>
                         <div class="dice-result">
                             <h4 class="dice-total{{#if atk.critConfirm.isCrit}} success{{/if}}{{#if atk.critConfirm.isFumble}} failure{{/if}}">
                                 {{atk.critConfirm.total}}</h4>
@@ -108,7 +108,7 @@
                     </div>
                     {{#if atk.hasDamage}}
                     <div class="dice-roll damage-roll">
-                        <div class="dice-flavor">{{localize "D35E.Damage"}}{{#if ../nonLethal}}<i class="fas fa-tint-slash"></i>{{/if}}</div>
+                        <div class="dice-flavor">{{localize "D3Vilia.Damage"}}{{#if ../nonLethal}}<i class="fas fa-tint-slash"></i>{{/if}}</div>
                         <div class="dice-result">
                             <h4 class="dice-total">
                                 {{atk.critDamage.total}}
@@ -135,7 +135,7 @@
             <div class="dice-flavor">Saving throw</div>
             <div class="dice-result">
                 <h4 class="dice-total{{#if atk.attack.isCrit}} success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}">
-                    {{localize "D35E.DC"}} <span class="dc-value">{{../dc.dc}}</span> {{../dc.description}}</h4>
+                    {{localize "D3Vilia.DC"}} <span class="dc-value">{{../dc.dc}}</span> {{../dc.description}}</h4>
             </div>
         </div>
         {{/if}}
@@ -143,7 +143,7 @@
         {{#if ../dc.description}}
         <div class="flexcol card-buttons">
             <button class="everyone" data-action="rollSave" data-value="{{../dc.type}}" data-ability="{{../dc.ability}}" data-target="{{../dc.dc}}">{{localize
-                "D35E.RollSavingThrow"}}
+                "D3Vilia.RollSavingThrow"}}
             </button>
         </div>
         {{/if}}
@@ -154,8 +154,8 @@
             {{#each atk.special as |card|}}
             <button class="{{#if card.isTargeted}}special-action-button{{else}}special-action-info{{/if}}" data-action="{{card.action}}" data-json="{{card.data}}" data-value="{{card.value}}">{{#if
                 card.hasImg}}<img src="{{card.img}}">{{/if}}{{#if card.isTargeted}}<img class="target"
-                                                                                        src="systems/D35E/icons/actions/reticule.svg">{{/if}}{{#unless
-                card.isTargeted}}<img class="target" src="systems/D35E/icons/actions/impact-point.svg">{{/unless}}{{card.label}}<br>{{#unless
+                                                                                        src="systems/D3Vilia/icons/actions/reticule.svg">{{/if}}{{#unless
+                card.isTargeted}}<img class="target" src="systems/D3Vilia/icons/actions/impact-point.svg">{{/unless}}{{card.label}}<br>{{#unless
                 card.isTargeted}}<span class="special-action-sublabel">(Auto-applied)</span>{{/unless}}
             </button>
             {{/each}}

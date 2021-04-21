@@ -2,24 +2,24 @@
 *Newer changes are places in changelogs directory*
 ## 0.86.6
 ### Bug Fixes
-- [#89](https://github.com/Rughalt/D35E/issues/89) - Natural armor field missed in the NPC charlist
-- [#91](https://github.com/Rughalt/D35E/issues/91) - Grapple Modifier doesn't add up
-- [#92](https://github.com/Rughalt/D35E/issues/92) - Attack bonus/penalty for size is reverted for attack bonuses fields
-- [#93](https://github.com/Rughalt/D35E/issues/93) - Some monsters dragged from compendium can't be modified
+- [#89](https://github.com/Rughalt/D3Vilia/issues/89) - Natural armor field missed in the NPC charlist
+- [#91](https://github.com/Rughalt/D3Vilia/issues/91) - Grapple Modifier doesn't add up
+- [#92](https://github.com/Rughalt/D3Vilia/issues/92) - Attack bonus/penalty for size is reverted for attack bonuses fields
+- [#93](https://github.com/Rughalt/D3Vilia/issues/93) - Some monsters dragged from compendium can't be modified
 
 ### Bug Fixes
 
 ## 0.86.5
 
 ### Bug Fixes
-- [#86](https://github.com/Rughalt/D35E/issues/86) - Rolling grapple displays null in roll data 
-- [#85](https://github.com/Rughalt/D35E/issues/85) - Add size modifiers to rolls for base Melee and Ranged attack
-- [#84](https://github.com/Rughalt/D35E/issues/84) - Cannot set Ability scores from Attribute tab 
-- [#83](https://github.com/Rughalt/D35E/issues/83) - Add ability to toggle Class Features list under classes
-- [#82](https://github.com/Rughalt/D35E/issues/82) - Using ECL for XP count if Level Progression is disabled
-- [#80](https://github.com/Rughalt/D35E/issues/80) - Subskills do not work in Level Up Details
-- [#78](https://github.com/Rughalt/D35E/issues/78) - Gracefully fail if cannot migrate a pack
-- [#79](https://github.com/Rughalt/D35E/issues/79) - No scrollbars in default skin
+- [#86](https://github.com/Rughalt/D3Vilia/issues/86) - Rolling grapple displays null in roll data 
+- [#85](https://github.com/Rughalt/D3Vilia/issues/85) - Add size modifiers to rolls for base Melee and Ranged attack
+- [#84](https://github.com/Rughalt/D3Vilia/issues/84) - Cannot set Ability scores from Attribute tab 
+- [#83](https://github.com/Rughalt/D3Vilia/issues/83) - Add ability to toggle Class Features list under classes
+- [#82](https://github.com/Rughalt/D3Vilia/issues/82) - Using ECL for XP count if Level Progression is disabled
+- [#80](https://github.com/Rughalt/D3Vilia/issues/80) - Subskills do not work in Level Up Details
+- [#78](https://github.com/Rughalt/D3Vilia/issues/78) - Gracefully fail if cannot migrate a pack
+- [#79](https://github.com/Rughalt/D3Vilia/issues/79) - No scrollbars in default skin
 
 
 ## 0.86.4
@@ -42,20 +42,20 @@
 
 ### Bug Fixes
 - Fixes loading characters that had no Prestige Caster Level
-- [#61](https://github.com/Rughalt/D35E/issues/61) - Fixed Ranger class Favorite Enemy 
-- [#57](https://github.com/Rughalt/D35E/issues/57) - Add possibility to give bab in the changes tab 
-- [#63](https://github.com/Rughalt/D35E/issues/55) - Monsters didn't get feats every 3 levels 
-- [#60](https://github.com/Rughalt/D35E/issues/55) - Spellslots tables are wrong 
-- [#64](https://github.com/Rughalt/D35E/issues/55) - Class details break when selecting *None* as saving throw progression.
-- [#58](https://github.com/Rughalt/D35E/issues/55) - Damage value doesn't overriding 
-- [#59](https://github.com/Rughalt/D35E/issues/55) - Power attack not working properly 
-- [#75](https://github.com/Rughalt/D35E/issues/55) - Fighter didn't get bonus feat at lvl 1 
-- [#77](https://github.com/Rughalt/D35E/issues/55) - Fixed Ranger class Favorite Enemy 
+- [#61](https://github.com/Rughalt/D3Vilia/issues/61) - Fixed Ranger class Favorite Enemy 
+- [#57](https://github.com/Rughalt/D3Vilia/issues/57) - Add possibility to give bab in the changes tab 
+- [#63](https://github.com/Rughalt/D3Vilia/issues/55) - Monsters didn't get feats every 3 levels 
+- [#60](https://github.com/Rughalt/D3Vilia/issues/55) - Spellslots tables are wrong 
+- [#64](https://github.com/Rughalt/D3Vilia/issues/55) - Class details break when selecting *None* as saving throw progression.
+- [#58](https://github.com/Rughalt/D3Vilia/issues/55) - Damage value doesn't overriding 
+- [#59](https://github.com/Rughalt/D3Vilia/issues/55) - Power attack not working properly 
+- [#75](https://github.com/Rughalt/D3Vilia/issues/55) - Fighter didn't get bonus feat at lvl 1 
+- [#77](https://github.com/Rughalt/D3Vilia/issues/55) - Fixed Ranger class Favorite Enemy 
   
 
 ## 0.85.4
 ### Features
-- [#55](https://github.com/Rughalt/D35E/issues/55) - Updated French translation by @red5h4d0w
+- [#55](https://github.com/Rughalt/D3Vilia/issues/55) - Updated French translation by @red5h4d0w
 - Updated Class Abilities/Features rendering style
 ### Bug Fixes
 - Fixed regression caused by displaying damage type for typeless damage
@@ -92,7 +92,7 @@
 ### Features
 - Enhancement support
 - Base feats for attack rolls
-    - Power Attack (this also fixed [#39](https://github.com/Rughalt/D35E/issues/39))
+    - Power Attack (this also fixed [#39](https://github.com/Rughalt/D3Vilia/issues/39))
     - Manyshot and Greater Manyshot
     - Rapid Shot
 - Two-Weapon Fighting support for attack rolls
@@ -102,7 +102,7 @@
 
 ### Bug Fixes
 - Fixed Ammunition Bonus Damage being incorrectly added to damage roll.
-- [#52](https://github.com/Rughalt/D35E/issues/52) Randomize HP rolls up to HD sides instead of levels
+- [#52](https://github.com/Rughalt/D3Vilia/issues/52) Randomize HP rolls up to HD sides instead of levels
 
 ## 0.83.5
 ### SRD
@@ -124,8 +124,8 @@
 ### Bug Fixes 
 - Removed DND copyrighted names from description and packge title and readme
 - Fixed spell icon
-- [#39](https://github.com/Rughalt/D35E/issues/39) - Turn Undead Uses is still not calculating correctly.
-- [#40](https://github.com/Rughalt/D35E/issues/40) - Dragging an Item from the sidebar into a character sheet doesn't retain Action data.
+- [#39](https://github.com/Rughalt/D3Vilia/issues/39) - Turn Undead Uses is still not calculating correctly.
+- [#40](https://github.com/Rughalt/D3Vilia/issues/40) - Dragging an Item from the sidebar into a character sheet doesn't retain Action data.
 
 ## 0.83
 ### SRD
@@ -138,18 +138,18 @@
     - Wildshape - melds used items and attacks, copies natural attack of monster and sets abilities
     - Polymorph - melds natural attacks, copies natural attack of monster and sets abilities
     - Alter self - changes appearance
-- [#15](https://github.com/Rughalt/D35E/issues/15) - Rolling NPC Hit Die
+- [#15](https://github.com/Rughalt/D3Vilia/issues/15) - Rolling NPC Hit Die
 
 ### Bug Fixes   
 - Golem bonus HP now depends on size
 - Undead HP and Fortitude are no longer calculated using their Charisma modifier anymore
 - Sped up container updates
-- [#33](https://github.com/Rughalt/D35E/issues/34) - Conditions Compendium using Pathfinder conditions not 3.5
-- [#34](https://github.com/Rughalt/D35E/issues/34) - Racial HD compendium bugs
-- [#32](https://github.com/Rughalt/D35E/issues/32) - Bonus PowerPoints doesn't acount for item/custom racial Ability Score modifiers
-- [#35](https://github.com/Rughalt/D35E/issues/35) - Rogue class calculates sneak attack damage based on char level instead of rogue level
-- [#36](https://github.com/Rughalt/D35E/issues/36) - Turn Undead Uses doesn't calculate correctly
-- [#38](https://github.com/Rughalt/D35E/issues/38) - Revealing details for unidentified items
+- [#33](https://github.com/Rughalt/D3Vilia/issues/34) - Conditions Compendium using Pathfinder conditions not 3.5
+- [#34](https://github.com/Rughalt/D3Vilia/issues/34) - Racial HD compendium bugs
+- [#32](https://github.com/Rughalt/D3Vilia/issues/32) - Bonus PowerPoints doesn't acount for item/custom racial Ability Score modifiers
+- [#35](https://github.com/Rughalt/D3Vilia/issues/35) - Rogue class calculates sneak attack damage based on char level instead of rogue level
+- [#36](https://github.com/Rughalt/D3Vilia/issues/36) - Turn Undead Uses doesn't calculate correctly
+- [#38](https://github.com/Rughalt/D3Vilia/issues/38) - Revealing details for unidentified items
 
 ## 0.82.1
 ### Bug Fixes
@@ -170,18 +170,18 @@
 - Ported spell- and power-based consumable creation from PF1
 
 ### Bug Fixes
-- [#19](https://github.com/Rughalt/D35E/issues/19) - Armor doesn't have option for Masterwork bug
-- [#21](https://github.com/Rughalt/D35E/issues/21) - sizeRoll() given static value instead variable when creating an attack
-- [#13](https://github.com/Rughalt/D35E/issues/13) - Missing input for Ammo Bonus Damage formula
-- [#23](https://github.com/Rughalt/D35E/issues/23) - Applying a race from the compendium places a large color box on the NPC sheet in place of name or avatar
-- [#20](https://github.com/Rughalt/D35E/issues/20) - Attacks created from weapons are created as Ranged Weapon Attacks.
-- [#22](https://github.com/Rughalt/D35E/issues/22) - sizeRoll() increases the d4 and d6 by 2 steps instead of 1
-- [#16](https://github.com/Rughalt/D35E/issues/16) - Missing Grapple box on Player character sheet 
-- [#17](https://github.com/Rughalt/D35E/issues/17) - Changes tab still references CMB/CMD no way to add to Grapple
-- [#14](https://github.com/Rughalt/D35E/issues/14) - Grapple size modifier uses PF vales not 3.5
-- [#8](https://github.com/Rughalt/D35E/issues/8) - Class Compendium bugs
-- [#25](https://github.com/Rughalt/D35E/issues/25) - Damage bonus applied twice if more than one type of damage is present
-- [#24](https://github.com/Rughalt/D35E/issues/24) - Skill roll-up on character sheet doesn't show specialized skills
+- [#19](https://github.com/Rughalt/D3Vilia/issues/19) - Armor doesn't have option for Masterwork bug
+- [#21](https://github.com/Rughalt/D3Vilia/issues/21) - sizeRoll() given static value instead variable when creating an attack
+- [#13](https://github.com/Rughalt/D3Vilia/issues/13) - Missing input for Ammo Bonus Damage formula
+- [#23](https://github.com/Rughalt/D3Vilia/issues/23) - Applying a race from the compendium places a large color box on the NPC sheet in place of name or avatar
+- [#20](https://github.com/Rughalt/D3Vilia/issues/20) - Attacks created from weapons are created as Ranged Weapon Attacks.
+- [#22](https://github.com/Rughalt/D3Vilia/issues/22) - sizeRoll() increases the d4 and d6 by 2 steps instead of 1
+- [#16](https://github.com/Rughalt/D3Vilia/issues/16) - Missing Grapple box on Player character sheet 
+- [#17](https://github.com/Rughalt/D3Vilia/issues/17) - Changes tab still references CMB/CMD no way to add to Grapple
+- [#14](https://github.com/Rughalt/D3Vilia/issues/14) - Grapple size modifier uses PF vales not 3.5
+- [#8](https://github.com/Rughalt/D3Vilia/issues/8) - Class Compendium bugs
+- [#25](https://github.com/Rughalt/D3Vilia/issues/25) - Damage bonus applied twice if more than one type of damage is present
+- [#24](https://github.com/Rughalt/D3Vilia/issues/24) - Skill roll-up on character sheet doesn't show specialized skills
 
 ## 0.81
 
@@ -203,8 +203,8 @@
 - Fixed skill calculation for multiclass characters
 - Fixed character sheet text length
 - Fixes permission when GM rolls effect for player
-- [#2](https://github.com/Rughalt/D35E/issues/2) - Limited character sheet scrollbar
-- [#3](https://github.com/Rughalt/D35E/issues/3) - Saving throws rolled multiple times
+- [#2](https://github.com/Rughalt/D3Vilia/issues/2) - Limited character sheet scrollbar
+- [#3](https://github.com/Rughalt/D3Vilia/issues/3) - Saving throws rolled multiple times
 
 ## 0.56 - 0.80
 A lot of things were fixed.
@@ -589,7 +589,7 @@ have been added.
 - Add or update some items to the following compendiums:
   - Magic Items
   - Common Buffs
-- Add macro'able function to show an actor's defenses as a chatlog (game.D35E.rollDefenses()) (see [documentation](https://furyspark.gitlab.io/foundryvtt-pathfinder1-doc/advanced/macros/))
+- Add macro'able function to show an actor's defenses as a chatlog (game.D3Vilia.rollDefenses()) (see [documentation](https://furyspark.gitlab.io/foundryvtt-pathfinder1-doc/advanced/macros/))
 
 ## 0.21
 

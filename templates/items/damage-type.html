@@ -8,7 +8,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize " D35E.ItemName"}}"/>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize " D3Vilia.ItemName"}}"/>
             </h1>
 
             <div class="item-subtitle">
@@ -28,10 +28,10 @@
     <section class="sheet-content flexcol sheet-attack">
         {{!-- Item Sheet Navigation --}}
         <nav class="sheet-navigation tabs" data-group="primary">
-            <a class="item active" data-tab="description">{{ localize "D35E.Description" }}</a>
-            <a class="item" data-tab="details">{{ localize "D35E.Details" }}</a>
-            <a class="item" data-tab="conditionals">{{localize "D35E.Conditionals"}}</a>
-            <!--      <a class="item" data-tab="links">{{localize "D35E.Links"}}</a>-->
+            <a class="item active" data-tab="description">{{ localize "D3Vilia.Description" }}</a>
+            <a class="item" data-tab="details">{{ localize "D3Vilia.Details" }}</a>
+            <a class="item" data-tab="conditionals">{{localize "D3Vilia.Conditionals"}}</a>
+            <!--      <a class="item" data-tab="links">{{localize "D3Vilia.Links"}}</a>-->
         </nav>
 
         {{!-- Item Sheet Body --}}
@@ -47,14 +47,14 @@
             <div class="tab details" data-group="primary" data-tab="details">
                 <div class="form-group stacked">
                     <div class="data-selector">
-                        <a class="entry-selector" for="data.identifiers" data-fields="{{localize " D35E.Identifiers"}}"
+                        <a class="entry-selector" for="data.identifiers" data-fields="{{localize " D3Vilia.Identifiers"}}"
                         data-dtypes="String"><i class="fas fa-edit"></i></a>
-                        <label for="data.identifiers">{{localize "D35E.Identifiers"}}</label>
+                        <label for="data.identifiers">{{localize "D3Vilia.Identifiers"}}</label>
                     </div>
 
                     {{!-- Attack Type --}}
                     <div class="form-group">
-                        <label>{{localize "D35E.DamageType"}}</label>
+                        <label>{{localize "D3Vilia.DamageType"}}</label>
                         <select name="data.damageType">
                             {{#select data.damageType}}
                             {{#each config.damageTypes as |name type|}}
@@ -65,25 +65,25 @@
                     </div>
 
                     <div class="form-group">
-                        <label>{{localize "D35E.BaseDamageTypeEquivalent"}}</label>
+                        <label>{{localize "D3Vilia.BaseDamageTypeEquivalent"}}</label>
                     </div>
                     <div class="flexrow">
                         <div class="form-group" style="flex: 1">
                             <div class="toggle" style="width: 165px">
                                 <input id="{{randomUuid}}-data.slashing" type="checkbox" name="data.isSlashing" {{checked data.isSlashing}}/>
-                                <label style="width: 165px" for="{{randomUuid}}-data.slashing">{{#if data.isSlashing}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D35E.DRSlashing"}}</label>
+                                <label style="width: 165px" for="{{randomUuid}}-data.slashing">{{#if data.isSlashing}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D3Vilia.DRSlashing"}}</label>
                             </div>
                         </div>
                         <div class="form-group" style="flex: 1">
                             <div class="toggle" style="width: 165px">
                                 <input id="{{randomUuid}}-data.bludgeoning" type="checkbox" name="data.isBludgeoning" {{checked data.isBludgeoning}}/>
-                                <label style="width: 165px" for="{{randomUuid}}-data.bludgeoning">{{#if data.isBludgeoning}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D35E.DRBludgeoning"}}</label>
+                                <label style="width: 165px" for="{{randomUuid}}-data.bludgeoning">{{#if data.isBludgeoning}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D3Vilia.DRBludgeoning"}}</label>
                             </div>
                         </div>
                         <div class="form-group" style="flex: 1">
                             <div class="toggle" style="width: 165px">
                                 <input id="{{randomUuid}}-data.piercing" type="checkbox" name="data.isPiercing" {{checked data.isPiercing}}/>
-                                <label style="width: 165px" for="{{randomUuid}}-data.piercing">{{#if data.isPiercing}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D35E.DRPiercing"}}</label>
+                                <label style="width: 165px" for="{{randomUuid}}-data.piercing">{{#if data.isPiercing}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}{{localize "D3Vilia.DRPiercing"}}</label>
                             </div>
                         </div>
                     </div>

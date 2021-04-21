@@ -16,25 +16,25 @@
 - Special Action `eval` that evaluates *one line* javascript code. **Use with care, we are not responsible for breaking things**
 
 # Changes
-- [447](https://github.com/Rughalt/D35E/issues/447) - Etherealness enchantment bug 
-- [446](https://github.com/Rughalt/D35E/issues/446) - natural armor bug 
-- [441](https://github.com/Rughalt/D35E/issues/441) - Tumble and Total Defense 
-- [439](https://github.com/Rughalt/D35E/issues/439) - Jump and High Speed 
-- [432](https://github.com/Rughalt/D35E/issues/432) - Allow taking half damage from particular energy types 
-- [431](https://github.com/Rughalt/D35E/issues/431) - unidentified magic item reveals spell-like properties in player's sheet 
-- [429](https://github.com/Rughalt/D35E/issues/429) - Damage Ability choice not remembered in Attack dialog 
-- [428](https://github.com/Rughalt/D35E/issues/428) - Apply half damage with no check is applying Full Damage 
-- [426](https://github.com/Rughalt/D35E/issues/426) - Unarmed strike not usable from Unarmed strike 'item' 
-- [424](https://github.com/Rughalt/D35E/issues/424) - Bard feature 'Bardic Knowledge' 
-- [421](https://github.com/Rughalt/D35E/issues/421) - Add "Emission Angle" to item light sources 
-- [418](https://github.com/Rughalt/D35E/issues/418) - Darts are ranged weapons without ammunitions 
-- [417](https://github.com/Rughalt/D35E/issues/417) - Fast Healing, Regeneration for Changes Mechanic 
-- [408](https://github.com/Rughalt/D35E/issues/408) - Allow embedded expressions in object references in special actions 
-- [406](https://github.com/Rughalt/D35E/issues/406) - Critical Confirmation Bonus 
-- [405](https://github.com/Rughalt/D35E/issues/405) - Request Extend the slider mechanic to have multiple 
-- [404](https://github.com/Rughalt/D35E/issues/404) - Add optional "combat" changes for skill checks 
-- [403](https://github.com/Rughalt/D35E/issues/403) - Allow for special actions on attacks to be applied only once during a full attack 
-- [402](https://github.com/Rughalt/D35E/issues/402) - Limited Uses always subtracts by 1 regardless of other values. 
-- [399](https://github.com/Rughalt/D35E/issues/399) - Familiar Hit Points 
-- [392](https://github.com/Rughalt/D35E/issues/392) - Request Have the ability to set a cap in multi use abilities 
-- [389](https://github.com/Rughalt/D35E/issues/389) - Clothing and Weight 
+- [447](https://github.com/Rughalt/D3Vilia/issues/447) - Etherealness enchantment bug 
+- [446](https://github.com/Rughalt/D3Vilia/issues/446) - natural armor bug 
+- [441](https://github.com/Rughalt/D3Vilia/issues/441) - Tumble and Total Defense 
+- [439](https://github.com/Rughalt/D3Vilia/issues/439) - Jump and High Speed 
+- [432](https://github.com/Rughalt/D3Vilia/issues/432) - Allow taking half damage from particular energy types 
+- [431](https://github.com/Rughalt/D3Vilia/issues/431) - unidentified magic item reveals spell-like properties in player's sheet 
+- [429](https://github.com/Rughalt/D3Vilia/issues/429) - Damage Ability choice not remembered in Attack dialog 
+- [428](https://github.com/Rughalt/D3Vilia/issues/428) - Apply half damage with no check is applying Full Damage 
+- [426](https://github.com/Rughalt/D3Vilia/issues/426) - Unarmed strike not usable from Unarmed strike 'item' 
+- [424](https://github.com/Rughalt/D3Vilia/issues/424) - Bard feature 'Bardic Knowledge' 
+- [421](https://github.com/Rughalt/D3Vilia/issues/421) - Add "Emission Angle" to item light sources 
+- [418](https://github.com/Rughalt/D3Vilia/issues/418) - Darts are ranged weapons without ammunitions 
+- [417](https://github.com/Rughalt/D3Vilia/issues/417) - Fast Healing, Regeneration for Changes Mechanic 
+- [408](https://github.com/Rughalt/D3Vilia/issues/408) - Allow embedded expressions in object references in special actions 
+- [406](https://github.com/Rughalt/D3Vilia/issues/406) - Critical Confirmation Bonus 
+- [405](https://github.com/Rughalt/D3Vilia/issues/405) - Request Extend the slider mechanic to have multiple 
+- [404](https://github.com/Rughalt/D3Vilia/issues/404) - Add optional "combat" changes for skill checks 
+- [403](https://github.com/Rughalt/D3Vilia/issues/403) - Allow for special actions on attacks to be applied only once during a full attack 
+- [402](https://github.com/Rughalt/D3Vilia/issues/402) - Limited Uses always subtracts by 1 regardless of other values. 
+- [399](https://github.com/Rughalt/D3Vilia/issues/399) - Familiar Hit Points 
+- [392](https://github.com/Rughalt/D3Vilia/issues/392) - Request Have the ability to set a cap in multi use abilities 
+- [389](https://github.com/Rughalt/D3Vilia/issues/389) - Clothing and Weight 

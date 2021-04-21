@@ -1,10 +1,10 @@
 <form>
     <div class="form-group">
-        <label>{{localize "D35E.STBonus"}} <i class="fas fa-history tooltip" style="color: lightgray;"><span class="tooltipcontent">{{localize "D35E.ValuePersisted"}}</span></i></label>
+        <label>{{localize "D3Vilia.STBonus"}} <i class="fas fa-history tooltip" style="color: lightgray;"><span class="tooltipcontent">{{localize "D3Vilia.ValuePersisted"}}</span></i></label>
         <input type="text" name="st-bonus" class="auto-save" value="" placeholder="e.g. +1d4"/>
     </div>
     <div class="form-group stacked">
-        <label class="block-header">{{localize "D35E.STDialogModifiers"}}</label>
+        <label class="block-header">{{localize "D3Vilia.STDialogModifiers"}}</label>
     </div>
     <div class="form-group">
         <div class="flexcol">
@@ -53,7 +53,7 @@
 
 
     <div class="form-group">
-        <label>{{localize "D35E.RollMode"}} <i class="fas fa-history tooltip" style="color: lightgray;"><span class="tooltipcontent">{{localize "D35E.ValuePersisted"}}</span></i></label>
+        <label>{{localize "D3Vilia.RollMode"}} <i class="fas fa-history tooltip" style="color: lightgray;"><span class="tooltipcontent">{{localize "D3Vilia.ValuePersisted"}}</span></i></label>
         <select name="rollMode" class="auto-save">
             {{#select rollMode}}
             {{#each rollModes as |label mode|}}
@@ -63,7 +63,7 @@
         </select>
     </div>
     <script>
-        if (game.settings.get("D35E", "saveAttackWindow")) {
+        if (game.settings.get("D3Vilia", "saveAttackWindow")) {
             $('.auto-save').savy('load',function(){
                 console.log("All fields from save are loaded");
                 $('.attack-form input').trigger('change')

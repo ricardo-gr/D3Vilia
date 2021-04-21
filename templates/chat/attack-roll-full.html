@@ -1,4 +1,4 @@
-<div class="D35E chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
+<div class="D3Vilia chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
      tokenId}}data-token-id="{{tokenId}}" {{/if}}>
 <header class="card-header flexrow">
     <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
@@ -12,7 +12,7 @@
             <div class="dice-roll attack-roll">
                 {{#if atk.attack.flavor}}
                     <div class="dice-flavor">{{atk.attack.flavor}} {{#if ../item.data.ability.vsTouchAc}}(vs Touch AC){{/if}}
-                        {{#if ../nonLethal}}({{localize "D35E.WeaponPropNonLethal"}}){{/if}}
+                        {{#if ../nonLethal}}({{localize "D3Vilia.WeaponPropNonLethal"}}){{/if}}
                     </div>
                 {{/if}}
                 <div class="dice-result">
@@ -84,7 +84,7 @@
             <div class="dice-flavor">Saving throw</div>
             <div class="dice-result">
                 <h4 class="dice-total{{#if atk.attack.isCrit}} success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}">
-                    {{localize "D35E.DC"}} {{../dc.dc}} {{../dc.description}}</h4>
+                    {{localize "D3Vilia.DC"}} {{../dc.dc}} {{../dc.description}}</h4>
             </div>
         </div>
         {{/if}}
@@ -103,7 +103,7 @@
         {{#if ../dc.description}}
         <div class="flexcol card-buttons">
             <button class="everyone" data-action="rollSave" data-value="{{../dc.type}}" data-ability="{{../dc.ability}}" data-target="{{../dc.dc}}">{{localize
-                "D35E.RollSavingThrow"}}
+                "D3Vilia.RollSavingThrow"}}
             </button>
         </div>
         {{/if}}
@@ -114,8 +114,8 @@
             {{#each atk.special as |card|}}
             <button class="{{#if card.isTargeted}}special-action-button{{/if}}" data-action="{{card.action}}" data-json="{{card.data}}" data-value="{{card.value}}">{{#if
                 card.hasImg}}<img src="{{card.img}}">{{/if}}{{#if card.isTargeted}}<img class="target"
-                                                                                        src="systems/D35E/icons/actions/reticule.svg">{{/if}}{{#unless
-                card.isTargeted}}<img class="target" src="systems/D35E/icons/actions/impact-point.svg">{{/unless}}{{card.label}}
+                                                                                        src="systems/D3Vilia/icons/actions/reticule.svg">{{/if}}{{#unless
+                card.isTargeted}}<img class="target" src="systems/D3Vilia/icons/actions/impact-point.svg">{{/unless}}{{card.label}}
             </button>
             {{/each}}
         </div>

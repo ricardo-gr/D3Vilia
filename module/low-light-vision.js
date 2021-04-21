@@ -6,7 +6,7 @@ Object.defineProperties(Token.prototype, {
     actorVision: {
         get() {
             return {
-                lowLight: getProperty(this.data, "flags.D35E.lowLightVision"),
+                lowLight: getProperty(this.data, "flags.D3Vilia.lowLightVision"),
             };
         }
     }
@@ -20,7 +20,7 @@ SightLayer.prototype.hasLowLight = function() {
     if (game.user.isGM) {
         return lowLightTokens.filter(o => o._controlled).length > 0;
     }
-    if (game.settings.get("D35E", "lowLightVisionMode")) {
+    if (game.settings.get("D3Vilia", "lowLightVisionMode")) {
         return lowLightTokens.filter(o => o._controlled).length > 0;
     }
     return (!relevantTokens.filter(o => o._controlled).length && lowLightTokens.length) || lowLightTokens.filter(o => o._controlled).length > 0;

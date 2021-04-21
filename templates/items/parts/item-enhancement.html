@@ -8,12 +8,12 @@
             <div class="form-group stacked">
                 <label class="checkbox">
                     <input type="checkbox" name="data.enhancements.uses.commonPool" {{checked
-                           data.enhancements.uses.commonPool}}/> {{localize "D35E.CommonUsesPool"}}
+                           data.enhancements.uses.commonPool}}/> {{localize "D3Vilia.CommonUsesPool"}}
                 </label>
             </div>
             {{#if data.enhancements.uses.commonPool}}
             <div class="form-group uses-per">
-                <label>{{localize "D35E.LimitedUses"}}</label>
+                <label>{{localize "D3Vilia.LimitedUses"}}</label>
                 <div class="form-fields">
                     <input type="text" name="data.enhancements.uses.value" value="{{data.enhancements.uses.value}}"
                            data-dtype="Number"/>
@@ -30,20 +30,20 @@
                 </div>
             </div>
             <div class="form-group uses-per">
-                <label>{{localize "D35E.MaximumUsesFormula"}}</label>
+                <label>{{localize "D3Vilia.MaximumUsesFormula"}}</label>
                 <input type="text" name="data.enhancements.uses.maxFormula"
-                       value="{{data.enhancements.uses.maxFormula}}" placeholder="{{localize "D35E.MaximumUsesFormula"}}"/>
+                       value="{{data.enhancements.uses.maxFormula}}" placeholder="{{localize "D3Vilia.MaximumUsesFormula"}}"/>
             </div>
             <div class="form-group uses-recharge-formula">
-                <label>{{localize "D35E.RechargeFormula"}} <i class="fas fa-info-circle tooltip">
-                    <div class="tooltipcontent"><strong>{{localize "D35E.RechargeFormula"}}</strong><br><p style="white-space: normal;"> {{localize "D35E.RechargeFormulaInfo"}}</p></div>
+                <label>{{localize "D3Vilia.RechargeFormula"}} <i class="fas fa-info-circle tooltip">
+                    <div class="tooltipcontent"><strong>{{localize "D3Vilia.RechargeFormula"}}</strong><br><p style="white-space: normal;"> {{localize "D3Vilia.RechargeFormulaInfo"}}</p></div>
                 </i></label>
-                <input type="text" name="data.enhancements.uses.rechargeFormula" value="{{data.enhancements.uses.rechargeFormula}}" placeholder="{{localize "D35E.RechargeFormula"}}"/>
+                <input type="text" name="data.enhancements.uses.rechargeFormula" value="{{data.enhancements.uses.rechargeFormula}}" placeholder="{{localize "D3Vilia.RechargeFormula"}}"/>
             </div>
             <div class="form-group stacked">
                 <label class="checkbox">
                     <input type="checkbox" name="data.enhancements.uses.autoDeductCharges" {{checked
-                           data.enhancements.uses.autoDeductCharges}}/> {{localize "D35E.AutoDeductCharges"}}
+                           data.enhancements.uses.autoDeductCharges}}/> {{localize "D3Vilia.AutoDeductCharges"}}
                 </label>
             </div>
             {{/if}}
@@ -57,11 +57,11 @@
             <div class="form-group stacked">
                 <label class="checkbox">
                     <input type="checkbox" name="data.enhancements.automation.updateName" {{checked
-                           data.enhancements.automation.updateName}}/> {{localize "D35E.MagicItemUpdateName"}}
+                           data.enhancements.automation.updateName}}/> {{localize "D3Vilia.MagicItemUpdateName"}}
                 </label>
                 <label class="checkbox">
                     <input type="checkbox" name="data.enhancements.automation.updatePrice" {{checked
-                           data.enhancements.automation.updatePrice}}/> {{localize "D35E.MagicItemUpdatePrice"}}
+                           data.enhancements.automation.updatePrice}}/> {{localize "D3Vilia.MagicItemUpdatePrice"}}
                 </label>
             </div>
         </div>
@@ -76,12 +76,12 @@
                     <span>Price</span></div>
                 <div class="item-detail item-actions">
                     <span>Action</span></div>
-                <div class="item-detail item-uses"><span>{{localize "D35E.ChargePlural"}}</span></div>
+                <div class="item-detail item-uses"><span>{{localize "D3Vilia.ChargePlural"}}</span></div>
                 <div class="item-detail item-per-use" style="flex: 0 48px"><span>Per Use</span></div>
                 <div class="item-detail item-type" style="flex: 0 32px">
                     <span></span></div>
             </li>
-            <ol class="item-list" data-pack="D35E.enhancement">
+            <ol class="item-list" data-pack="D3Vilia.enhancement">
                 {{#each enhancementsBase as |item iid|}}
                 <li class="item item-box flexrow" data-item-id="{{item._id}}">
                     <div class="item-name enh-item flexrow">
@@ -106,7 +106,7 @@
                         <div class="item-attack">
                             {{#if item.hasAction}}
                             <a class="item-control item-attack"><img class="icon"
-                                                                     src="systems/D35E/icons/actions/gladius.svg"></a>
+                                                                     src="systems/D3Vilia/icons/actions/gladius.svg"></a>
                             {{/if}}
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                 <div class="item-detail item-type" style="flex: 0 32px">
                     <span></span></div>
             </li>
-            <ol class="item-list" data-pack="D35E.enhancement">
+            <ol class="item-list" data-pack="D3Vilia.enhancement">
                 {{#each enhancementsFromBuff as |item iid|}}
                 <li class="item item-box flexrow" data-item-id="{{item._id}}">
                     <div class="item-name enh-item flexrow">
@@ -188,12 +188,12 @@
                     <span>Price</span></div>
                 <div class="item-detail item-actions">
                     <span>Action</span></div>
-                <div class="item-detail item-uses"><span>{{localize "D35E.ChargePlural"}}</span></div>
+                <div class="item-detail item-uses"><span>{{localize "D3Vilia.ChargePlural"}}</span></div>
                 <div class="item-detail item-per-use" style="flex: 0 48px"><span>Per Use</span></div>
                 <div class="item-detail item-type" style="flex: 0 32px">
                     <span></span></div>
             </li>
-            <ol class="item-list" data-pack="D35E.enhancement">
+            <ol class="item-list" data-pack="D3Vilia.enhancement">
                 {{#each enhancementsFromSpell as |item iid|}}
                 <li class="item item-box flexrow" data-item-id="{{item._id}}">
                     <div class="item-name enh-item flexrow">
@@ -217,7 +217,7 @@
                         <div class="item-attack">
                             {{#if item.hasAction}}
                             <a class="item-control item-attack"><img class="icon"
-                                                                     src="systems/D35E/icons/actions/gladius.svg"></a>
+                                                                     src="systems/D3Vilia/icons/actions/gladius.svg"></a>
                             {{/if}}
                         </div>
                     </div>

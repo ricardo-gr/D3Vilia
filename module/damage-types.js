@@ -15,19 +15,19 @@ export class DamageTypes {
 
     static getBaseDRDamageTypes() {
         let damageTypes = [
-            {uid: 'any', name: game.i18n.localize("D35E.DRNonPenetrable"), value: 0},
-            {uid: 'good', name: game.i18n.localize("D35E.AlignmentGood"), value: 0, or: false, lethal: false},
-            {uid: 'evil', name: game.i18n.localize("D35E.AlignmentEvil"), value: 0, or: false, lethal: false},
-            {uid: 'chaotic', name: game.i18n.localize("D35E.AlignmentChaotic"), value: 0, or: false, lethal: false},
-            {uid: 'lawful', name: game.i18n.localize("D35E.AlignmentLawful"), value: 0, or: false, lethal: false},
-            {uid: 'slashing', name: game.i18n.localize("D35E.DRSlashing"), value: 0, or: false, lethal: false},
-            {uid: 'bludgeoning', name: game.i18n.localize("D35E.DRBludgeoning"), value: 0, or: false, lethal: false},
-            {uid: 'piercing', name: game.i18n.localize("D35E.DRPiercing"), value: 0, or: false, lethal: false},
-            {uid: 'epic', name: game.i18n.localize("D35E.DREpic"), value: 0, or: false, lethal: false},
-            {uid: 'magic', name: game.i18n.localize("D35E.DRMagic"), value: 0, or: false, lethal: false},
-            {uid: 'silver', name: game.i18n.localize("D35E.DRSilver"), value: 0, or: false, lethal: false},
-            {uid: 'adamantine', name: game.i18n.localize("D35E.DRAdamantine"), value: 0, or: false, lethal: false},
-            {uid: 'coldiron', name: game.i18n.localize("D35E.DRColdIron"), value: 0, or: false, lethal: false}]
+            {uid: 'any', name: game.i18n.localize("D3Vilia.DRNonPenetrable"), value: 0},
+            {uid: 'good', name: game.i18n.localize("D3Vilia.AlignmentGood"), value: 0, or: false, lethal: false},
+            {uid: 'evil', name: game.i18n.localize("D3Vilia.AlignmentEvil"), value: 0, or: false, lethal: false},
+            {uid: 'chaotic', name: game.i18n.localize("D3Vilia.AlignmentChaotic"), value: 0, or: false, lethal: false},
+            {uid: 'lawful', name: game.i18n.localize("D3Vilia.AlignmentLawful"), value: 0, or: false, lethal: false},
+            {uid: 'slashing', name: game.i18n.localize("D3Vilia.DRSlashing"), value: 0, or: false, lethal: false},
+            {uid: 'bludgeoning', name: game.i18n.localize("D3Vilia.DRBludgeoning"), value: 0, or: false, lethal: false},
+            {uid: 'piercing', name: game.i18n.localize("D3Vilia.DRPiercing"), value: 0, or: false, lethal: false},
+            {uid: 'epic', name: game.i18n.localize("D3Vilia.DREpic"), value: 0, or: false, lethal: false},
+            {uid: 'magic', name: game.i18n.localize("D3Vilia.DRMagic"), value: 0, or: false, lethal: false},
+            {uid: 'silver', name: game.i18n.localize("D3Vilia.DRSilver"), value: 0, or: false, lethal: false},
+            {uid: 'adamantine', name: game.i18n.localize("D3Vilia.DRAdamantine"), value: 0, or: false, lethal: false},
+            {uid: 'coldiron', name: game.i18n.localize("D3Vilia.DRColdIron"), value: 0, or: false, lethal: false}]
         return damageTypes;
     }
 
@@ -68,10 +68,10 @@ export class DamageTypes {
     }
 
     static computeDRString(dr) {
-        let or = game.i18n.localize("D35E.or")
-        let and = game.i18n.localize("D35E.and")
-        let DR = game.i18n.localize("D35E.DR")
-        let lethal = game.i18n.localize("D35E.LethalDamageFrom")
+        let or = game.i18n.localize("D3Vilia.or")
+        let and = game.i18n.localize("D3Vilia.and")
+        let DR = game.i18n.localize("D3Vilia.DR")
+        let lethal = game.i18n.localize("D3Vilia.LethalDamageFrom")
         let drParts = [];
         let drOrParts = [];
         let orValue = 0;
@@ -158,13 +158,13 @@ export class DamageTypes {
         let erParts = [];
         er.forEach(e => {
             if (e?.vulnerable) {
-                erParts.push(`${e.name} ${game.i18n.localize("D35E.Vulnerability")}`)
+                erParts.push(`${e.name} ${game.i18n.localize("D3Vilia.Vulnerability")}`)
             } else if (e?.immunity) {
-                erParts.push(`${e.name} ${game.i18n.localize("D35E.Immunity")}`)
+                erParts.push(`${e.name} ${game.i18n.localize("D3Vilia.Immunity")}`)
             } else if (e?.half) {
-                erParts.push(`${e.name} ${game.i18n.localize("D35E.Half")}`)
+                erParts.push(`${e.name} ${game.i18n.localize("D3Vilia.Half")}`)
             } else if (e?.lethal) {
-                erParts.push(`${game.i18n.localize("D35E.LethalDamageFrom")} ${e.name}`)
+                erParts.push(`${game.i18n.localize("D3Vilia.LethalDamageFrom")} ${e.name}`)
             } else if (e.value > 0) {
                 erParts.push(`${e.name} ${e.value}`)
             }
@@ -270,23 +270,23 @@ export class DamageTypes {
                     let value = erValue?.value
                     if (erValue?.immunity) {
                         damageAfterEr = 0;
-                        value = game.i18n.localize("D35E.Immunity")
+                        value = game.i18n.localize("D3Vilia.Immunity")
                     }
                     else if (hasRegeneration && !erValue?.lethal) {
                         if (damageAfterEr > 0) {
                             nonLethalDamage += damageAfterEr;
                             damageAfterEr = 0;
-                            value = game.i18n.localize("D35E.WeaponPropNonLethal")
+                            value = game.i18n.localize("D3Vilia.WeaponPropNonLethal")
                         }
                     }
                     else if (erValue?.vulnerable) {
                         damageAfterEr = Math.ceil(d.roll.total * 1.5)
-                        value = game.i18n.localize("D35E.Vulnerability")
+                        value = game.i18n.localize("D3Vilia.Vulnerability")
                     } else if (erValue?.half) {
                         damageAfterEr = Math.ceil(damageAfterEr * 0.5)
-                        value = game.i18n.localize("D35E.Half")
+                        value = game.i18n.localize("D3Vilia.Half")
                     } else if (damageAfterEr === d.roll.total) {
-                        value = game.i18n.localize("D35E.NoER")
+                        value = game.i18n.localize("D3Vilia.NoER")
                     }
 
                     energyDamage.push({nonLethal: hasRegeneration && !erValue?.lethal,name:_damage.data.name,uid:_damage.data.data.uniqueId,before:d.roll.total,after:damageAfterEr,value:value || 0,lower:damageAfterEr<d.roll.total,higher:damageAfterEr>d.roll.total,equal:d.roll.total===damageAfterEr});

@@ -9,18 +9,18 @@ export class ActorSheetPFNPCLoot extends ActorSheetPFNPC {
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["D35E", "sheet", "actor", "npc", "loot"],
+      classes: ["D3Vilia", "sheet", "actor", "npc", "loot"],
       width: 560,
       height: 420,
     });
   }
     
   get template() {
-    return "systems/D35E/templates/actors/npc-sheet-loot.html";
+    return "systems/D3Vilia/templates/actors/npc-sheet-loot.html";
   }
 
   static get name() {
-    return game.i18n.localize("D35E.ActorSheetPFNPCLoot");
+    return game.i18n.localize("D3Vilia.ActorSheetPFNPCLoot");
   }
 
   getData() {

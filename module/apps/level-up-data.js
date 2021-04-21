@@ -11,9 +11,9 @@ export class LevelUpDataDialog extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "level-up-data",
-            classes: ["D35E", "entry", "level-up-data"],
+            classes: ["D3Vilia", "entry", "level-up-data"],
             title: "Level Data",
-            template: "systems/D35E/templates/apps/level-up-data.html",
+            template: "systems/D3Vilia/templates/apps/level-up-data.html",
             width: 840,
             height: "auto",
             closeOnSubmit: false,
@@ -66,7 +66,7 @@ export class LevelUpDataDialog extends FormApplication {
             maxSkillRank: this.actor.data.details.level.available + 3,
             levelUpData: this.levelUpData,
             bonusSkillPoints: this.actor.data?.counters?.bonusSkillPoints?.value || 0,
-            config: CONFIG.D35E}
+            config: CONFIG.D3Vilia}
         return data
     }
 
@@ -118,7 +118,7 @@ export class LevelUpDataDialog extends FormApplication {
                     })
                 }
             })
-            console.log(`D35E | Updating Level Data | ${classId} | ${this.levelUpId}`)
+            console.log(`D3Vilia | Updating Level Data | ${classId} | ${this.levelUpId}`)
             updateData[`data.details.levelUpData`] = data;
 
             const classes = this.actor.items.filter(o => o.type === "class" && getProperty(o.data, "classType") !== "racial").sort((a, b) => {

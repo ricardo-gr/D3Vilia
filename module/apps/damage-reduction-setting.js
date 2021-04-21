@@ -13,9 +13,9 @@ export class DamageReductionSetting extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "dr-setting",
-            classes: ["D35E", "dr-setting"],
+            classes: ["D3Vilia", "dr-setting"],
             title: "Damage Reduction and Energy Resistance",
-            template: "systems/D35E/templates/apps/damage-reduction-setting.html",
+            template: "systems/D3Vilia/templates/apps/damage-reduction-setting.html",
             width: 640,
             height: "auto",
             closeOnSubmit: false,

@@ -14,12 +14,12 @@ describe('The Home Page', () => {
     it('opens enhanacement compendium', () => {
         cy.get('.notification > .close').click({multiple: true})
         cy.get('[title="Compendium Packs"] > .fas').click()
-        cy.get('[data-pack="D35E.enhancements"] > .pack-title > a').click()
+        cy.get('[data-pack="D3Vilia.enhancements"] > .pack-title > a').click()
     })
 
     it('opens weapon compendium and imports weapon', () => {
         cy.get('[title="Compendium Packs"] > .fas').click()
-        cy.get('[data-pack="D35E.weapons-and-ammo"] > .pack-title > a').click()
+        cy.get('[data-pack="D3Vilia.weapons-and-ammo"] > .pack-title > a').click()
         cy.get('[data-entry-id="KtgSPHGqIRTwhwZM"] > .entry-name').rightclick()
         cy.get('.context-items > :nth-child(1)').click()
         cy.get('nav[data-group="primary"] > [data-tab="enhancements"]').click()

@@ -3,7 +3,7 @@ import { createTabs } from "./lib.js";
 export default function renderOnboardingScreen() {
     const system = game.system;
     const moduleId = system.id;
-    const title = "D35E";
+    const title = "D3Vilia";
     const moduleVersion = system.data.version;
     game.settings.register(title, '__onboarding', {
         name: `Tutorial shown`,
@@ -21,7 +21,7 @@ export default function renderOnboardingScreen() {
     class OnboardingScreen extends Application {
         static get defaultOptions() {
             const options = super.defaultOptions;
-            options.template = `systems/D35E/templates/onboarding.html`;
+            options.template = `systems/D3Vilia/templates/onboarding.html`;
             options.resizable = false;
             options.width = 600;
             options.height = 195;

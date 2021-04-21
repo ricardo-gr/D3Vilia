@@ -4,7 +4,7 @@ export class PointBuyCalculator extends FormApplication {
         super(...args);
 
         this.abilities = [];
-        for (let [k, name] of Object.entries(CONFIG.D35E.abilities)) {
+        for (let [k, name] of Object.entries(CONFIG.D3Vilia.abilities)) {
             this.abilities.push({
                 key: k,
                 name: name,
@@ -16,9 +16,9 @@ export class PointBuyCalculator extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "pointbuy-calculator",
-            classes: ["D35E", "pointbuy-calculator"],
+            classes: ["D3Vilia", "pointbuy-calculator"],
             title: "Point Buy Calculator",
-            template: "systems/D35E/templates/apps/point-buy-calculator.html",
+            template: "systems/D3Vilia/templates/apps/point-buy-calculator.html",
             width: 320,
             height: "auto",
             closeOnSubmit: false,
@@ -43,7 +43,7 @@ export class PointBuyCalculator extends FormApplication {
         let result = 0;
 
         for (let a of this.abilities) {
-            result += CONFIG.D35E.abilityCost[a.value];
+            result += CONFIG.D3Vilia.abilityCost[a.value];
         }
         return result;
     }

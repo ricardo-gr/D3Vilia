@@ -6,9 +6,9 @@ export class ActorTraitSelector extends FormApplication {
 	static get defaultOptions() {
 	  const options = super.defaultOptions;
 	  options.id = "trait-selector";
-	  options.classes = ["D35E"];
+	  options.classes = ["D3Vilia"];
 	  options.title = "Actor Trait Selection";
-	  options.template = "systems/D35E/templates/apps/trait-selector.html";
+	  options.template = "systems/D3Vilia/templates/apps/trait-selector.html";
 	  options.width = 320;
 	  options.height = "auto";
 	  return options;

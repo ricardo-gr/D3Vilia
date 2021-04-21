@@ -8,9 +8,9 @@ export class LevelUpDialog extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "level-up-box",
-            classes: ["D35E", "entry"],
+            classes: ["D3Vilia", "entry"],
             title: "Level Up Wizard",
-            template: "systems/D35E/templates/apps/level-up-box.html",
+            template: "systems/D3Vilia/templates/apps/level-up-box.html",
             width: 320,
             height: "auto",
             closeOnSubmit: false,
@@ -24,7 +24,7 @@ export class LevelUpDialog extends FormApplication {
 
     getData() {
         let data = {actor: this.actor, hasNewFeat: (this.actor.data.details.level.available + 1) % 3 == 0, hasNewAbility: (this.actor.data.details.level.available + 1) % 4 == 0,
-            config: CONFIG.D35E}
+            config: CONFIG.D3Vilia}
         return data
     }
 

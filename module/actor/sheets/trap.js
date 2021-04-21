@@ -14,7 +14,7 @@ export class ActorSheetTrap extends ActorSheetPF {
    */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-      classes: ["D35E", "sheet", "actor", "npc", "trap"],
+      classes: ["D3Vilia", "sheet", "actor", "npc", "trap"],
       width: 725,
       height: 400
     });
@@ -29,11 +29,11 @@ export class ActorSheetTrap extends ActorSheetPF {
    * @type {String}
    */
   get template() {
-    return "systems/D35E/templates/actors/trap-sheet.html";
+    return "systems/D3Vilia/templates/actors/trap-sheet.html";
   }
 
   static get name() {
-    return game.i18n.localize("D35E.ActorSheetPFNPC");
+    return game.i18n.localize("D3Vilia.ActorSheetPFNPC");
   }
 
   /* -------------------------------------------- */

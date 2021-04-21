@@ -9,9 +9,9 @@ export class SpellbookEditor extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "spellbook-editor",
-            classes: ["D35E", "entry"],
+            classes: ["D3Vilia", "entry"],
             title: "Notes Selector",
-            template: "systems/D35E/templates/apps/spellbook-editor.html",
+            template: "systems/D3Vilia/templates/apps/spellbook-editor.html",
             width: 320,
             height: "auto",
             closeOnSubmit: false,
@@ -25,7 +25,7 @@ export class SpellbookEditor extends FormApplication {
 
     getData() {
         return {spellbook: this.spellbook, actor: this.actor,
-            config: CONFIG.D35E}
+            config: CONFIG.D3Vilia}
     }
 
     activateListeners(html) {

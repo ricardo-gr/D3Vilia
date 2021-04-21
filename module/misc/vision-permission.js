@@ -9,7 +9,7 @@ export class VisionPermissionSheet extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["sheet", "vision-permission"],
-            template: "systems/D35E/templates/apps/vision-permission.html",
+            template: "systems/D3Vilia/templates/apps/vision-permission.html",
             width: 300,
             height: "auto",
             closeOnSubmit: true,
@@ -26,21 +26,21 @@ export class VisionPermissionSheet extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        await this.object.setFlag("D35E", "visionPermission", formData);
-        game.socket.emit("system.D35E", { eventType: "redrawCanvas" });
+        await this.object.setFlag("D3Vilia", "visionPermission", formData);
+        game.socket.emit("system.D3Vilia", { eventType: "redrawCanvas" });
     }
 
     async getData() {
         let data = super.getData();
-        data = mergeObject(data, this.object.getFlag("D35E", "visionPermission"));
+        data = mergeObject(data, this.object.getFlag("D3Vilia", "visionPermission"));
         data.users = data.users || {};
 
         data.defaultLevels = [
-            { level: "no", name: game.i18n.localize("D35E.No") },
-            { level: "yes", name: game.i18n.localize("D35E.Yes") }
+            { level: "no", name: game.i18n.localize("D3Vilia.No") },
+            { level: "yes", name: game.i18n.localize("D3Vilia.Yes") }
         ];
         data.levels = [
-            { level: "default", name: game.i18n.localize("D35E.Default") },
+            { level: "default", name: game.i18n.localize("D3Vilia.Default") },
             ...data.defaultLevels
         ];
         if (data.default == null) data.default = "no";
@@ -65,7 +65,7 @@ export const hasTokenVision = function(token) {
     if (!token.actor) return false;
     if (token.actor.hasPerm(game.user, "OWNER")) return true;
 
-    const visionFlag = token.actor.getFlag("D35E", "visionPermission");
+    const visionFlag = token.actor.getFlag("D3Vilia", "visionPermission");
     if (!visionFlag || !visionFlag.users[game.user._id]) return false;
     if (visionFlag.users[game.user._id].level === "yes") return true;
     if (visionFlag.users[game.user._id].level === "default" && visionFlag.default === "yes") return true;
@@ -84,7 +84,7 @@ const ActorDirectory__getEntryContextOptions = ActorDirectory.prototype._getEntr
 ActorDirectory.prototype._getEntryContextOptions = function() {
     return ActorDirectory__getEntryContextOptions.call(this).concat([
         {
-            name: "D35E.Vision",
+            name: "D3Vilia.Vision",
             icon: '<i class="fas fa-eye"></i>',
             condition: li => {
                 return game.user.isGM;
@@ -122,7 +122,7 @@ SightLayer.prototype._isTokenVisionSource = function(token) {
     const canObserve = token.actor && hasTokenVision(token);
     if ( !canObserve ) return false;
     const others = canvas.tokens.controlled.filter(t => !t.data.hidden && t.hasSight);
-    return !others.length || game.settings.get("D35E", "sharedVisionMode") === "1";
+    return !others.length || game.settings.get("D3Vilia", "sharedVisionMode") === "1";
 };
 
 Object.defineProperty(Token.prototype, "observer", {

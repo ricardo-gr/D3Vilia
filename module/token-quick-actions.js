@@ -18,9 +18,9 @@ export class TokenQuickActions {
     items.forEach(function(item) {
       const icon = item.img;
       let title = "";
-      if      (item.type === "attack") title = game.i18n.localize("D35E.AttackWith").format(item.name);
-      else if (item.type === "spell")  title = game.i18n.localize("D35E.AttackWithSpell").format(item.name);
-      else if (item.type === "feat")   title = game.i18n.localize("D35E.AttackWithFeat").format(item.name);
+      if      (item.type === "attack") title = game.i18n.localize("D3Vilia.AttackWith").format(item.name);
+      else if (item.type === "spell")  title = game.i18n.localize("D3Vilia.AttackWithSpell").format(item.name);
+      else if (item.type === "feat")   title = game.i18n.localize("D3Vilia.AttackWithFeat").format(item.name);
       const type = item.type;
       quickActions += `<div id="${type}-${item._id}" class="control-icon token-quick-action"><img src="${icon}" width="36" height="36" title="${title}"></div>`;
     });
@@ -30,7 +30,7 @@ export class TokenQuickActions {
     items.forEach(function(item) {
       const type = item.type;
       html.find(`#${type}-${item._id}`).click(function(event) {
-        game.D35E.rollItemMacro(item.name, {
+        game.D3Vilia.rollItemMacro(item.name, {
           itemId: item._id,
           itemType: type,
           actorId: actorId
@@ -65,7 +65,7 @@ export class TokenQuickActions {
     items.forEach(function(item) {
       const type = item.type;
       html.find(`#${type}-${item._id}`).click(function(event) {
-        game.D35E.rollItemMacro(item.name, {
+        game.D3Vilia.rollItemMacro(item.name, {
           itemId: item._id,
           itemType: type,
           actorId: actorId

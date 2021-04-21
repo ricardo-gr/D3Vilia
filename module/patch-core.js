@@ -8,7 +8,7 @@ const FormApplication_close = FormApplication.prototype.close;
 
 export async function PatchCore() {
   // Patch getTemplate to prevent unwanted indentation in things things like <textarea> elements.
-  async function D35E_getTemplate(path) {
+  async function D3Vilia_getTemplate(path) {
     if ( !_templateCache.hasOwnProperty(path) ) {
       await new Promise(resolve => {
         game.socket.emit('template', path, resp => {
@@ -135,7 +135,7 @@ export async function PatchCore() {
   const Token_animateMovement = Token.prototype.animateMovement;
   Token.prototype.animateMovement = async function(...args) {
     await Token_animateMovement.call(this, ...args);
-    console.log("D35E | Calling _calculateMinionDistance")
+    console.log("D3Vilia | Calling _calculateMinionDistance")
     ActorPF.prototype._calculateMinionDistance.call(this.actor, {});
     // Do something?
   };
@@ -161,7 +161,7 @@ export async function PatchCore() {
   Object.defineProperty(ActiveEffect.prototype, "isTemporary", {
     get: function () {
       const duration = this.data.duration.seconds ?? (this.data.duration.rounds || this.data.duration.turns) ?? 0;
-      return duration > 0 || this.getFlag("core", "statusId") || this.getFlag("D35E", "show");
+      return duration > 0 || this.getFlag("core", "statusId") || this.getFlag("D3Vilia", "show");
     },
   });
 
@@ -170,7 +170,7 @@ export async function PatchCore() {
   // Patch, patch, patch
   Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
   Combat.prototype.rollInitiative = _rollInitiative;
-  window.getTemplate = D35E_getTemplate;
+  window.getTemplate = D3Vilia_getTemplate;
 
   if (isMinimumCoreVersion("0.7.2")) {
     await import("./low-light-vision.js");

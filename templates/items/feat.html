@@ -3,13 +3,13 @@
   {{#if data.uniqueId}}
       <div class="tooltip">
       <i class="fas fa-anchor"></i>
-      <div class="tooltipcontent">{{{ localize 'D35E.ItemHasUID' }}}</div>
+      <div class="tooltipcontent">{{{ localize 'D3Vilia.ItemHasUID' }}}</div>
     </div>
     {{/if}}
     {{#if unmetRequirements}}
     <div class="tooltip" style="margin-left: 4px">
         <i class="fas fa-tasks"></i>
-        <div class="tooltipcontent">{{{ localize 'D35E.HasUnmetRequirements' }}}
+        <div class="tooltipcontent">{{{ localize 'D3Vilia.HasUnmetRequirements' }}}
 
             {{#each unmetRequirements as |req|}}
             <p>{{req}}</p>
@@ -26,7 +26,7 @@
 
     <div class="header-details flexrow">
       <h1 class="charname">
-        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D3Vilia.ItemName"}}"/>
       </h1>
 
       <div class="item-subtitle">
@@ -39,8 +39,8 @@
 
   {{!-- Item Sheet Navigation --}}
   <nav class="sheet-navigation tabs" data-group="primary">
-    <a class="item active" data-tab="description">{{ localize "D35E.Description" }}</a>
-    <a class="item active" data-tab="configuration" style="flex: 0 150px;">{{ localize "D35E.Configuration" }}</a>
+    <a class="item active" data-tab="description">{{ localize "D3Vilia.Description" }}</a>
+    <a class="item active" data-tab="configuration" style="flex: 0 150px;">{{ localize "D3Vilia.Configuration" }}</a>
   </nav>
 
   {{!-- Item Sheet Body --}}
@@ -51,24 +51,24 @@
         <section class="description-body" style="display: block; height: 100%">
           <div class="flexcol">
             {{#if data.spellSpecialization.isDomain}}
-            <h3 class="form-header">{{localize "D35E.SpellSpecializationGrantedPowers"}}</h3>
+            <h3 class="form-header">{{localize "D3Vilia.SpellSpecializationGrantedPowers"}}</h3>
             {{/if}}
             <div style="{{#if data.spellSpecialization.isDomain}}height: 80px{{else}}height:400px{{/if}}">
               {{editor content=data.description.value target="data.description.value" button=true owner=owner
               editable=editable}}
             </div>
             {{#if data.spellSpecialization.isDomain}}
-              <h3 class="form-header">{{localize "D35E.Spells"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.Spells"}}</h3>
               <div class="inventory-group flexcol" style="padding-bottom: 8px">
                 <ol class="inventory-list sub-scroll scroll-inventory">
 
                   <li class="inventory-header flexrow">
                     <h3 class="item-name flexrow"></h3>
                     <div style="flex: 0 60px; text-align: center; opacity: 0.7">
-                      {{localize "D35E.Level"}}
+                      {{localize "D3Vilia.Level"}}
                     </div>
                   </li>
-                  <ol class="item-list" data-pack="D35E.class-abilities">
+                  <ol class="item-list" data-pack="D3Vilia.class-abilities">
                     {{#each data.spellSpecialization.spells as |item level|}}
                     <li class="item item-box  flexrow" data-item-id="{{item.id}}" data-pack="{{item.pack}}"
                         data-item-level="{{item.level}}">
@@ -79,7 +79,7 @@
                         </h4>
                       </div>
                       <div style="flex: 0 60px; text-align: center; opacity: 0.7">
-                        <em>{{localize "D35E.Level"}} {{item.level}}</em>
+                        <em>{{localize "D3Vilia.Level"}} {{item.level}}</em>
                       </div>
 
                     </li>
@@ -94,14 +94,14 @@
     </div>
     {{else}}
 
-    {{> "systems/D35E/templates/items/parts/item-description.html"}}
+    {{> "systems/D3Vilia/templates/items/parts/item-description.html"}}
 
     {{/if}}
 
     <div class="tab flexcol active" data-group="primary" data-tab="configuration">
       <nav class="sheet-navigation tabs subtabs configuration" data-group="configuration">
-        <a class="item active" data-tab="details">{{ localize "D35E.Details" }}</a>
-        <a class="item" data-tab="changes">{{localize "D35E.Changes"}}</a>
+        <a class="item active" data-tab="details">{{ localize "D3Vilia.Details" }}</a>
+        <a class="item" data-tab="changes">{{localize "D3Vilia.Changes"}}</a>
       </nav>
 
       <div class="flexrow configuration-container" style="overflow: hidden; height: 100%">
@@ -109,11 +109,11 @@
           {{!-- Details Tab --}}
           <div class="tab configuration-group details" data-group="configuration" data-tab="details">
 
-              <h3 class="form-header">{{localize "D35E.Details"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.Details"}}</h3>
 
               {{!-- Feat Type --}}
               <div class="form-group select">
-                <label>{{localize "D35E.Type"}}</label>
+                <label>{{localize "D3Vilia.Type"}}</label>
                 <select name="data.featType" value="{{data.featType}}">
                   {{#select data.featType}}
                   {{#each config.featTypes as |type a|}}
@@ -126,26 +126,26 @@
               {{!-- Feat Tags --}}
               <div class="form-group stacked">
                 <div class="data-selector">
-                  <a class="entry-selector" for="data.tags" data-fields="{{localize "D35E.Tags"}}" data-dtypes="String"><i class="fas fa-edit"></i></a>
-                  <label for="data.tags">{{localize "D35E.Tags"}}</label>
+                  <a class="entry-selector" for="data.tags" data-fields="{{localize "D3Vilia.Tags"}}" data-dtypes="String"><i class="fas fa-edit"></i></a>
+                  <label for="data.tags">{{localize "D3Vilia.Tags"}}</label>
                 </div>
 
                 {{#if isClassFeature}}
                 <div class="data-selector">
-                  <a class="entry-selector" for="data.associations.classes" data-fields="{{localize "D35E.ClassPlural"}};{{localize "D35E.Level"}}" data-dtypes="String;Number"><i class="fas fa-edit"></i></a>
-                  <label for="data.associations.classes">{{localize "D35E.ClassPlural"}}</label>
+                  <a class="entry-selector" for="data.associations.classes" data-fields="{{localize "D3Vilia.ClassPlural"}};{{localize "D3Vilia.Level"}}" data-dtypes="String;Number"><i class="fas fa-edit"></i></a>
+                  <label for="data.associations.classes">{{localize "D3Vilia.ClassPlural"}}</label>
                 </div>
                 {{/if}}
               </div>
 
               <div class="form-group stacked">
                 <label class="checkbox">
-                  <input type="checkbox" name="data.showInQuickbar" {{checked data.showInQuickbar}}/> {{localize "D35E.ShowInQuickbar"}}
+                  <input type="checkbox" name="data.showInQuickbar" {{checked data.showInQuickbar}}/> {{localize "D3Vilia.ShowInQuickbar"}}
                 </label>
               </div>
 
             <div class="form-group">
-              <label>{{localize "D35E.Metamagic"}}</label>
+              <label>{{localize "D3Vilia.Metamagic"}}</label>
               <label class="checkbox" style="position: relative; flex: 0 20px">
                 <input type="checkbox" class="stylized" name="data.metamagic.enabled" {{checked data.metamagic.enabled}}/>
                 <span class="checkmark"></span>
@@ -154,70 +154,70 @@
 
             {{#if data.metamagic.enabled}}
               <div class="form-group">
-                <label>{{localize "D35E.ShortDescription"}}</label>
+                <label>{{localize "D3Vilia.ShortDescription"}}</label>
                 <input type="text" name="data.metamagic.shortDesc" value="{{data.metamagic.shortDesc}}" data-dtype="String"/>
               </div>
               <textarea class="metamagic-editor" style="font-family: monospace; min-height: 120px" name="data.metamagic.code">{{data.metamagic.code}}</textarea>
             {{/if}}
 
               {{#if isSpellSpecialization}}
-              <h3 class="form-header">{{localize "D35E.FeatTypeSpellSpecialization"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.FeatTypeSpellSpecialization"}}</h3>
               <div class="form-group">
-                <label>{{localize "D35E.SpellSpecializationSchool"}}</label>
+                <label>{{localize "D3Vilia.SpellSpecializationSchool"}}</label>
                 <input type="text" name="data.spellSpecializationName" value="{{data.spellSpecializationName}}" data-dtype="String"/>
               </div>
               <div class="form-group">
-                <label>{{localize "D35E.SpellSpecializationForbidden"}}</label>
+                <label>{{localize "D3Vilia.SpellSpecializationForbidden"}}</label>
                 <input type="text" name="data.spellSpecializationForbiddenNames" value="{{data.spellSpecializationForbiddenNames}}" data-dtype="String"/>
               </div>
 
             <div class="form-group">
-              <label>{{localize "D35E.SpellSpecializationIdDomain"}}</label>
+              <label>{{localize "D3Vilia.SpellSpecializationIdDomain"}}</label>
               <label class="checkbox" style="position: relative; flex: 0 20px">
                 <input type="checkbox" class="stylized" name="data.spellSpecialization.isDomain" {{checked data.spellSpecialization.isDomain}}/>
                 <span class="checkmark"></span>
               </label>
             </div>
 
-              <em>{{localize "D35E.SpellSpecializationDesc"}}</em>
+              <em>{{localize "D3Vilia.SpellSpecializationDesc"}}</em>
 
-              <h3 class="form-header">{{localize "D35E.SpellSpecializationSpells"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.SpellSpecializationSpells"}}</h3>
               <section>
                 {{#each data.spellSpecialization.spells as |spell level|}}
                 <div class="spell flexcol" data-spell="{{level}}">
-                  <h4>{{localize "D35E.Level"}} {{spell.level}}</h4>
+                  <h4>{{localize "D3Vilia.Level"}} {{spell.level}}</h4>
                   <div class="form-group">
                     <img src="{{spell.img}}">
                     <label>{{spell.name}}</label>
                     <input type="text" name="data.spellSpecialization.spells.{{level}}.id" value="{{spell.id}}" data-dtype="String"/>
                     <input type="text" name="data.spellSpecialization.spells.{{level}}.pack" value="{{spell.pack}}" data-dtype="String"/>
                   </div>
-                  <em style="align-self: flex-end;">{{localize "D35E.SpellSpecializationDropSpell"}}</em>
+                  <em style="align-self: flex-end;">{{localize "D3Vilia.SpellSpecializationDropSpell"}}</em>
                 </div>
                 {{/each}}
               </section>
 
               {{/if}}
 
-              {{> "systems/D35E/templates/items/parts/item-customization.html"}}
+              {{> "systems/D3Vilia/templates/items/parts/item-customization.html"}}
 
               {{!-- Activation --}}
-              <h3 class="form-header">{{localize "D35E.FeatureUsage"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.FeatureUsage"}}</h3>
 
               {{!-- Item Activation Template --}}
-              {{> "systems/D35E/templates/items/parts/item-activation.html"}}
+              {{> "systems/D3Vilia/templates/items/parts/item-activation.html"}}
 
               {{!-- Action --}}
-              <h3 class="form-header">{{localize "D35E.Attack"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.Attack"}}</h3>
 
               {{!-- Item Action Template --}}
-              {{> "systems/D35E/templates/items/parts/item-action.html"}}
+              {{> "systems/D3Vilia/templates/items/parts/item-action.html"}}
 
               {{!-- Measure Template --}}
-              <h3 class="form-header">{{localize "D35E.MeasureTemplate"}}</h3>
+              <h3 class="form-header">{{localize "D3Vilia.MeasureTemplate"}}</h3>
 
               {{!-- Item Measure Template --}}
-              {{> "systems/D35E/templates/items/parts/item-template.html"}}
+              {{> "systems/D3Vilia/templates/items/parts/item-template.html"}}
 
             {{#if isSpellSpecialization}}
               {{#if isGM}}
@@ -232,9 +232,9 @@
 
 
           <div class="tab configuration-group flexcol" data-group="configuration" data-tab="changes">
-            {{> "systems/D35E/templates/items/parts/item-changes.html"}}
+            {{> "systems/D3Vilia/templates/items/parts/item-changes.html"}}
 
-            {{> "systems/D35E/templates/items/parts/item-notes.html"}}
+            {{> "systems/D3Vilia/templates/items/parts/item-notes.html"}}
           </div>
         </section>
       </div>
@@ -245,7 +245,7 @@
   {{#if data.spellSpecialization.isDomain}}
   {{#if owner}}
   <div class="form-group" >
-    <button type="button" name="add-domain-spells">{{localize "D35E.AddSpellsToSpellbook"}}</button>
+    <button type="button" name="add-domain-spells">{{localize "D3Vilia.AddSpellsToSpellbook"}}</button>
   </div>
   {{/if}}
   {{/if}}

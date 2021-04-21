@@ -18,7 +18,7 @@ def generate_random_id():
     return random_id
 
 def img_to_base_64(image):
-    with open(image.replace("systems/D35E/",""), "rb") as img_file:
+    with open(image.replace("systems/D3Vilia/",""), "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
 if args.action == 'unpack' or args.action == 'repack':

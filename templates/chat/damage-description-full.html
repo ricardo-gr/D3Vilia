@@ -1,4 +1,4 @@
-<div class="D35E chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
+<div class="D3Vilia chat-card item-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if
      tokenId}}data-token-id="{{tokenId}}" {{/if}}>
 <header class="card-header flexrow">
     <img src="{{img}}" title="{{name}}" width="36" height="36"/>
@@ -12,12 +12,12 @@
         <div class="dice-roll attack-roll flexcol">
             {{#if hit}}
             {{#if crit}}
-            <div class="dice-flavor">{{localize "D35E.Crit"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.Crit"}}</div>
             {{else}}
-            <div class="dice-flavor">{{localize "D35E.Hit"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.Hit"}}</div>
             {{/if}}
             {{else}}
-            <div class="dice-flavor">{{localize "D35E.Miss"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.Miss"}}</div>
             {{/if}}
             <div class="flexrow">
                 <div class="flexcol">
@@ -40,7 +40,7 @@
 
     <div class="chat-attack">
         <div class="dice-roll attack-roll flexcol">
-            <div class="dice-flavor">{{localize "D35E.Fortification"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.Fortification"}}</div>
             <div class="flexrow">
                 <div class="flexcol">
                     <div class="dice-result ">
@@ -66,9 +66,9 @@
 
         <div class="dice-roll attack-roll flexcol">
             {{#if damageData.isHealing}}
-            <div class="dice-flavor">{{localize "D35E.HealingApplied"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.HealingApplied"}}</div>
             {{else}}
-            <div class="dice-flavor">{{localize "D35E.DamageApplied"}}{{#if applyHalf}} ({{localize "D35E.Half"}}){{/if}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.DamageApplied"}}{{#if applyHalf}} ({{localize "D3Vilia.Half"}}){{/if}}</div>
             {{/if}}
             <div class="flexrow">
                 <div class="flexcol">
@@ -126,16 +126,16 @@
     </div>
     <div class="chat-attack chat-attack-details">
         <div class="dice-roll attack-roll flexcol">
-            <div class="dice-flavor">{{localize "D35E.DRERApplied"}}</div>
+            <div class="dice-flavor">{{localize "D3Vilia.DRERApplied"}}</div>
             {{#if damageData.baseBeforeDR}}
             <div class="flexrow">
 
                 <h4 style="flex:100px;line-height:26px;margin:0;border: unset;text-align: unset;background: unset;box-shadow: unset;font-size: unset;font-weight: unset;"
                     class="dice-total">
                     {{#if damageData.appliedDR.name}}
-                    {{localize "D35E.DR"}} {{damageData.appliedDR.value}}/{{damageData.appliedDR.name}}
+                    {{localize "D3Vilia.DR"}} {{damageData.appliedDR.value}}/{{damageData.appliedDR.name}}
                     {{else}}
-                    {{localize "D35E.NoDR"}}
+                    {{localize "D3Vilia.NoDR"}}
                     {{/if}}
                 </h4>
                 <div class="dice-result" style="flex: 0 50px;order: 0;">

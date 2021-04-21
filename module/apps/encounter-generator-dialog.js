@@ -9,7 +9,7 @@ export class EncounterGeneratorDialog extends FormApplication {
         return mergeObject(super.defaultOptions, {
             id: "encounter-generator",
             title: "Encounter Generator",
-            template: "systems/D35E/templates/apps/encounter-generator-dialog.html",
+            template: "systems/D3Vilia/templates/apps/encounter-generator-dialog.html",
             width: "auto",
             height: "auto",
             closeOnSubmit: false,
@@ -19,9 +19,9 @@ export class EncounterGeneratorDialog extends FormApplication {
     };
 
     loadCompendium() {//is the Bestiary compendium loaded?, No? Load it
-        if (game.D35E.CompendiumDirectoryPF.browser.compendiums.bestiary._data.loaded == false) {
+        if (game.D3Vilia.CompendiumDirectoryPF.browser.compendiums.bestiary._data.loaded == false) {
             ui.notifications.info("Loading Monster Compendiums for the first time...")
-            game.D35E.CompendiumDirectoryPF.browser.compendiums.bestiary.loadData()
+            game.D3Vilia.CompendiumDirectoryPF.browser.compendiums.bestiary.loadData()
         }
     }
     async getCompendiumTables(){
@@ -30,7 +30,7 @@ export class EncounterGeneratorDialog extends FormApplication {
         let grabbedTables = new Array;
         const compendiums = [...game.packs.entries]
         async function compendiumTables(name){
-            const pack = game.packs.get("D35E.roll-tables");
+            const pack = game.packs.get("D3Vilia.roll-tables");
             const index = await pack.getIndex();
             const idTable = index.find(i => i.name === `${name}`);
             const table = await pack.getEntity(idTable._id);
@@ -121,7 +121,7 @@ export class EncounterGeneratorDialog extends FormApplication {
                     let monsters = grabbedTables.find(t => t.data._id === val).roll().results
                     testELArray = duplicate(monsterArray)
                     monsters.forEach(monster => {
-                        let monsterCR = game.D35E.CompendiumDirectoryPF.browser.compendiums.bestiary.items.find(x => x.item._id === monster.resultId)
+                        let monsterCR = game.D3Vilia.CompendiumDirectoryPF.browser.compendiums.bestiary.items.find(x => x.item._id === monster.resultId)
                         testELArray.push({
                             id: monster.resultId,
                             name: monster.text,
@@ -204,7 +204,7 @@ export class EncounterGeneratorDialog extends FormApplication {
         };
 
         async function makeMonsters() {//add all the monster data to the Encounter Gen window (in the form of a pretty little template)
-            var newMonster = await renderTemplate("systems/D35E/templates/apps/encounter-generator-template.html", monsterData);
+            var newMonster = await renderTemplate("systems/D3Vilia/templates/apps/encounter-generator-template.html", monsterData);
             $("#putMonstersHere").append(newMonster);
         };
         makeMonsters();

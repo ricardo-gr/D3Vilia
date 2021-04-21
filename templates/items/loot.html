@@ -9,26 +9,26 @@
     <div class="header-details flexrow">
       {{#if isGM}}
       <h3 class="charname">
-        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize "D3Vilia.ItemName"}}"/>
       </h3>
 
       <h3 class="charname">
-        <input name="data.unidentified.name" type="text" value="{{data.unidentified.name}}" placeholder="{{localize "D35E.UnidentifiedName"}}"/>
+        <input name="data.unidentified.name" type="text" value="{{data.unidentified.name}}" placeholder="{{localize "D3Vilia.UnidentifiedName"}}"/>
       </h3>
       {{else}}
       {{#if showUnidentifiedData}}
       <h1 class="charname">
-        <input name="data.unidentified.name" type="text" value="{{itemName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        <input name="data.unidentified.name" type="text" value="{{itemName}}" placeholder="{{localize "D3Vilia.ItemName"}}"/>
       </h1>
       {{else}}
       <h1 class="charname">
-        <input name="name" type="text" value="{{itemName}}" placeholder="{{localize "D35E.ItemName"}}"/>
+        <input name="name" type="text" value="{{itemName}}" placeholder="{{localize "D3Vilia.ItemName"}}"/>
       </h1>
       {{/if}}
       {{/if}}
 
       <div class="item-subtitle">
-        <h4 class="item-type">{{localize "D35E.Item"}}</h4>
+        <h4 class="item-type">{{localize "D3Vilia.Item"}}</h4>
         <span class="item-status">{{itemStatus}}</span>
       </div>
 
@@ -46,16 +46,16 @@
   <section class="sheet-content flexcol">
   {{!-- Item Sheet Navigation --}}
   <nav class="sheet-navigation tabs" data-group="primary">
-    <a class="item active" data-tab="description">{{ localize "D35E.Description" }}</a>
-    <a class="item" data-tab="details">{{ localize "D35E.Details" }}</a>
+    <a class="item active" data-tab="description">{{ localize "D3Vilia.Description" }}</a>
+    <a class="item" data-tab="details">{{ localize "D3Vilia.Details" }}</a>
   </nav>
 
   {{!-- Item Sheet Body --}}
   <section class="primary-body">
-    {{> "systems/D35E/templates/items/parts/item-description.html"}}
+    {{> "systems/D3Vilia/templates/items/parts/item-description.html"}}
 
     <div class="tab details" data-group="primary" data-tab="details">
-      <h3 class="form-header">{{localize "D35E.Details"}}</h3>
+      <h3 class="form-header">{{localize "D3Vilia.Details"}}</h3>
 
       {{!-- Loot Type --}}
       <div class="form-group">
@@ -71,46 +71,46 @@
 
       {{#if isContainer}}
       <div class="form-group">
-        <label>{{localize "D35E.BagOfHoldingLike"}}</label>
+        <label>{{localize "D3Vilia.BagOfHoldingLike"}}</label>
         <label class="checkbox">
           <input type="checkbox" name="data.bagOfHoldingLike" {{checked data.bagOfHoldingLike}}/>
         </label>
       </div>
 
       <div class="form-group">
-        <label>{{localize "D35E.WeightCapacity"}}</label>
+        <label>{{localize "D3Vilia.WeightCapacity"}}</label>
         <input type="text" name="data.convertedCapacity" value="{{convertedCapacity}}" data-dtype="Number"/>
         {{#if usesImperialSystem}}
-        <label class="unit" style="flex: 0">{{ localize 'D35E.Lbs' }}</label>
+        <label class="unit" style="flex: 0">{{ localize 'D3Vilia.Lbs' }}</label>
         {{else}}
-        <label class="unit" style="flex: 0">{{ localize 'D35E.Kgs' }}</label>
+        <label class="unit" style="flex: 0">{{ localize 'D3Vilia.Kgs' }}</label>
         {{/if}}
       </div>
       {{/if}}
 
       {{#if isAmmo}}
       <div class="form-group ammo-formula">
-        <label>{{localize "D35E.BonusAmmoDamage"}}</label>
-        <input type="text" name="data.bonusAmmoDamage" value="{{data.bonusAmmoDamage}}" placeholder="{{localize "D35E.BonusAmmoDamageFormula"}}"/>
+        <label>{{localize "D3Vilia.BonusAmmoDamage"}}</label>
+        <input type="text" name="data.bonusAmmoDamage" value="{{data.bonusAmmoDamage}}" placeholder="{{localize "D3Vilia.BonusAmmoDamageFormula"}}"/>
       </div>
       <div class="form-group ammo-formula">
-        <label>{{localize "D35E.BonusAmmoDamageType"}}</label>
-        <input type="text" name="data.bonusAmmoDamageType" value="{{data.bonusAmmoDamageType}}" placeholder="{{localize "D35E.BonusAmmoDamageTypePlaceholder"}}"/>
+        <label>{{localize "D3Vilia.BonusAmmoDamageType"}}</label>
+        <input type="text" name="data.bonusAmmoDamageType" value="{{data.bonusAmmoDamageType}}" placeholder="{{localize "D3Vilia.BonusAmmoDamageTypePlaceholder"}}"/>
       </div>
       <div class="form-group ammo-formula">
-        <label>{{localize "D35E.BonusAmmoAttack"}}</label>
-        <input type="text" name="data.bonusAmmoAttack" value="{{data.bonusAmmoAttack}}" placeholder="{{localize "D35E.BonusAmmoAttackPlaceholder"}}"/>
+        <label>{{localize "D3Vilia.BonusAmmoAttack"}}</label>
+        <input type="text" name="data.bonusAmmoAttack" value="{{data.bonusAmmoAttack}}" placeholder="{{localize "D3Vilia.BonusAmmoAttackPlaceholder"}}"/>
       </div>
 
       <div class="form-group stacked">
-        <label>{{localize "D35E.AttackNotes"}}</label>
+        <label>{{localize "D3Vilia.AttackNotes"}}</label>
         <textarea type="text" name="data.bonusAmmoAttackNote">{{data.bonusAmmoAttackNote}}</textarea>
       </div>
       {{/if}}
 
       {{#if isGM}}
       <label class="checkbox">
-        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{localize "D35E.Identified"}}
+        <input type="checkbox" name="data.identified" {{checked data.identified}}/> {{localize "D3Vilia.Identified"}}
       </label>
       {{/if}}
 

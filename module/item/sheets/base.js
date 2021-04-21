@@ -33,7 +33,7 @@ export class ItemSheetPF extends ItemSheet {
         return mergeObject(super.defaultOptions, {
             width: 560,
             height: 600,
-            classes: ["D35E", "sheet", "item"],
+            classes: ["D3Vilia", "sheet", "item"],
             resizable: false
         });
     }
@@ -45,7 +45,7 @@ export class ItemSheetPF extends ItemSheet {
      * @return {string}
      */
     get template() {
-        const path = "systems/D35E/templates/items/";
+        const path = "systems/D3Vilia/templates/items/";
         return `${path}/${this.item.data.type}.html`;
     }
 
@@ -69,10 +69,10 @@ export class ItemSheetPF extends ItemSheet {
         }
 
         // Include CONFIG values
-        data.config = CONFIG.D35E;
+        data.config = CONFIG.D3Vilia;
 
         // Include relevant settings
-        data.usesImperialSystem = game.settings.get("D35E", "units") === "imperial";
+        data.usesImperialSystem = game.settings.get("D3Vilia", "units") === "imperial";
 
         data.randomUuid = uuidv4();
 
@@ -102,7 +102,7 @@ export class ItemSheetPF extends ItemSheet {
 
         // Unidentified data
         if (this.item.showUnidentifiedData) {
-            data.itemName = getProperty(this.item.data, "data.unidentified.name") || game.i18n.localize("D35E.Unidentified");
+            data.itemName = getProperty(this.item.data, "data.unidentified.name") || game.i18n.localize("D3Vilia.Unidentified");
         } else {
             data.itemName = getProperty(this.item.data, "data.identifiedName") || this.item.name;
         }
@@ -156,12 +156,12 @@ export class ItemSheetPF extends ItemSheet {
 
             // Prepare categories for weapons
             data.weaponCategories = {types: {}, subTypes: {}};
-            for (let [k, v] of Object.entries(CONFIG.D35E.weaponTypes)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.weaponTypes)) {
                 if (typeof v === "object") data.weaponCategories.types[k] = v._label;
             }
             const type = data.item.data.weaponType;
-            if (hasProperty(CONFIG.D35E.weaponTypes, type)) {
-                for (let [k, v] of Object.entries(CONFIG.D35E.weaponTypes[type])) {
+            if (hasProperty(CONFIG.D3Vilia.weaponTypes, type)) {
+                for (let [k, v] of Object.entries(CONFIG.D3Vilia.weaponTypes[type])) {
                     // Add static targets
                     if (!k.startsWith("_")) data.weaponCategories.subTypes[k] = v;
                 }
@@ -195,7 +195,7 @@ export class ItemSheetPF extends ItemSheet {
         // Prepare enhancement specific stuff
         if (data.item.type === "enhancement") {
             data.enhancementTypes = {types: {}, subTypes: {}};
-            for (let [k, v] of Object.entries(CONFIG.D35E.enhancementType)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.enhancementType)) {
                 data.enhancementTypes.types[k] = v;
             }
 
@@ -209,19 +209,19 @@ export class ItemSheetPF extends ItemSheet {
         if (data.item.type === "equipment") {
             // Prepare categories for equipment
             data.equipmentCategories = {types: {}, subTypes: {}};
-            for (let [k, v] of Object.entries(CONFIG.D35E.equipmentTypes)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.equipmentTypes)) {
                 if (typeof v === "object") data.equipmentCategories.types[k] = v._label;
             }
             const type = data.item.data.equipmentType;
-            if (hasProperty(CONFIG.D35E.equipmentTypes, type)) {
-                for (let [k, v] of Object.entries(CONFIG.D35E.equipmentTypes[type])) {
+            if (hasProperty(CONFIG.D3Vilia.equipmentTypes, type)) {
+                for (let [k, v] of Object.entries(CONFIG.D3Vilia.equipmentTypes[type])) {
                     // Add static targets
                     if (!k.startsWith("_")) data.equipmentCategories.subTypes[k] = v;
                 }
             }
 
             // Prepare slots for equipment
-            data.equipmentSlots = CONFIG.D35E.equipmentSlots[type];
+            data.equipmentSlots = CONFIG.D3Vilia.equipmentSlots[type];
 
             // Whether the equipment should show armor data
             data.showArmorData = ["armor", "shield"].includes(type);
@@ -259,12 +259,12 @@ export class ItemSheetPF extends ItemSheet {
         }
 
         if (data.item.data.weight) {
-            const conversion = game.settings.get("D35E", "units") === "metric" ? 0.5 : 1;
+            const conversion = game.settings.get("D3Vilia", "units") === "metric" ? 0.5 : 1;
             data.convertedWeight = data.item.data.weight * conversion;
         }
 
         if (data.item.data.capacity) {
-            const conversion = game.settings.get("D35E", "units") === "metric" ? 0.5 : 1;
+            const conversion = game.settings.get("D3Vilia", "units") === "metric" ? 0.5 : 1;
             data.convertedCapacity = data.item.data.capacity * conversion;
         }
 
@@ -296,7 +296,7 @@ export class ItemSheetPF extends ItemSheet {
             let alreadyAddedAbilities = new Set();
 
             {
-                let spellLikes = game.packs.get("D35E.spelllike");
+                let spellLikes = game.packs.get("D3Vilia.spelllike");
                 let spellikeItems = []
                 await spellLikes.getIndex().then(index => spellikeItems = index);
                 for (let entry of spellikeItems) {
@@ -363,10 +363,10 @@ export class ItemSheetPF extends ItemSheet {
         // Prepare class specific stuff
         if (data.item.type === "class") {
             for (let [a, s] of Object.entries(data.data.savingThrows)) {
-                s.label = CONFIG.D35E.savingThrows[a];
+                s.label = CONFIG.D3Vilia.savingThrows[a];
             }
             for (let [a, s] of Object.entries(data.data.fc)) {
-                s.label = CONFIG.D35E.favouredClassBonuses[a];
+                s.label = CONFIG.D3Vilia.favouredClassBonuses[a];
             }
             data.powerPointLevels = {}
             Object.keys(data.data.powerPointTable).forEach(key => {
@@ -379,7 +379,7 @@ export class ItemSheetPF extends ItemSheet {
 
             data.powerPointBonusBaseAbility = data.data.powerPointBonusBaseAbility
             data.abilities = {}
-            for (let [a, s] of Object.entries(CONFIG.D35E.abilities)) {
+            for (let [a, s] of Object.entries(CONFIG.D3Vilia.abilities)) {
                 data.abilities[a] = {}
                 data.abilities[a].label = s;
             }
@@ -459,7 +459,7 @@ export class ItemSheetPF extends ItemSheet {
                             alreadyAddedDescriptions.add(e._id)
                         }
                     } else {
-                        console.warn('D35E | Missing', ability)
+                        console.warn('D3Vilia | Missing', ability)
                     }
 
                 }
@@ -484,11 +484,11 @@ export class ItemSheetPF extends ItemSheet {
                 for (let a of ['fort', 'ref', 'will']) {
                     const classType = getProperty(data.data, "classType") || "base";
 
-                    let formula = CONFIG.D35E.classSavingThrowFormulas[classType][data.data.savingThrows[a].value] != null ? CONFIG.D35E.classSavingThrowFormulas[classType][data.data.savingThrows[a].value] : "0";
+                    let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][data.data.savingThrows[a].value] != null ? CONFIG.D3Vilia.classSavingThrowFormulas[classType][data.data.savingThrows[a].value] : "0";
                     progressionData[a] = Math.floor(new Roll(formula, {level: level}).roll().total);
                 }
                 {
-                    const formula = CONFIG.D35E.classBABFormulas[data.data.bab] != null ? CONFIG.D35E.classBABFormulas[data.data.bab] : "0";
+                    const formula = CONFIG.D3Vilia.classBABFormulas[data.data.bab] != null ? CONFIG.D3Vilia.classBABFormulas[data.data.bab] : "0";
                     let bab = Math.floor(new Roll(formula, {level: level}).roll().total);
                     let babModifiers = []
                     while (bab > 0) {
@@ -537,13 +537,13 @@ export class ItemSheetPF extends ItemSheet {
             data.abilitiesDescription.sort((a, b) => (a.level > b.level) ? 1 : ((b.level > a.level) ? -1 : 0));
 
             if (this.actor != null) {
-                let healthConfig = game.settings.get("D35E", "healthConfig");
+                let healthConfig = game.settings.get("D3Vilia", "healthConfig");
                 data.healthConfig = data.isRacialHD ? healthConfig.hitdice.Racial : this.actor.data.type === "character" ? healthConfig.hitdice.PC : healthConfig.hitdice.NPC;
             } else data.healthConfig = {auto: false};
 
             // Add skill list
             if (!this.item.actor) {
-                data.skills = Object.entries(CONFIG.D35E.skills).reduce((cur, o) => {
+                data.skills = Object.entries(CONFIG.D3Vilia.skills).reduce((cur, o) => {
                     cur[o[0]] = {
                         name: o[1],
                         classSkill: getProperty(this.item.data, `data.classSkills.${o[0]}`) === true
@@ -553,7 +553,7 @@ export class ItemSheetPF extends ItemSheet {
             } else {
                 data.skills = Object.entries(this.item.actor.data.data.skills).reduce((cur, o) => {
                     const key = o[0];
-                    const name = CONFIG.D35E.skills[key] != null ? CONFIG.D35E.skills[key] : o[1].name;
+                    const name = CONFIG.D3Vilia.skills[key] != null ? CONFIG.D3Vilia.skills[key] : o[1].name;
                     cur[o[0]] = {
                         name: name,
                         classSkill: getProperty(this.item.data, `data.classSkills.${o[0]}`) === true
@@ -565,8 +565,8 @@ export class ItemSheetPF extends ItemSheet {
 
         // Prepare stuff for items with changes
         if (data.item.data.changes) {
-            data.changes = {targets: {}, modifiers: CONFIG.D35E.bonusModifiers};
-            for (let [k, v] of Object.entries(CONFIG.D35E.buffTargets)) {
+            data.changes = {targets: {}, modifiers: CONFIG.D3Vilia.bonusModifiers};
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.buffTargets)) {
                 if (typeof v === "object") data.changes.targets[k] = v._label;
             }
             data.item.data.changes.forEach(item => {
@@ -578,29 +578,29 @@ export class ItemSheetPF extends ItemSheet {
                         for (let [s, skl] of Object.entries(actorSkills)) {
                             if (!skl.subSkills) {
                                 if (skl.custom) item.subTargets[`skill.${s}`] = skl.name;
-                                else item.subTargets[`skill.${s}`] = CONFIG.D35E.skills[s];
+                                else item.subTargets[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
                                 for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D35E.skills[s]} (${skl2.name})`;
+                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }
                     } else {
-                        for (let [s, skl] of Object.entries(CONFIG.D35E.skills)) {
+                        for (let [s, skl] of Object.entries(CONFIG.D3Vilia.skills)) {
                             if (!skl.subSkills) {
                                 if (skl.custom) item.subTargets[`skill.${s}`] = skl.name;
-                                else item.subTargets[`skill.${s}`] = CONFIG.D35E.skills[s];
+                                else item.subTargets[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
                                 for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D35E.skills[s]} (${skl2.name})`;
+                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }
                     }
                 }
                 // Add static targets
-                else if (item[1] != null && CONFIG.D35E.buffTargets.hasOwnProperty(item[1])) {
-                    for (let [k, v] of Object.entries(CONFIG.D35E.buffTargets[item[1]])) {
+                else if (item[1] != null && CONFIG.D3Vilia.buffTargets.hasOwnProperty(item[1])) {
+                    for (let [k, v] of Object.entries(CONFIG.D3Vilia.buffTargets[item[1]])) {
                         if (!k.startsWith("_")) item.subTargets[k] = v;
                     }
                 }
@@ -627,7 +627,7 @@ export class ItemSheetPF extends ItemSheet {
         // Prepare stuff for items with context notes
         if (data.item.data.contextNotes) {
             data.contextNotes = {targets: {}};
-            for (let [k, v] of Object.entries(CONFIG.D35E.contextNoteTargets)) {
+            for (let [k, v] of Object.entries(CONFIG.D3Vilia.contextNoteTargets)) {
                 if (typeof v === "object") data.contextNotes.targets[k] = v._label;
             }
             data.item.data.contextNotes.forEach(item => {
@@ -640,29 +640,29 @@ export class ItemSheetPF extends ItemSheet {
                         for (let [s, skl] of Object.entries(actorSkills)) {
                             if (!skl.subSkills) {
                                 if (skl.custom) item.subNotes[`skill.${s}`] = skl.name;
-                                else item.subNotes[`skill.${s}`] = CONFIG.D35E.skills[s];
+                                else item.subNotes[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
                                 for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subNotes[`skill.${s2}`] = `${CONFIG.D35E.skills[s]} (${skl2.name})`;
+                                    item.subNotes[`skill.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }
                     } else {
-                        for (let [s, skl] of Object.entries(CONFIG.D35E.skills)) {
+                        for (let [s, skl] of Object.entries(CONFIG.D3Vilia.skills)) {
                             if (!skl.subSkills) {
                                 if (skl.custom) item.subNotes[`skill.${s}`] = skl.name;
-                                else item.subNotes[`skill.${s}`] = CONFIG.D35E.skills[s];
+                                else item.subNotes[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
                                 for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subNotes[`skill.${s}`] = `${CONFIG.D35E.skills[s]} (${skl2.name})`;
+                                    item.subNotes[`skill.${s}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }
                     }
                 }
                 // Add static targets
-                else if (item[1] != null && CONFIG.D35E.contextNoteTargets.hasOwnProperty(item[1])) {
-                    for (let [k, v] of Object.entries(CONFIG.D35E.contextNoteTargets[item[1]])) {
+                else if (item[1] != null && CONFIG.D3Vilia.contextNoteTargets.hasOwnProperty(item[1])) {
+                    for (let [k, v] of Object.entries(CONFIG.D3Vilia.contextNoteTargets[item[1]])) {
                         if (!k.startsWith("_")) item.subNotes[k] = v;
                     }
                 }
@@ -682,11 +682,11 @@ export class ItemSheetPF extends ItemSheet {
     _getItemStatus(item) {
         if (item.type === "spell") {
             if (item.data.preparation.mode === "prepared") {
-                return item.data.preparation.preparedAmount > 0 ? game.i18n.localize("D35E.AmountPrepared").format(item.data.preparation.preparedAmount) : game.i18n.localize("D35E.Unprepared");
+                return item.data.preparation.preparedAmount > 0 ? game.i18n.localize("D3Vilia.AmountPrepared").format(item.data.preparation.preparedAmount) : game.i18n.localize("D3Vilia.Unprepared");
             } else if (item.data.preparation.mode) {
                 return item.data.preparation.mode.titleCase();
             } else return "";
-        } else if (["weapon", "equipment"].includes(item.type)) return item.data.equipped ? game.i18n.localize("D35E.Equipped") : game.i18n.localize("D35E.NotEquipped");
+        } else if (["weapon", "equipment"].includes(item.type)) return item.data.equipped ? game.i18n.localize("D3Vilia.Equipped") : game.i18n.localize("D3Vilia.NotEquipped");
     }
 
     /* -------------------------------------------- */
@@ -703,7 +703,7 @@ export class ItemSheetPF extends ItemSheet {
         if (item.type === "weapon") {
             props.push(...Object.entries(item.data.properties)
                 .filter(e => e[1] === true)
-                .map(e => CONFIG.D35E.weaponProperties[e[0]]));
+                .map(e => CONFIG.D3Vilia.weaponProperties[e[0]]));
         } else if (item.type === "spell") {
             props.push(
                 labels.components,
@@ -715,7 +715,7 @@ export class ItemSheetPF extends ItemSheet {
             props.push(...Object.entries(item.data.allowedTypes)
                 .map(e => e[1]));
         } else if (item.type === "equipment") {
-            props.push(CONFIG.D35E.equipmentTypes[item.data.armor.type]);
+            props.push(CONFIG.D3Vilia.equipmentTypes[item.data.armor.type]);
             props.push(labels.armor);
         } else if (item.type === "feat") {
             props.push(labels.featType);
@@ -723,7 +723,7 @@ export class ItemSheetPF extends ItemSheet {
 
         // Action type
         if (item.data.actionType) {
-            props.push(CONFIG.D35E.itemActionTypes[item.data.actionType]);
+            props.push(CONFIG.D3Vilia.itemActionTypes[item.data.actionType]);
         }
 
         // Action usage
@@ -1108,7 +1108,7 @@ export class ItemSheetPF extends ItemSheet {
             let _customAttributes = duplicate(this.item.data.data.customAttributes || {});
             let newAttribute = {id: this.generateId(),name:'',value:''};
             _customAttributes[newAttribute.id] = newAttribute;
-            console.log(`D35E | Adding custom attribute | `,_customAttributes)
+            console.log(`D3Vilia | Adding custom attribute | `,_customAttributes)
             return this.item.update({"data.customAttributes": _customAttributes});
         }
 
@@ -1116,7 +1116,7 @@ export class ItemSheetPF extends ItemSheet {
         if (a.classList.contains("delete")) {
             await this._onSubmit(event);  // Submit any unsaved changes
             const li = a.closest(".custom-field");
-            console.log(`D35E | Removing custom attribute | ${li.dataset.customField}`, this.item.data.data.customAttributes)
+            console.log(`D3Vilia | Removing custom attribute | ${li.dataset.customField}`, this.item.data.data.customAttributes)
             const updateData = {};
             updateData[`data.customAttributes.-=${li.dataset.customField}`] = null;
             return this.item.update(updateData);
@@ -1369,7 +1369,7 @@ export class ItemSheetPF extends ItemSheet {
     }
 
     async _createAttack(event) {
-        if (this.item.actor == null) throw new Error(game.i18n.localize("D35E.ErrorItemNoOwner"));
+        if (this.item.actor == null) throw new Error(game.i18n.localize("D3Vilia.ErrorItemNoOwner"));
 
         await this._onSubmit(event);
 
@@ -1377,7 +1377,7 @@ export class ItemSheetPF extends ItemSheet {
     }
 
     async _addSpellsToSpellbook(event) {
-        if (this.item.actor == null) throw new Error(game.i18n.localize("D35E.ErrorItemNoOwner"));
+        if (this.item.actor == null) throw new Error(game.i18n.localize("D3Vilia.ErrorItemNoOwner"));
         await this.item.actor.addSpellsToSpellbook(this.item);
 
     }
@@ -1557,7 +1557,7 @@ export class ItemSheetPF extends ItemSheet {
         }
 
         if (!data.actorId) {
-            return ui.notifications.warn(game.i18n.localize("D35E.FullAttackNeedDropFromActor"));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.FullAttackNeedDropFromActor"));
         }
         if (data.type === "Item" && data?.data?.type === "attack") {
             let updateData = {}
@@ -1602,7 +1602,7 @@ export class ItemSheetPF extends ItemSheet {
         }
 
         if (!data.actorId) {
-            return ui.notifications.warn(game.i18n.localize("D35E.ResourceNeedDropFromActor"));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.ResourceNeedDropFromActor"));
         }
         if (data.type === "Item" && data?.data?.data?.uses?.max) {
             let updateData = {}
@@ -1626,7 +1626,7 @@ export class ItemSheetPF extends ItemSheet {
         }
 
         if (!data.pack) {
-            return ui.notifications.warn(game.i18n.localize("D35E.ResourceNeedDropFromCompendium"));
+            return ui.notifications.warn(game.i18n.localize("D3Vilia.ResourceNeedDropFromCompendium"));
         }
         if (data.type === "RollTable") {
             let updateData = {}
@@ -1734,8 +1734,8 @@ export class ItemSheetPF extends ItemSheet {
 
     _createEnhancementSpellDialog(itemData) {
         new Dialog({
-            title: game.i18n.localize("D35E.CreateEnhForSpell").format(itemData.name),
-            content: game.i18n.localize("D35E.CreateEnhForSpellD").format(itemData.name),
+            title: game.i18n.localize("D3Vilia.CreateEnhForSpell").format(itemData.name),
+            content: game.i18n.localize("D3Vilia.CreateEnhForSpellD").format(itemData.name),
             buttons: {
                 potion: {
                     icon: '<i class="fas fa-prescription-bottle"></i>',
@@ -1783,9 +1783,9 @@ export class ItemSheetPF extends ItemSheet {
         } else {
             button.disabled = true;
 
-            const msg = `<p>${game.i18n.localize("D35E.DeleteItemConfirmation")}</p>`;
+            const msg = `<p>${game.i18n.localize("D3Vilia.DeleteItemConfirmation")}</p>`;
             Dialog.confirm({
-                title: game.i18n.localize("D35E.DeleteItem"),
+                title: game.i18n.localize("D3Vilia.DeleteItem"),
                 content: msg,
                 yes: () => {
                     const updateData = {};

@@ -17,7 +17,7 @@ export const _getInitiativeFormula = function(actor) {
 
 Combat.showInitiativeDialog = function(formula=null) {
   return new Promise(resolve => {
-    let template = "systems/D35E/templates/chat/roll-dialog.html";
+    let template = "systems/D3Vilia/templates/chat/roll-dialog.html";
     let rollMode = game.settings.get("core", "rollMode");
     let dialogData = {
       formula: formula ? formula : "",
@@ -38,7 +38,7 @@ Combat.showInitiativeDialog = function(formula=null) {
     // Show dialog
     renderTemplate(template, dialogData).then(dlg => {
       new Dialog({
-        title: game.i18n.localize("D35E.InitiativeBonus"),
+        title: game.i18n.localize("D3Vilia.InitiativeBonus"),
         content: dlg,
         buttons: buttons,
         default: "normal",
@@ -122,9 +122,9 @@ export const _rollInitiative = async function (ids, { formula = null, updateTurn
                 token: c.token._id,
                 alias: c.token.name,
               },
-              flavor: game.i18n.localize("D35E.RollsForInitiative").format(c.token.name),
+              flavor: game.i18n.localize("D3Vilia.RollsForInitiative").format(c.token.name),
               roll: roll,
-              content: await renderTemplate("systems/D35E/templates/chat/roll-ext.html", rollData),
+              content: await renderTemplate("systems/D3Vilia/templates/chat/roll-ext.html", rollData),
             },
             messageOptions
         );
@@ -182,25 +182,25 @@ export const addChatMessageContextOptions = function(html, options) {
   let canApplyCritical = li => canvas.tokens.controlled.length && li.find(".crit-damage-roll .dice-total").length;
   options.push(
     {
-      name: game.i18n.localize("D35E.ApplyDamage"),
+      name: game.i18n.localize("D3Vilia.ApplyDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApply,
       callback: li => ActorPF.applyDamage(li, 1)
     },
     {
-      name: game.i18n.localize("D35E.ApplyHealing"),
+      name: game.i18n.localize("D3Vilia.ApplyHealing"),
       icon: '<i class="fas fa-user-plus"></i>',
       condition: canApply,
       callback: li => ActorPF.applyDamage(li, -1)
     },
     {
-      name: game.i18n.localize("D35E.ApplyCriticalDamage"),
+      name: game.i18n.localize("D3Vilia.ApplyCriticalDamage"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApplyCritical,
       callback: li => ActorPF.applyDamage(li, 1, true)
     },
     {
-      name: game.i18n.localize("D35E.ApplyCriticalHealing"),
+      name: game.i18n.localize("D3Vilia.ApplyCriticalHealing"),
       icon: '<i class="fas fa-user-minus"></i>',
       condition: canApplyCritical,
       callback: li => ActorPF.applyDamage(li, -1, true)

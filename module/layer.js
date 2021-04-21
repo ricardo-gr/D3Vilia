@@ -2,7 +2,7 @@
  * This registers very simple layer that is used to properly render
  * left menu buttons.
  */
-export default class D35ELayer extends PlaceablesLayer {
+export default class D3ViliaLayer extends PlaceablesLayer {
     constructor() {
         super();
     }
@@ -27,7 +27,7 @@ export default class D35ELayer extends PlaceablesLayer {
      */
     static registerLayer() {
         const layers = mergeObject(Canvas.layers, {
-            d35e: D35ELayer
+            d3vilia: D3ViliaLayer
         });
         Object.defineProperty(Canvas, 'layers', {
             get: function () {

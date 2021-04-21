@@ -92,7 +92,7 @@ export class ChatAttack {
 
         // Add tooltip
         let tooltip = $(await roll.getTooltip()).prepend(`<div class="dice-formula">${roll.formula}</div>`)[0].outerHTML;
-        data.flavor = critical ? game.i18n.localize("D35E.CriticalConfirmation") : this.label;
+        data.flavor = critical ? game.i18n.localize("D3Vilia.CriticalConfirmation") : this.label;
         data.tooltip = tooltip;
         data.total = roll.total;
         data.isCrit = critType === 1;
@@ -116,7 +116,7 @@ export class ChatAttack {
     }
 
     getShortToolTip(dmgVal, dmgName) {
-        if (dmgName === null) return `<img src="systems/D35E/icons/damage-type/unknown.svg" title="Part" class="dmg-type-icon" />${dmgVal}`
+        if (dmgName === null) return `<img src="systems/D3Vilia/icons/damage-type/unknown.svg" title="Part" class="dmg-type-icon" />${dmgVal}`
         let dmgIconBase = dmgName.toLowerCase();
         let dmgIcon = "unknown"
         switch (dmgIconBase) {
@@ -160,7 +160,7 @@ export class ChatAttack {
                 dmgIcon = "unarmed";
                 break;
         }
-        return `<img src="systems/D35E/icons/damage-type/${dmgIcon}.svg" title="${dmgName}" class="dmg-type-icon" />${dmgVal}`
+        return `<img src="systems/D3Vilia/icons/damage-type/${dmgIcon}.svg" title="${dmgName}" class="dmg-type-icon" />${dmgVal}`
     }
 
     async addDamage({extraParts = [], primaryAttack = true, critical = false, multiattack = 0, modifiers = {}} = {}) {
@@ -223,9 +223,9 @@ export class ChatAttack {
         })
         // Add normal data
         let flavor;
-        if (isMultiattack) flavor = game.i18n.localize("D35E.Damage") + ` (${game.i18n.localize("D35E.SubAttack")} ${multiattack})`;
-        else if (!critical) flavor = this.item.isHealing ? game.i18n.localize("D35E.Healing") : game.i18n.localize("D35E.Damage");
-        else flavor = this.item.isHealing ? game.i18n.localize("D35E.HealingCritical") : game.i18n.localize("D35E.DamageCritical");
+        if (isMultiattack) flavor = game.i18n.localize("D3Vilia.Damage") + ` (${game.i18n.localize("D3Vilia.SubAttack")} ${multiattack})`;
+        else if (!critical) flavor = this.item.isHealing ? game.i18n.localize("D3Vilia.Healing") : game.i18n.localize("D3Vilia.Damage");
+        else flavor = this.item.isHealing ? game.i18n.localize("D3Vilia.HealingCritical") : game.i18n.localize("D3Vilia.DamageCritical");
         const damageTypes = rolls.reduce((cur, o) => {
             if (o.damageType !== "" && cur.indexOf(o.damageType) === -1) cur.push(o.damageType);
             return cur;
@@ -234,13 +234,13 @@ export class ChatAttack {
         // Add cards
         if (critical) {
             this.cards = []
-            if (this.item.isHealing) this.cards.push(this.createCriticalChatCardData(game.i18n.localize("D35E.Apply"), -totalDamage, rolls));
-            else this.cards.push(this.createCriticalChatCardData(game.i18n.localize("D35E.Apply"), totalDamage, rolls));
+            if (this.item.isHealing) this.cards.push(this.createCriticalChatCardData(game.i18n.localize("D3Vilia.Apply"), -totalDamage, rolls));
+            else this.cards.push(this.createCriticalChatCardData(game.i18n.localize("D3Vilia.Apply"), totalDamage, rolls));
         } else {
             this.normalDamage = JSON.stringify(rolls)
-            if (this.item.isHealing) this.cards.push(this.createChatCardData(game.i18n.localize("D35E.Apply"), -totalDamage, rolls));
-            else if (isMultiattack) this.cards.push(this.createChatCardData(game.i18n.localize("D35E.Apply") + ` (${game.i18n.localize("D35E.SubAttack")} ${multiattack})`, totalDamage, rolls));
-            else this.cards.push(this.createChatCardData(game.i18n.localize("D35E.Apply"), totalDamage, rolls));
+            if (this.item.isHealing) this.cards.push(this.createChatCardData(game.i18n.localize("D3Vilia.Apply"), -totalDamage, rolls));
+            else if (isMultiattack) this.cards.push(this.createChatCardData(game.i18n.localize("D3Vilia.Apply") + ` (${game.i18n.localize("D3Vilia.SubAttack")} ${multiattack})`, totalDamage, rolls));
+            else this.cards.push(this.createChatCardData(game.i18n.localize("D3Vilia.Apply"), totalDamage, rolls));
         }
 
 
