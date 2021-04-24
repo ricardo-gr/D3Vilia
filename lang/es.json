@@ -1293,5 +1293,9 @@
   "SETTINGS.D3ViliaSaveAttackWindowN": "Guardar formulario de ventana de ataque",
   "SETTINGS.D3ViliaSaveAttackWindowL": "Habilitar esto guardará los valores de la ventana de ataque por elemento (modo de empuñadura, munición seleccionada, bonificación de ataque, etc.).",
   "SETTINGS.D3ViliaDisableTutorialN": "Desactivar tutorial para todos los jugadores",
-  "SETTINGS.D3ViliaDisableTutorialL": "Desactiva el tutorial para todos los jugadores de este mundo."
+  "SETTINGS.D3ViliaDisableTutorialL": "Desactiva el tutorial para todos los jugadores de este mundo.",
+
+  
+  "D3Vilia.PsionicAttackMode": "Modo de Ataque Psionico",
+  "D3Vilia.PsionicDefenseMode": "Modo de Defensa Psionico"
 }

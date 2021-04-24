@@ -1595,7 +1595,7 @@ export class ItemPF extends Item {
 
             // Lock useAmount for powers to max value
             if (this.type === "spell" && getProperty(this.data, "data.isPower")) {
-                rollData.useAmount = Math.min(rollData.useAmount, rollData.cl - (getProperty(this.data, "data.powerPointsCost") || 0))
+                rollData.useAmount = (rollData.useAmount + (getProperty(this.data, "data.powerPointsCost") || 1) / (getProperty(this.data, "data.powerPointsCost") || 1) - 1);
             }
             let attacks = [];
             if (this.hasAttack) {

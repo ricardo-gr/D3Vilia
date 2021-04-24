@@ -5745,13 +5745,13 @@ export class ActorPF extends Actor {
                         obj.data.learnedAt.class.forEach(learnedAtObj => {
                             if (learnedAtObj[0].toLowerCase() === spellbookClass.toLowerCase()) {
                                 obj.data.level = learnedAtObj[1]
-                                obj.data.powerPointsCost = Math.max((parseInt(learnedAtObj[1])*2)-1,0)
+                                obj.data.powerPointsCost = obj.data.powerPointsCost === 0 ? Math.max((parseInt(learnedAtObj[1])*2)-1,0): obj.data.powerPointsCost;
                                 foundLevel = true;
                             }
                         })
                     }
                     if (!foundLevel) {
-                        obj.data.powerPointsCost = Math.max((parseInt(obj.data.level)*2)-1,0)
+                        obj.data.powerPointsCost = obj.data.powerPointsCost === 0 ? Math.max((parseInt(learnedAtObj[1])*2)-1,0): obj.data.powerPointsCost;
                         ui.notifications.warn(`Spell added despite not being in a spell list for class.`)
                     }
                 }

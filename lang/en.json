@@ -1463,6 +1463,8 @@
   "SETTINGS.D3ViliaAllowNoAmmoN": "Allow no Ammo for ranged weapons",
   "SETTINGS.D3ViliaAllowNoAmmoH": "Allows players to use ranged weapons without ammunition",
   "SETTINGS.D3ViliaAutoAmmoRecoveryN": "Use Automatic Ammo recovery",
-  "SETTINGS.D3ViliaAutoAmmoRecoveryH": "Allows automatic ammo recovery feature"
+  "SETTINGS.D3ViliaAutoAmmoRecoveryH": "Allows automatic ammo recovery feature",
 
+  "D3Vilia.PsionicAttackMode": "Psionic Attack Mode",
+  "D3Vilia.PsionicDefenseMode": "Psionic Defense Mode"
 }

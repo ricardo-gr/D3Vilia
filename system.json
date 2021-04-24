@@ -230,6 +230,13 @@
       "system": "D3Vilia",
       "path": "./packs/scenes.db",
       "entity": "Scene"
+    },
+    {
+      "name": "psionic-combat",
+      "label": "Psionic Combat",
+      "system": "D3Vilia",
+      "path": "./packs/psi-combat-modes.db",
+      "entity": "Item"
     }
   ],
   "languages": [

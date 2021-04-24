@@ -894,6 +894,8 @@ D3Vilia.spellSchools = {
   "bol": "D3Vilia.PowerSchoolPsychometabolism",
   "por": "D3Vilia.PowerSchoolPsychoportation",
   "tel": "D3Vilia.PowerSchoolTelepathy",
+  "pam": "D3Vilia.PsionicAttackMode",
+  "pdm": "D3Vilia.PsionicDefenseMode",
   "misc": "D3Vilia.Misc",
 };
 
@@ -1168,6 +1170,13 @@ D3Vilia.languages = {
   "terran": "Terran",
   "treant": "Treant",
   "undercommon": "Undercommon",
+  "westfalli": "Westfalli",
+  "entanico": "Entanico",
+  "inkauriano": "Inkauriano",
+  "esuarthiano": "Esuarthiano",
+  "vamarico": "Vamarico",
+  "nebines": "Nebines",
+  "atlante": "Atlante",
 };
 
 D3Vilia.creatureTypes = {
@@ -1227,6 +1236,14 @@ D3Vilia.CHARACTER_EXP_LEVELS =  {
   fast: [
     0, 750, 2250, 4500, 7500, 11250, 15750, 21000, 27000, 33750, 41250, 49500,
     58500, 68250, 78750, 90000, 102000, 114750, 128250, 142500
+  ],
+  vilia: [
+    0, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 800000, 
+    1100000, 1400000, 1700000, 2000000, 2300000, 2600000, 2900000, 3200000, 3500000, 3800000,
+    4100000, 4400000, 4700000, 5000000, 5300000, 5600000, 5900000, 6200000, 6500000, 6800000,
+    7100000, 7400000, 7700000, 8000000, 8300000, 8600000, 8900000, 9200000, 9500000, 9800000,
+    10100000, 10400000, 10700000, 11000000, 11300000, 11600000, 11900000, 12200000, 12500000, 12800000,
+    13100000, 13400000, 13700000, 14000000, 14300000, 14600000, 14900000, 15200000, 15500000, 15800000
   ]
 };
 
