@@ -515,6 +515,9 @@ export class ItemSheetPF extends ItemSheet {
                     }
                     data.spellProgression.push(spellProgressionData)
                     data.knownSpellProgression.push(knownSpellProgressionData)
+
+                    //Add power progression data to Psionic Classes
+                    data.powerPointLevels[level].spellProgression = knownSpellProgressionData;
                 }
             }
 
