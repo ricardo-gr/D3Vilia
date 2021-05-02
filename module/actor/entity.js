@@ -5751,7 +5751,7 @@ export class ActorPF extends Actor {
                         })
                     }
                     if (!foundLevel) {
-                        obj.data.powerPointsCost = obj.data.powerPointsCost === 0 ? Math.max((parseInt(learnedAtObj[1])*2)-1,0): obj.data.powerPointsCost;
+                        obj.data.powerPointsCost = obj.data.powerPointsCost === 0 ? Math.max((parseInt(obj.data.level)*2)-1,0): obj.data.powerPointsCost;
                         ui.notifications.warn(`Spell added despite not being in a spell list for class.`)
                     }
                 }

@@ -237,6 +237,13 @@
       "system": "D3Vilia",
       "path": "./packs/psi-combat-modes.db",
       "entity": "Item"
+    },
+    {
+      "name": "psionic-powers-3e",
+      "label": "Psionic Powers 3e",
+      "system": "D3Vilia",
+      "path": "./packs/powers3e.db",
+      "entity": "Item"
     }
   ],
   "languages": [
