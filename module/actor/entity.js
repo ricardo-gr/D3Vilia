@@ -2728,6 +2728,7 @@ export class ActorPF extends Actor {
         // Set class tags
         let totalNonRacialLevels = 0;
         data.classes = {};
+        data.multiclass = {};
         data.totalNonEclLevels = 0;
         data.damage = { nonlethal : {value: data.attributes.hp.nonlethal || 0, max: data.attributes.hp.max || 0}}
         actorData.items.filter(obj => {
@@ -2748,52 +2749,100 @@ export class ActorPF extends Actor {
             let healthConfig = game.settings.get("D3Vilia", "healthConfig");
             healthConfig = cls.data.classType === "racial" ? healthConfig.hitdice.Racial : this.hasPlayerOwner ? healthConfig.hitdice.PC : healthConfig.hitdice.NPC;
             const classType = cls.data.classType || "base";
-            data.classes[tag] = {
-                level: cls.data.levels,
-                _id: cls._id,
-                name: cls.name,
-                hd: cls.data.hd,
-                bab: cls.data.bab,
-                hp: healthConfig.auto,
-                maxLevel: cls.data.maxLevel,
-                skillsPerLevel: cls.data.skillsPerLevel,
-                isSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none",
-                isPsionSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType === "psionic",
-                hasSpecialSlot: cls.data.hasSpecialSlot,
-                isSpellcastingSpontaneus: cls.data.spellcastingSpontaneus === true,
-                isArcane: cls.data.spellcastingType !== null && cls.data.spellcastingType === "arcane",
-                spellcastingType: cls.data.spellcastingType,
-                spellcastingAbility: cls.data.spellcastingAbility,
-                allSpellsKnown: cls.data.allSpellsKnown,
+            //TODO: Fork this logic to apply to classes or to multiclass. Need to identify both in the Class Items.
+            if(cls.data.multiclass) {
+                data.multiclass[tag] = {
+                    level: cls.data.levels,
+                    _id: cls._id,
+                    name: cls.name,
+                    hd: cls.data.hd,
+                    bab: cls.data.bab,
+                    hp: healthConfig.auto,
+                    maxLevel: cls.data.maxLevel,
+                    skillsPerLevel: cls.data.skillsPerLevel,
+                    isSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none",
+                    isPsionSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType === "psionic",
+                    hasSpecialSlot: cls.data.hasSpecialSlot,
+                    isSpellcastingSpontaneus: cls.data.spellcastingSpontaneus === true,
+                    isArcane: cls.data.spellcastingType !== null && cls.data.spellcastingType === "arcane",
+                    spellcastingType: cls.data.spellcastingType,
+                    spellcastingAbility: cls.data.spellcastingAbility,
+                    allSpellsKnown: cls.data.allSpellsKnown,
 
-                savingThrows: {
-                    fort: 0,
-                    ref: 0,
-                    will: 0,
-                },
-                fc: {
-                    hp: classType === "base" ? cls.data.fc.hp.value : 0,
-                    skill: classType === "base" ? cls.data.fc.skill.value : 0,
-                    alt: classType === "base" ? cls.data.fc.alt.value : 0,
-                },
-            };
-            data.classes[nameTag] = data.classes[tag];
-            data.classes[tag].spellsKnownPerLevel = []
-            data.classes[tag].powersKnown = []
-            data.classes[tag].powersMaxLevel = []
-            for (let _level = 1; _level < cls.data.maxLevel + 1; _level++) {
-                data.classes[tag][`spellPerLevel${_level}`] = cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none" ? cls.data.spellsPerLevel[_level - 1] : undefined
-                if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].spellsKnownPerLevel.push(cls.data.spellsKnownPerLevel[_level - 1])
-                if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].powersKnown.push(cls.data.powersKnown[_level - 1])
-                if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].powersMaxLevel.push(cls.data.powersMaxLevel[_level - 1])
+                    savingThrows: {
+                        fort: 0,
+                        ref: 0,
+                        will: 0,
+                    },
+                    fc: {
+                        hp: classType === "base" ? cls.data.fc.hp.value : 0,
+                        skill: classType === "base" ? cls.data.fc.skill.value : 0,
+                        alt: classType === "base" ? cls.data.fc.alt.value : 0,
+                    },
+                };
+                data.multiclass[nameTag] = data.multiclass[tag];
+                data.multiclass[tag].spellsKnownPerLevel = []
+                data.multiclass[tag].powersKnown = []
+                data.multiclass[tag].powersMaxLevel = []
+                for (let _level = 1; _level < cls.data.maxLevel + 1; _level++) {
+                    data.multiclass[tag][`spellPerLevel${_level}`] = cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none" ? cls.data.spellsPerLevel[_level - 1] : undefined
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.multiclass[tag].spellsKnownPerLevel.push(cls.data.spellsKnownPerLevel[_level - 1])
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.multiclass[tag].powersKnown.push(cls.data.powersKnown[_level - 1])
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.multiclass[tag].powersMaxLevel.push(cls.data.powersMaxLevel[_level - 1])
+                }
+                for (let k of Object.keys(data.multiclass[tag].savingThrows)) {
+                    let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][cls.data.savingThrows[k].value];
+                    if (formula == null) formula = "0";
+                    data.multiclass[tag].savingThrows[k] = new Roll(formula, { level: cls.data.levels }).roll().total;
+                }
+            } else {
+                data.classes[tag] = {
+                    level: cls.data.levels,
+                    _id: cls._id,
+                    name: cls.name,
+                    hd: cls.data.hd,
+                    bab: cls.data.bab,
+                    hp: healthConfig.auto,
+                    maxLevel: cls.data.maxLevel,
+                    skillsPerLevel: cls.data.skillsPerLevel,
+                    isSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none",
+                    isPsionSpellcaster: cls.data.spellcastingType !== null && cls.data.spellcastingType === "psionic",
+                    hasSpecialSlot: cls.data.hasSpecialSlot,
+                    isSpellcastingSpontaneus: cls.data.spellcastingSpontaneus === true,
+                    isArcane: cls.data.spellcastingType !== null && cls.data.spellcastingType === "arcane",
+                    spellcastingType: cls.data.spellcastingType,
+                    spellcastingAbility: cls.data.spellcastingAbility,
+                    allSpellsKnown: cls.data.allSpellsKnown,
+
+                    savingThrows: {
+                        fort: 0,
+                        ref: 0,
+                        will: 0,
+                    },
+                    fc: {
+                        hp: classType === "base" ? cls.data.fc.hp.value : 0,
+                        skill: classType === "base" ? cls.data.fc.skill.value : 0,
+                        alt: classType === "base" ? cls.data.fc.alt.value : 0,
+                    },
+                };
+                data.classes[nameTag] = data.classes[tag];
+                data.classes[tag].spellsKnownPerLevel = []
+                data.classes[tag].powersKnown = []
+                data.classes[tag].powersMaxLevel = []
+                for (let _level = 1; _level < cls.data.maxLevel + 1; _level++) {
+                    data.classes[tag][`spellPerLevel${_level}`] = cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none" ? cls.data.spellsPerLevel[_level - 1] : undefined
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].spellsKnownPerLevel.push(cls.data.spellsKnownPerLevel[_level - 1])
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].powersKnown.push(cls.data.powersKnown[_level - 1])
+                    if (cls.data.spellcastingType !== null && cls.data.spellcastingType !== "none") data.classes[tag].powersMaxLevel.push(cls.data.powersMaxLevel[_level - 1])
+                }
+                for (let k of Object.keys(data.classes[tag].savingThrows)) {
+                    let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][cls.data.savingThrows[k].value];
+                    if (formula == null) formula = "0";
+                    data.classes[tag].savingThrows[k] = new Roll(formula, { level: cls.data.levels }).roll().total;
+                }
+                if (cls.data.classType !== "racial") //TODO: Where should I include this?
+                    totalNonRacialLevels = Math.min(totalNonRacialLevels + cls.data.levels, 20) //RGR: Hard-coded 20 levels
             }
-            for (let k of Object.keys(data.classes[tag].savingThrows)) {
-                let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][cls.data.savingThrows[k].value];
-                if (formula == null) formula = "0";
-                data.classes[tag].savingThrows[k] = new Roll(formula, { level: cls.data.levels }).roll().total;
-            }
-            if (cls.data.classType !== "racial")
-                totalNonRacialLevels = Math.min(totalNonRacialLevels + cls.data.levels, 20)
         });
         data.classLevels = totalNonRacialLevels;
         {

@@ -244,6 +244,13 @@
       "system": "D3Vilia",
       "path": "./packs/powers3e.db",
       "entity": "Item"
+    },
+    {
+      "name": "multiclasses",
+      "label": "Classes for Multiclassing",
+      "system": "D3Vilia",
+      "path": "./packs/multiclasses.db",
+      "entity": "Item"
     }
   ],
   "languages": [

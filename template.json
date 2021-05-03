@@ -475,7 +475,7 @@
               "hasAbility": false
             }
           ],
-          "doubleClass": [
+          "multiClass": [
             {
               "level": 1,
               "id": "_dclevel1",
@@ -1422,6 +1422,7 @@
         "changes"
       ],
       "classType": "base",
+      "multiclass": false,
       "levels": 1,
       "maxLevel": 20,
       "prestigeLevels": 0,

@@ -208,6 +208,7 @@ export class ActorSheetPF extends ActorSheet {
     // Prepare owned items
     this._prepareItems(data);
 
+    //TODO: Consider multiclass here?
     let classNamesAndLevels = []
 
     data.items.filter(i => i.type == "class").forEach(c => classNamesAndLevels.push(c.name + " " + c.data.levels))
