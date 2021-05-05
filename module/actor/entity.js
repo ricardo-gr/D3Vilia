@@ -2043,12 +2043,15 @@ export class ActorPF extends Actor {
             {
                 const k = `data.attributes.savingThrows.${a}.total`;
                 const j = `data.attributes.savingThrows.${a}.base`;
-                let totalLevel = 0;
-                let epicLevels = 0;
+                let totalClassLevel = 0;
+                let epicClassLevels = 0;
+                let totalMulticlassLevel = 0;
+                let epicMulticlassLevels = 0;
                 if (useFractionalBaseBonuses) {
                     let highStart = false;
-                    linkData(data, updateData, k,
-                        Math.floor(classes.reduce((cur, obj) => {
+
+                    racialSt = Math.floor(classes.filter((obj) => obj.data.type !== "base" && obj.data.type !== "prestige")
+                        .reduce((cur, obj) => {
                             const saveScale = getProperty(obj, `data.savingThrows.${a}.value`) || "";
                             if (saveScale === "high") {
                                 const acc = highStart ? 0 : 2;
@@ -2057,7 +2060,36 @@ export class ActorPF extends Actor {
                             }
                             if (saveScale === "low") return cur + obj.data.levels / 3;
                             return cur;
-                        }, 0)) - data1.attributes.energyDrain
+                        }, 0));
+                    
+                    highStart = false;
+                    classSt = Math.floor(classes.filter((obj) => obj.data.multiclass === false)
+                        .reduce((cur, obj) => {
+                            const saveScale = getProperty(obj, `data.savingThrows.${a}.value`) || "";
+                            if (saveScale === "high") {
+                                const acc = highStart ? 0 : 2;
+                                highStart = true;
+                                return cur + obj.data.levels / 2 + acc;
+                            }
+                            if (saveScale === "low") return cur + obj.data.levels / 3;
+                            return cur;
+                        }, 0));
+
+                    highStart = false;
+                    multiclassSt = Math.floor(classes.filter((obj) => obj.data.multiclass === true)
+                        .reduce((cur, obj) => {
+                            const saveScale = getProperty(obj, `data.savingThrows.${a}.value`) || "";
+                            if (saveScale === "high") {
+                                const acc = highStart ? 0 : 2;
+                                highStart = true;
+                                return cur + obj.data.levels / 2 + acc;
+                            }
+                            if (saveScale === "low") return cur + obj.data.levels / 3;
+                            return cur;
+                        }, 0));
+
+                    linkData(data, updateData, k, (classSt > multiclassSt ? racialSt + classSt : racialSt + multiclassSt)
+                         - data1.attributes.energyDrain
                     );
 
                     const v = updateData[k];
@@ -2067,37 +2099,66 @@ export class ActorPF extends Actor {
                     }
                 } else {
                     let epicST = 0;
-                    let baseST = classes.reduce((cur, obj) => {
-                        const classType = getProperty(obj.data, "classType") || "base";
-                        let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][obj.data.savingThrows[a].value];
-                        if (formula == null) formula = "0";
-                        let classLevel = obj.data.levels;
+                    let classST = classes.filter((obj) => obj.data.multiclass == false)
+                        .reduce((cur, obj) => {
+                            const classType = getProperty(obj.data, "classType") || "base";
+                            let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][obj.data.savingThrows[a].value];
+                            if (formula == null) formula = "0";
+                            let classLevel = obj.data.levels;
 
-                        // Epic level/total level should only be calculated when taking into account non-racial hd
-                        if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
-                            if (totalLevel + classLevel > 20) {
-                                classLevel = 20 - totalLevel;
-                                totalLevel = 20;
-                                epicLevels += obj.data.levels - classLevel;
-                            } else {
-                                totalLevel = totalLevel + classLevel
+                            // Epic level/total level should only be calculated when taking into account non-racial hd
+                            if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
+                                if (totalClassLevel + classLevel > 20) {
+                                    classLevel = 20 - totalClassLevel;
+                                    totalClassLevel = 20;
+                                    epicClassLevels += obj.data.levels - classLevel;
+                                } else {
+                                    totalClassLevel = totalClassLevel + classLevel
+                                }
                             }
-                        }
-                        const v = Math.floor(new Roll(formula, { level: classLevel }).roll().total);
+                            const v = Math.floor(new Roll(formula, { level: classLevel }).roll().total);
 
-                        if (v !== 0) {
-                            sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
-                            sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
-                        }
+                            if (v !== 0) {
+                                sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
+                                sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
+                            }
 
-                        return cur + v;
-                    }, 0) - data1.attributes.energyDrain
+                            return cur + v;
+                        }, 0) - data1.attributes.energyDrain
+                    let multiclassST = classes.filter((obj) => obj.data.multiclass == true)
+                        .reduce((cur, obj) => {
+                            const classType = getProperty(obj.data, "classType") || "base";
+                            let formula = CONFIG.D3Vilia.classSavingThrowFormulas[classType][obj.data.savingThrows[a].value];
+                            if (formula == null) formula = "0";
+                            let classLevel = obj.data.levels;
 
+                            // Epic level/total level should only be calculated when taking into account non-racial hd
+                            if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
+                                if (totalMulticlassLevel + classLevel > 20) {
+                                    classLevel = 20 - totalMulticlassLevel;
+                                    totalMulticlassLevel = 20;
+                                    epicMulticlassLevels += obj.data.levels - classLevel;
+                                } else {
+                                    totalMulticlassLevel = totalMulticlassLevel + classLevel
+                                }
+                            }
+                            const v = Math.floor(new Roll(formula, { level: classLevel }).roll().total);
+
+                            if (v !== 0) {
+                                sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
+                                sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
+                            }
+
+                            return cur + v;
+                        }, 0) - data1.attributes.energyDrain
+
+                    let epicLevels = epicClassLevels > epicMulticlassLevels ? epicClassLevels : epicMulticlassLevels;
                     if (epicLevels > 0) {
                         epicST = new Roll('floor(@level/2)', { level: epicLevels }).roll().total;
                         sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
                         sourceInfo[k].positive.push({ name: 'Epic Levels', value: epicST });
                     }
+                    let baseST = classST > multiclassST ? classST : multiclassST;
                     linkData(data, updateData, k, baseST + epicST);
                     linkData(data, updateData, j, baseST + epicST);
                 }
@@ -2141,16 +2202,38 @@ export class ActorPF extends Actor {
         {
             const k = "data.attributes.bab.total";
             const j = "data.attributes.bab.base";
-            let totalLevel = 0;
-            let epicLevels = 0;
+            let totalClassLevel = 0;
+            let epicClassLevels = 0;
+            let totalMulticlassLevel = 0;
+            let epicMulticlassLevels = 0;
+            
             if (useFractionalBaseBonuses) {
-                linkData(data, updateData, k, Math.floor(classes.reduce((cur, obj) => {
-                    const babScale = getProperty(obj, "data.bab") || "";
-                    if (babScale === "high") return cur + obj.data.levels;
-                    if (babScale === "med") return cur + obj.data.levels * 0.75;
-                    if (babScale === "low") return cur + obj.data.levels * 0.5;
-                    return cur;
-                }, 0)));
+                racialBab = Math.floor(classes.filter((obj) => obj.data.type !== "base" && obj.data.type !== "prestige")
+                    .reduce((cur, obj) => {
+                        const babScale = getProperty(obj, "data.bab") || "";
+                        if (babScale === "high") return cur + obj.data.levels;
+                        if (babScale === "med") return cur + obj.data.levels * 0.75;
+                        if (babScale === "low") return cur + obj.data.levels * 0.5;
+                        return cur;
+                    }, 0));
+                classBab = Math.floor(classes.filter((obj) => obj.data.multiclass === false)
+                    .reduce((cur, obj) => {
+                        const babScale = getProperty(obj, "data.bab") || "";
+                        if (babScale === "high") return cur + obj.data.levels;
+                        if (babScale === "med") return cur + obj.data.levels * 0.75;
+                        if (babScale === "low") return cur + obj.data.levels * 0.5;
+                        return cur;
+                    }, 0));
+                multiclassBab = Math.floor(classes.filter((obj) => obj.data.multiclass === true)
+                    .reduce((cur, obj) => {
+                        const babScale = getProperty(obj, "data.bab") || "";
+                        if (babScale === "high") return cur + obj.data.levels;
+                        if (babScale === "med") return cur + obj.data.levels * 0.75;
+                        if (babScale === "low") return cur + obj.data.levels * 0.5;
+                        return cur;
+                    }, 0));
+
+                linkData(data, updateData, k, classBab > multiclassBab ? racialBab + classBab : racialBab + multiclassBab);
 
                 const v = updateData[k];
                 if (v !== 0) {
@@ -2159,34 +2242,61 @@ export class ActorPF extends Actor {
                 }
             } else {
                 let epicBab = 0
-                let bab = classes.reduce((cur, obj) => {
-                    const formula = CONFIG.D3Vilia.classBABFormulas[obj.data.bab] != null ? CONFIG.D3Vilia.classBABFormulas[obj.data.bab] : "0";
-                    let classLevel = obj.data.levels;
+                let classBab = classes.filter((obj) => obj.data.multiclass == false)
+                    .reduce((cur, obj) => {
+                        const formula = CONFIG.D3Vilia.classBABFormulas[obj.data.bab] != null ? CONFIG.D3Vilia.classBABFormulas[obj.data.bab] : "0";
+                        let classLevel = obj.data.levels;
 
-                    // Epic level/total level should only be calculated when taking into account non-racial hd
-                    if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
-                        if (totalLevel + classLevel > 20) {
-                            classLevel = 20 - totalLevel;
-                            totalLevel = 20;
-                            epicLevels += obj.data.levels - classLevel;
-                        } else {
-                            totalLevel = totalLevel + classLevel
+                        // Epic level/total level should only be calculated when taking into account non-racial hd
+                        if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
+                            if (totalClassLevel + classLevel > 20) {
+                                classLevel = 20 - totalClassLevel;
+                                totalClassLevel = 20;
+                                epicClassLevels += obj.data.levels - classLevel;
+                            } else {
+                                totalClassLevel = totalClassLevel + classLevel
+                            }
                         }
-                    }
-                    const v = new Roll(formula, { level: classLevel }).roll().total;
+                        const v = new Roll(formula, { level: classLevel }).roll().total;
 
-                    if (v !== 0) {
-                        sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
-                        sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
-                    }
+                        if (v !== 0) {
+                            sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
+                            sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
+                        }
 
-                    return cur + v;
-                }, 0)
+                        return cur + v;
+                    }, 0)
+                let multiclassBab = classes.filter((obj) => obj.data.multiclass == true)
+                    .reduce((cur, obj) => {
+                        const formula = CONFIG.D3Vilia.classBABFormulas[obj.data.bab] != null ? CONFIG.D3Vilia.classBABFormulas[obj.data.bab] : "0";
+                        let classLevel = obj.data.levels;
+
+                        // Epic level/total level should only be calculated when taking into account non-racial hd
+                        if (getProperty(obj.data, "classType") === "base" || (obj.data, "classType") === "prestige") {
+                            if (totalMulticlassLevel + classLevel > 20) {
+                                classLevel = 20 - totalMulticlassLevel;
+                                totalMulticlassLevel = 20;
+                                epicMulticlassLevels += obj.data.levels - classLevel;
+                            } else {
+                                totalMulticlassLevel = totalMulticlassLevel + classLevel
+                            }
+                        }
+                        const v = new Roll(formula, { level: classLevel }).roll().total;
+
+                        if (v !== 0) {
+                            sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
+                            sourceInfo[k].positive.push({ name: getProperty(obj, "name"), value: v });
+                        }
+
+                        return cur + v;
+                    }, 0)
+                let epicLevels = epicClassLevels > epicMulticlassLevels ? epicClassLevels : epicMulticlassLevels;
                 if (epicLevels > 0) {
                     epicBab = new Roll('ceil(@level/2)', { level: epicLevels }).roll().total;
                     sourceInfo[k] = sourceInfo[k] || { positive: [], negative: [] };
                     sourceInfo[k].positive.push({ name: 'Epic Levels', value: epicBab });
                 }
+                let bab = classBab > multiclassBab ? classBab : multiclassBab;
                 linkData(data, updateData, k, bab + epicBab);
                 linkData(data, updateData, j, bab + epicBab);
             }
@@ -2309,10 +2419,15 @@ export class ActorPF extends Actor {
             }
         }
         {
-            let level = classes.reduce((cur, o) => {
+            let classLevel = classes.filter((obj) => obj.data.multiclass === false).reduce((cur, o) => {
                 if (o.data.classType === "minion" || o.data.classType === "template") return cur;
                 return cur + o.data.levels;
             }, 0);
+            let multiclassLevel = classes.filter((obj) => obj.data.multiclass === true).reduce((cur, o) => {
+                if (o.data.classType === "minion" || o.data.classType === "template") return cur;
+                return cur + o.data.levels;
+            }, 0);
+            let level = classLevel > multiclassLevel ? classLevel : multiclassLevel;
 
             console.log(`D3Vilia | Setting attributes hd total | ${level}`)
             linkData(data, updateData, "data.attributes.hd.total", level);
@@ -2745,16 +2860,15 @@ export class ActorPF extends Actor {
                 nameTag = createTag(cls.name);
             }
             cls.data.tag = tag;
-            data.totalNonEclLevels += cls.data.levels
             let healthConfig = game.settings.get("D3Vilia", "healthConfig");
             healthConfig = cls.data.classType === "racial" ? healthConfig.hitdice.Racial : this.hasPlayerOwner ? healthConfig.hitdice.PC : healthConfig.hitdice.NPC;
             const classType = cls.data.classType || "base";
-            //TODO: Fork this logic to apply to classes or to multiclass. Need to identify both in the Class Items.
+            //Fork this logic to apply to classes or to multiclass. Need to identify both in the Class Items.
             if(cls.data.multiclass) {
                 data.multiclass[tag] = {
                     level: cls.data.levels,
                     _id: cls._id,
-                    name: cls.name,
+                    name: cls.name + " - Multiclass",
                     hd: cls.data.hd,
                     bab: cls.data.bab,
                     hp: healthConfig.auto,
@@ -2844,6 +2958,11 @@ export class ActorPF extends Actor {
                     totalNonRacialLevels = Math.min(totalNonRacialLevels + cls.data.levels, 20) //RGR: Hard-coded 20 levels
             }
         });
+        //Determine the character level based on the max of either class or multiclass
+        let classLevels = Object.values(data.classes).reduce((acc, cls) => acc + cls.level, 0);
+        let multiclassLevels = Object.values(data.multiclass).reduce((acc, cls) => acc + cls.level, 0);
+        
+        data.totalNonEclLevels = Math.max(classLevels, multiclassLevels);
         data.classLevels = totalNonRacialLevels;
         {
             let group = "feat"
