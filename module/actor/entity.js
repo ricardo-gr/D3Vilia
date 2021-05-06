@@ -3747,10 +3747,15 @@ export class ActorPF extends Actor {
             }
         }
 
-        let level = classes.reduce((cur, o) => {
-            if (o.data.data.classType === "minion" || o.data.data.classType === "template") return cur;
+        let classLevel = classes.reduce((cur, o) => {
+            if (o.data.data.classType === "minion" || o.data.data.classType === "template" || o.data.data.multiclass === true) return cur;
             return cur + o.data.data.levels;
         }, 0);
+        let multiclassLevel = classes.reduce((cur, o) => {
+            if (o.data.data.classType === "minion" || o.data.data.classType === "template" || o.data.data.multiclass === false) return cur;
+            return cur + o.data.data.levels;
+        }, 0);
+        let level = classLevel > multiclassLevel ? classLevel : multiclassLevel;
         let racialHD = classes.filter(o => o.type === "class" && getProperty(o.data, "data.classType") === "racial").reduce((cur, o) => {
             return cur + o.data.data.levels;
         }, 0);

@@ -210,10 +210,13 @@ export class ActorSheetPF extends ActorSheet {
 
     //TODO: Consider multiclass here?
     let classNamesAndLevels = []
+    let multiclassNamesAndLevels = []
 
-    data.items.filter(i => i.type == "class").forEach(c => classNamesAndLevels.push(c.name + " " + c.data.levels))
+    data.items.filter(i => i.type == "class" && i.data.multiclass === false).forEach(c => classNamesAndLevels.push(c.name + " " + c.data.levels))
+    data.items.filter(i => i.type == "class" && i.data.multiclass === true).forEach(c => multiclassNamesAndLevels.push(c.name + " " + c.data.levels))
 
     data.classList = classNamesAndLevels.join(", ")
+    data.multiclassList = multiclassNamesAndLevels.join(", ")
     data.randomUuid = this.randomUuid;
 
     // Compute encumbrance
