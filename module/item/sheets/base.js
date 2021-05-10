@@ -579,23 +579,23 @@ export class ItemSheetPF extends ItemSheet {
                     if (this.item.actor != null) {
                         const actorSkills = this.item.actor.data.data.skills;
                         for (let [s, skl] of Object.entries(actorSkills)) {
-                            if (!skl.subSkills) {
+                            if (!skl.namedSubSkills) {
                                 if (skl.custom) item.subTargets[`skill.${s}`] = skl.name;
                                 else item.subTargets[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
-                                for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
+                                for (let [s2, skl2] of Object.entries(skl.namedSubSkills)) {
+                                    item.subTargets[`skill.${s}.namedSubSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }
                     } else {
                         for (let [s, skl] of Object.entries(CONFIG.D3Vilia.skills)) {
-                            if (!skl.subSkills) {
+                            if (!skl.namedSubSkills) {
                                 if (skl.custom) item.subTargets[`skill.${s}`] = skl.name;
                                 else item.subTargets[`skill.${s}`] = CONFIG.D3Vilia.skills[s];
                             } else {
-                                for (let [s2, skl2] of Object.entries(skl.subSkills)) {
-                                    item.subTargets[`skill.${s}.subSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
+                                for (let [s2, skl2] of Object.entries(skl.namedSubSkills)) {
+                                    item.subTargets[`skill.${s}.namedSubSkills.${s2}`] = `${CONFIG.D3Vilia.skills[s]} (${skl2.name})`;
                                 }
                             }
                         }

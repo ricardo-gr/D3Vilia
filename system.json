@@ -251,6 +251,13 @@
       "system": "D3Vilia",
       "path": "./packs/multiclasses.db",
       "entity": "Item"
+    },
+    {
+      "name": "proficiencies",
+      "label": "Non Weapon Proficiencies",
+      "system": "D3Vilia",
+      "path": "./packs/proficiencies.db",
+      "entity": "Item"
     }
   ],
   "languages": [

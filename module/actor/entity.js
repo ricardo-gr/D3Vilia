@@ -494,8 +494,11 @@ export class ActorPF extends Actor {
                 if (skl != null) {
                     result.push(`data.skills.crf.changeBonus`);
                     if (skl.subSkills != null) {
-                        for (let [b, subSkl] of Object.entries(skl.subSkills)) {
-                            if (subSkl != null) result.push(`data.skills.crf.subSkills.${b}.changeBonus`);
+                        for (let [b, subSkl] of Object.entries(skl.namedSubSkills)) {
+                            if (subSkl != null){
+                                for (let [subSklEntry, subSklValue] of Object.entries(skl.subSkills))
+                                    if(subSklValue != null && subSklValue.name === subSkl.name) result.push(`data.skills.crf.subSkills.${subSklEntry}.changeBonus`);
+                            }
                         }
                     }
                 }
@@ -592,6 +595,12 @@ export class ActorPF extends Actor {
             const subSklKey = RegExp.$2;
             if (curData.skills[sklKey] != null && curData.skills[sklKey].subSkills[subSklKey] != null) {
                 return `data.skills.${sklKey}.subSkills.${subSklKey}.changeBonus`;
+            }
+        } else if (changeTarget.match(/^skill\.([a-zA-Z0-9]+)\.namedSubSkills\.([a-zA-Z0-9]+)$/)) {
+            const sklKey = RegExp.$1;
+            const subSklKey = RegExp.$2;
+            if (curData.skills[sklKey] != null && curData.skills[sklKey].namedSubSkills[subSklKey] != null) {
+                return `data.skills.${sklKey}.namedSubSkills.${subSklKey}.changeBonus`;
             }
         }
 
@@ -1353,10 +1362,17 @@ export class ActorPF extends Actor {
                                 changeData[`skill.${s}`][b] = duplicate(changeDataTemplate);
                             });
                         } else {
+                            // RGR: Consider this for subskill change
                             for (let s2 of Object.keys(skl.subSkills)) {
                                 changeData[`skill.${s}.subSkills.${s2}`] = {};
                                 Object.keys(CONFIG.D3Vilia.bonusModifiers).forEach(b => {
                                     changeData[`skill.${s}.subSkills.${s2}`][b] = duplicate(changeDataTemplate);
+                                });
+                            }
+                            for (let s2 of Object.keys(skl.namedSubSkills)) {
+                                changeData[`skill.${s}.namedSubSkills.${s2}`] = {};
+                                Object.keys(CONFIG.D3Vilia.bonusModifiers).forEach(b => {
+                                    changeData[`skill.${s}.namedSubSkills.${s2}`][b] = duplicate(changeDataTemplate);
                                 });
                             }
                         }
@@ -1523,6 +1539,20 @@ export class ActorPF extends Actor {
             }
         }
 
+        // Rename subskill changes
+        allChanges.filter((o) => o.raw[2].includes("namedSubSkills"))
+            .forEach((o) => {
+                let parts = o.raw[2].split(".");
+                let skl = parts[1];
+                let namedSubSkill = getProperty(srcData1, `data.skills.${skl}.namedSubSkills.${parts[3]}`);
+                
+                for (let [ssn, ssv] of Object.entries(getProperty(srcData1, `data.skills.${skl}.subSkills`) || {})) {
+                    if (ssv.name === namedSubSkill.name) {
+                        o.raw[2] = `skill.${skl}.subSkills.${ssn}`;
+                        break;
+                    }
+                }
+            });
 
         // Initialize data
         await this._resetData(updateData, srcData1, flags, sourceInfo, allChanges, fullConditions);

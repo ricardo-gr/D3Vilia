@@ -73,12 +73,13 @@ export const registerSystemSettings = function() {
     hint: "SETTINGS.D3ViliaExpRateL",
     scope: "world",
     config: true,
-    default: "medium",
+    default: "vilia",
     type: String,
     choices: {
       "slow": "Slow",
       "medium": "Medium",
       "fast": "Fast",
+      "vilia": "Vilia XP",
     },
     onChange: () => {
       [...game.actors.entities, ...Object.values(game.actors.tokens)].filter(o => {
