@@ -17,6 +17,9 @@
                 {{#each actor.data.classes as |cls a|}}
                 <option value="{{a}}">{{cls.name}}</option>
                 {{/each}}
+                {{#each actor.data.multiclass as |cls a|}}
+                <option value="{{a}}">{{cls.name}}</option>
+                {{/each}}
                 {{/select}}
             </select>
         </div>

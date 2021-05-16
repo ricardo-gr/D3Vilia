@@ -1665,19 +1665,37 @@ export class ActorPF extends Actor {
             let spellbookAbilityMod = getProperty(srcData1, `data.abilities.${spellbookAbilityKey}.mod`);
             const spellbookClass = getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.class`);
             const autoSetup = getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.autoSetup`);
-            let classLevel = getProperty(srcData1, `data.classes.${spellbookClass}.level`) + parseInt(getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.bonusPrestigeCl`));
-            if (classLevel > getProperty(srcData1, `data.classes.${spellbookClass}.maxLevel`))
-                classLevel = getProperty(srcData1, `data.classes.${spellbookClass}.maxLevel`);
-            const classProgression = getProperty(srcData1, `data.classes.${spellbookClass}.spellPerLevel${classLevel}`);
+
+            let normalClassLevel = getProperty(srcData1, `data.classes.${spellbookClass}.level`) + parseInt(getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.bonusPrestigeCl`));
+            let multiclassLevel = getProperty(srcData1, `data.multiclass.${spellbookClass}.level`) + parseInt(getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.bonusPrestigeCl`));
+            let classLevel = isNaN(normalClassLevel) ? multiclassLevel : normalClassLevel;
+
+            if (classLevel > getProperty(srcData1, `data.classes.${spellbookClass}.maxLevel`) || classLevel > getProperty(srcData1, `data.multiclass.${spellbookClass}.maxLevel`)){
+                let classMaxLevel = getProperty(srcData1, `data.classes.${spellbookClass}.maxLevel`);
+                let multiclassMaxLevel = classLevel > getProperty(srcData1, `data.multiclass.${spellbookClass}.maxLevel`);
+                classLevel = isNaN(classMaxLevel) ? multiclassMaxLevel : classMaxLevel;
+            }
+
+            const normalClassProgression = getProperty(srcData1, `data.classes.${spellbookClass}.spellPerLevel${classLevel}`);
+            const multiclassProgression =  getProperty(srcData1, `data.multiclass.${spellbookClass}.spellPerLevel${classLevel}`);
+            const classProgression = normalClassProgression == null ? multiclassProgression : normalClassProgression;
+
             let autoSpellLevels = getProperty(srcData1, `data.attributes.spells.spellbooks.${spellbookKey}.autoSpellLevels`);
             if (autoSetup) {
-                const autoSpellcastingAbilityKey = getProperty(srcData1, `data.classes.${spellbookClass}.spellcastingAbility`)
-                for (let property of [["spellcastingType", "spellcastingType"], ["ability", "spellcastingAbility"], ["spontaneous", "isSpellcastingSpontaneus"]])
-                    linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.${property[0]}`, getProperty(srcData1, `data.classes.${spellbookClass}.${property[1]}`));
+                const normalAutoSpellcastingAbilityKey = getProperty(srcData1, `data.classes.${spellbookClass}.spellcastingAbility`);
+                const multiclassAutoSpellcastingAbilityKey = getProperty(srcData1, `data.multiclass.${spellbookClass}.spellcastingAbility`);
+                const autoSpellcastingAbilityKey = normalAutoSpellcastingAbilityKey ? multiclassAutoSpellcastingAbilityKey : normalAutoSpellcastingAbilityKey;
+
+                for (let property of [["spellcastingType", "spellcastingType"], ["ability", "spellcastingAbility"], ["spontaneous", "isSpellcastingSpontaneus"]]) {
+                    let classProperty = getProperty(srcData1, `data.classes.${spellbookClass}.${property[1]}`);
+                    let multiclassProperty = getProperty(srcData1, `data.multiclass.${spellbookClass}.${property[1]}`);
+                    let resultProperty = classProperty == null ? multiclassProperty : classProperty;
+                    linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.${property[0]}`, resultProperty);
+                }
                 linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.autoSpellLevels`, true);
-                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.usePowerPoints`, getProperty(srcData1, `data.classes.${spellbookClass}.isPsionSpellcaster`));
-                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.arcaneSpellFailure`, getProperty(srcData1, `data.classes.${spellbookClass}.isArcane`));
-                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.hasSpecialSlot`, getProperty(srcData1, `data.classes.${spellbookClass}.hasSpecialSlot`));
+                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.usePowerPoints`, getProperty(srcData1, `data.classes.${spellbookClass}.isPsionSpellcaster`) || getProperty(srcData1, `data.multiclass.${spellbookClass}.isPsionSpellcaster`));
+                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.arcaneSpellFailure`, getProperty(srcData1, `data.classes.${spellbookClass}.isArcane`) || getProperty(srcData1, `data.multiclass.${spellbookClass}.isArcane`));
+                linkData(srcData1, updateData, `data.attributes.spells.spellbooks.${spellbookKey}.hasSpecialSlot`, getProperty(srcData1, `data.classes.${spellbookClass}.hasSpecialSlot`) || getProperty(srcData1, `data.multiclass.${spellbookClass}.hasSpecialSlot`));
 
                 autoSpellLevels = true;
                 spellbookAbilityMod = getProperty(srcData1, `data.abilities.${autoSpellcastingAbilityKey}.mod`)
@@ -3164,19 +3182,38 @@ export class ActorPF extends Actor {
                     }
                 }
 
-                spellbook.allSpellsKnown = data.classes[spellbook.class]?.allSpellsKnown
+                spellbook.allSpellsKnown = data.classes[spellbook.class]?.allSpellsKnown;
+
+                spellbook.powersKnown = data.classes[spellbook.class]?.powersKnown ? data.classes[spellbook.class]?.powersKnown[`${data.classes[spellbook.class].level}`] || 0 : 0;
+                spellbook.powersMaxLevel = data.classes[spellbook.class]?.powersMaxLevel ? data.classes[spellbook.class]?.powersMaxLevel[`${data.classes[spellbook.class].level}`] || 0 : 0;
+            } else if (spellbook.class !== "" && data.multiclass[spellbook.class] != null) {
+                spellbook.cl.total += data.multiclass[spellbook.class].level;
+                let spellcastingType = spellbook.spellcastingType;
+                if (spellcastingType !== undefined && spellcastingType !== null && spellcastingType !== "none" && spellcastingType !== "other") {
+                    if (data.attributes.prestigeCl[spellcastingType]?.max !== undefined) {
+                        spellbook.maxPrestigeCl = data.attributes.prestigeCl[spellcastingType].max;
+                        spellbook.availablePrestigeCl = data.attributes.prestigeCl[spellcastingType].max - spellcastingBonusTotalUsed[spellcastingType];
+                    }
+                }
+
+                spellbook.allSpellsKnown = data.multiclass[spellbook.class]?.allSpellsKnown
+
+                spellbook.powersKnown = data.multiclass[spellbook.class]?.powersKnown ? data.multiclass[spellbook.class]?.powersKnown[`${data.multiclass[spellbook.class].level}`] || 0 : 0
+                spellbook.powersMaxLevel = data.multiclass[spellbook.class]?.powersMaxLevel ? data.multiclass[spellbook.class]?.powersMaxLevel[`${data.multiclass[spellbook.class].level}`] || 0 : 0
             }
             spellbook.hasPrestigeCl = spellbook.maxPrestigeCl > 0
             spellbook.canAddPrestigeCl = spellbook.availablePrestigeCl > 0
             spellbook.canRemovePrestigeCl = spellbook.bonusPrestigeCl > 0
-            spellbook.powersKnown = data.classes[spellbook.class]?.powersKnown ? data.classes[spellbook.class]?.powersKnown[`${data.classes[spellbook.class].level}`] || 0 : 0
-            spellbook.powersMaxLevel = data.classes[spellbook.class]?.powersMaxLevel ? data.classes[spellbook.class]?.powersMaxLevel[`${data.classes[spellbook.class].level}`] || 0 : 0
+            
             spellbook.cl.total += spellbook.bonusPrestigeCl === undefined ? 0 : spellbook.bonusPrestigeCl;
             // Add spell slots
             spellbook.spells = spellbook.spells || {};
             for (let a = 0; a < 10; a++) {
                 spellbook.spells[`spell${a}`] = spellbook.spells[`spell${a}`] || { value: 0, max: 0, base: null, known: 0 };
-                spellbook.spells[`spell${a}`].maxKnown = data.classes[spellbook.class]?.spellsKnownPerLevel ? Math.max(0, data.classes[spellbook.class]?.spellsKnownPerLevel[data.classes[spellbook.class].level - 1] ? data.classes[spellbook.class]?.spellsKnownPerLevel[data.classes[spellbook.class].level - 1][a+1] || 0 : 0) : 0
+                
+                let classMaxKnown = data.classes[spellbook.class]?.spellsKnownPerLevel ? Math.max(0, data.classes[spellbook.class]?.spellsKnownPerLevel[data.classes[spellbook.class].level - 1] ? data.classes[spellbook.class]?.spellsKnownPerLevel[data.classes[spellbook.class].level - 1][a+1] || 0 : 0) : 0
+                let multiclassMaxKnown = data.multiclass[spellbook.class]?.spellsKnownPerLevel ? Math.max(0, data.multiclass[spellbook.class]?.spellsKnownPerLevel[data.multiclass[spellbook.class].level - 1] ? data.multiclass[spellbook.class]?.spellsKnownPerLevel[data.multiclass[spellbook.class].level - 1][a+1] || 0 : 0) : 0
+                spellbook.spells[`spell${a}`].maxKnown = Math.max(multiclassMaxKnown, classMaxKnown);
             }
         }
         data.canLevelUp = data.details.xp.value >= data.details.xp.max
