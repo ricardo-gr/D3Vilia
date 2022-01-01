@@ -2916,7 +2916,7 @@ export class ActorPF extends Actor {
                 data.multiclass[tag] = {
                     level: cls.data.levels,
                     _id: cls._id,
-                    name: cls.name + " - Multiclass",
+                    name: cls.name,
                     hd: cls.data.hd,
                     bab: cls.data.bab,
                     hp: healthConfig.auto,
@@ -5980,7 +5980,7 @@ export class ActorPF extends Actor {
                         } else {
                         }
                     }
-                    let spellbookClass = this.data.data.classes[spellbook.class]?.name || "Missing";
+                    let spellbookClass = this.data.data.classes[spellbook.class]?.name || this.data.data.multiclass[spellbook.class]?.name || "Missing";
                     if (obj.data.learnedAt !== undefined) {
                         obj.data.learnedAt.class.forEach(learnedAtObj => {
                             if (learnedAtObj[0].toLowerCase() === spellbookClass.toLowerCase()) {

@@ -1180,6 +1180,7 @@ export class ItemPF extends Item {
                 multiweaponFighting = actor.items.filter(o => o.type === "feat" && (o.name === "Multiweapon Fighting" || o.data.data.changeFlags.multiweaponAttack)).length > 0,
                 hasTwoImprovedWeaponFightingFeat = actor.items.filter(o => o.type === "feat" && o.name === "Improved Two-Weapon Fighting").length > 0,
                 hasTwoGreaterFightingFeat = actor.items.filter(o => o.type === "feat" && o.name === "Greater Two-Weapon Fighting").length > 0,
+                hasImprovedFlanking = actor.items.filter(o => o.type === "feat" && o.name === "Flanqueo Mejorado").length > 0,
                 rollMode = null,
                 optionalFeatIds = [],
                 optionalFeatRanges = new Map(),
@@ -1299,7 +1300,7 @@ export class ItemPF extends Item {
                     rollModifiers.push(`${game.i18n.localize("D3Vilia.CloseQuartersShot")}`)
                 }
                 if (form.find('[name="flanking"]').prop("checked")) {
-                    rollData.flanking = 2;
+                    rollData.flanking = hasImprovedFlanking ? 4 : 2;
                     attackExtraParts.push("@flanking");
                     rollModifiers.push(`${game.i18n.localize("D3Vilia.Flanking")}`)
                 }
